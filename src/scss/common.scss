@@ -1,0 +1,185 @@
+@import "variables";
+
+html {
+  background-color: $border-color;
+  font-family: "Arial","Microsoft JhengHei";
+  color: #909090;
+  font-size: $font-size-normal;
+}
+a {
+  color: #909090;
+}
+// util
+.vam {
+  vertical-align: middle;
+}
+
+// 顶部导航
+.top-nav {
+  position: fixed;
+  left: 0;top:0;
+  width: 100%;
+  height: $top-nav-h;
+  line-height: $top-nav-h;
+  background: url("./assets/top-nav_bg.gif") repeat-x;
+  word-spacing: -6px;
+  color: #fff;
+  z-index: 889;
+}
+.top-nav_logo {
+  display: inline-block;
+  width: $left-nav-w;
+  font-size: 24px;
+  word-spacing: 0;
+}
+.top-nav_user {
+  display: inline-block;
+  word-spacing: 0;
+  height: $top-nav-h;
+  line-height: $top-nav-h;
+  min-width: 150px;
+  cursor: pointer;
+  background-color: rgba(0,0,0,0);
+  transition: all 0.2s;
+  &.active {
+
+  }
+  &:hover {
+    background-color: rgba(0,0,0,0.2);
+  }
+}
+.top-nav_user-img {
+  display: inline-block;
+  max-width: 30px;
+  vertical-align: middle;
+}
+// 左侧导航
+.left-nav {
+  position: fixed;
+  left: 0;top: $top-nav-h;
+  width: 250px;height: 100%;
+  background-color: #fff;
+  z-index: 888;
+}
+// 内容容器
+.view-box {
+  margin-left: $left-nav-w;
+  margin-top: $top-nav-h;
+}
+
+// 多级菜单
+.tree {
+  font-size: $font-size-title;
+  font-weight: 400;
+}
+.tree-node_title {
+  padding-left: $base-space * 2;
+}
+
+.tree-node {
+  box-sizing: border-box;
+  min-height: $tree-node-h;
+  line-height: $tree-node-h;
+  border-top: $tree-border-w solid transparent;
+  border-bottom: $tree-border-w solid $border-color;
+  transition: all 0.2s;
+  &.active.empty {
+    background-color: $border-color;
+    border-top: 1px solid darken($border-color, 5%);
+    border-bottom: 1px solid darken($border-color, 5%);
+    .tree-node_link {
+      color: map_get($comb-colors, 'qingse');
+    }
+  }
+}
+.tree-node_arrow {
+  font-size: 1.6rem !important;
+  margin-top: 18px;
+  margin-right: $base-space * 2;
+}
+.tree-node_child {
+  box-sizing: border-box;
+  border-top: $tree-border-w solid $border-color;
+}
+/*.tree-node_link {
+  padding-left: $base-space * 3;
+}*/
+
+// 面包屑
+.crumbs {
+  height: 60px;
+  line-height: 60px;
+  background-color: #f1f1f1;
+  padding: 0 24px;
+}
+.crumbs-item {
+  position: relative;
+  display: inline-block;
+  padding-right: 8px;
+  &:after {
+    content: ">";
+    margin-left: 8px;
+  }
+  &:last-child:after {
+    content: "";
+  }
+}
+
+// 内容
+.v-content {
+  padding: 0 24px;
+}
+
+// 弹窗
+.comb-dialog {
+  .modal {
+    border-radius: 10px;
+    max-width: 780px;
+    padding: 24px 24px 16px 24px;
+  }
+  .modal-header_title {
+    color: map_get($comb-colors,'qingse');
+    font-size: $font-size-title;
+    font-weight: 700;
+  }
+  .modal-footer {
+    .comb-btn {
+      margin-right: 8px;
+      &:first-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+// 按钮
+.comb-btn {
+  @extend .btn;
+  box-shadow: none;
+  width: 100px;
+  height: 35px;
+  border-radius: 20px;
+  padding: 0;
+}
+// COMB表单
+input,textarea {
+  outline: none;
+  border: none;
+}
+.form-group {
+  //display: table-row;
+  width: 100%;
+}
+.form-textarea,.form-input,.form-label {
+  display: table-cell;
+}
+.form-textarea,.form-input {
+  background-color: #fff;
+  border-radius: 10px;
+}
+.form-input {
+  height: 50px;
+  line-height: 50px;
+}
+.form-label {
+  width: 100px;
+}
