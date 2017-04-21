@@ -5,6 +5,7 @@ import Cluster from '@/components/Cluster'
 import Project from '@/components/Project'
 import Hub from '@/components/Hub'
 import Apps from '@/components/Apps'
+import AddHost from '@/components/AddHost'
 
 Vue.use(Router)
 
@@ -19,6 +20,11 @@ export default new Router({
       path: '/cluster',
       name: 'Cluster',
       component: Cluster
+    },
+    {
+      path: '/addhost',
+      name: 'AddHost',
+      component: AddHost
     },
     {
       path: '/project',

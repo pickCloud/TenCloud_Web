@@ -111,6 +111,7 @@ a {
   line-height: 60px;
   background-color: #f1f1f1;
   padding: 0 24px;
+  margin-bottom: 16px;
 }
 .crumbs-item {
   position: relative;
@@ -132,6 +133,12 @@ a {
 
 // 弹窗
 .comb-dialog {
+  &.mini {
+    .modal {
+      width: 50%;
+      max-width: 500px;
+    }
+  }
   .modal {
     border-radius: 10px;
     max-width: 780px;
@@ -151,6 +158,20 @@ a {
     }
   }
 }
+.comb-dialog_info {
+  padding: 24px 0;
+  &.large {
+    font-size: 1.7rem;
+    .material-icons {
+      font-size: 3rem;
+      margin-top: -8px;
+    }
+  }
+  .material-icons {
+    vertical-align: middle;
+    margin-top: -2px;
+  }
+}
 // 按钮
 .comb-btn {
   @extend .btn;
@@ -165,21 +186,25 @@ input,textarea {
   outline: none;
   border: none;
 }
-.form-group {
-  //display: table-row;
+.form-control {
+  display: block;
   width: 100%;
-}
-.form-textarea,.form-input,.form-label {
-  display: table-cell;
-}
-.form-textarea,.form-input {
+  padding: 16px;
   background-color: #fff;
   border-radius: 10px;
+  border: 1px solid transparent;
+  transition: border-color ease-in-out .3s;
+  &:focus {
+    border-color: map_get($comb-colors, 'qingse');
+  }
 }
-.form-input {
-  height: 50px;
-  line-height: 50px;
+textarea.form-control {
+  height: auto;
 }
-.form-label {
-  width: 100px;
+.form-gird {
+  @extend .row;
+  .label-control {
+    @extend .col;
+    padding-top: 16px;
+  }
 }

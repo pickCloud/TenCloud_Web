@@ -62,10 +62,10 @@
         this.visible = false
       },
       afterEnter () {
-        document.querySelector('.' + this.typeClass).className += ' active'
+        this.$modaldom.className += ' active'
       },
       beforeLeave () {
-        document.querySelector('.' + this.typeClass).className = document.querySelector('.' + this.typeClass).className.replace(' active', '')
+        this.$modaldom.className = this.$modaldom.className.replace(' active', '')
       },
       getBtnsClass (key) {
         let temp = 'btn-flat'
@@ -79,6 +79,9 @@
       btns () {
         return this.buttons.split(',').reverse()
       }
+    },
+    mounted () {
+      this.$modaldom = this.$el.querySelector('.' + this.typeClass)
     }
   }
 </script>

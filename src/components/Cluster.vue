@@ -7,7 +7,7 @@
     <div class="v-content">
       <div class="_btns-group">
         <span class="comb-btn waves-effect lvse" @click="addNewCluster">新增集群</span>
-        <span class="comb-btn waves-effect qingse" @click="addNewHost">添加主机</span>
+        <router-link class="comb-btn waves-effect qingse" :to="{ name: 'AddHost'}">添加主机</router-link>
       </div>
       <div class="row _list-group">
         <div class="col m12 l6 xl4">
@@ -24,7 +24,7 @@
             </ul>
             <div class="_list-con_btns">
               <span class="comb-btn waves-effect lvse ">查看详情</span>
-              <span class="comb-btn waves-effect qingse right">删除集群</span>
+              <span class="comb-btn waves-effect qingse right" @click="delCluster(1)">删除集群</span>
             </div>
           </div>
         </div>
@@ -42,45 +42,62 @@
             </ul>
             <div class="_list-con_btns">
               <span class="comb-btn waves-effect lvse ">查看详情</span>
-              <span class="comb-btn waves-effect qingse right">删除集群</span>
+              <span class="comb-btn waves-effect qingse right" @click="delCluster(2)">删除集群</span>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <modal title="新增集群" buttons="确定,取消" buttonsClass="comb-btn lvse,comb-btn qingse" ref="addcluster" class="comb-dialog">
+    <!-- 新增集群弹窗 -->
+    <modal title="新增集群" buttons="确定,取消" buttonsClass="comb-btn lvse,comb-btn qingse" ref="addcluster" class="comb-dialog" @callback="addSure">
       <div class="_new-cluster_con">
-        <div class="form-group">
-          <label class="form-label">名称</label>
-          <input type="text" class="form-input">
+        <div class="form-gird">
+          <label class="label-control s12 m1 center-align">名称</label>
+          <div class="col s12 m11">
+            <input type="text" class="form-control" v-model="adddata.name">
+          </div>
         </div>
-        <div class="form-group">
-          <label>描述</label>
-          <textarea name="" class="form-textarea"></textarea>
+        <div class="form-gird">
+          <label class="label-control s12 m1 center-align">描述</label>
+          <div class="col s12 m11">
+            <textarea name="" class="form-control" v-model="adddata.desc"></textarea>
+          </div>
         </div>
       </div>
     </modal>
+    <!-- 新增集群弹窗 end -->
+    <!-- 删除集群弹窗 -->
+    <modal buttons="确定,取消" buttonsClass="comb-btn lvse,comb-btn qingse" ref="delcluster" class="comb-dialog mini">
+      <div class="comb-dialog_info center-align red-text large"><i class="material-icons">error</i> <span v-html="delbody"></span></div>
+    </modal>
+    <!-- 删除集群弹窗 end -->
   </div>
 </template>
 
 <script>
-  import Percentage from '../tenui/packages/percentage/src/main.vue'
-  import Modal from '../tenui/packages/modal/src/main.vue'
-
   export default {
     name: 'Cluster',
     data () {
-      return {}
+      return {
+        adddata: {
+          name: '',
+          desc: ''
+        },
+        delbody: ''
+      }
     },
     methods: {
       addNewCluster () {
         this.$refs.addcluster.show()
       },
-      addNewHost () {
-        console.log('add new host')
+      delCluster (id) {
+        this.delbody = '您确定删除集群' + id + '吗？'
+        this.$refs.delcluster.show()
+      },
+      addSure () {
+//        console.log(this.adddata.name)
       }
-    },
-    components: {Percentage, Modal}
+    }
   }
 </script>
 

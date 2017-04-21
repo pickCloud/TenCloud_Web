@@ -3,10 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import {Tree} from './tenui/tenui'
+import Tenui from './comb-ten'
 
 Vue.config.productionTip = false
-Vue.use(Tree)
+Vue.use(Tenui)
 
 /* eslint-disable no-new */
 new Vue({

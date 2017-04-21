@@ -1,6 +1,5 @@
 @import "variables";
 ._btns-group {
-  margin-top: 16px;
   .comb-btn:first-child {
     margin-right: 8px;
   }
@@ -47,6 +46,7 @@
 }
 
 ._new-cluster_con {
+  padding: 24px 0 1px 0;
   background-color: #f6f6f6;
 }
 
