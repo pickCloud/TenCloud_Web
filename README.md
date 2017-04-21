@@ -2,6 +2,34 @@
 
 > Comb Console Project
 
+## COMB-CONSOLE
+
+``` bash
+ - assets 图片等素材
+ - components 组件
+ - router 路由
+ - scss 样式
+ - tenui tenui样式框架
+```
+
+## TENUI 目录结构
+
+``` bash
+ - fonts 字体
+ - js 纯js实现的功能，或者功能插件等
+ -- waves.js 水波纹功能
+ - packages VUE模块
+ -- alert 提示元素
+ -- modal 弹窗
+ -- percentage 圆形百分比
+ -- tree 树形菜单
+ - sass 样式
+ -- common 通用包含variables，mixins等等
+ -- extends 扩展（多元素组合，JS辅助，多样式风格）
+ -- tenui.js 打包所需模块
+ -- tenui.scss 打包所需样式
+```
+
 ## Build Setup
 
 ``` bash
