@@ -68,7 +68,7 @@
     <!-- 新增集群弹窗 end -->
     <!-- 删除集群弹窗 -->
     <modal buttons="确定,取消" buttonsClass="comb-btn lvse,comb-btn qingse" ref="delcluster" class="comb-dialog mini">
-      <div class="comb-dialog_info center-align red-text large"><i class="material-icons">error</i> <span v-html="delbody"></span></div>
+      <div class="comb-dialog_info center-align red-text large"><i class="ten-icon">&#xe691;</i> <span v-html="delbody"></span></div>
     </modal>
     <!-- 删除集群弹窗 end -->
   </div>

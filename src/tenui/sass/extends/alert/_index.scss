@@ -1,6 +1,6 @@
 .alert {
   width:100%;
-  padding:8px 16px;
+  padding:4px 16px;
   margin:0;
   box-sizing:border-box;
   border-radius:4px;
@@ -19,7 +19,8 @@
 }
 .alert_content {
   display:table-cell;
-  padding:0 8px
+  padding:0 8px;
+  vertical-align:middle
 }
 .alert_icon {
   font-size:20px;
@@ -33,8 +34,7 @@
   width:28px
 }
 .alert_title {
-  font-size:14px;
-  line-height:18px;
+  font-size:1rem;
 }
 .alert_title.is-bold {
   font-weight:700
@@ -43,7 +43,7 @@
   font-size:20px;
   color:#fff;
   opacity:1;
-  top:8px;
+  top:5px;
   right:10px;
   position:absolute;
   cursor:pointer

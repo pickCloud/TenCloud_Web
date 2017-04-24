@@ -1,0 +1,57 @@
+@import "variables";
+.tab-cont_item {
+  > h5 {
+    font-size: 1em;
+    margin-bottom: 24px;
+  }
+}
+
+.switch-box {
+  margin-bottom: 24px;
+}
+
+.switch-item {
+  display: inline-block;
+  padding: 32px 56px;
+  background-color: #fff;
+  margin-right: 16px;
+  border: 1px solid #ebebeb;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  margin-bottom: 36px;
+  &:after {
+    position: absolute;
+    content: "";
+    left: 50%;bottom: -20px;
+    width: 40px;height: 40px;
+    margin-left: -20px;
+    background: url("../assets/selected.png") no-repeat;
+    transform: scale(0,0);
+    transition: all 0.2s;
+    transition-delay: 0.1s;
+  }
+  &:hover,&.active {
+    border-color: map_get($comb-colors, 'qingse');
+    &:after {
+      transform: scale(1,1);
+    }
+  }
+}
+
+.switch-item_img {
+  padding: 0 48px;
+  height: 90px;
+  line-height: 90px;
+  vertical-align: top;
+  img {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.save-box {
+  text-align: center;
+  margin-top: 24px;
+}

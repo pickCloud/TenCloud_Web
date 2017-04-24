@@ -1,15 +1,13 @@
 <template>
   <transition name="alert-fade">
     <div class="alert" :class="[ typeClass ]" v-show="visible">
-      <i class="alert_icon material-icons" :class="[isBigIcon ]" v-if="showIcon">{{iconClass}}</i>
+      <i class="alert_icon ten-icon" :class="[isBigIcon]" v-if="showIcon" v-html="iconClass"></i>
       <div class="alert_content">
         <span class="alert_title" :class="[ isBoldTitle ]" v-if="title">{{ title }}</span>
         <slot>
           <p class="alert_description" v-if="description">{{ description }}</p>
         </slot>
-        <i class="alert_closebtn" :class="{'material-icons':closeText=='clear'}" v-show="closable" @click="close()">
-          {{closeText}}
-        </i>
+        <i class="alert_closebtn" :class="{'ten-icon':closeText=='&#xe6ac;'}" v-show="closable" @click="close()" v-html="closeText"></i>
       </div>
     </div>
   </transition>
@@ -17,10 +15,10 @@
 
 <script>
   const MAP = {
-    'success': {'icon': 'verified_user', 'class': 'green'},
-    'info': {'icon': 'info', 'class': 'blue'},
-    'warning': {'icon': 'warning', 'class': 'amber darken-3'},
-    'error': {'icon': 'cancel', 'class': 'red'}
+    'success': {'icon': '&#xe690;', 'class': 'green'},
+    'info': {'icon': '&#xe692;', 'class': 'blue'},
+    'warning': {'icon': '&#xe691;', 'class': 'amber darken-3'},
+    'error': {'icon': '&#xe693;', 'class': 'red'}
   }
   export default {
     name: 'Alert',
@@ -45,7 +43,7 @@
       },
       closeText: {
         type: String,
-        default: 'clear'
+        default: '&#xe6ac;'
       },
       showIcon: {
         type: Boolean,

@@ -2,14 +2,16 @@ import Tree from './tenui/packages/tree/index'
 import Modal from './tenui/packages/modal/index'
 import Percentage from './tenui/packages/percentage/index'
 import Tabs from './tenui/packages/tabs/index'
+import Alert from './tenui/packages/alert/index'
 import './tenui/js/waves'
 
-export { Tree, Modal, Percentage, Tabs }
+export { Tree, Modal, Percentage, Tabs, Alert }
 export default {
   Tree,
   Modal,
   Percentage,
   Tabs,
+  Alert,
   install (Vue) {
     for (let key in this) {
       if (key !== 'install') {

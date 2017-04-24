@@ -1,10 +1,10 @@
 <template>
   <li class="tree-node" :class="{'empty':node.link}">
     <div class="tree-node_title" @click="nodeSelect($event)">
-      <i class="material-icons tree-node_icon" v-if="node.icon">{{node.icon}}</i>
+      <i class="ten-icon tree-node_icon" v-if="node.icon" v-html="node.icon"></i>
       <a class="tree-node_link" :href="node.link" v-if="node.link">{{node.label}}</a>
       <span class="tree-node_label" v-else>{{node.label}}</span>
-      <i class="material-icons tree-node_arrow" v-if="node.children">keyboard_arrow_down</i>
+      <i class="ten-icon tree-node_arrow" v-if="node.children">&#xe6bb;</i>
     </div>
     <ul class="tree-node_child" v-if="node.children">
       <tree-node v-for="(item,key) in node.children" :key="key" :node="item"></tree-node>

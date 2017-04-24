@@ -94,7 +94,6 @@ a {
 }
 .tree-node_arrow {
   font-size: 1.6rem !important;
-  margin-top: 18px;
   margin-right: $base-space * 2;
 }
 .tree-node_child {
@@ -162,14 +161,18 @@ a {
   padding: 24px 0;
   &.large {
     font-size: 1.7rem;
-    .material-icons {
+    .ten-icon {
       font-size: 3rem;
-      margin-top: -8px;
+      margin-top: -10px;
     }
   }
-  .material-icons {
+  .ten-icon {
     vertical-align: middle;
-    margin-top: -2px;
+    margin-right: 8px;
+  }
+  > span {
+    display: inline-block;
+    vertical-align: middle;
   }
 }
 // 按钮

@@ -1,0 +1,42 @@
+.tab-label {
+  li {
+    display: inline-block;
+    padding: 8px;
+    cursor: pointer;
+    margin-right: 8px;
+    font-weight: 700;
+    &.active {
+      color: $primary-color;
+    }
+  }
+  position: relative;
+  border-bottom:1px solid map_get($grey, 'lighten-3');
+  @include user-select(none);
+}
+.tab-line {
+  position: absolute;
+  content: "";
+  bottom: -1px;left: 0;
+  height: 2px;
+  width: 1px;
+  background-color: $primary-color;
+  transition: width 0.2s, left 0.3s;
+  padding: 0 !important;
+}
+
+.tab-cont {
+  position: relative;
+  width: 100%;
+}
+
+.tab-cont_item {
+  position: absolute;
+  left: 0;top: 0;opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s;
+  width: 100%;
+  &.active {
+    visibility: visible;
+    opacity: 1;
+  }
+}

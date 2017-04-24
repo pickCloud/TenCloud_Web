@@ -6,8 +6,11 @@
   cursor: pointer;
   overflow: hidden;
   @include user-select(none);
-  .material-icons {
-    vertical-align: middle;
+  //.ten-icon {
+  //  vertical-align: middle;
+  //}
+  .ten-icon {
+    font-size: 1.2rem;
   }
   &.active {
     > .tree-node_title .tree-node_arrow {
@@ -32,7 +35,6 @@
 .tree-node_arrow {
   float: right;
   font-size: 1.2rem !important;
-  margin-top: 3px;
   transition: all 0.2s;
 }
 .tree-node_child {
