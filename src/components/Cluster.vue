@@ -1,11 +1,11 @@
 <template>
   <div class="v-cluster">
     <div class="crumbs">
-      <a class="crumbs-item" href="/">服务器</a>
+      <span class="crumbs-item">服务器</span>
       <span class="crumbs-item qingse-text">集群</span>
     </div>
     <div class="v-content">
-      <div class="_btns-group">
+      <div class="btns-group">
         <span class="comb-btn waves-effect lvse" @click="addNewCluster">新增集群</span>
         <router-link class="comb-btn waves-effect qingse" :to="{ name: 'AddHost'}">添加主机</router-link>
       </div>

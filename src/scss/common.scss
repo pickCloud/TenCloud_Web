@@ -5,6 +5,7 @@ html {
   font-family: "Arial","Microsoft JhengHei";
   color: #909090;
   font-size: $font-size-normal;
+  font-weight: 400;
 }
 a {
   color: #909090;
@@ -70,7 +71,6 @@ a {
 // 多级菜单
 .tree {
   font-size: $font-size-title;
-  font-weight: 400;
 }
 .tree-node_title {
   padding-left: $base-space * 2;
@@ -111,6 +111,7 @@ a {
   background-color: #f1f1f1;
   padding: 0 24px;
   margin-bottom: 16px;
+  font-weight: 600;
 }
 .crumbs-item {
   position: relative;
@@ -176,6 +177,11 @@ a {
   }
 }
 // 按钮
+.btns-group {
+  .comb-btn:first-child {
+    margin-right: 8px;
+  }
+}
 .comb-btn {
   @extend .btn;
   box-shadow: none;
@@ -210,4 +216,23 @@ textarea.form-control {
     @extend .col;
     padding-top: 16px;
   }
+}
+// 搜索
+.piece-search {
+  height: 35px;
+  line-height: 35px;
+  border-radius: 50px;
+  padding: 0 16px;
+  background-color: #ebebeb;
+  .ten-icon {
+    font-size: 1.4rem;
+    cursor: pointer;
+    vertical-align: middle;
+  }
+}
+.piece-search_input {
+  min-width: 200px;
+  display: inline-block;
+  background-color: transparent;
+  vertical-align: middle;
 }

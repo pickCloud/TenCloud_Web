@@ -51,6 +51,10 @@ npm run e2e
 npm test
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## 致谢
+- <a href="vuejs.org">vuejs</a>
+- <a href="http://materializecss.com/">materializecss</a>
+- <a href="https://github.com/mzabriskie/axios">axios</a>
+- <a href="http://jquery.com/">jQuery</a>
 
 
