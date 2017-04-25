@@ -23,7 +23,7 @@
               <li>更新时间：2017年01月05日</li>
             </ul>
             <div class="_list-con_btns">
-              <span class="comb-btn waves-effect lvse ">查看详情</span>
+              <router-link :to="{ name: 'Cluster-Details' }" class="comb-btn waves-effect lvse ">查看详情</router-link>
               <span class="comb-btn waves-effect qingse right" @click="delCluster(1)">删除集群</span>
             </div>
           </div>

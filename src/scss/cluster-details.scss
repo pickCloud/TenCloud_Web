@@ -1,0 +1,99 @@
+#head {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 24px 36px 24px 36px;
+  display: flex;
+  position: relative;
+  .article {
+    font-size: 15px;
+    padding-left: 20px;
+    h3 {
+      margin-top: 8px;
+    }
+    p {
+      font-size: 15px;
+      color: #bbb;
+    }
+    .alter-button {
+      position: absolute;
+      right: 16px;
+      top: 16px;
+    }
+  }
+  .avatar {
+    float: left;
+    padding-top: 12px;
+    padding-right: 24px;
+    height: 100%;
+    img {
+    border: 5px solid #4dd1de;
+    border-radius: 12px;
+    }
+  }
+  .status {
+    display: inline;
+    float: left;
+    margin-right: 36px;
+  }
+}
+#body {
+  background-color: #fff;
+  border-radius: 10px;
+  #buttons-panel {
+    background-color: #fff;
+    width: 100%;
+    height: 72px;
+    margin-top: 36px;
+    border-radius: 10px;
+    .buttons {
+      float: left;
+      margin: 24px 24px 24px 36px;
+      height: 36px;
+    }
+    .btns-group {
+      padding: 16px 0 16px 16px;
+      margin-right: 16px;
+      .comb-btn {
+        margin-right: 8px;
+      }
+    }
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 10px;
+    border-top: 1px solid #eee;
+  }
+  th:first-child, td:first-child {
+    width: 16px;
+  }
+  th, td {
+    color: #bbb;
+    text-align: left;
+    padding-left: 24px;
+    height: 48px;
+    max-width: 24px;
+  }
+  td div {
+    display: inline-block;
+    padding-right: 36px;
+    max-width: 33%;
+    a {
+      text-decoration: none;
+    }
+  }
+  table tr:nth-child(even) {
+    background-color: #efefef;
+    border-radius: 10px;
+  }
+}
+.hide {
+  display: none;
+}
+.editable {
+  max-width: 78%;
+}
+.editable[contenteditable] {
+  border: 3px solid #eee;
+  border-radius: 20px;
+}

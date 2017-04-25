@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Main from '@/components/Main'
 
 import Cluster from '@/components/Cluster'
+import ClusterDetails from '@/components/cluster-details'
 import AddHost from '@/components/AddHost'
 
 import Project from '@/components/Project'
@@ -27,6 +28,11 @@ export default new Router({
       path: '/cluster',
       name: 'Cluster',
       component: Cluster
+    },
+    {
+      path: '/cluster-details',
+      name: 'Cluster-Details',
+      component: ClusterDetails
     },
     {
       path: '/addhost',
