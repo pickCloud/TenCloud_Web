@@ -51,10 +51,7 @@
 
 <script>
   export default {
-    name: 'AddHost',
-    mounted () {
-      console.log(this.$http)
-    }
+    name: 'AddHost'
   }
 </script>
 

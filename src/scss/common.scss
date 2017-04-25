@@ -87,7 +87,7 @@ a {
     background-color: $border-color;
     border-top: 1px solid darken($border-color, 5%);
     border-bottom: 1px solid darken($border-color, 5%);
-    .tree-node_link {
+    .tree-node_label {
       color: map_get($comb-colors, 'qingse');
     }
   }
@@ -235,4 +235,17 @@ textarea.form-control {
   display: inline-block;
   background-color: transparent;
   vertical-align: middle;
+}
+// checkbox
+[type="checkbox"] {
+  &:checked {
+    + label {
+      background-color: map_get($comb-colors, 'lvse');
+    }
+  }
+}
+// 标签
+.comb-label {
+  padding: 2px 4px;
+  border-radius: 5px;
 }

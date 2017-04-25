@@ -14,7 +14,7 @@
         <col width="40px">
         <thead>
           <tr>
-            <th><input type="checkbox"></th>
+            <th><checkbox></checkbox></th>
             <th>名称</th>
             <th>状态</th>
             <th>发布时间</th>
@@ -23,25 +23,25 @@
         </thead>
         <tbody>
           <tr>
-            <td><input type="checkbox"></td>
+            <td><checkbox></checkbox></td>
             <td>应用1</td>
-            <td>应用1</td>
-            <td>应用1</td>
-            <td>应用1</td>
+            <td><span class="comb-label lvse white-text">正常</span></td>
+            <td>2017.04.20</td>
+            <td><router-link class="lvse-text" :to="{name: 'AppsInfo', params:{id:1}}">查看详情</router-link></td>
           </tr>
           <tr>
-            <td><input type="checkbox"></td>
+            <td><checkbox></checkbox></td>
             <td>应用1</td>
-            <td>应用1</td>
-            <td>应用1</td>
-            <td>应用1</td>
+            <td><span class="comb-label fense-l white-text">异常</span></td>
+            <td>2017.04.20</td>
+            <td><router-link class="lvse-text" :to="{name: 'AppsInfo', params:{id:2}}">查看详情</router-link></td>
           </tr>
           <tr>
-            <td><input type="checkbox"></td>
+            <td><checkbox></checkbox></td>
             <td>应用1</td>
-            <td>应用1</td>
-            <td>应用1</td>
-            <td>应用1</td>
+            <td><span class="comb-label fense-l white-text">异常</span></td>
+            <td>2017.04.20</td>
+            <td><router-link class="lvse-text" :to="{name: 'AppsInfo', params:{id:3}}">查看详情</router-link></td>
           </tr>
         </tbody>
       </table>
