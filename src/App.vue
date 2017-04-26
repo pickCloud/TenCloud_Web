@@ -54,7 +54,7 @@ export default {
             {
               label: '文件仓库',
               icon: '&#xe610;',
-              link: '/#/hub'
+              link: '/#/filehub'
             }
           ]
         }

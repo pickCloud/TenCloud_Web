@@ -13,6 +13,7 @@ import ProDeploy from '@/components/ProDeploy'
 import ProBuild from '@/components/ProBuild'
 
 import Hub from '@/components/Hub'
+import FileHub from '@/components/FileHub'
 
 import Apps from '@/components/Apps'
 import AppsInfo from '@/components/AppsInfo'
@@ -80,6 +81,11 @@ export default new Router({
       path: '/hub',
       name: 'Hub',
       component: Hub
+    },
+    {
+      path: '/filehub',
+      name: 'FileHub',
+      component: FileHub
     }
   ]
 })
