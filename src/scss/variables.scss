@@ -1,4 +1,5 @@
 $border-color:#f8f8f8 !default;
+$border-color-darken:#ebebeb !default;
 $comb-colors:(
   'lvse': #48e498,
   'qingse': #4dd1de,
@@ -18,15 +19,3 @@ $tree-border-w:1px;
 $font-size-normal: 14px;
 $font-size-title: 16rem / 14;
 $font-size-mini: 12rem / 14;
-
-@each $key,$color in $comb-colors {
-  .#{$key} {
-    background-color: $color;
-    &.btn:hover {
-      background-color: darken($color, 15%);
-    }
-  }
-  .#{$key}-text {
-    color: $color;
-  }
-}

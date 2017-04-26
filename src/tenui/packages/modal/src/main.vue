@@ -57,9 +57,11 @@
       },
       show () {
         this.visible = true
+        document.body.style.overflow = 'hidden'
       },
       close () {
         this.visible = false
+        document.body.style.overflow = 'auto'
       },
       afterEnter () {
         this.$modaldom.className += ' active'

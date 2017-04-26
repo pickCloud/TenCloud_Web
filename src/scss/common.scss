@@ -1,5 +1,17 @@
 @import "variables";
 
+@each $key,$color in $comb-colors {
+  .#{$key} {
+    background-color: $color;
+    &.btn:hover {
+      background-color: darken($color, 15%);
+    }
+  }
+  .#{$key}-text {
+    color: $color;
+  }
+}
+
 html {
   background-color: $border-color;
   font-family: "Arial","Microsoft JhengHei";
@@ -248,4 +260,10 @@ textarea.form-control {
 .comb-label {
   padding: 2px 4px;
   border-radius: 5px;
+}
+// select
+.select-opation_item {
+  &.active {
+    background-color: map_get($comb-colors, 'qingse');
+  }
 }

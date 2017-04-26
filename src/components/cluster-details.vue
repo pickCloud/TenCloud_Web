@@ -68,11 +68,8 @@
       </div>
     </div>
     <!-- 迁移主机 -->
-    <modal title="迁移主机" buttons="确定,取消" buttonsClass="comb-btn lvse,comb-btn qingse" ref="movemachine" class="comb-dialog">
-      <div>
-        <span>迁移至：</span>
-        <select></select>
-      </div>
+    <modal title="迁移主机至" buttons="确定,取消" buttonsClass="comb-btn lvse,comb-btn qingse" ref="movemachine" class="comb-dialog mini">
+      <tselect :data="clusters"></tselect>
     </modal>
     <!-- 删除主机 -->
     <modal buttons="确定,取消" buttonsClass="comb-btn lvse,comb-btn qingse" ref="delmachine" class="comb-dialog mini">
@@ -89,6 +86,13 @@ export default {
   // test data
   data () {
     return {
+      clusters: [
+        {label: '集群1', active: true},
+        {label: '集群2'},
+        {label: '集群3'},
+        {label: '集群4'},
+        {label: '集群5'}
+      ],
       hosts: [{
         name: 'TIMCOOO1',
         ip: '127.0.108.11',

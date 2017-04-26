@@ -1,8 +1,12 @@
 import Checkbox from './src/checkbox'
+import FileInput from './src/fileinput'
+import TSelect from './src/tselect'
 
-export { Checkbox }
+export { Checkbox, FileInput, TSelect }
 export default {
   Checkbox,
+  FileInput,
+  TSelect,
   install (Vue) {
     for (let key in this) {
       if (key !== 'install') {

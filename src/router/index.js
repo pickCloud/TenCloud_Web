@@ -9,6 +9,8 @@ import AddHost from '@/components/AddHost'
 import Project from '@/components/Project'
 import ProInfo from '@/components/ProInfo'
 import ProAdd from '@/components/ProAdd'
+import ProDeploy from '@/components/ProDeploy'
+import ProBuild from '@/components/ProBuild'
 
 import Hub from '@/components/Hub'
 
@@ -30,7 +32,7 @@ export default new Router({
       component: Cluster
     },
     {
-      path: '/cluster-details',
+      path: '/cluster-details/:id',
       name: 'Cluster-Details',
       component: ClusterDetails
     },
@@ -53,6 +55,16 @@ export default new Router({
       path: '/proinfo/:id',
       name: 'ProInfo',
       component: ProInfo
+    },
+    {
+      path: '/prodeploy/:id',
+      name: 'ProDeploy',
+      component: ProDeploy
+    },
+    {
+      path: '/probuild/:id',
+      name: 'ProBuild',
+      component: ProBuild
     },
     {
       path: '/apps',
