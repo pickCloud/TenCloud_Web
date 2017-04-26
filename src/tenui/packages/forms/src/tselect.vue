@@ -12,7 +12,7 @@
 
 <script>
   import NoDropDown from '@/tenui/js/nodropdown'
-  import Tselect from './tselect'
+  import Tselect from './tenselect'
 
   export default {
     name: 'Tselect',

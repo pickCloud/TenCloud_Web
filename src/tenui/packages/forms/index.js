@@ -1,6 +1,6 @@
-import Checkbox from './src/checkbox'
-import FileInput from './src/fileinput'
-import TSelect from './src/tselect'
+import Checkbox from './src/checkbox.vue'
+import FileInput from './src/fileinput.vue'
+import TSelect from './src/tselect.vue'
 
 export { Checkbox, FileInput, TSelect }
 export default {
