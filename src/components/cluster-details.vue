@@ -61,7 +61,7 @@
               <td>{{ host.status }}</td>
               <td>{{ host.site }}</td>
               <td>
-                <div><a class="lvse-text">详情</a></div>
+                <div><router-link :to="{ name:'Machine-Details' }" class="lvse-text">详情</router-link></div>
                 <div><a class="hongse-text" @click="delMachine">删除</a></div>
                 <div><a class="qingse-text" @click="moveMachine">迁移</a></div>
               </td>
@@ -100,22 +100,26 @@ export default {
         name: 'TIMCOOO1',
         ip: '127.0.108.11',
         status: '良好',
-        site: '华南'
+        site: '华南',
+        id: 1
       }, {
         name: 'TIMCOOO2',
         ip: '127.0.108.12',
         status: '良好',
-        site: '香港'
+        site: '香港',
+        id: 2
       }, {
         name: 'TIMCOOO3',
         ip: '127.0.108.13',
         status: '良好',
-        site: '纽约'
+        site: '纽约',
+        id: 3
       }, {
         name: 'TIMCOOO4',
         ip: '127.0.108.14',
         status: '良好',
-        site: 'LA'
+        site: 'LA',
+        id: 4
       }],
       status: {
         name: 'Cluster 1',
@@ -162,4 +166,12 @@ export default {
 
 <style scoped lang="scss">
   @import "../scss/cluster-details";
+  table {
+    th:first-child, td:first-child {
+      width: 16px;
+    }
+    th:last-child, td:last-child {
+      width: 24%;
+    }
+  }
 </style>

@@ -4,6 +4,7 @@ import Main from '@/components/Main'
 
 import Cluster from '@/components/Cluster'
 import ClusterDetails from '@/components/cluster-details'
+import MachineDetails from '@/components/machine-details'
 import AddHost from '@/components/AddHost'
 
 import Project from '@/components/Project'
@@ -36,6 +37,11 @@ export default new Router({
       path: '/cluster-details/:id',
       name: 'Cluster-Details',
       component: ClusterDetails
+    },
+    {
+      path: '/machine-details',
+      name: 'Machine-Details',
+      component: MachineDetails
     },
     {
       path: '/addhost',
