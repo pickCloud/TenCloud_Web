@@ -70,14 +70,14 @@
           </tbody>
     		</table>
       </div>
-      <div class="app-list_box">
+      <div class="panel">
         <div class="btns-group">
           <router-link :to="{ name:'AddHost' }"><button type="button" class="comb-btn waves-effect lvse">添加主机</button></router-link>
           <button type="button" class="comb-btn waves-effect qingse" @click="moveMachine">迁移主机</button>
           <button type="button" class="comb-btn waves-effect hongse" @click="delMachine">删除主机</button>
           <search class="right"></search>
         </div>
-        <table class="striped highlight centered app-list_table">
+        <table class="striped highlight centered">
           <col width="40px">
           <thead>
             <tr>
@@ -198,5 +198,4 @@ export default {
 
 <style scoped lang="scss">
   @import "../scss/cluster-details";
-  @import "../scss/apps";
 </style>
