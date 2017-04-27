@@ -61,9 +61,9 @@
               <td>{{ host.status }}</td>
               <td>{{ host.site }}</td>
               <td>
-                <router-link :to="{ name:'Machine-Details' }" class="lvse-text cluster-details_btn">详情</router-link>
-                <span class="hongse-text cluster-details_btn" @click="delMachine">删除</span>
-                <span class="qingse-text cluster-details_btn" @click="moveMachine">迁移</span>
+                <router-link :to="{ name:'Machine-Details' }" class="lvse-text table-details_btn">详情</router-link>
+                <span class="hongse-text table-details_btn" @click="delMachine">删除</span>
+                <span class="qingse-text table-details_btn" @click="moveMachine">迁移</span>
               </td>
             </tr>
           </tbody>

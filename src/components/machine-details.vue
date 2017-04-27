@@ -3,11 +3,11 @@
     <div class="crumbs">
       <span class="crumbs-item">服务器</span>
       <router-link class="crumbs-item" :to="{name:'Cluster'}">集群</router-link>
-      <router-link class="crumbs-item" :to="{name:'Cluster-Details'}">Cluster 1 详情</router-link>
-      <span>TIMCOOO1</span>
+      <router-link class="crumbs-item" :to="{name:'Cluster-Details', params:{id:1}}">Cluster 1</router-link>
+      <span class="qingse-text">TIMCOOO1</span>
     </div>
     <div class="v-content">
-      <div class="head">
+      <div class="head margin-b-24">
         <div class="avatar">
           <img src="../assets/cluster-avatar.png">
         </div>
@@ -27,9 +27,9 @@
             <span class="lvse-text">正常</span>
           </p>
           <div class="toggle-machine-status">
-            <span><i class="ten-icon">&#xe734;</i></span>
-            <span><i class="ten-icon">&#xe606;</i></span>
-            <span><i class="ten-icon">&#xe669;</i></span>
+            <i class="ten-icon">&#xe734;</i>
+            <i class="ten-icon">&#xe606;</i>
+            <i class="ten-icon">&#xe669;</i>
           </div>
           <div class="machine-info">
             <div>IP: 127.0.108.11</div>
@@ -38,12 +38,16 @@
           </div>
     		</div>
     	</div>
-      <div class="panel">
-        <tabs :labels="['配置','应用列表','性能']" theme="block">
+      <div class="margin-b-16">系统信息</div>
+      <div class="panel-tab margin-b-24">
+        <tabs :labels="['配置','应用列表','性能']" theme="block" :tabkey="1">
           <div>neirong1</div>
           <div>
             <table class="striped highlight">
-              <col width="40px">
+              <col width="15%">
+              <col width="15%">
+              <col width="50%">
+              <col width="20%">
               <thead>
                 <tr>
                   <th>版本号</th>
@@ -58,9 +62,9 @@
                   <td>{{ machine.create_time }}</td>
                   <td>{{ machine.path }}</td>
                   <td>
-                    <div><a class="lvse-text">部署</a></div>
-                    <div><a class="qingse-text" @click="moveMachine">下载</a></div>
-                    <div><a class="hongse-text" @click="delMachine">删除</a></div>
+                    <span class="lvse-text table-details_btn">详情</span>
+                    <span class="qingse-text table-details_btn" @click="moveMachine">迁移</span>
+                    <span class="hongse-text table-details_btn" @click="delMachine">删除</span>
                   </td>
                 </tr>
               </tbody>
@@ -69,7 +73,23 @@
           <div>neirong3</div>
         </tabs>
       </div>
+      <div class="margin-b-16">商务信息</div>
+      <div class="panel-tab margin-b-24">
+        <tabs :labels="['服务商','合同','日志']" theme="block" :tabkey="1">
+          <div>neirong1</div>
+          <div>neirong2</div>
+          <div>neirong3</div>
+        </tabs>
+      </div>
     </div>
+    <!-- 迁移 -->
+    <modal title="迁移主机至" buttons="确定,取消" buttonsClass="comb-btn lvse,comb-btn qingse" ref="movemachine" class="comb-dialog mini">
+      <tselect :data="clusters"></tselect>
+    </modal>
+    <!-- 删除 -->
+    <modal buttons="确定,取消" buttonsClass="comb-btn lvse,comb-btn qingse" ref="delmachine" class="comb-dialog mini">
+      <div class="comb-dialog_info center-align red-text large"><i class="ten-icon">&#xe691;</i> <span v-html="delbody"></span></div>
+    </modal>
   </div>
 </template>
 
@@ -84,6 +104,7 @@ export default {
       altering: true,
       title: '',
       details: '',
+      delbody: '',
       machines: [
         {
           version: 20170501,
@@ -95,6 +116,13 @@ export default {
           create_time: '2017/05/02',
           path: '/usr/local'
         }
+      ],
+      clusters: [
+        {label: '集群1', active: true},
+        {label: '集群2'},
+        {label: '集群3'},
+        {label: '集群4'},
+        {label: '集群5'}
       ]
     }
   },
@@ -102,6 +130,9 @@ export default {
     delMachine () {
       this.delbody = '您确定删除该版本吗？'
       this.$refs.delmachine.show()
+    },
+    moveMachine () {
+      this.$refs.movemachine.show()
     },
     alter () {
       this.toAlter = true
