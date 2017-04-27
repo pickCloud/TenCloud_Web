@@ -34,42 +34,6 @@
   牛逼，我不也不知道，直觉！</p>
     		</div>
     	</div>
-    	<div class="body">
-    		<div class="buttons-panel">
-          <div class="btns-group">
-            <router-link :to="{ name:'AddHost' }"><button type="button" class="comb-btn waves-effect lvse">添加主机</button></router-link>
-            <button type="button" class="comb-btn waves-effect qingse" @click="moveMachine">迁移主机</button>
-            <button type="button" class="comb-btn waves-effect hongse" @click="delMachine">删除主机</button>
-            <search class="right"></search>
-          </div>
-    		</div>
-    		<table class="striped highlight">
-          <thead>
-      			<tr>
-              <th><checkbox></checkbox></th>
-      			  <th>名称</th>
-      			  <th>IP</th>
-      			  <th>状态</th>
-      			  <th>地址</th>
-      			  <th>操作</th>
-      			</tr>
-          </thead>
-          <tbody>
-      			<tr v-for="host in hosts">
-              <td><checkbox></checkbox></td>
-      			  <td>{{ host.name }}</td>
-      			  <td>{{ host.ip }}</td>
-      			  <td>{{ host.status }}</td>
-      			  <td>{{ host.site }}</td>
-      			  <td>
-      			  	<div><a class="lvse-text">详情</a></div>
-      			  	<div><a class="hongse-text" @click="delMachine">删除</a></div>
-      			  	<div><a class="qingse-text" @click="moveMachine">迁移</a></div>
-      			  </td>
-      			</tr>
-          </tbody>
-    		</table>
-      </div>
       <div class="panel">
         <div class="btns-group">
           <router-link :to="{ name:'AddHost' }"><button type="button" class="comb-btn waves-effect lvse">添加主机</button></router-link>
@@ -77,7 +41,7 @@
           <button type="button" class="comb-btn waves-effect hongse" @click="delMachine">删除主机</button>
           <search class="right"></search>
         </div>
-        <table class="striped highlight centered">
+        <table class="striped highlight">
           <col width="40px">
           <thead>
             <tr>
