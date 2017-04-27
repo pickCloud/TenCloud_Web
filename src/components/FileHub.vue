@@ -1,5 +1,8 @@
 <template>
   <div class="v-filehub">
-    this is filehub
+    <div class="crumbs">
+      <span class="crumbs-item">仓库</span>
+      <span class="crumbs-item qingse-text">文件仓库</span>
+    </div>
   </div>
 </template>

@@ -20,12 +20,12 @@
         <span class="crumbs-item">仓库</span>
         <span class="crumbs-item qingse-text">镜像仓库</span>
       </div>
-      <div class="v-content">
+      <div class="table-layer">
         <div class="btns-group">
           <div class="comb-btn waves-effect lvse">上传</div>
           <search class="right"></search>
         </div>
-        <table class="striped highlight centered app-list_table">
+        <table class="striped highlight centered">
           <thead>
             <tr>
               <th>名称</th>

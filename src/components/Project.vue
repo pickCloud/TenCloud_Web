@@ -3,13 +3,13 @@
     <div class="crumbs">
       <span class="crumbs-item qingse-text">项目</span>
     </div>
-    <div class="app-list_box">
+    <div class="panel">
       <div class="btns-group">
         <router-link class="comb-btn waves-effect lvse" :to="{name:'ProAdd'}">新增项目</router-link>
         <div class="comb-btn waves-effect fense" @click="delApp">删除项目</div>
         <search class="right"></search>
       </div>
-      <table class="striped highlight centered app-list_table">
+      <table class="striped highlight centered">
         <col width="40px">
         <thead>
         <tr>
@@ -75,7 +75,6 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../scss/apps";
   ._pro-icon {
     display: inline-block;
     width: 30px;

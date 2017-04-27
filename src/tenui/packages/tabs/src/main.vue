@@ -1,8 +1,8 @@
 <template>
-  <div class="tab-wrap">
-    <ul class="tab-label">
-      <li :class="{'active':tabindex == key}" v-for="(label, key) in labels" @click="labelSelect(key, $event)">{{label}}</li>
-      <li class="tab-line" :style="{'left':lineleft,'width':linewidth}"></li>
+  <div class="tab-wrap" :class="[themeClass]">
+    <ul class="tab-label-group">
+      <li class="tab-label" :class="{'active':tabindex == key}" v-for="(label, key) in labels" @click="labelSelect(key, $event)">{{label}}</li>
+      <li class="tab-line" :style="{'left':lineleft,'width':linewidth}" v-if="hasLine"></li>
     </ul>
     <div class="tab-cont">
       <slot></slot>
@@ -12,6 +12,10 @@
 
 <script>
 //  import $ from 'jquery'
+  const MAP = {
+    'default': 'tab-theme-default',
+    'block': 'tab-theme-block'
+  }
   export default {
     name: 'Tabs',
     data () {
@@ -29,6 +33,10 @@
       tabkey: {
         type: Number,
         default: 0
+      },
+      theme: {
+        type: String,
+        default: 'default'
       }
     },
     methods: {
@@ -61,7 +69,15 @@
     },
     mounted () {
       this.initTabContItem()
-      this.linestyle(this.$el.querySelector('.tab-label .active'))
+      this.linestyle(this.$el.querySelector('.tab-label-group .active'))
+    },
+    computed: {
+      themeClass () {
+        return MAP[this.theme]
+      },
+      hasLine () {
+        return this.theme === 'default'
+      }
     }
   }
 </script>

@@ -194,6 +194,7 @@ a {
   .comb-btn:first-child {
     margin-right: 8px;
   }
+  margin-bottom: 16px;
 }
 .comb-btn {
   @extend .btn;
@@ -267,4 +268,58 @@ textarea.form-control {
   &.active {
     background-color: map_get($comb-colors, 'qingse');
   }
+}
+// margin
+.margin-b-16 {margin-bottom: 16px;}
+.margin-t-16 {margin-top: 16px;}
+// pading
+.padding-l-16 {padding-left: 16px;}
+.padding-l-24 {padding-left: 24px;}
+// 面板
+.panel {
+  margin: 0 24px 16px 24px;
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #ebebeb;
+}
+.panel-tab {
+  @extend .panel;
+  padding: 0;
+  .tab-label-group {
+    padding: 16px 24px;
+    border-bottom: 1px solid $border-color-darken;
+  }
+  .tab-cont {
+    padding: 16px 24px;
+  }
+}
+//详情通用
+.info-panel {
+  position: relative;
+  > .btns-group {
+    position: absolute;
+    right: 24px;top: 24px;
+  }
+}
+.info-left {
+  display: table-cell;
+  width: 180px;height: 180px;
+  border: 5px solid map_get($comb-colors, 'qingse');
+  border-radius: 10px;
+  vertical-align: middle;
+}
+.info-right {
+  display: table-cell;
+  vertical-align: top;
+  padding-left: 16px;
+}
+.info-title {
+  margin: 8px 0 16px 0;
+  font-size: 1.28rem;
+  color: map_get($comb-colors, 'qingse');
+  font-weight: 700;
+}
+.info-desc {
+  margin-top: 24px;
 }
