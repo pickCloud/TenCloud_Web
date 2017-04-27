@@ -31,7 +31,7 @@
                 <col width="30%">
                 <thead>
                   <tr>
-                    <th>版本号</th>
+                    <th>版本号<i class="ten-icon">&#xe734;</i></th>
                     <th>创建时间</th>
                     <th>文件</th>
                     <th>操作</th>
