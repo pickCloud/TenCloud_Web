@@ -2,8 +2,8 @@
   <div class="cluster-details">
     <div class="crumbs">
       <span class="crumbs-item">服务器</span>
-      <span class="crumbs-item">集群</span>
-      <span class="crumbs-item qingse-text">{{ status.name }}</span>
+      <router-link class="crumbs-item" :to="{name:'Cluster'}">集群</router-link>
+      <span class="crumbs-item qingse-text">{{ status.name }}详情</span>
     </div>
     <div class="v-content">
       <div class="head">
@@ -16,7 +16,7 @@
             <button class="comb-btn waves-effect lvse" @click="submitAlter" v-bind:class="{ hide:altering }">确认</button>
             <button class="comb-btn waves-effect lvse" @click="cancelAlter" v-bind:class="{ hide:altering }">取消</button>
           </div>
-    			<h3 class="qingse-text editable">{{ status.name }}</h3>
+    			<h5 class="qingse-text editable">{{ status.name }}</h5>
     			<div class="status"><span>状态：共 {{ status.used + status.free }} GB 内存</span></div>
     			<div class="status">
     				<span class="qingse-text">█</span>
@@ -28,8 +28,8 @@
     				<span>空闲</span>
     				<span class="zise-text">{{ status.free }} GB</span>
     			</div>
-    			<br><br>
-    			<p>更新时间：20170807</p>
+          <br>
+    			<p class="time">更新时间：20170807</p>
     			<p class="editable">集群1是一个很牛逼的集群，为什么这么牛逼，我不也不知道，直觉！集群1是一个很牛逼的集群，为什么这么牛逼，我不也不知道，直觉！集群1是一个很牛逼的集群，为什么这么牛逼，我不也不知道，直觉！
   牛逼，我不也不知道，直觉！</p>
     		</div>
@@ -39,7 +39,7 @@
           <div class="btns-group">
             <router-link :to="{ name:'AddHost' }"><button type="button" class="comb-btn waves-effect lvse">添加主机</button></router-link>
             <button type="button" class="comb-btn waves-effect qingse" @click="moveMachine">迁移主机</button>
-            <button type="button" class="comb-btn waves-effect huangse" @click="delMachine">删除主机</button>
+            <button type="button" class="comb-btn waves-effect hongse" @click="delMachine">删除主机</button>
             <search class="right"></search>
           </div>
     		</div>
@@ -62,13 +62,48 @@
       			  <td>{{ host.status }}</td>
       			  <td>{{ host.site }}</td>
       			  <td>
-      			  	<div><a>详情</a></div>
-      			  	<div><a class="huangse-text" @click="delMachine">删除</a></div>
+      			  	<div><a class="lvse-text">详情</a></div>
+      			  	<div><a class="hongse-text" @click="delMachine">删除</a></div>
       			  	<div><a class="qingse-text" @click="moveMachine">迁移</a></div>
       			  </td>
       			</tr>
           </tbody>
     		</table>
+      </div>
+      <div class="app-list_box">
+        <div class="btns-group">
+          <router-link :to="{ name:'AddHost' }"><button type="button" class="comb-btn waves-effect lvse">添加主机</button></router-link>
+          <button type="button" class="comb-btn waves-effect qingse" @click="moveMachine">迁移主机</button>
+          <button type="button" class="comb-btn waves-effect hongse" @click="delMachine">删除主机</button>
+          <search class="right"></search>
+        </div>
+        <table class="striped highlight centered app-list_table">
+          <col width="40px">
+          <thead>
+            <tr>
+              <th><checkbox></checkbox></th>
+              <th>名称</th>
+              <th>IP</th>
+              <th>状态</th>
+              <th>地址</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="host in hosts">
+              <td><checkbox></checkbox></td>
+              <td>{{ host.name }}</td>
+              <td>{{ host.ip }}</td>
+              <td>{{ host.status }}</td>
+              <td>{{ host.site }}</td>
+              <td>
+                <div><a class="lvse-text">详情</a></div>
+                <div><a class="hongse-text" @click="delMachine">删除</a></div>
+                <div><a class="qingse-text" @click="moveMachine">迁移</a></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
     <!-- 迁移主机 -->
@@ -163,4 +198,5 @@ export default {
 
 <style scoped lang="scss">
   @import "../scss/cluster-details";
+  @import "../scss/apps";
 </style>
