@@ -6,7 +6,7 @@
       <span class="crumbs-item qingse-text">{{ status.name }}详情</span>
     </div>
     <div class="v-content">
-      <div class="head">
+      <div class="head margin-b-24">
         <div class="avatar">
           <img src="../assets/cluster-avatar.png">
         </div>
@@ -61,9 +61,9 @@
               <td>{{ host.status }}</td>
               <td>{{ host.site }}</td>
               <td>
-                <div><router-link :to="{ name:'Machine-Details' }" class="lvse-text">详情</router-link></div>
-                <div><a class="hongse-text" @click="delMachine">删除</a></div>
-                <div><a class="qingse-text" @click="moveMachine">迁移</a></div>
+                <router-link :to="{ name:'Machine-Details' }" class="lvse-text cluster-details_btn">详情</router-link>
+                <span class="hongse-text cluster-details_btn" @click="delMachine">删除</span>
+                <span class="qingse-text cluster-details_btn" @click="moveMachine">迁移</span>
               </td>
             </tr>
           </tbody>

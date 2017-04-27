@@ -51,23 +51,16 @@
   border: 3px solid #eee;
   border-radius: 20px;
 }
-table {
-  th, td {
-    padding-left: 24px;
-    max-width: 32px;
-  }
-  td div {
-    display: inline-block;
-    margin-right: 40px;
-    max-width: 32%;
-    a {
-      text-decoration: none;
-    }
+
+.cluster-details_btn {
+  display: inline-block;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.cluster-details {
+  .panel {
+    margin: 0;
   }
 }
-.panel {
-  margin: 24px 0 24px 0;
-  .comb-btn {
-    margin-right: 8px;
-  }
-}
+
