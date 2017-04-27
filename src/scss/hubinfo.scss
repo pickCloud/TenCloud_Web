@@ -1,0 +1,66 @@
+@import "variables";
+.hubinfo-left {
+  float: left;
+  width: 25%;
+  border-radius: 5px;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.hubinfo-left_title {
+  height: 100px;
+  line-height: 100px;
+  font-size: 1.7rem;
+  color: #fff;
+  background-color: map_get($comb-colors,'qingse');
+}
+
+.hubinfo-left_ul {
+  margin: 0;
+  padding: 0 24px;
+  li {
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid $border-color-darken;
+  }
+}
+
+.hubinfo-left_upbox {
+  padding: 32px 24px;
+}
+
+.hubinfo-left_up {
+  display: block;
+  text-align: center;
+}
+
+
+
+
+.hubinfo-right {
+  padding-left: 25%;
+  .panel-tab {
+    margin-left: 24px;
+  }
+}
+
+.hubinfo-right_btn {
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+@media (max-width: 1200px) {
+  .hubinfo-left {
+    float: none;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  .hubinfo-right {
+    width: 100%;
+    padding-left: 0;
+    .panel-tab {
+      margin-left: 0;
+    }
+  }
+}

@@ -195,6 +195,7 @@ a {
     margin-right: 8px;
   }
   margin-bottom: 16px;
+  min-height: 35px;
 }
 .comb-btn {
   @extend .btn;
@@ -215,7 +216,7 @@ input,textarea {
   padding: 16px;
   background-color: #fff;
   border-radius: 10px;
-  border: 1px solid transparent;
+  border: 1px solid $border-color-darken;
   transition: border-color ease-in-out .3s;
   &:focus {
     border-color: map_get($comb-colors, 'qingse');
@@ -271,6 +272,7 @@ textarea.form-control {
 }
 // margin
 .margin-b-16 {margin-bottom: 16px;}
+.margin-b-24 {margin-bottom: 24px;}
 .margin-t-16 {margin-top: 16px;}
 // pading
 .padding-l-16 {padding-left: 16px;}
@@ -286,6 +288,13 @@ textarea.form-control {
 .panel-tab {
   @extend .panel;
   padding: 0;
+  &.no-mrg {
+    margin: 0;
+  }
+  &.only-mrg-b {
+    margin: 0;
+    margin-bottom: 24px;
+  }
   .tab-label-group {
     padding: 16px 24px;
     border-bottom: 1px solid $border-color-darken;
@@ -304,10 +313,11 @@ textarea.form-control {
 }
 .info-left {
   display: table-cell;
-  width: 180px;height: 180px;
+}
+.info-icon {
+  width: 190px;height: 190px;
   border: 5px solid map_get($comb-colors, 'qingse');
   border-radius: 10px;
-  vertical-align: middle;
 }
 .info-right {
   display: table-cell;

@@ -20,9 +20,9 @@
         <span class="crumbs-item">仓库</span>
         <span class="crumbs-item qingse-text">镜像仓库</span>
       </div>
-      <div class="table-layer">
+      <div class="panel">
         <div class="btns-group">
-          <div class="comb-btn waves-effect lvse">上传</div>
+          <router-link :to="{name:'Hubup'}" class="comb-btn waves-effect lvse">上传</router-link>
           <search class="right"></search>
         </div>
         <table class="striped highlight centered">
@@ -37,12 +37,18 @@
             <tr>
               <td>名称</td>
               <td>说明</td>
-              <td>操作</td>
+              <td>
+                <router-link :to="{name:'HubInfo', params:{id:1}}" class="lvse-text hub-btn">详情</router-link>
+                <router-link :to="{name:'ProDeploy', params:{id:1}}" class="qingse-text hub-btn">部署</router-link>
+              </td>
             </tr>
             <tr>
               <td>名称</td>
               <td>说明</td>
-              <td>操作</td>
+              <td>
+                <router-link :to="{name:'HubInfo', params:{id:1}}" class="lvse-text hub-btn">详情</router-link>
+                <router-link :to="{name:'ProDeploy', params:{id:1}}" class="qingse-text hub-btn">部署</router-link>
+              </td>
             </tr>
           </tbody>
         </table>

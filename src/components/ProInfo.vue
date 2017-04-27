@@ -10,7 +10,7 @@
         <router-link class="comb-btn waves-effect lvse" :to="{name:'ProDeploy', params: {id:1}}">部署</router-link>
       </div>
       <div class="info-left">
-        <img class="vam" src="../assets/cluster-avatar.png" alt="">
+        <div class="info-icon"><img class="vam" src="../assets/cluster-avatar.png" alt=""></div>
       </div>
       <div class="info-right">
         <h5 class="info-title">项目1</h5>

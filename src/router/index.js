@@ -13,6 +13,8 @@ import ProDeploy from '@/components/ProDeploy'
 import ProBuild from '@/components/ProBuild'
 
 import Hub from '@/components/Hub'
+import Hubup from '@/components/Hubup'
+import HubInfo from '@/components/HubInfo'
 import FileHub from '@/components/FileHub'
 
 import Apps from '@/components/Apps'
@@ -81,6 +83,16 @@ export default new Router({
       path: '/hub',
       name: 'Hub',
       component: Hub
+    },
+    {
+      path: '/hubup',
+      name: 'Hubup',
+      component: Hubup
+    },
+    {
+      path: '/hubinfo/:id',
+      name: 'HubInfo',
+      component: HubInfo
     },
     {
       path: '/filehub',
