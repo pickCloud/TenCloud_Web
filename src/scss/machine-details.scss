@@ -5,6 +5,12 @@
       color: #848484;
       line-height: 16px;
     }
+    .toggle-machine-status {
+      .ten-icon {
+        font-size: 32px;
+        margin-right: 8px;
+      }
+    }
     .machine-info {
       width: 100%;
       background-color: #f7f7f7;
@@ -18,10 +24,5 @@
         text-align: center;
       }
     }
-  }
-}
-table {
-  tr, td {
-    width: 25%;
   }
 }

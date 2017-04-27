@@ -27,7 +27,9 @@
             <span class="lvse-text">正常</span>
           </p>
           <div class="toggle-machine-status">
-
+            <span><i class="ten-icon">&#xe734;</i></span>
+            <span><i class="ten-icon">&#xe606;</i></span>
+            <span><i class="ten-icon">&#xe669;</i></span>
           </div>
           <div class="machine-info">
             <div>IP: 127.0.108.11</div>
