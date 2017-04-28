@@ -271,12 +271,12 @@ textarea.form-control {
   }
 }
 // margin
-.margin-b-16 {margin-bottom: 16px;}
-.margin-b-24 {margin-bottom: 24px;}
-.margin-t-16 {margin-top: 16px;}
+.margin-b-16 {margin-bottom: 16px !important;}
+.margin-b-24 {margin-bottom: 24px !important;}
+.margin-t-16 {margin-top: 16px !important;}
 // pading
-.padding-l-16 {padding-left: 16px;}
-.padding-l-24 {padding-left: 24px;}
+.padding-l-16 {padding-left: 16px !important;}
+.padding-l-24 {padding-left: 24px !important;}
 // 面板
 .panel {
   margin: 0 24px 16px 24px;
