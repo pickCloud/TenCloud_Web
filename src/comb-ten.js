@@ -4,10 +4,11 @@ import Percentage from './tenui/packages/percentage/index'
 import Tabs from './tenui/packages/tabs/index'
 import Alert from './tenui/packages/alert/index'
 import Forms from './tenui/packages/forms/index'
+import Tips from './tenui/packages/tips/index'
 import Search from './components/piece/search/index'
 import './tenui/js/waves'
 
-export { Tree, Modal, Percentage, Tabs, Alert, Search, Forms }
+export { Tree, Modal, Percentage, Tabs, Alert, Search, Forms, Tips }
 export default {
   Tree,
   Modal,
@@ -16,6 +17,7 @@ export default {
   Alert,
   Search,
   Forms,
+  Tips,
   install (Vue) {
     for (let key in this) {
       if (key !== 'install') {
