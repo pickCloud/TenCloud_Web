@@ -6,11 +6,11 @@
       <span class="crumbs-item qingse-text">应用详情</span>
     </div>
     <div class="v-content">
-      <div class="head margin-b-24">
-        <div class="avatar">
-          <img src="../assets/cluster-avatar.png">
+      <div class="info-panel head margin-b-24">
+        <div class="info-left">
+          <div class="info-icon"><img class="vam" src="../assets/cluster-avatar.png" alt=""></div>
         </div>
-        <div class="article">
+        <div class="info-right article">
     			<h4 class="qingse-text editable">应用1</h4>
           <p>
             <span>运行状态：</span>
@@ -23,7 +23,7 @@
     		</div>
     	</div>
     </div>
-    <div class="panel-tab margin-b-24">
+    <div class="panel-tab">
       <tabs :labels="['监控','部署策略','部署日志', '运行日志']" theme="block" :tabkey="1">
         <div>监控</div>
         <div>部署策略</div>

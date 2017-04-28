@@ -12,7 +12,7 @@
           <button class="comb-btn waves-effect lvse" @click="submitAlter" v-bind:class="{ hide:altering }">确认</button>
           <button class="comb-btn waves-effect lvse" @click="cancelAlter" v-bind:class="{ hide:altering }">取消</button>
         </div>
-        <div class="info-left avatar">
+        <div class="info-left">
           <div class="info-icon"><img class="vam" src="../assets/cluster-avatar.png" alt=""></div>
         </div>
         <div class="info-right article">

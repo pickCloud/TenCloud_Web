@@ -7,16 +7,16 @@
       <span class="qingse-text">TIMCOOO1</span>
     </div>
     <div class="v-content">
-      <div class="head margin-b-24">
-        <div class="avatar">
-          <img src="../assets/cluster-avatar.png">
+      <div class="info-panel head margin-b-24">
+        <div class="btns-group alter-button">
+          <button class="comb-btn waves-effect lvse" @click="alter" v-bind:class="{ hide:toAlter }">修改</button>
+          <button class="comb-btn waves-effect lvse" @click="submitAlter" v-bind:class="{ hide:altering }">确认</button>
+          <button class="comb-btn waves-effect lvse" @click="cancelAlter" v-bind:class="{ hide:altering }">取消</button>
         </div>
-        <div class="article">
-          <div class="alter-button">
-            <button class="comb-btn waves-effect lvse" @click="alter" v-bind:class="{ hide:toAlter }">修改</button>
-            <button class="comb-btn waves-effect lvse" @click="submitAlter" v-bind:class="{ hide:altering }">确认</button>
-            <button class="comb-btn waves-effect lvse" @click="cancelAlter" v-bind:class="{ hide:altering }">取消</button>
-          </div>
+        <div class="info-left">
+          <div class="info-icon"><img class="vam" src="../assets/cluster-avatar.png" alt=""></div>
+        </div>
+        <div class="info-right article">
     			<h5 class="qingse-text editable">TIMCOOO1</h5>
           <p>
             <span>机器状态：</span>
