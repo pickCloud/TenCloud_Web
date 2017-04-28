@@ -4,6 +4,7 @@
     <i class="ten-icon">&#xe734;</i>
     <i class="ten-icon">&#xe669;</i>
     <i class="ten-icon">&#xe685;</i>
+    <pages :total="10" :index="1"></pages>
   </div>
 </template>
 
