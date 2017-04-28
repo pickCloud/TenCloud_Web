@@ -20,6 +20,16 @@
     - modal 弹窗
     - percentage 圆形百分比
     - tree 树形菜单
+    - tips 提示
+      ``` bash
+      <tips text="" point="">default slot</tips>
+      参数：
+        text: String 默认为'' 提示文本信息
+        point: String 默认为'tip-up' 提示的位置 tip-up tip-bottom tip-left tip-right
+      slot
+        default: 默认的卡槽
+        tip: tip卡槽
+      ```
  - sass 样式
     - common 通用包含variables，mixins等等
     - extends 扩展（多元素组合，JS辅助，多样式风格）

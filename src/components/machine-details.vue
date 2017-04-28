@@ -27,9 +27,9 @@
             <span class="lvse-text">正常</span>
           </p>
           <div class="toggle-machine-status">
-            <i class="ten-icon">&#xe734;</i>
-            <i class="ten-icon">&#xe606;</i>
-            <i class="ten-icon">&#xe669;</i>
+            <tips text="开机"><i class="ten-icon">&#xe734;</i></tips>
+            <tips text="关机"><i class="ten-icon">&#xe606;</i></tips>
+            <tips text="重启"><i class="ten-icon">&#xe669;</i></tips>
           </div>
           <div class="machine-info">
             <div>IP: 127.0.108.11</div>
