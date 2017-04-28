@@ -25,7 +25,10 @@
           <router-link :to="{name:'Hubup'}" class="comb-btn waves-effect lvse">上传</router-link>
           <search class="right"></search>
         </div>
-        <table class="striped highlight centered">
+        <table class="striped highlight">
+          <col width="20%">
+          <col width="40%">
+          <col width="40%">
           <thead>
             <tr>
               <th>名称</th>

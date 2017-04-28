@@ -6,11 +6,11 @@
     </div>
     <div class="panel">
       <div class="btns-group">
-        <div class="comb-btn waves-effect lvse">新增应用</div>
+        <router-link :to="{name:'Hub'}" class="comb-btn waves-effect lvse">新增应用</router-link>
         <div class="comb-btn waves-effect fense" @click="delApp">删除应用</div>
         <search class="right"></search>
       </div>
-      <table class="striped highlight centered">
+      <table class="striped highlight">
         <col width="40px">
         <thead>
           <tr>

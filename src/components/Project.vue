@@ -9,8 +9,7 @@
         <div class="comb-btn waves-effect fense" @click="delApp">删除项目</div>
         <search class="right"></search>
       </div>
-      <table class="striped highlight centered">
-        <col width="40px">
+      <table class="striped highlight">
         <thead>
         <tr>
           <th><checkbox></checkbox></th>
