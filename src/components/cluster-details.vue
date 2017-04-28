@@ -6,17 +6,17 @@
       <span class="crumbs-item qingse-text">{{ status.name }}详情</span>
     </div>
     <div class="v-content">
-      <div class="head margin-b-24">
-        <div class="avatar">
-          <img src="../assets/cluster-avatar.png">
+      <div class="panel info-panel head margin-b-24">
+        <div class="btns-group alter-button">
+          <button class="comb-btn waves-effect lvse" @click="alter" v-bind:class="{ hide:toAlter }">修改</button>
+          <button class="comb-btn waves-effect lvse" @click="submitAlter" v-bind:class="{ hide:altering }">确认</button>
+          <button class="comb-btn waves-effect lvse" @click="cancelAlter" v-bind:class="{ hide:altering }">取消</button>
         </div>
-        <div class="article">
-          <div class="alter-button">
-            <button class="comb-btn waves-effect lvse" @click="alter" v-bind:class="{ hide:toAlter }">修改</button>
-            <button class="comb-btn waves-effect lvse" @click="submitAlter" v-bind:class="{ hide:altering }">确认</button>
-            <button class="comb-btn waves-effect lvse" @click="cancelAlter" v-bind:class="{ hide:altering }">取消</button>
-          </div>
-    			<h5 class="qingse-text editable">{{ status.name }}</h5>
+        <div class="info-left avatar">
+          <div class="info-icon"><img class="vam" src="../assets/cluster-avatar.png" alt=""></div>
+        </div>
+        <div class="info-right article">
+          <h5 class="qingse-text editable">{{ status.name }}</h5>
     			<div class="status"><span>状态：共 {{ status.used + status.free }} GB 内存</span></div>
     			<div class="status">
     				<span class="qingse-text">█</span>
@@ -32,8 +32,8 @@
     			<p class="time">更新时间：20170807</p>
     			<p class="editable">集群1是一个很牛逼的集群，为什么这么牛逼，我不也不知道，直觉！集群1是一个很牛逼的集群，为什么这么牛逼，我不也不知道，直觉！集群1是一个很牛逼的集群，为什么这么牛逼，我不也不知道，直觉！
   牛逼，我不也不知道，直觉！</p>
-    		</div>
-    	</div>
+        </div>
+      </div>
       <div class="panel">
         <div class="btns-group">
           <router-link :to="{ name:'AddHost' }"><button type="button" class="comb-btn waves-effect lvse">添加主机</button></router-link>
