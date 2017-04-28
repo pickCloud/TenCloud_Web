@@ -1,6 +1,6 @@
 <template>
   <div class="checkbox">
-    <input type="checkbox" :class="[type]" :id="rndid" :name="name">
+    <input type="checkbox" :class="[theme]" :id="rndid" :name="name">
     <label :for="rndid">{{label}}</label>
   </div>
 </template>
@@ -17,7 +17,7 @@
         type: String,
         default: ''
       },
-      type: {
+      theme: {
         type: String,
         default: ''
       }

@@ -1,7 +1,7 @@
 <template>
   <transition name="ten-fade" @after-enter="afterEnter" @before-leave="beforeLeave">
     <div class="modal-wrapper" v-show="visible">
-      <div :class="[typeClass]">
+      <div :class="[theme]">
         <div class="modal-header" v-if="title">
           <slot name="title"><span class="modal-header_title">{{title}}</span></slot>
         </div>
@@ -26,7 +26,7 @@
         type: String,
         default: ''
       },
-      typeClass: {
+      theme: {
         type: String,
         default: 'modal'
       },
@@ -83,7 +83,7 @@
       }
     },
     mounted () {
-      this.$modaldom = this.$el.querySelector('.' + this.typeClass)
+      this.$modaldom = this.$el.querySelector('.' + this.theme)
     }
   }
 </script>

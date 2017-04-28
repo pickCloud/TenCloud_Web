@@ -24,7 +24,7 @@
       </modal>
       参数：
         title：标题 类型：String 可选
-        typeClass：弹窗主题  类型：String 默认modal
+        theme：弹窗主题  类型：String 默认modal
         buttons：按钮 类型：String 默认''
         buttonsClass：按钮样式 类型：String 默认''
         postdata：抛送的数据 类型：String 默认''
@@ -36,6 +36,19 @@
         footer：展示底部
       ```
     - percentage 圆形百分比
+    - tabs 标签页
+      ```base
+      <tabs :labels="['运行环境','版本管理','数据分析','日志']" theme="block">
+        <div>neirong1</div>
+        <div>neirong2</div>
+        <div>neirong3</div>
+        <div>neirong4</div>
+      </tabs>
+      参数
+        labels：标签名 Array 必须
+        tabkey：标签索引 Number 默认0
+        theme：主题 String 默认default 可选block
+      ```
     - tree 树形菜单
       ``` bash
       <tree :data="data" collapse></tree>
@@ -82,12 +95,29 @@
             disabled:可选 禁用
         maxHeight：String 默认185px 最大高度
       ```
+    - checkbox 组件
+      ```base
+      <checkbox></checkbox>
+      参数:
+        label：标签 String 默认''
+        name：input属性name String 默认''
+        theme：主题 String 默认''
+      ```
+    - fileinput 组件
+      ```base
+      <fileinput></fileinput>
+      参数：
+        accept：文件类型 String 默认image/png,image/gif,image/jpg,image/jpeg
+        showview: 预览 Boolean 默认true
+      ```
     - tips 提示
       ``` bash
       <tips text="" point="">default slot</tips>
       参数：
         text: String 默认为'' 提示文本信息
         point: String 默认为'tip-up' 提示的位置 tip-up tip-bottom tip-left tip-right
+      事件：
+        change: 参数label value key
       slot
         default: 默认的卡槽
         tip: tip卡槽
