@@ -11,7 +11,7 @@
           <div class="info-icon"><img class="vam" src="../assets/cluster-avatar.png" alt=""></div>
         </div>
         <div class="info-right article">
-    			<h4 class="qingse-text editable">应用1</h4>
+    			<h4 class="qingse-text">应用1</h4>
           <p>
             <span>运行状态：</span>
             <span class="lvse-text">正常</span>

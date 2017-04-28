@@ -17,6 +17,7 @@ import Hub from '@/components/Hub'
 import Hubup from '@/components/Hubup'
 import HubInfo from '@/components/HubInfo'
 import FileHub from '@/components/FileHub'
+import FileDetails from '@/components/file-details'
 
 import Apps from '@/components/Apps'
 import AppsInfo from '@/components/AppsInfo'
@@ -104,6 +105,11 @@ export default new Router({
       path: '/filehub',
       name: 'FileHub',
       component: FileHub
+    },
+    {
+      path: '/file-details/:id',
+      name: 'File-Details',
+      component: FileDetails
     }
   ]
 })
