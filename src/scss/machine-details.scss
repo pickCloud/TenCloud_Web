@@ -16,13 +16,13 @@
     .machine-info {
       width: 100%;
       background-color: #f7f7f7;
-      display: flex;
-      display: -webkit-flex;
-      flex-grow: row;
+      display: inline-block;
       padding-top: 8px;
       padding-bottom: 8px;
       div {
-        width: 33%;
+        float: left;
+        margin-left: 8%;
+        margin-right: 8%;
         text-align: center;
       }
     }

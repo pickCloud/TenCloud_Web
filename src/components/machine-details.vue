@@ -83,7 +83,7 @@
       </div>
     </div>
     <!-- 迁移 -->
-    <modal title="迁移主机至" buttons="确定,取消" buttonsClass="comb-btn lvse,comb-btn qingse" ref="movemachine" class="comb-dialog mini">
+    <modal title="迁移应用至" buttons="确定,取消" buttonsClass="comb-btn lvse,comb-btn qingse" ref="movemachine" class="comb-dialog mini">
       <tselect :data="clusters"></tselect>
     </modal>
     <!-- 删除 -->
@@ -118,17 +118,17 @@ export default {
         }
       ],
       clusters: [
-        {label: '集群1', active: true},
-        {label: '集群2'},
-        {label: '集群3'},
-        {label: '集群4'},
-        {label: '集群5'}
+        {label: '主机1', active: true},
+        {label: '主机2'},
+        {label: '主机3'},
+        {label: '主机4'},
+        {label: '主机5'}
       ]
     }
   },
   methods: {
     delMachine () {
-      this.delbody = '您确定删除该版本吗？'
+      this.delbody = '您确定删除该应用吗？'
       this.$refs.delmachine.show()
     },
     moveMachine () {
