@@ -122,6 +122,17 @@
         default: 默认的卡槽
         tip: tip卡槽
       ```
+    - 分页组件
+      ```base
+      <pages :allpage="10" :nowpage="1" @change="pageChange"></pages>
+      参数：
+        allpage: 总页码
+        nowpage: 当前页码
+        shownum：显示页码
+      事件：
+        change：页码变更的时候抛送
+                参数 pagenum
+      ```
  - sass 样式
     - common 通用包含variables，mixins等等
     - extends 扩展（多元素组合，JS辅助，多样式风格）

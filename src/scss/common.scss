@@ -333,3 +333,13 @@ textarea.form-control {
 .info-desc {
   margin-top: 24px;
 }
+// 分页按钮
+.pages {
+  margin-bottom: 16px;
+}
+.page-btn {
+  background-color: $border-color-darken;
+  &.active {
+    background-color: map_get($comb-colors, 'qingse');
+  }
+}
