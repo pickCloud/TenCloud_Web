@@ -1,3 +1,4 @@
+@import "variables.scss";
 .head {
   background-color: #fff;
   border-radius: 10px;
@@ -36,10 +37,14 @@
   max-width: 64%;
   border: 3px solid transparent;
   border-radius: 10px;
+  outline: none;
 }
 .editable[contenteditable] {
   border: 3px solid #ddd;
   border-radius: 10px;
+  &:focus {
+    border-color: map_get($comb-colors, 'qingse');
+  }
 }
 
 .table-details_btn {
