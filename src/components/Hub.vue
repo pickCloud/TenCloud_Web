@@ -55,6 +55,7 @@
             </tr>
           </tbody>
         </table>
+        <div class="clearfix"><pages class="right" :allpage="5" :nowpage="1" @change="pageChange"></pages></div>
       </div>
     </div>
   </div>
@@ -62,10 +63,18 @@
 
 <script>
   export default {
-    name: 'Hub'
+    name: 'Hub',
+    methods: {
+      pageChange () {
+        return
+      }
+    }
   }
 </script>
 
 <style lang="scss" scoped>
   @import "../scss/hub";
+  table {
+    margin-bottom: 24px;
+  }
 </style>

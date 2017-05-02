@@ -90,6 +90,7 @@
                   </tr>
                 </tbody>
               </table>
+              <div class="clearfix"><pages class="right" :allpage="5" :nowpage="1" @change="pageChange"></pages></div>
             </div>
           </tabs>
         </div>
@@ -106,4 +107,7 @@
 
 <style lang="scss" scoped>
   @import "../scss/hubinfo";
+  table {
+    margin-bottom: 24px;
+  }
 </style>

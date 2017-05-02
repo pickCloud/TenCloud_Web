@@ -69,6 +69,7 @@
                 </tr>
               </tbody>
             </table>
+            <div class="clearfix"><pages class="right" :allpage="5" :nowpage="1" @change="pageChange"></pages></div>
           </div>
           <div>neirong3</div>
         </tabs>
@@ -152,6 +153,9 @@ export default {
       $('.editable').removeAttr('contenteditable')
       $('h3.editable').html(this.title)
       $('p.editable').html(this.details)
+    },
+    pageChange () {
+      return
     }
   }
 }

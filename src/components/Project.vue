@@ -47,6 +47,7 @@
         </tr>
         </tbody>
       </table>
+      <div class="clearfix"><pages class="right" :allpage="5" :nowpage="1" @change="pageChange"></pages></div>
     </div>
     <!-- 删除集群弹窗 -->
     <modal buttons="确定,取消" buttonsClass="comb-btn lvse,comb-btn qingse" ref="delapp" class="comb-dialog mini">
@@ -68,6 +69,9 @@
       delApp () {
         this.delbody = '您确定要删除项目XX吗？'
         this.$refs.delapp.show()
+      },
+      pageChange () {
+        return
       }
     }
   }
@@ -81,5 +85,8 @@
     vertical-align: middle;
     border-radius: 5px;
     border: 1px dashed #ccc;
+  }
+  table {
+    margin-bottom: 24px;
   }
 </style>

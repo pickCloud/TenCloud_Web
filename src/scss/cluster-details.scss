@@ -33,7 +33,7 @@
   display: none;
 }
 .editable {
-  max-width: 72%;
+  max-width: 64%;
   border: 3px solid transparent;
   border-radius: 10px;
 }
@@ -51,5 +51,8 @@
 .cluster-details {
   .panel {
     margin: 0;
+    table {
+      margin-bottom: 24px;
+    }
   }
 }

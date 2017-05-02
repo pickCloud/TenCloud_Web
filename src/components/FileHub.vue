@@ -19,6 +19,7 @@
             </tr>
           </tbody>
         </table>
+        <div class="clearfix"><pages class="right" :allpage="5" :nowpage="1" @change="pageChange"></pages></div>
       </div>
     </div>
   </div>
@@ -54,10 +55,18 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    pageChange () {
+      return
+    }
   }
 }
 </script>
 
 <style scoped lang="scss">
 @import "../scss/FileHub";
+table {
+  margin-bottom: 24px;
+}
 </style>
