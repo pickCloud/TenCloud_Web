@@ -1,6 +1,6 @@
 <template>
   <ul class="tree">
-    <tree-node v-for="(item,key) in data" :key="key" :node="item" :collapse="collapse"></tree-node>
+    <tree-node v-for="(item,key) in data" :key="key" :node="item" :node-idx="key+''" :collapse="collapse"></tree-node>
   </ul>
 </template>
 

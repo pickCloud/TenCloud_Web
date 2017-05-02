@@ -1,5 +1,5 @@
 <template>
-  <li class="tree-node" :class="{'empty':node.link}">
+  <li class="tree-node" :class="{'empty':node.link}" :idx="nodeIdx">
     <div class="tree-node_title" @click="nodeSelect($event)">
       <i class="ten-icon tree-node_icon" v-if="node.icon" v-html="node.icon"></i>
       <span class="tree-node_label">{{node.label}}</span>
@@ -7,7 +7,7 @@
       <a class="tree-node_link" :href="node.link" v-if="node.link"></a>
     </div>
     <ul class="tree-node_child" v-if="node.children">
-      <tree-node v-for="(item,key) in node.children" :key="key" :node="item"></tree-node>
+      <tree-node v-for="(item,key) in node.children" :key="key" :node="item" :node-idx="nodeIdx + '-' + key"></tree-node>
     </ul>
   </li>
 </template>
@@ -24,6 +24,9 @@
       collapse: {
         type: Boolean,
         default: false
+      },
+      nodeIdx: {
+        type: String
       }
     },
     methods: {

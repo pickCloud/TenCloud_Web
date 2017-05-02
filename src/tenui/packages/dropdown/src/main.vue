@@ -8,7 +8,7 @@
         <i class="ten-icon vam">&#xe6bb;</i>
       </slot>
     </div>
-    <div class="dropdown-items"><slot></slot></div>
+    <div class="dropdown-items z-depth-2"><slot></slot></div>
   </div>
 </template>
 
