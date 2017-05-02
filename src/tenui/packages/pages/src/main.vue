@@ -39,12 +39,8 @@
         }
       },
       prevOrNext (t) {
-        if (t === 'prev') {
-          if (this.pagenum > 1) this.pagenum--
-        }
-        if (t === 'next') {
-          if (this.pagenum < this.allpage) this.pagenum ++
-        }
+        if (t === 'prev' && this.pagenum > 1) this.pagenum--
+        if (t === 'next' && this.pagenum < this.allpage) this.pagenum ++
       },
       activeClass (item) {
         return this.pagenum === parseInt(item) ? 'active' : item !== '...' ? 'waves-effect' : 'normal'

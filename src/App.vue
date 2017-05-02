@@ -1,12 +1,13 @@
 <template>
   <div id="app">
     <nav class="top-nav">
-      <div class="top-nav_logo center-align">COMB</div>
-      <div class="top-nav_user right center-align">
-        <img src="./assets/user-head.jpg" class="circle top-nav_user-img" alt="">
-        Beauty
-        <i class="ten-icon vam">&#xe6bb;</i>
-      </div>
+      <div class="top-nav_logo center-align"><router-link :to="{name:'Main'}">COMB</router-link></div>
+      <dropdown class="top-nav_user right" title="标题啊" img="/static/images/user-head.jpg">
+        <div>列表1</div>
+        <div>列表2</div>
+        <div>列表3</div>
+        <div>列表4</div>
+      </dropdown>
     </nav>
     <nav class="left-nav">
       <tree :data="navdata" collapse></tree>

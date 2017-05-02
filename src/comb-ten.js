@@ -6,10 +6,11 @@ import Alert from './tenui/packages/alert/index'
 import Forms from './tenui/packages/forms/index'
 import Tips from './tenui/packages/tips/index'
 import Pages from './tenui/packages/pages/index'
+import Dropdown from './tenui/packages/dropdown/index'
 import Search from './components/piece/search/index'
 import './tenui/js/waves'
 
-export { Tree, Modal, Percentage, Tabs, Alert, Search, Forms, Tips, Pages }
+export { Tree, Modal, Percentage, Tabs, Alert, Search, Forms, Tips, Pages, Dropdown }
 export default {
   Tree,
   Modal,
@@ -20,6 +21,7 @@ export default {
   Forms,
   Tips,
   Pages,
+  Dropdown,
   install (Vue) {
     for (let key in this) {
       if (key !== 'install') {

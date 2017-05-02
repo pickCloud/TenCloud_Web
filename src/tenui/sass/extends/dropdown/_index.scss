@@ -1,0 +1,39 @@
+.dropdown {
+  position: relative;
+  &.hover {
+    &:hover {
+      background-color: rgba(0,0,0,0.2);
+      .dropdown-items {
+        height: auto;
+      }
+    }
+  }
+  @include user-select(none);
+}
+.dropdown-label {
+  padding: 0 16px;
+  img {
+    display: inline-block;width: 30px;
+  }
+  ._label {
+    margin: 0 8px;
+  }
+}
+.dropdown-items {
+  color: $off-black;
+  background-color: #fff;
+  height: 0;
+  overflow: hidden;
+  a {
+    color: $off-black;
+  }
+}
+.dropdown-item {
+  height: 45px;
+  line-height: 45px;
+  border-bottom: 1px solid map_get($grey,'lighten-3');
+  padding: 0 16px;
+  &:hover {
+    background-color: map_get($grey,'lighten-4');
+  }
+}

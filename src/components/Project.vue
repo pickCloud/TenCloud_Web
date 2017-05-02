@@ -23,7 +23,7 @@
         <tbody>
         <tr>
           <td><checkbox></checkbox></td>
-          <td><img class="_pro-icon" src="../assets/user-head.jpg" alt=""></td>
+          <td><img class="_pro-icon" src="../../static/images/user-head.jpg" alt=""></td>
           <td>项目1</td>
           <td><span class="comb-label lvse white-text">正常</span></td>
           <td>2017.04.20</td>
@@ -31,7 +31,7 @@
         </tr>
         <tr>
           <td><checkbox></checkbox></td>
-          <td><img class="_pro-icon" src="../assets/user-head.jpg" alt=""></td>
+          <td><img class="_pro-icon" src="../../static/images/user-head.jpg" alt=""></td>
           <td>项目1</td>
           <td><span class="comb-label fense-l white-text">异常</span></td>
           <td>2017.04.20</td>
@@ -39,7 +39,7 @@
         </tr>
         <tr>
           <td><checkbox></checkbox></td>
-          <td><img class="_pro-icon" src="../assets/user-head.jpg" alt=""></td>
+          <td><img class="_pro-icon" src="../../static/images/user-head.jpg" alt=""></td>
           <td>项目1</td>
           <td><span class="comb-label fense-l white-text">异常</span></td>
           <td>2017.04.20</td>

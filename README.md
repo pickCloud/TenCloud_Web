@@ -133,6 +133,20 @@
         change：页码变更的时候抛送
                 参数 pagenum
       ```
+    - dropdown
+      ```base
+      <dropdown class="top-nav_user right center-align" title="标题啊" img="/static/images/user-head.jpg">
+        <div>列表1</div>
+        <div>列表2</div>
+        <div>列表3</div>
+        <div>列表4</div>
+      </dropdown>
+      参数:
+        title：String 标题 默认''
+        icon：String 图标 默认''
+        img：String 图片图标 默认''
+        type：String 触发方式 默认'hover'
+      ```
  - sass 样式
     - common 通用包含variables，mixins等等
     - extends 扩展（多元素组合，JS辅助，多样式风格）
