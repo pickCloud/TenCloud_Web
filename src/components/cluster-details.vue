@@ -83,8 +83,6 @@
 </template>
 
 <script>
-import $ from 'jquery'
-
 export default {
   name: 'cluster-details',
   // test data
@@ -145,21 +143,38 @@ export default {
     alter () {
       this.toAlter = true
       this.altering = false
-      $('.editable').attr('contenteditable', 'true')
-      this.title = $('h3.editable').text()
-      this.details = $('p.editable').text()
+      var editable = document.getElementsByClassName('editable')
+      for (var i = 0; i < editable.length; i++) {
+        editable[i].contentEditable = true
+        if (editable[i].tagName === 'H5') {
+          this.title = editable[i].innerHTML
+        }
+        if (editable[i].tagName === 'P') {
+          this.details = editable[i].innerHTML
+        }
+      }
     },
     submitAlter () {
       this.toAlter = false
       this.altering = true
-      $('.editable').removeAttr('contenteditable')
+      var editable = document.getElementsByClassName('editable')
+      for (var i = 0; i < editable.length; i++) {
+        editable[i].removeAttribute('contenteditable')
+      }
     },
     cancelAlter () {
       this.toAlter = false
       this.altering = true
-      $('.editable').removeAttr('contenteditable')
-      $('h3.editable').html(this.title)
-      $('p.editable').html(this.details)
+      var editable = document.getElementsByClassName('editable')
+      for (var i = 0; i < editable.length; i++) {
+        editable[i].removeAttribute('contenteditable')
+        if (editable[i].tagName === 'H5') {
+          editable[i].innerHTML = this.title
+        }
+        if (editable[i].tagName === 'P') {
+          editable[i].innerHTML = this.details
+        }
+      }
     },
     pageChange () {
       return
