@@ -2,25 +2,25 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/components/Main'
 
-import Cluster from '@/components/Cluster'
-import ClusterDetails from '@/components/cluster-details'
-import MachineDetails from '@/components/machine-details'
-import AddHost from '@/components/AddHost'
+const Cluster = r => require.ensure([], () => r(require('@/components/Cluster')), 'cluster')
+const ClusterDetails = r => require.ensure([], () => r(require('@/components/cluster-details')), 'cluster')
+const MachineDetails = r => require.ensure([], () => r(require('@/components/machine-details')), 'cluster')
+const AddHost = r => require.ensure([], () => r(require('@/components/AddHost')), 'cluster')
 
-import Project from '@/components/Project'
-import ProInfo from '@/components/ProInfo'
-import ProAdd from '@/components/ProAdd'
-import ProDeploy from '@/components/ProDeploy'
-import ProBuild from '@/components/ProBuild'
+const Project = r => require.ensure([], () => r(require('@/components/Project')), 'project')
+const ProInfo = r => require.ensure([], () => r(require('@/components/ProInfo')), 'project')
+const ProAdd = r => require.ensure([], () => r(require('@/components/ProAdd')), 'project')
+const ProDeploy = r => require.ensure([], () => r(require('@/components/ProDeploy')), 'project')
+const ProBuild = r => require.ensure([], () => r(require('@/components/ProBuild')), 'project')
 
-import Hub from '@/components/Hub'
-import Hubup from '@/components/Hubup'
-import HubInfo from '@/components/HubInfo'
-import FileHub from '@/components/FileHub'
-import FileDetails from '@/components/file-details'
+const Hub = r => require.ensure([], () => r(require('@/components/Hub')), 'hub')
+const Hubup = r => require.ensure([], () => r(require('@/components/Hubup')), 'hub')
+const HubInfo = r => require.ensure([], () => r(require('@/components/HubInfo')), 'hub')
+const FileHub = r => require.ensure([], () => r(require('@/components/FileHub')), 'filehub')
+const FileDetails = r => require.ensure([], () => r(require('@/components/file-details')), 'filehub')
 
-import Apps from '@/components/Apps'
-import AppsInfo from '@/components/AppsInfo'
+const Apps = r => require.ensure([], () => r(require('@/components/Apps')), 'apps')
+const AppsInfo = r => require.ensure([], () => r(require('@/components/AppsInfo')), 'apps')
 
 Vue.use(Router)
 

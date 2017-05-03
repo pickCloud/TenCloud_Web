@@ -1,6 +1,9 @@
 <template>
   <ul class="tree">
-    <tree-node v-for="(item,key) in data" :key="key" :node="item" :node-idx="key+''" :collapse="collapse"></tree-node>
+    <tree-node v-for="(item,key) in data" :key="key" :node="item"
+               :nodeidx="key+''" :nowidx="nowidx" :collapse="collapse"
+               :cacheidx="cacheidx"
+               @nodeSelect="nodeSelect"></tree-node>
   </ul>
 </template>
 
@@ -16,6 +19,19 @@
       collapse: {
         type: Boolean,
         default: false
+      }
+    },
+    data () {
+      return {
+        nowidx: '',
+        cacheidx: ''
+      }
+    },
+    methods: {
+      nodeSelect (idx, sub) {
+        if (this.nowidx === idx) this.nowidx = ''
+        else this.nowidx = idx
+        if (!sub) this.cacheidx = idx
       }
     },
     components: {TreeNode}
