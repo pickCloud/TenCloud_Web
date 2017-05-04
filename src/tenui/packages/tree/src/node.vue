@@ -16,7 +16,6 @@
 </template>
 
 <script>
-//  import $ from 'jquery'
   export default {
     name: 'TreeNode',
     props: {

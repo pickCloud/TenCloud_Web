@@ -147,6 +147,16 @@
         img：String 图片图标 默认''
         type：String 触发方式 默认'hover'
       ```
+    - toast
+      ```base
+      vm.$toast(options)
+      参数:
+        content: 内容 String
+        duration：消失时间间隔 Number 默认3000
+        type：类型 String 默认'info'
+        pointClass：显示位置 String 默认'b' 可选l r t b lt lb rt rb cc
+        customClass：自定义样式 String 默认''
+      ```
  - sass 样式
     - common 通用包含variables，mixins等等
     - extends 扩展（多元素组合，JS辅助，多样式风格）
