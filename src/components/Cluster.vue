@@ -10,39 +10,21 @@
         <router-link class="comb-btn waves-effect qingse" :to="{ name: 'AddHost'}">添加主机</router-link>
       </div>
       <div class="row _list-group">
-        <div class="col m12 l6 xl4">
+        <div class="col m12 l6 xl4" v-for="cluster in clusters">
           <div class="_list-con">
-            <div class="_list-con_title center-align qingse-text">集群名称</div>
-            <div class="_list-con_desc center-align grey-text lighten-5">集群的描述描述描述描述描述描述描述描述描述</div>
+            <div class="_list-con_title center-align qingse-text">{{ cluster.title }}</div>
+            <div class="_list-con_desc center-align grey-text lighten-5">{{ cluster.description }}</div>
             <div class="_list-con_quan center-align">
-              <percentage :used="2" :free="10" :lineWidth="20" :width="190" :height="190"></percentage>
+              <percentage :used="cluster.used" :free="cluster.free" :lineWidth="20" :width="190" :height="190"></percentage>
             </div>
             <ul class="_list-con_infos">
-              <li><i class="color-block qingse"></i> 使用：2GB</li>
-              <li><i class="color-block zise"></i> 空余：10GB</li>
-              <li>更新时间：2017年01月05日</li>
+              <li><i class="color-block qingse"></i> 使用：{{ cluster.used }}GB</li>
+              <li><i class="color-block zise"></i> 空余：{{ cluster.free }}GB</li>
+              <li>更新时间：{{ cluster.update_time }}</li>
             </ul>
             <div class="_list-con_btns">
-              <router-link :to="{ name: 'Cluster-Details', params:{id:1} }" class="comb-btn waves-effect lvse ">查看详情</router-link>
-              <span class="comb-btn waves-effect qingse right" @click="delCluster(1)">删除集群</span>
-            </div>
-          </div>
-        </div>
-        <div class="col m12 l6 xl4">
-          <div class="_list-con">
-            <div class="_list-con_title center-align qingse-text">集群名称</div>
-            <div class="_list-con_desc center-align grey-text lighten-5">集群的描述描述描述描述描述描述描述描述描述</div>
-            <div class="_list-con_quan center-align">
-              <percentage :used="10" :free="60" :lineWidth="20" :width="190" :height="190"></percentage>
-            </div>
-            <ul class="_list-con_infos">
-              <li><i class="color-block qingse"></i> 使用：10GB</li>
-              <li><i class="color-block zise"></i> 空余：60GB</li>
-              <li>更新时间：2017年01月05日</li>
-            </ul>
-            <div class="_list-con_btns">
-              <span class="comb-btn waves-effect lvse ">查看详情</span>
-              <span class="comb-btn waves-effect qingse right" @click="delCluster(2)">删除集群</span>
+              <router-link :to="{ name: 'Cluster-Details', params:{id:cluster.id} }" class="comb-btn waves-effect lvse ">查看详情</router-link>
+              <span class="comb-btn waves-effect qingse right" @click="delCluster(cluster.id)">删除集群</span>
             </div>
           </div>
         </div>
@@ -75,6 +57,7 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     name: 'Cluster',
     data () {
@@ -83,7 +66,8 @@
           name: '',
           desc: ''
         },
-        delbody: ''
+        delbody: '',
+        clusters: []
       }
     },
     methods: {
@@ -97,6 +81,11 @@
       addSure () {
 //        console.log(this.adddata.name)
       }
+    },
+    mounted () {
+      axios.get('static/api/clusters.json').then(response => {
+        this.clusters = response.data.clusters
+      })
     }
   }
 </script>

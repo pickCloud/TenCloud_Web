@@ -17,7 +17,7 @@
           <div class="info-icon"><img class="vam" src="../assets/cluster-avatar.png" alt=""></div>
         </div>
         <div class="info-right article">
-    			<h5 class="qingse-text editable">TIMCOOO1</h5>
+    			<h5 class="qingse-text editable">{{ this.name }}</h5>
           <p>
             <span>机器状态：</span>
             <span class="lanse-text">运行中</span>
@@ -57,10 +57,10 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="machine in machines">
-                  <td>{{ machine.version }}</td>
-                  <td>{{ machine.create_time }}</td>
-                  <td>{{ machine.path }}</td>
+                <tr v-for="app in apps">
+                  <td>{{ app.version }}</td>
+                  <td>{{ app.create_time }}</td>
+                  <td>{{ app.path }}</td>
                   <td>
                     <span class="lvse-text table-details_btn">详情</span>
                     <span class="qingse-text table-details_btn" @click="moveMachine">迁移</span>
@@ -85,7 +85,7 @@
     </div>
     <!-- 迁移 -->
     <modal title="迁移应用至" buttons="确定,取消" buttonsClass="comb-btn lvse,comb-btn qingse" ref="movemachine" class="comb-dialog mini">
-      <tselect :data="clusters"></tselect>
+      <tselect :data="clusters_to_move"></tselect>
     </modal>
     <!-- 删除 -->
     <modal buttons="确定,取消" buttonsClass="comb-btn lvse,comb-btn qingse" ref="delmachine" class="comb-dialog mini">
@@ -95,6 +95,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'machine-details',
   data () {
@@ -104,19 +105,9 @@ export default {
       title: '',
       details: '',
       delbody: '',
-      machines: [
-        {
-          version: 20170501,
-          create_time: '2017/05/01',
-          path: '/var/www'
-        },
-        {
-          version: 20170502,
-          create_time: '2017/05/02',
-          path: '/usr/local'
-        }
-      ],
-      clusters: [
+      apps: [],
+      name: '',
+      clusters_to_move: [
         {label: '主机1', active: true},
         {label: '主机2'},
         {label: '主机3'},
@@ -172,6 +163,18 @@ export default {
     pageChange () {
       return
     }
+  },
+  mounted () {
+    axios.get('static/api/clusters.json').then(response => {
+      for (var i = 0; i < response.data.clusters.length; i++) {
+        for (var j = 0; j < response.data.clusters[i].hosts.length; j++) {
+          if (response.data.clusters[i].hosts[j].id === parseInt(this.$route.params.id)) {
+            this.apps = response.data.clusters[i].hosts[j].apps
+            this.name = response.data.clusters[i].hosts[j].name
+          }
+        }
+      }
+    })
   }
 }
 </script>

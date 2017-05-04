@@ -42,7 +42,7 @@ export default new Router({
       component: ClusterDetails
     },
     {
-      path: '/machine-details',
+      path: '/machine-details/:id',
       name: 'Machine-Details',
       component: MachineDetails
     },
