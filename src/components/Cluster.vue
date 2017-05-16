@@ -84,12 +84,13 @@
             return
           }
           this.$http.post('/api/cluster/new', this.adddata).then(respones => {
-            this.$toast(respones.data.message)
-            this.adddata.push({
-              id: respones.data.id,
+            let tempresult = respones.data
+            this.$toast(tempresult.message)
+            this.clusters.push({
+              id: tempresult.data.id,
               name: this.adddata.name,
               desc: this.adddata.desc,
-              update_time: this.adddata.update_time
+              update_time: tempresult.data.update_time
             })
           })
         }
