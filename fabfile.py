@@ -10,6 +10,7 @@ env.password = 'Sqsm1234'
 
 def push(info="fabric auto"):
     show(1)
+    local('git status')
     local('git commit -m"%s"' % info)
     local('git push')
 
@@ -18,11 +19,10 @@ def server_update():
     show(2)
     with cd('/var/www/FrontEnd'):
         run('git pull')
-        run('npm run')
+        run('npm build')
 
 
-
-def update(info="fabric add"):
+def up(info="fabric add"):
     """
     提交代码并在服务器拉取
     :param info: 
