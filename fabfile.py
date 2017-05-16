@@ -19,7 +19,7 @@ def server_update():
     show(2)
     with cd('/var/www/FrontEnd'):
         run('git pull')
-        run('npm build')
+        # run('npm build')
 
 
 def up(info="fabric add"):
