@@ -12,14 +12,14 @@
       <div class="row _list-group">
         <div class="col m12 l6 xl4" v-for="cluster in clusters">
           <div class="_list-con">
-            <div class="_list-con_title center-align qingse-text">{{ cluster.title }}</div>
-            <div class="_list-con_desc center-align grey-text lighten-5">{{ cluster.description }}</div>
-            <div class="_list-con_quan center-align">
-              <percentage :used="cluster.used" :free="cluster.free" :lineWidth="20" :width="190" :height="190"></percentage>
-            </div>
+            <div class="_list-con_title center-align qingse-text">{{ cluster.name }}</div>
+            <div class="_list-con_desc center-align grey-text lighten-5">{{ cluster.desc }}</div>
+            <!--<div class="_list-con_quan center-align">-->
+              <!--<percentage :used="cluster.used" :free="cluster.free" :lineWidth="20" :width="190" :height="190"></percentage>-->
+            <!--</div>-->
             <ul class="_list-con_infos">
-              <li><i class="color-block qingse"></i> 使用：{{ cluster.used }}GB</li>
-              <li><i class="color-block zise"></i> 空余：{{ cluster.free }}GB</li>
+              <!--<li><i class="color-block qingse"></i> 使用：{{ cluster.used }}GB</li>-->
+              <!--<li><i class="color-block zise"></i> 空余：{{ cluster.free }}GB</li>-->
               <li>更新时间：{{ cluster.update_time }}</li>
             </ul>
             <div class="_list-con_btns">
@@ -57,7 +57,6 @@
 </template>
 
 <script>
-  import axios from 'axios'
   export default {
     name: 'Cluster',
     data () {
@@ -78,13 +77,21 @@
         this.delbody = '您确定删除集群' + id + '吗？'
         this.$refs.delcluster.show()
       },
-      addSure () {
-//        console.log(this.adddata.name)
+      addSure (...arg) {
+        if (arg[0] === 0) {
+          if (this.adddata.name === '') {
+            this.$toast('集群名称不能为空')
+            return
+          }
+          this.$http.post('/api/cluster/new', this.adddata).then(respones => {
+            this.$toast(respones.data.msg)
+          })
+        }
       }
     },
-    mounted () {
-      axios.get('static/api/clusters.json').then(response => {
-        this.clusters = response.data.clusters
+    created () {
+      this.$http.get('/api/clusters').then(response => {
+        this.clusters = response.data.data
       })
     }
   }

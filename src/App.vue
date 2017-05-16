@@ -61,11 +61,6 @@ export default {
         }
       ]
     }
-  },
-  created () {
-    this.$http.get('/api/clusters').then((res) => {
-      console.log(res)
-    })
   }
 }
 </script>
