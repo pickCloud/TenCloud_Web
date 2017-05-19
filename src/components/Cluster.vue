@@ -81,7 +81,7 @@
       },
       delSure (...arg) {
         if (arg[0] === 0 && this.delid !== null) {
-          this.$http.post('/api/cluster/del', {id: this.delid}).then(res => {
+          this.$http.post('/api/cluster/del', {id: [this.delid]}).then(res => {
             let tempresult = res.data
             if (tempresult.status === 0) {
               for (let i = 0; i < this.clusters.length; i++) {
