@@ -24,7 +24,7 @@
             </ul>
             <div class="_list-con_btns">
               <router-link :to="{ name: 'Cluster-Details', params:{id:cluster.id} }" class="comb-btn waves-effect lvse ">查看详情</router-link>
-              <span class="comb-btn waves-effect qingse right" @click="delCluster(cluster.id)">删除集群</span>
+              <span class="comb-btn waves-effect qingse right" @click="delCluster(cluster.id, cluster.name)">删除集群</span>
             </div>
           </div>
         </div>
@@ -49,7 +49,7 @@
     </modal>
     <!-- 新增集群弹窗 end -->
     <!-- 删除集群弹窗 -->
-    <modal buttons="确定,取消" buttonsClass="comb-btn lvse,comb-btn qingse" ref="delcluster" class="comb-dialog mini">
+    <modal buttons="确定,取消" buttonsClass="comb-btn lvse,comb-btn qingse" ref="delcluster" class="comb-dialog mini" @callback="delSure">
       <div class="comb-dialog_info center-align red-text large"><i class="ten-icon">&#xe691;</i> <span v-html="delbody"></span></div>
     </modal>
     <!-- 删除集群弹窗 end -->
@@ -66,6 +66,7 @@
           desc: ''
         },
         delbody: '',
+        delid: null,
         clusters: []
       }
     },
@@ -73,9 +74,27 @@
       addNewCluster () {
         this.$refs.addcluster.show()
       },
-      delCluster (id) {
-        this.delbody = '您确定删除集群' + id + '吗？'
+      delCluster (id, name) {
+        this.delbody = '您确定删除集群' + name + '吗？'
+        this.delid = id
         this.$refs.delcluster.show()
+      },
+      delSure (...arg) {
+        if (arg[0] === 0 && this.delid !== null) {
+          this.$http.post('/api/cluster/del', {id: this.delid}).then(res => {
+            let tempresult = res.data
+            if (tempresult.status === 0) {
+              for (let i = 0; i < this.clusters.length; i++) {
+                if (this.clusters[i].id === this.delid) {
+                  this.clusters[i].splice(i, 1)
+                  break
+                }
+              }
+            }
+            this.$toast(tempresult.message)
+            this.delid = null
+          })
+        }
       },
       addSure (...arg) {
         if (arg[0] === 0) {
