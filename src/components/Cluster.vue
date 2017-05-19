@@ -86,7 +86,7 @@
             if (tempresult.status === 0) {
               for (let i = 0; i < this.clusters.length; i++) {
                 if (this.clusters[i].id === this.delid) {
-                  this.clusters[i].splice(i, 1)
+                  this.clusters.splice(i, 1)
                   break
                 }
               }
