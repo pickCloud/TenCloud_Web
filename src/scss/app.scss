@@ -1,0 +1,129 @@
+@import "variables";
+// 颜色
+@each $key,$color in $comb-colors {
+  .#{$key} {
+    background-color: $color;
+    &.btn:hover {
+      background-color: darken($color, 15%);
+    }
+  }
+  .#{$key}-text {
+    color: $color;
+  }
+}
+//
+body {
+  background-color: $border-color;
+}
+a,body {
+  color: #909090;
+}
+// 顶部导航
+.top-nav {
+  position: fixed;
+  left: 0;top:0;
+  width: 100%;
+  height: $top-nav-h;
+  line-height: $top-nav-h;
+  background: url("../assets/top-nav_bg.gif") repeat-x;
+  word-spacing: -6px;
+  color: #fff;
+  z-index: 889;
+}
+.top-nav_logo {
+  display: inline-block;
+  width: $left-nav-w;
+  font-size: 24px;
+  word-spacing: 0;
+  a {
+    color: #fff;
+  }
+}
+.top-nav_user {
+  display: inline-block;
+  word-spacing: 0;
+  height: $top-nav-h;
+  line-height: $top-nav-h;
+  min-width: 150px;
+  cursor: pointer;
+  background-color: rgba(0,0,0,0);
+  transition: all 0.2s;
+}
+// 左侧导航
+.left-nav {
+  position: fixed;
+  left: 0;top: $top-nav-h;
+  width: 250px;height: 100%;
+  background-color: #fff;
+  z-index: 888;
+}
+// 内容容器
+.view-box {
+  position: relative;
+  margin-left: $left-nav-w;
+  margin-top: $top-nav-h;
+}
+//
+.tree {
+  font-size: $font-size-title;
+  .tree-node {
+    border-top: $tree-border-w solid transparent;
+    border-bottom: $tree-border-w solid $border-color;
+    transition: all 0.2s;
+    &.active.empty {
+      background-color: $border-color;
+      border-top: 1px solid darken($border-color, 5%);
+      border-bottom: 1px solid darken($border-color, 5%);
+      .tree-node_label {
+        color: map_get($comb-colors, 'qingse');
+      }
+    }
+  }
+  .tree-node_title {
+    height: $base-space * 7;
+    line-height: $base-space * 7;
+    padding: 0 $base-space * 2;
+  }
+}
+
+// 面包屑
+.crumbs {
+  height: $base-space * 7;
+  line-height: $base-space * 7;
+  background-color: #f1f1f1;
+  padding: 0 24px;
+  margin-bottom: 16px;
+}
+.crumbs-item {
+  position: relative;
+  display: inline-block;
+  padding-right: 8px;
+  &:after {
+    content: ">";
+    margin-left: 8px;
+  }
+  &:last-child:after {
+    content: "";
+  }
+}
+// 内容
+.v-content {
+  padding: 0 24px;
+}
+// 按钮
+.btns-group {
+  .comb-btn {
+    margin-right: 8px;
+  }
+  margin-bottom: 16px;
+  min-height: 35px;
+}
+.comb-btn {
+  box-shadow: none;
+  width: 100px;
+  height: 35px !important;
+  line-height: 35px !important;
+  border-radius: 20px !important;
+  padding: 0;
+  color: #fff;
+}

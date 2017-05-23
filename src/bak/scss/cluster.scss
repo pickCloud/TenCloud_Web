@@ -1,0 +1,47 @@
+@import "variables";
+._list-group {
+  margin: 0 -0.75rem;
+  .col {
+    margin-bottom: 16px;
+  }
+}
+._list-con {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 24px;
+}
+._list-con_title {
+  font-size: 24px;
+  font-weight: 600;
+}
+._list-con_infos {
+  li {
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid $border-color;
+    &:first-child {
+      border-top: 1px solid $border-color;
+    }
+    .color-block {
+      display: inline-block;
+      width: 10px;height: 10px;
+    }
+  }
+}
+._list-con_desc {
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+._list-con_btns {
+  .comb-btn {
+    width: 45%;
+    height: 40px;
+    line-height: 40px;
+  }
+}
+
+._new-cluster_con {
+  padding: 24px 0 1px 0;
+  background-color: #f6f6f6;
+}
+
