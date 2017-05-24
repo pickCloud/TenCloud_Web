@@ -13,7 +13,7 @@
         <div class="col m12 l6 xl4" v-for="cluster in clusters">
           <div class="_list-con">
             <div class="_list-con_title center-align qingse-text">{{ cluster.name }}</div>
-            <div class="_list-con_desc center-align grey-text lighten-5">{{ cluster.desc }}</div>
+            <div class="_list-con_description center-align grey-text lighten-5">{{ cluster.description }}</div>
             <!--<div class="_list-con_quan center-align">-->
               <!--<percentage :used="cluster.used" :free="cluster.free" :lineWidth="20" :width="190" :height="190"></percentage>-->
             <!--</div>-->
@@ -42,7 +42,7 @@
         <div class="form-gird">
           <label class="label-control s12 m1 center-align">描述</label>
           <div class="col s12 m11">
-            <textarea name="" class="form-control" v-model="adddata.desc"></textarea>
+            <textarea name="" class="form-control" v-model="adddata.description"></textarea>
           </div>
         </div>
       </div>
@@ -63,7 +63,7 @@
       return {
         adddata: {
           name: '',
-          desc: ''
+          description: ''
         },
         delbody: '',
         delid: null,
@@ -81,7 +81,7 @@
       },
       delSure (...arg) {
         if (arg[0] === 0 && this.delid !== null) {
-          this.$http.post('/api/cluster/del', {id: [this.delid]}).then(res => {
+          this.$http.post(this.$API.api + '/api/cluster/del', {id: [this.delid]}).then(res => {
             let tempresult = res.data
             if (tempresult.status === 0) {
               for (let i = 0; i < this.clusters.length; i++) {
@@ -102,21 +102,26 @@
             this.$toast('集群名称不能为空')
             return
           }
-          this.$http.post('/api/cluster/new', this.adddata).then(respones => {
+          this.$http.post(this.$API.api + '/api/cluster/new', this.adddata).then(respones => {
             let tempresult = respones.data
             this.$toast(tempresult.message)
             this.clusters.push({
               id: tempresult.data.id,
               name: this.adddata.name,
-              desc: this.adddata.desc,
+              description: this.adddata.description,
               update_time: tempresult.data.update_time
             })
           })
         }
       }
     },
+    watch: {
+      clusters (n, o) {
+        this.$COMMON.cluster = n
+      }
+    },
     created () {
-      this.$http.get('/api/clusters').then(response => {
+      this.$http.get(this.$API.api + '/api/clusters').then(response => {
         this.clusters = response.data.data
       })
     }
