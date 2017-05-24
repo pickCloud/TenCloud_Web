@@ -18,6 +18,9 @@ body {
 a,body {
   color: #909090;
 }
+html,body,input,select,button {
+  font-family: "Microsoft YaHei UI";
+}
 // 顶部导航
 .top-nav {
   position: fixed;
@@ -126,4 +129,47 @@ a,body {
   border-radius: 20px !important;
   padding: 0;
   color: #fff;
+}
+.comb-msg {
+  .msg-content_head {
+    color: map_get($comb-colors, 'qingse');
+    font-size: $font-size-title;
+    font-size: 500;
+  }
+  .msg-content {
+    max-width: 780px;
+    padding: 8px 8px 0 8px;
+    border-radius: 10px;
+  }
+  &.mini {
+    .msg-content {
+      max-width: 500px;
+    }
+  }
+  .msg-content_body {
+    margin-bottom: 8px;
+  }
+}
+// COMB表单
+input,textarea {
+  outline: none;
+  border: none;
+}
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid $border-color-darken;
+  transition: border-color ease-in-out .3s;
+  &:focus {
+    border-color: map_get($comb-colors, 'qingse');
+  }
+}
+textarea.form-control {
+  height: auto;
+}
+.label-control {
+  padding-top: 16px;
 }

@@ -1,14 +1,14 @@
 import axios from 'axios'
 
 const APIS = {
-  base: 'http://localhost:3000',
+  base: 'http://192.168.1.116',
   clusters: {
-    list: '/api/clusters'
+    list: '/api/clusters',
+    add: '/api/cluster/new'
   }
 }
 
 export default {
-  $http: axios,
   getApiLink (...key) {
     let temp = APIS
     key.every(function (v) {
@@ -20,6 +20,10 @@ export default {
   },
   getApi (key, params = null) {
     const api = this.getApiLink.apply(this, key)
-    return this.$http.get(api, params)
+    return axios.get(api, params)
+  },
+  postApi (key, params = null) {
+    const api = this.getApiLink.apply(this, key)
+    return axios.post(api, params)
   }
 }

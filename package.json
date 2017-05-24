@@ -14,13 +14,14 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
-    "jimu": "^0.0.19",
+    "axios": "^0.16.1",
+    "jimu": "^0.0.26",
     "vue": "^2.2.2",
+    "vue-resource": "^1.3.3",
     "vue-router": "^2.3.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
-    "axios": "^0.16.1",
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.10",

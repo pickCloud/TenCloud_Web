@@ -9,12 +9,12 @@
         <m-btn class="comb-btn waves-effect lvse hover" @click.native="addNewCluster">新增集群</m-btn>
         <m-btn class="comb-btn waves-effect qingse hover" href="/">添加主机</m-btn>
       </div>
-      <m-row>
-        <m-col class="xs-12 sm-6 md-4 lg-3" v-for="(cluster, key) in clusters" :key="key">
+      <m-row :gutter="16">
+        <m-col class="xs-12 sm-6 md-4 cluster-col" v-for="(cluster, key) in clusters" :key="key">
           <div class="_list-con">
-            <div class="_list-con_title center-align qingse-text">{{ cluster.name }}</div>
-            <div class="_list-con_desc center-align grey-text lighten-5">{{ cluster.desc }}</div>
-            <!--<div class="_list-con_quan center-align">-->
+            <div class="_list-con_title text-center qingse-text">{{ cluster.name }}</div>
+            <div class="_list-con_desc text-center grey-text lighten-5">{{ cluster.description }}</div>
+            <!--<div class="_list-con_quan text-center">-->
             <!--<percentage :used="cluster.used" :free="cluster.free" :lineWidth="20" :width="190" :height="190"></percentage>-->
             <!--</div>-->
             <ul class="_list-con_infos">
@@ -23,8 +23,8 @@
               <li>更新时间：{{ cluster.update_time }}</li>
             </ul>
             <div class="_list-con_btns">
-              <router-link :to="{ name: 'Cluster-Details', params:{id:cluster.id} }" class="comb-btn waves-effect lvse ">查看详情</router-link>
-              <span class="comb-btn waves-effect qingse right" @click="delCluster(cluster.id, cluster.name)">删除集群</span>
+              <m-btn :to="{ name: 'Cluster-Details', params:{id:cluster.id} }" class="comb-btn waves-effect lvse hover">查看详情</m-btn>
+              <m-btn class="comb-btn waves-effect qingse right hover" @click="delCluster(cluster.id, cluster.name)">删除集群</m-btn>
             </div>
           </div>
         </m-col>
@@ -34,68 +34,23 @@
 </template>
 
 <script>
+  import ClusterMixin from './ClusterMixin.js'
   export default {
+    name: 'Clusters',
+    mixins: [ClusterMixin],
     data: () => ({
-      adddata: {
+      newdata: {
         name: '',
-        desc: ''
+        description: ''
       },
       delbody: '',
       delid: null,
       clusters: []
     }),
-    methods: {
-      addNewCluster () {
-        this.$refs.addcluster.show()
-      },
-      delCluster (id, name) {
-        this.delbody = '您确定删除集群' + name + '吗？'
-        this.delid = id
-        this.$refs.delcluster.show()
-      },
-      delSure (...arg) {
-        if (arg[0] === 0 && this.delid !== null) {
-          this.$http.post('/api/cluster/del', {id: [this.delid]}).then(res => {
-            let tempresult = res.data
-            if (tempresult.status === 0) {
-              for (let i = 0; i < this.clusters.length; i++) {
-                if (this.clusters[i].id === this.delid) {
-                  this.clusters.splice(i, 1)
-                  break
-                }
-              }
-            }
-            this.$toast(tempresult.message)
-            this.delid = null
-          })
-        }
-      },
-      addSure (...arg) {
-        if (arg[0] === 0) {
-          if (this.adddata.name === '') {
-            this.$toast('集群名称不能为空')
-            return
-          }
-          this.$http.post('/api/cluster/new', this.adddata).then(respones => {
-            let tempresult = respones.data
-            this.$toast(tempresult.message)
-            this.clusters.push({
-              id: tempresult.data.id,
-              name: this.adddata.name,
-              desc: this.adddata.desc,
-              update_time: tempresult.data.update_time
-            })
-          })
-        }
-      }
-    },
     created () {
       this.$combapi.getApi(['clusters', 'list']).then(response => {
-        console.log(response.data.data)
+        this.clusters = response.data.data
       })
-//      this.$http.get('/api/clusters').then(response => {
-//        this.clusters = response.data.data
-//      })
     }
   }
 </script>
