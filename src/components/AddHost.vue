@@ -32,15 +32,16 @@
 
           <div class="margin-b-16" v-if="clusters.length > 0">选择集群</div>
           <ul class="switch-box" v-if="clusters.length > 0">
-            <li class="switch-item" :class="{'active': item.id === selectid}" v-for="item in clusters" @click="selectCluster(item.id)">{{item.name}}</li>
+            <li class="switch-item" :class="{'active': item.id === formdata.cluster_id}" v-for="item in clusters" @click="selectCluster(item.id)">{{item.name}}</li>
           </ul>
-          <div class="margin-b-16">安装主机监控程序</div>
-          <div class="tcm-listener">curl -sSL http://192.168.1.116/supermonitor/master.sh | sh -s {{token}}</div>
+          <!--<div class="margin-b-16">安装主机监控程序</div>-->
+          <!--<div class="tcm-listener">curl -sSL http://192.168.1.116/supermonitor/master.sh | sh -s {{token}}</div>-->
 
-          <div class="save-box" v-if="isok">
+          <div class="save-box" v-if="status === 'save'">
             <div class="comb-btn waves-effect lvse" @click="addHost">保存</div>
           </div>
-          <div class="waiting-link" v-else="">
+
+          <div class="waiting-link" v-if="status === 'waiting'">
             <img src="../assets/spin.gif" class="vam" alt=""> <span class="vam">等待连接</span>
           </div>
         </div>
