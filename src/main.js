@@ -4,11 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Jimu from 'jimu'
-import APIS from './apis'
+import Global from './global'
 
 Vue.config.productionTip = false
 Vue.use(Jimu)
-Vue.prototype.$combapi = APIS
+Vue.prototype.$Global = Global
 
 /* eslint-disable no-new */
 new Vue({

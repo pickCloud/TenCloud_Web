@@ -173,3 +173,19 @@ textarea.form-control {
 .label-control {
   padding-top: 16px;
 }
+// comb-dialog
+.comb-msg-del {
+  .msg-content_body {
+    margin-top: 64px;
+    margin-bottom: 64px;
+    color: red;
+    text-align: center;
+  }
+  .icon {
+    font-size: 2rem;
+    margin-right: 16px;
+  }
+  .icon-label {
+    font-size: 1.2rem;
+  }
+}

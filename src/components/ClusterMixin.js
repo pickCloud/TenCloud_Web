@@ -45,14 +45,13 @@ export default {
               this.$toast('集群名称不能为空', 'cc')
               return
             }
-            this.$combapi.postApi(['clusters', 'add'], this.newdata).then(respones => {
-              let tempresult = respones.data
-              this.$toast(tempresult.message, 'cc')
+            this.$Global.async('cluster_add').getData(this.newdata).then(d => {
+              this.$toast(d.message, 'cc')
               this.clusters.push({
-                id: tempresult.data.id,
+                id: d.data.id,
                 name: this.newdata.name,
                 description: this.newdata.description,
-                update_time: tempresult.data.update_time
+                update_time: d.data.update_time
               })
             })
           }
@@ -61,13 +60,38 @@ export default {
       })
     },
     delCluster (id, name) {
-      console.log(name)
+      const h = this.$createElement
+      this.$message({
+        theme: 'comb-msg comb-msg-del mini',
+        hasClose: false,
+        content: h('m-icon', {attrs: {icon: 'icon-zhuyi-yin'}}, '您确定删除集群' + name + '吗？'),
+        buttons: [
+          {label: '确定', theme: 'comb-btn lvse hover'},
+          {label: '取消', theme: 'comb-btn qingse hover'}
+        ],
+        callback: (msg, ...arg) => {
+          if (arg[0] === 0) {
+            this.$Global.async('cluster_del').getData({id: [id]}).then(d => {
+              if (d.status === 0) {
+                for (let i = 0; i < this.clusters.length; i++) {
+                  if (this.clusters[i].id === id) {
+                    this.clusters.splice(i, 1)
+                    break
+                  }
+                }
+              }
+              this.$toast(d.message)
+              this.delid = null
+            })
+          }
+          msg.actionPopper(false)
+        }
+      })
     },
     delSure (...arg) {
       if (arg[0] === 0 && this.delid !== null) {
-        this.$http.post('/api/cluster/del', {id: [this.delid]}).then(res => {
-          let tempresult = res.data
-          if (tempresult.status === 0) {
+        this.$Global.async('cluster_del').getData({id: [this.delid]}).then(d => {
+          if (d.status === 0) {
             for (let i = 0; i < this.clusters.length; i++) {
               if (this.clusters[i].id === this.delid) {
                 this.clusters.splice(i, 1)
@@ -75,7 +99,7 @@ export default {
               }
             }
           }
-          this.$toast(tempresult.message)
+          this.$toast(d.message)
           this.delid = null
         })
       }

@@ -24,7 +24,7 @@
             </ul>
             <div class="_list-con_btns">
               <m-btn :to="{ name: 'Cluster-Details', params:{id:cluster.id} }" class="comb-btn waves-effect lvse hover">查看详情</m-btn>
-              <m-btn class="comb-btn waves-effect qingse right hover" @click="delCluster(cluster.id, cluster.name)">删除集群</m-btn>
+              <m-btn class="comb-btn waves-effect qingse right hover" @click.native="delCluster(cluster.id, cluster.name)">删除集群</m-btn>
             </div>
           </div>
         </m-col>
@@ -44,12 +44,11 @@
         description: ''
       },
       delbody: '',
-      delid: null,
       clusters: []
     }),
     created () {
-      this.$combapi.getApi(['clusters', 'list']).then(response => {
-        this.clusters = response.data.data
+      this.$Global.async('clusters').getData().then(d => {
+        this.clusters = d.data
       })
     }
   }
