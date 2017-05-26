@@ -316,6 +316,7 @@ textarea.form-control {
   display: table-cell;
   vertical-align: top;
   padding-left: 16px;
+  width: 100%;
 }
 .info-title {
   margin: 8px 0 16px 0;
@@ -336,3 +337,19 @@ textarea.form-control {
     background-color: map_get($comb-colors, 'qingse');
   }
 }
+
+// 元素编辑
+.el-editor {
+  border: 1px solid transparent;
+  padding: 4px 0;
+  width: 100%;
+  border-radius: 5px;
+}
+.el-editor[contenteditable='true'] {
+  border-color: $border-color-darken;
+  padding: 4px 8px;
+  &:focus {
+    border-color: map_get($comb-colors, 'qingse');
+  }
+}
+

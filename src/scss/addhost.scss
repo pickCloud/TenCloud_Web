@@ -1,8 +1,4 @@
 @import "variables";
-.switch-box {
-  margin-bottom: 24px;
-}
-
 .switch-item {
   display: inline-block;
   padding: 32px 56px;
@@ -50,9 +46,34 @@
 }
 
 .tcm-listener {
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   border-radius: 10px;
   background-color: #fff;
   border: $border-color-darken 1px solid;
   padding: 10px 16px;
+}
+
+.tab-cont_item {
+  padding-top: 16px;
+}
+
+.form-control {
+  margin-bottom: 16px;
+}
+.add-host_label {
+  box-sizing: border-box;
+  height: 50px;
+  line-height: 50px;
+  background-color: #fff;
+  border-radius: 10px;
+  border:1px solid $border-color-darken;
+  border-right-color: transparent;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.add-host_info {
+  .form-control {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
 }

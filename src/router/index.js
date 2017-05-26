@@ -47,7 +47,7 @@ export default new Router({
       component: MachineDetails
     },
     {
-      path: '/addhost',
+      path: '/addhost/:id',
       name: 'AddHost',
       component: AddHost
     },

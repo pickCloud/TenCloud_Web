@@ -7,7 +7,7 @@
     <div class="v-content">
       <div class="btns-group">
         <span class="comb-btn waves-effect lvse" @click="addNewCluster">新增集群</span>
-        <router-link class="comb-btn waves-effect qingse" :to="{ name: 'AddHost'}">添加主机</router-link>
+        <router-link class="comb-btn waves-effect qingse" :to="{ name: 'AddHost', params: {id: 0}}">添加主机</router-link>
       </div>
       <div class="row _list-group">
         <div class="col m12 l6 xl4" v-for="cluster in clusters">
@@ -81,9 +81,8 @@
       },
       delSure (...arg) {
         if (arg[0] === 0 && this.delid !== null) {
-          this.$http.post(this.$API.api + '/api/cluster/del', {id: [this.delid]}).then(res => {
-            let tempresult = res.data
-            if (tempresult.status === 0) {
+          this.$Global.async('cluster_del').getData({id: [this.delid]}).then(d => {
+            if (d.status === 0) {
               for (let i = 0; i < this.clusters.length; i++) {
                 if (this.clusters[i].id === this.delid) {
                   this.clusters.splice(i, 1)
@@ -91,7 +90,7 @@
                 }
               }
             }
-            this.$toast(tempresult.message)
+            this.$toast(d.message)
             this.delid = null
           })
         }
@@ -102,27 +101,23 @@
             this.$toast('集群名称不能为空')
             return
           }
-          this.$http.post(this.$API.api + '/api/cluster/new', this.adddata).then(respones => {
-            let tempresult = respones.data
-            this.$toast(tempresult.message)
+          this.$Global.async('cluster_add').getData(this.adddata).then(d => {
+            this.$toast(d.message)
             this.clusters.push({
-              id: tempresult.data.id,
+              id: d.data.id,
               name: this.adddata.name,
               description: this.adddata.description,
-              update_time: tempresult.data.update_time
+              update_time: d.data.update_time
             })
+            this.adddata.name = ''
+            this.adddata.description = ''
           })
         }
       }
     },
-    watch: {
-      clusters (n, o) {
-        this.$COMMON.cluster = n
-      }
-    },
     created () {
-      this.$http.get(this.$API.api + '/api/clusters').then(response => {
-        this.clusters = response.data.data
+      this.$Global.async('clusters').getData().then(d => {
+        this.clusters = d.data
       })
     }
   }
