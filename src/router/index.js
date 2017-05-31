@@ -29,6 +29,7 @@ export default new Router({
     {
       path: '/',
       name: 'Main',
+      redirect: { name: 'Cluster' },
       component: Main
     },
     {

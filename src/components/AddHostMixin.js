@@ -50,7 +50,10 @@ export default {
         if (event.data === 'success') {
           window.location.href = '/#/cluster-details/' + this.formdata.cluster_id
         } else {
-          if (event.data !== 'open') this.$toast(event.data)
+          if (event.data !== 'open') {
+            this.status = 'save'
+            this.$toast(event.data)
+          }
         }
         // console.log(event)
       }

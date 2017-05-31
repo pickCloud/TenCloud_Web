@@ -2,8 +2,8 @@ import axios from 'axios'
 const islocal = /.+localhost.+/.test(window.location.href)
 
 const APIS = {
-  baseURL: islocal ? 'http://192.168.1.101' : 'http://47.94.18.22',
-  wsURL: islocal ? 'ws://192.168.1.101:8010' : 'ws://47.94.18.22',
+  baseURL: islocal ? 'http://192.168.1.121' : 'http://47.94.18.22',
+  wsURL: islocal ? 'ws://192.168.1.121:8010' : 'ws://47.94.18.22',
   clusters: {u: '/api/clusters', m: 'get'},
   cluster_add: {u: '/api/cluster/new', m: 'post'},
   cluster_del: {u: '/api/cluster/del', m: 'post'},
