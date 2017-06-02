@@ -17,12 +17,15 @@
       </div>
       <div class="info-right article">
         <h5 class="qingse-text el-editor detail-title" :contenteditable="editor" @input="inpChange($event,'title')">{{baseInfo.name}}</h5>
-        <p>机器状态： <span :class="businessStatus[1]">{{businessStatus[0]}}</span></p>
-        <p>商务状态： <span :class="machineStatus[1]">{{machineStatus[0]}}</span></p>
-        <p class="machine-ctrl_icon">
-          <i class="icon icon-qidong" v-if="businessStatus[2]==='stop'" @mouseover="$tip('开机', $event.target, 'top')" @click="machineCtr('server_start')"></i>
-          <i class="icon icon-icon" v-if="businessStatus[2]==='run'" @mouseover="$tip('关机', $event.target, 'top')" @click="machineCtr('server_stop')"></i>
-          <i class="icon icon-zhongzhi" v-if="businessStatus[2]==='run'" @mouseover="$tip('重启', $event.target, 'top')" @click="machineCtr('server_reboot')"></i>
+        <p>机器状态： <span :class="machineStatus[1]">{{machineStatus[0]}}</span></p>
+        <p>商务状态： <span :class="businessStatus[1]">{{businessStatus[0]}}</span></p>
+        <p class="machine-ctrl_icon" v-if="!isWaiting">
+          <i class="icon icon-qidong" v-if="machineStatus[2]==='stop'" @mouseover="$tip('开机', $event.target, 'top')" @click="machineCtr($event.target, 'server_start')"></i>
+          <i class="icon icon-icon" v-if="machineStatus[2]==='run'" @mouseover="$tip('关机', $event.target, 'top')" @click="machineCtr($event.target, 'server_stop')"></i>
+          <i class="icon icon-zhongzhi" v-if="machineStatus[2]==='run'" @mouseover="$tip('重启', $event.target, 'top')" @click="machineCtr($event.target, 'server_reboot')"></i>
+        </p>
+        <p v-else>
+          <img src="../assets/spin.gif" class="vam" alt=""> <span class="vam">{{waitingTip}}</span>
         </p>
         <m-row class="machine-info_panel">
           <m-col class="xs-6">IP ： {{baseInfo.public_ip}}</m-col>
