@@ -12,7 +12,7 @@ const APIS = {
   server_add: {u: '/api/server/new', m: 'post'},
   server_del: {u: '/api/server/del', m: 'post'},
   server_detail: {u: '/api/server/', m: 'get'},
-  server_update: {u: '/api/server/modification', m: 'post'},
+  server_update: {u: '/api/server/update', m: 'post'},
   server_migration: {u: '/api/server/migration', m: 'post'},
   server_deletion: {u: '/api/server/deletion', m: 'post'},
   server_performance: {u: '/api/server/performance/', m: 'get'},

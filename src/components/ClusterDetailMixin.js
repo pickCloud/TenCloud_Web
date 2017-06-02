@@ -1,3 +1,11 @@
+const MAP = {
+  'Pending': ['准备中', 'lvse-text', 'run'],
+  'Stopped': ['已停止', 'hongse-text', 'stop'],
+  'Starting': ['启动中', 'lvse-text', 'run'],
+  'Running': ['运行中', 'lvse-text', 'run'],
+  'Stopping': ['停止中', 'hongse-text', 'stop'],
+  'Deleted': ['已释放', 'hongse-text', 'stop']
+}
 export default {
   data: () => ({
     clusters_to_move: [],
@@ -15,6 +23,11 @@ export default {
     selectAll: false,
     clusterid: -1
   }),
+  filters: {
+    'mstatus' (v) {
+      return MAP[v][0]
+    }
+  },
   watch: {
     selectAll (n, o) {
       if (n) {
@@ -25,7 +38,7 @@ export default {
       } else {
         this.hostids = []
       }
-      console.log(this.hostids)
+      // console.log(this.hostids)
     }
   },
   methods: {

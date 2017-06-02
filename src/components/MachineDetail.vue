@@ -13,7 +13,9 @@
         <m-btn class="comb-btn waves-effect lvse" v-if="editor" @click.native="cancelAlter">取消</m-btn>
       </div>
       <div class="info-left">
-        <div class="info-icon"><img class="vam" src="../assets/cluster-avatar.png" alt=""></div>
+        <div class="info-icon">
+          <img class="vam" src="../assets/cover.png" alt="">
+        </div>
       </div>
       <div class="info-right article">
         <h5 class="qingse-text el-editor detail-title" :contenteditable="editor" @input="inpChange($event,'title')">{{baseInfo.name}}</h5>
@@ -37,8 +39,29 @@
       系统信息
     </div>
     <div class="panel-tab">
-      <m-tab :labels="['配置','应用列表','性能']" theme="block" :tabkey="1">
-        <div>neirong1</div>
+      <m-tab :labels="['配置','应用列表','性能']" theme="block" :tabkey="0">
+        <div>
+          <m-table  class="striped">
+            <tbody slot="tbody">
+              <tr>
+                <th>CPU</th>
+                <td>{{sysInfo.config.cpu}}个</td>
+              </tr>
+              <tr>
+                <th>内存</th>
+                <td>{{parseInt(sysInfo.config.memory) / 1024}}G</td>
+              </tr>
+              <tr>
+                <th>系统名称</th>
+                <td>{{sysInfo.config.os_name}}</td>
+              </tr>
+              <tr>
+                <th>系统类型</th>
+                <td>{{sysInfo.config.os_type}}</td>
+              </tr>
+            </tbody>
+          </m-table>
+        </div>
         <div>
           <table class="striped highlight">
             <col width="15%">
@@ -80,9 +103,26 @@
       商务信息
     </div>
     <div class="panel-tab">
-      <m-tab :labels="['服务商','合同','日志']" theme="block" :tabkey="1">
-        <div>neirong1</div>
-        <div>neirong2</div>
+      <m-tab :labels="['服务商','合同','日志']" theme="block" :tabkey="0">
+        <div>{{businessInfo.provider}}</div>
+        <div>
+          <m-table  class="striped">
+            <tbody>
+              <tr>
+                <th>创建日期</th>
+                <td>{{businessInfo.contract.create_time}}</td>
+              </tr>
+              <tr>
+                <th>截止日期</th>
+                <td>{{businessInfo.contract.expired_time}}</td>
+              </tr>
+              <tr>
+                <th>支付方式</th>
+                <td>{{businessInfo.contract.charge_type}}</td>
+              </tr>
+            </tbody>
+          </m-table>
+        </div>
         <div>neirong3</div>
       </m-tab>
     </div>

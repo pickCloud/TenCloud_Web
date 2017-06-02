@@ -297,9 +297,11 @@ textarea.form-control {
   display: table-cell;
 }
 .info-icon {
-  width: 190px;height: 190px;
+  width: 190px;height: 190px;text-align: center;
   border: 5px solid map_get($comb-colors, 'qingse');
+  color: map_get($comb-colors, 'qingse');
   border-radius: 10px;
+  font-size: 3rem;
 }
 .info-right {
   display: table-cell;

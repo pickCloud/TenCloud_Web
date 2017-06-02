@@ -44,7 +44,7 @@
           <td><m-checkbox class="text-center" :data="{label: host.id+''}" v-model="hostids" hide-label></m-checkbox></td>
           <td>{{ host.name }}</td>
           <td>{{ host.public_ip }}</td>
-          <td>{{ host.machine_status }}</td>
+          <td>{{ host.machine_status | mstatus }}</td>
           <td>{{ host.address }}</td>
           <td>
             <m-btn class="lvse-text" :href="{name:'MachineDetail', params:{id: host.id}}">详情</m-btn>

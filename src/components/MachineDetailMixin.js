@@ -23,9 +23,17 @@ const STAUTS = {
 
 export default {
   data: () => ({
-    baseInfo: {},
-    businessInfo: {},
-    sysInfo: {},
+    baseInfo: {
+      cluster_id: -1,
+      cluster_name: ''
+    },
+    businessInfo: {
+      contract: {},
+      provider: ''
+    },
+    sysInfo: {
+      config: {}
+    },
     apps: {},
     machineid: -1,
     editor: false,
