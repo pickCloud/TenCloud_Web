@@ -4,7 +4,7 @@ export default {
     tcmname: '',
     formdata: {
       name: '',
-      ip: '',
+      public_ip: '',
       username: '',
       passwd: '',
       cluster_id: 0
@@ -20,8 +20,8 @@ export default {
           this.$toast('机器名称不能为空', 'cc')
           return
         }
-        if (this.formdata.ip === '') {
-          this.$toast('ip不能为空', 'cc')
+        if (this.formdata.public_ip === '') {
+          this.$toast('public_ip不能为空', 'cc')
           return
         }
         this.socket.send(JSON.stringify(this.formdata))
@@ -44,13 +44,16 @@ export default {
       }
     },
     initSocket () {
-      this.socket = new WebSocket(this.$Global.apis.wsURL + '/api/server/new')
+      this.socket = new WebSocket(this.$Global.apis.wsURL + this.$Global.apis.server_add.u)
       this.socket.onopen = (event) => {}
       this.socket.onmessage = (event) => {
         if (event.data === 'success') {
           window.location.href = '/#/cluster-details/' + this.formdata.cluster_id
         } else {
-          if (event.data !== 'open') this.$toast(event.data)
+          if (event.data !== 'open') {
+            this.status = 'save'
+            this.$toast(event.data)
+          }
         }
         // console.log(event)
       }

@@ -1,0 +1,370 @@
+@import "variables";
+// 颜色
+@each $key,$color in $comb-colors {
+  .#{$key} {
+    background-color: $color;
+    &.btn:hover {
+      background-color: darken($color, 15%);
+    }
+  }
+  .#{$key}-text {
+    color: $color;
+  }
+}
+//
+body {
+  background-color: $border-color;
+}
+a,body {
+  color: #909090;
+}
+html,body,input,select,button {
+  font-family: "Microsoft YaHei UI";
+}
+p {
+  padding: 0;margin: 0;
+  margin-bottom: 8px;
+}
+.inline-block {
+  display: inline-block;
+}
+// 顶部导航
+.top-nav {
+  position: fixed;
+  left: 0;top:0;
+  width: 100%;
+  height: $top-nav-h;
+  line-height: $top-nav-h;
+  background: url("../assets/top-nav_bg.gif") repeat-x;
+  word-spacing: -6px;
+  color: #fff;
+  z-index: 889;
+}
+.top-nav_logo {
+  display: inline-block;
+  width: $left-nav-w;
+  font-size: 24px;
+  word-spacing: 0;
+  a {
+    color: #fff;
+  }
+}
+.top-nav_user {
+  display: inline-block;
+  word-spacing: 0;
+  height: $top-nav-h;
+  line-height: $top-nav-h;
+  min-width: 150px;
+  cursor: pointer;
+  background-color: rgba(0,0,0,0);
+  transition: all 0.2s;
+}
+// 左侧导航
+.left-nav {
+  position: fixed;
+  left: 0;top: $top-nav-h;
+  width: 250px;height: 100%;
+  background-color: #fff;
+  z-index: 888;
+}
+// 内容容器
+.view-box {
+  position: relative;
+  margin-left: $left-nav-w;
+  top: $top-nav-h;
+  //margin-top: $top-nav-h;
+}
+//
+.tree {
+  font-size: $font-size-title;
+  .tree-node {
+    border-top: $tree-border-w solid transparent;
+    border-bottom: $tree-border-w solid $border-color;
+    transition: all 0.2s;
+    &.active.empty {
+      background-color: $border-color;
+      border-top: 1px solid darken($border-color, 5%);
+      border-bottom: 1px solid darken($border-color, 5%);
+      .tree-node_label {
+        color: map_get($comb-colors, 'qingse');
+      }
+    }
+  }
+  .tree-node_title {
+    height: $base-space * 7;
+    line-height: $base-space * 7;
+    padding: 0 $base-space * 2;
+  }
+}
+
+// 面包屑
+.crumbs {
+  height: $base-space * 7;
+  line-height: $base-space * 7;
+  background-color: #f1f1f1;
+  padding: 0 24px;
+  margin-bottom: 16px;
+}
+.crumbs-item {
+  position: relative;
+  display: inline-block;
+  padding-right: 8px;
+  &:after {
+    content: ">";
+    margin-left: 8px;
+  }
+  &:last-child:after {
+    content: "";
+  }
+}
+// 内容
+.v-content {
+  padding: 0 24px;
+}
+// 按钮
+.btns-group {
+  .comb-btn {
+    margin-right: 8px;
+  }
+  margin-bottom: 16px;
+  min-height: 35px;
+}
+.comb-btn {
+  box-shadow: none;
+  width: 100px;
+  height: 35px !important;
+  line-height: 35px !important;
+  border-radius: 20px !important;
+  padding: 0;
+  color: #fff;
+}
+.comb-msg {
+  .msg-content_head {
+    color: map_get($comb-colors, 'qingse');
+    font-size: $font-size-title;
+    font-size: 500;
+  }
+  .msg-content {
+    max-width: 780px;
+    padding: 8px 8px 0 8px;
+    border-radius: 10px;
+  }
+  &.mini {
+    .msg-content {
+      max-width: 500px;
+    }
+  }
+  .msg-content_body {
+    margin-bottom: 8px;
+  }
+}
+// COMB表单
+input,textarea {
+  outline: none;
+  border: none;
+}
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid $border-color-darken;
+  transition: border-color ease-in-out .3s;
+  &:focus {
+    border-color: map_get($comb-colors, 'qingse');
+  }
+}
+textarea.form-control {
+  height: auto;
+}
+.label-control {
+  padding-top: 16px;
+}
+// comb-dialog
+.comb-msg-del {
+  .msg-content_body {
+    margin-top: 64px;
+    margin-bottom: 64px;
+    color: red;
+    text-align: center;
+  }
+  .icon {
+    font-size: 2rem;
+    margin-right: 16px;
+  }
+  .icon-label {
+    font-size: 1.2rem;
+  }
+}
+// tabs
+.tab-theme-default {
+  .tab-label {
+    &.active {
+      color: map_get($comb-colors, 'qingse') !important;
+    }
+  }
+  .tab-line {
+    background-color: map_get($comb-colors, 'qingse');
+  }
+}
+.tab-theme-block {
+  .tab-label {
+    &.active {
+      background-color: map_get($comb-colors, 'qingse') !important;
+    }
+    padding: 8px 16px !important;
+    min-width: 80px;
+    text-align: center;
+  }
+}
+//
+.switch-item {
+  display: inline-block;
+  padding: 32px 56px;
+  background-color: #fff;
+  margin-right: 16px;
+  border: 1px solid #ebebeb;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  margin-bottom: 36px;
+  &:after {
+    position: absolute;
+    content: "";
+    left: 50%;bottom: -20px;
+    width: 40px;height: 40px;
+    margin-left: -20px;
+    background: url("../assets/selected.png") no-repeat;
+    transform: scale(0,0);
+    transition: all 0.2s;
+    transition-delay: 0.1s;
+  }
+  &:hover,&.active {
+    border-color: map_get($comb-colors, 'qingse');
+    &:after {
+      transform: scale(1,1);
+    }
+  }
+}
+
+.switch-item_img {
+  padding: 0 48px;
+  height: 90px;
+  line-height: 90px;
+  vertical-align: top;
+  img {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+// 面板
+.panel {
+  margin: 0 24px 16px 24px;
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #ebebeb;
+}
+.panel-tab {
+  @extend .panel;
+  padding: 0;
+  &.no-mrg {
+    margin: 0;
+  }
+  &.only-mrg-b {
+    margin: 0;
+    margin-bottom: 24px;
+  }
+  .tab-label-group {
+    padding: 16px 24px;
+    border-bottom: 1px solid $border-color-darken;
+  }
+  .tab-cont {
+    padding: 16px 24px;
+  }
+}
+//详情通用
+.info-panel {
+  position: relative;
+  > .btns-group {
+    position: absolute;
+    right: 24px;top: 24px;
+  }
+}
+.info-left {
+  display: table-cell;
+}
+.info-icon {
+  width: 190px;height: 190px;
+  border: 5px solid map_get($comb-colors, 'qingse');
+  border-radius: 10px;
+}
+.info-right {
+  display: table-cell;
+  vertical-align: top;
+  padding-left: 16px;
+  width: 100%;
+}
+.info-title {
+  margin: 8px 0 16px 0;
+  font-size: 1.28rem;
+  color: map_get($comb-colors, 'qingse');
+  font-weight: 700;
+}
+.info-desc {
+  margin-top: 24px;
+}
+// 搜索
+.piece-search {
+  height: 35px;
+  line-height: 35px;
+  border-radius: 50px;
+  padding: 0 16px;
+  background-color: #ebebeb;
+  .icon {
+    font-size: 1rem;
+    cursor: pointer;
+    vertical-align: middle;
+  }
+}
+.piece-search_input {
+  min-width: 200px;
+  display: inline-block;
+  background-color: transparent;
+}
+// 元素编辑
+.el-editor {
+  border: 1px solid transparent;
+  padding: 8px 0 !important;
+  width: 100%;
+  border-radius: 5px;
+}
+.el-editor[contenteditable='true'] {
+  border-color: $border-color-darken;
+  padding: 8px 8px !important;
+  &:focus {
+    border-color: map_get($comb-colors, 'qingse');
+  }
+}
+// 详情公用样式
+.detail-title {
+  font-size: 1.1rem !important;
+}
+// select
+.select{
+  &.active, &:hover{
+    .select-label {
+      border-color: map_get($comb-colors, 'qingse') !important;
+    }
+  }
+}
+.list-item.active {
+  background-color: map_get($comb-colors, 'qingse') !important;
+}
+// 标签
+.comb-label {
+  padding: 2px 4px;
+  border-radius: 5px;
+}

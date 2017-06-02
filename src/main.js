@@ -1,21 +1,24 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import axios from 'axios'
 import App from './App'
 import router from './router'
-import Tenui from './comb-ten'
+import Jimu from 'jimu'
 import Global from './global'
+import Piece from './components/piece'
 
-Vue.prototype.$http = axios
-Vue.prototype.$Global = Global
 Vue.config.productionTip = false
-Vue.use(Tenui)
+Vue.use(Jimu)
+Vue.use(Piece)
+Vue.prototype.$Global = Global
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  data: () => ({
+    come: 'comoa'
+  }),
   template: '<App/>',
   components: { App }
 })

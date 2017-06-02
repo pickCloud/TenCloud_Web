@@ -1,4 +1,7 @@
 @import "variables";
+.cluster-col {
+  margin-bottom: 16px;
+}
 ._list-group {
   margin: 0 -0.75rem;
   .col {
@@ -27,6 +30,7 @@
       width: 10px;height: 10px;
     }
   }
+  margin-bottom: 16px;
 }
 ._list-con_desc {
   margin-top: 8px;
@@ -43,5 +47,11 @@
 ._new-cluster_con {
   padding: 24px 0 1px 0;
   background-color: #f6f6f6;
+  .row {
+    padding: 0 16px;
+  }
+  .col {
+    margin-bottom: 16px;
+  }
 }
 
