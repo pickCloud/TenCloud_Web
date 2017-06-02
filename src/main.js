@@ -5,9 +5,11 @@ import App from './App'
 import router from './router'
 import Jimu from 'jimu'
 import Global from './global'
+import Piece from './components/piece'
 
 Vue.config.productionTip = false
 Vue.use(Jimu)
+Vue.use(Piece)
 Vue.prototype.$Global = Global
 
 /* eslint-disable no-new */

@@ -7,7 +7,7 @@
     <div class="v-content">
       <div class="btns-group">
         <m-btn class="comb-btn waves-effect lvse hover" @click.native="addNewCluster">新增集群</m-btn>
-        <m-btn class="comb-btn waves-effect qingse hover" href="/">添加主机</m-btn>
+        <m-btn class="comb-btn waves-effect qingse hover" :href="{name:'AddHost',params:{id:0}}">添加主机</m-btn>
       </div>
       <m-row :gutter="16">
         <m-col class="xs-12 sm-6 md-4 cluster-col" v-for="(cluster, key) in clusters" :key="key">
@@ -23,7 +23,7 @@
               <li>更新时间：{{ cluster.update_time }}</li>
             </ul>
             <div class="_list-con_btns">
-              <m-btn :to="{ name: 'Cluster-Details', params:{id:cluster.id} }" class="comb-btn waves-effect lvse hover">查看详情</m-btn>
+              <m-btn :href="{name: 'ClusterDetail', params:{id:cluster.id}}" class="comb-btn waves-effect lvse hover">查看详情</m-btn>
               <m-btn class="comb-btn waves-effect qingse right hover" @click.native="delCluster(cluster.id, cluster.name)">删除集群</m-btn>
             </div>
           </div>

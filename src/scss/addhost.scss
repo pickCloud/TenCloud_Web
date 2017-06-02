@@ -1,0 +1,23 @@
+@import "variables";
+.tab-cont {
+  padding: 16px 0;
+}
+.addhost-title {
+  margin-bottom: 16px;
+  font-weight: 400;
+}
+.addhost-form {
+  .input-group {
+    margin-bottom: 16px;
+  }
+  input {
+    border-radius: 10px;
+  }
+  .pos-left {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+  .input-label {
+    background-color: $border-color;
+  }
+}

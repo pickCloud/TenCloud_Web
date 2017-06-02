@@ -22,19 +22,19 @@ export default {
           {
             label: '集群',
             icon: 'icon icon-jiqun',
-            link: '/#/cluster'
+            link: {name: 'Cluster'}
           },
           {
             label: '应用',
             icon: 'icon icon-yingyong',
-            link: '/#/apps'
+            link: {name: 'Application'}
           }
         ]
       },
       {
         label: '项目',
-        link: '/#/project',
-        icon: 'icon icon-xiangmu'
+        icon: 'icon icon-xiangmu',
+        link: ''
       },
       {
         label: '仓库',
@@ -43,12 +43,12 @@ export default {
           {
             label: '镜像仓库',
             icon: 'icon icon-jingxiang',
-            link: '/#/hub'
+            link: {name: 'Hub'}
           },
           {
             label: '文件仓库',
             icon: 'icon icon-552cd47fba2cc',
-            link: '/#/filehub'
+            link: {name: 'FileHub'}
           }
         ]
       }
