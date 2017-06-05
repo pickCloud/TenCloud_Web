@@ -39,7 +39,7 @@
       系统信息
     </div>
     <div class="panel-tab">
-      <m-tab :labels="['配置','应用列表','性能']" theme="block" :tabkey="0">
+      <m-tab :labels="['配置','应用列表','性能']" theme="block" :tabkey="0" @change="sysTabChange">
         <div>
           <m-table  class="striped">
             <tbody slot="tbody">

@@ -41,7 +41,10 @@ export default {
     memory: {},
     disk: {},
     isWaiting: false,
-    waitingTip: ''
+    waitingTip: '',
+    tempEditor: {
+      title: ''
+    }
   }),
   methods: {
     getApiData () {
@@ -54,31 +57,27 @@ export default {
         }
       })
     },
-    getPerformance () {
-      this.$Global.async('')
+    inpChange (e, key) {
+      this.tempEditor[key] = e.target.innerHTML
     },
     editorHandle () {
       this.editor = true
-      this.tempEditor.title = this.title
-      this.tempEditor.description = this.description
+      this.tempEditor.title = this.baseInfo.name
     },
     submitAlter () {
       this.editor = false
-      if (this.tempEditor.title === this.title && this.tempEditor.description === this.description) return
-      this.$Global.async('cluster_update').getData({
+      if (this.tempEditor.title === this.baseInfo.name) return
+      this.$Global.async('server_update').getData({
         id: this.$route.params.id,
-        name: this.tempEditor.title,
-        description: this.tempEditor.description
+        name: this.tempEditor.title
       }).then(d => {
-        this.cluster.name = this.tempEditor.title
-        this.cluster.description = this.tempEditor.description
+        this.baseInfo.name = this.tempEditor.title
         this.$toast(d.message)
       })
     },
     cancelAlter () {
       this.editor = false
-      this.title = this.cluster.name + ' '
-      this.description = this.cluster.description + ' '
+      this.baseInfo.name = this.baseInfo.name + ' '
     },
     machineCtr (el, t) {
       if (el.$TipInstance) el.$TipInstance.actionPopper(false)
@@ -97,6 +96,15 @@ export default {
           this.$toast(d.message)
         }
       })
+    },
+    sysTabChange (idx) {
+      if (idx === 2) {
+        this.getPerformance()
+      }
+    },
+    getPerformance () {
+      // this.$Global.async('')
+      console.log(Date.parse(new Date()) / 1000)
     }
   },
   computed: {
