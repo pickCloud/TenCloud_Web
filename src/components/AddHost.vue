@@ -39,18 +39,8 @@
         <div class="tab-cont_item">
           <div class="addhost-title">合作服务商</div>
           <ul class="switch-box">
-            <li class="switch-item switch-item_img"><a href="#"><img src="../assets/aliyun.jpg" alt=""></a></li>
-            <li class="switch-item switch-item_img"><a href="#"><img src="../assets/txyun.jpg" alt=""></a></li>
-            <li class="switch-item switch-item_img"><a href="#"><img src="../assets/qingyun.jpg" alt=""></a></li>
-            <li class="switch-item switch-item_img"><a href="#"><img src="../assets/qingyun.jpg" alt=""></a></li>
-            <li class="switch-item switch-item_img"><a href="#"><img src="../assets/qingyun.jpg" alt=""></a></li>
-            <li class="switch-item switch-item_img"><a href="#"><img src="../assets/qingyun.jpg" alt=""></a></li>
-            <li class="switch-item switch-item_img"><a href="#"><img src="../assets/qingyun.jpg" alt=""></a></li>
-            <li class="switch-item switch-item_img"><a href="#"><img src="../assets/qingyun.jpg" alt=""></a></li>
-            <li class="switch-item switch-item_img"><a href="#"><img src="../assets/qingyun.jpg" alt=""></a></li>
-            <li class="switch-item switch-item_img"><a href="#"><img src="../assets/qingyun.jpg" alt=""></a></li>
-            <li class="switch-item switch-item_img"><a href="#"><img src="../assets/qingyun.jpg" alt=""></a></li>
-            <li class="switch-item switch-item_img"><a href="#"><img src="../assets/qingyun.jpg" alt=""></a></li>
+            <li class="switch-item switch-item_img"><a href="https://www.aliyun.com" target="_blank"><img src="../assets/aliyun.jpg" alt=""></a></li>
+            <li class="switch-item switch-item_img"><a href="https://www.qcloud.com" target="_blank"><img src="../assets/txyun.jpg" alt=""></a></li>
           </ul>
         </div>
       </m-tab>

@@ -55,7 +55,7 @@ export default {
             this.$toast(event.data, 'cc')
           }
         }
-        // console.log(event)
+        console.log(event)
       }
       // 监听Socket的关闭
       this.socket.onclose = function (event) {

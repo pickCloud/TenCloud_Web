@@ -370,3 +370,15 @@ textarea.form-control {
   padding: 2px 4px;
   border-radius: 5px;
 }
+// input
+.input-group {
+  &.active, &:not([disabled]):hover {
+    .input {
+      border-color: map_get($comb-colors, 'lvse') !important;
+    }
+    .input-label {
+      background-color: map_get($comb-colors, 'lvse') !important;
+      color: #fff;
+    }
+  }
+}
