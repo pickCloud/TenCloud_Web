@@ -91,11 +91,11 @@
           </table>
         </div>
         <div>
-          <m-row>
-            <m-col class="xs-6"><m-echart :opation="cpu"></m-echart></m-col>
-            <m-col class="xs-6"><m-echart :opation="memory"></m-echart></m-col>
-            <m-col class="xs-6"><m-echart :opation="disk"></m-echart></m-col>
-          </m-row>
+          <!--<m-row>-->
+            <!--<m-col class="xs-6"><m-echart :opation="cpu"></m-echart></m-col>-->
+            <!--<m-col class="xs-6"><m-echart :opation="memory"></m-echart></m-col>-->
+            <!--<m-col class="xs-6"><m-echart :opation="disk"></m-echart></m-col>-->
+          <!--</m-row>-->
         </div>
       </m-tab>
     </div>

@@ -52,7 +52,7 @@ export default {
         } else {
           if (event.data !== 'open') {
             this.status = 'save'
-            this.$toast(event.data)
+            this.$toast(event.data, 'cc')
           }
         }
         // console.log(event)
