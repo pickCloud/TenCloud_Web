@@ -59,7 +59,7 @@ export default {
         splitLine: { show: false }
       },
       series: [{
-        name: 'CPU性能',
+        name: 'CPU使用率(%)',
         type: 'line',
         data: []
       }]
@@ -83,7 +83,7 @@ export default {
         splitLine: { show: false }
       },
       series: [{
-        name: '内存',
+        name: '内存使用率(%)',
         type: 'line',
         data: []
       }]
