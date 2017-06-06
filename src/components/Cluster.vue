@@ -47,6 +47,7 @@
       clusters: []
     }),
     created () {
+      this.$message('GOOD BODY')
       this.$Global.async('clusters').getData().then(d => {
         this.clusters = d.data
       })
