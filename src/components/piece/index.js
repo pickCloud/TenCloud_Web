@@ -1,6 +1,7 @@
 import Search from './search' // 按钮
+import ECharts from './echarts' // 图表
 
-const options = { Search }
+const options = { Search, ECharts }
 
 options.install = (Vue) => {
   for (let component in options) {

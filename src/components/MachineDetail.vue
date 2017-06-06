@@ -77,7 +77,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="app in apps">
+            <tr v-for="app in sysInfo.apps">
               <td>{{ app.version }}</td>
               <td>{{ app.create_time }}</td>
               <td>{{ app.path }}</td>
@@ -91,11 +91,11 @@
           </table>
         </div>
         <div>
-          <!--<m-row>-->
-            <!--<m-col class="xs-6"><m-echart :opation="cpu"></m-echart></m-col>-->
-            <!--<m-col class="xs-6"><m-echart :opation="memory"></m-echart></m-col>-->
-            <!--<m-col class="xs-6"><m-echart :opation="disk"></m-echart></m-col>-->
-          <!--</m-row>-->
+          <m-row>
+            <m-col class="xs-6"><m-chart :option="cpu" ref="cpuchart"></m-chart></m-col>
+            <m-col class="xs-6"><m-chart :option="memory" ref="memorychart"></m-chart></m-col>
+            <m-col class="xs-6"><m-chart :option="disk" ref="diskchart" :nodes="2"></m-chart></m-col>
+          </m-row>
         </div>
       </m-tab>
     </div>

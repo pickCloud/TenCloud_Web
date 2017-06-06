@@ -20,6 +20,9 @@ const STAUTS = {
     'server_reboot': [30, 'Stopping', 'Running', '机器重启中，这个过程需要大约']
   }
 }
+const AJAX_ONE_TIME = 60 // 分钟
+const AJAX_TWO_TIME = 1 // 分钟
+const AJAX_LOOP_TIME = 1 // 分钟
 
 export default {
   data: () => ({
@@ -32,14 +35,82 @@ export default {
       provider: ''
     },
     sysInfo: {
+      apps: {},
       config: {}
     },
-    apps: {},
     machineid: -1,
     editor: false,
-    cpu: {},
-    memory: {},
-    disk: {},
+    cpu: {
+      title: {
+        text: 'CPU',
+        left: 'center'
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: { animation: false }
+      },
+      xAxis: {
+        type: 'time',
+        splitLine: { show: false }
+      },
+      yAxis: {
+        type: 'value',
+        boundaryGap: [0, '100%'],
+        splitLine: { show: false }
+      },
+      series: [{
+        name: 'CPU性能',
+        type: 'line',
+        data: []
+      }]
+    },
+    memory: {
+      title: {
+        text: '内存',
+        left: 'center'
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: { animation: false }
+      },
+      xAxis: {
+        type: 'time',
+        splitLine: { show: false }
+      },
+      yAxis: {
+        type: 'value',
+        boundaryGap: [0, '100%'],
+        splitLine: { show: false }
+      },
+      series: [{
+        name: '内存',
+        type: 'line',
+        data: []
+      }]
+    },
+    disk: {
+      title: {
+        text: '硬盘使用情况',
+        x: 'center'
+      },
+      tooltip: {
+        trigger: 'item',
+        formatter: '{a} <br/>{b} : {c} ({d}%)'
+      },
+      legend: {
+        orient: 'vertical',
+        left: 'left',
+        data: ['使用', '空余']
+      },
+      series: [
+        {
+          name: '硬盘使用情况',
+          type: 'pie',
+          radius: '55%',
+          data: []
+        }
+      ]
+    },
     isWaiting: false,
     waitingTip: '',
     tempEditor: {
@@ -99,12 +170,73 @@ export default {
     },
     sysTabChange (idx) {
       if (idx === 2) {
-        this.getPerformance()
+        this.getPerformance(AJAX_ONE_TIME)
       }
     },
-    getPerformance () {
-      // this.$Global.async('')
-      console.log(Date.parse(new Date()) / 1000)
+    formatDate (p) {
+      return p.map((v, i) => {
+        if (v > 100000) {
+          let t = new Date(v * 1000)
+          return t.Format('yyyy/MM/dd hh:mm:ss')
+        }
+        if (v < 1) {
+          let p = parseInt(v * 10000) / 100
+          return p
+        }
+        return v
+      })
+    },
+    formatDisk (p) {
+      const use = p[0]
+      return p.map((v, i) => {
+        if (i === 0) {
+          return {
+            value: v,
+            name: '使用',
+            itemStyle: {
+              normal: {color: '#ff8281'}
+            }
+          }
+        }
+        if (i === 1) {
+          return {
+            value: v - use,
+            name: '空余',
+            itemStyle: {
+              normal: {color: '#4dd1de'}
+            }
+          }
+        }
+      })
+    },
+    getPerformance (n = 1) {
+      const nowdate = new Date()
+      const olddate = new Date(nowdate.getTime() - 1000 * 60 * n)
+      this.$Global.async('server_performance', true).getData({
+        id: this.machineid,
+        start_time: Date.parse(olddate) / 1000,
+        end_time: Date.parse(nowdate) / 1000
+      }).then(d => {
+        if (d.status === 0) {
+          let tempData = d.data
+          for (let ck in tempData.cpu) {
+            tempData.cpu[ck] = this.formatDate(tempData.cpu[ck])
+          }
+          this.$refs.cpuchart.update(tempData.cpu, true)
+
+          for (let mk in tempData.memory) {
+            tempData.memory[mk] = this.formatDate(tempData.memory[mk])
+          }
+          this.$refs.memorychart.update(tempData.memory, true)
+          // console.log(this.formatDisk(tempData.disk))
+          this.$refs.diskchart.update(this.formatDisk(tempData.disk), true)
+          // 定期抓取
+          this.temptimeout = setTimeout(_ => {
+            this.getPerformance(AJAX_TWO_TIME)
+            clearTimeout(this.temptimeout)
+          }, AJAX_LOOP_TIME * 1000 * 60)
+        }
+      })
     }
   },
   computed: {
