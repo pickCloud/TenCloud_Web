@@ -1,10 +1,12 @@
 <template>
-  <div class="echarts"></div>
+  <div class="echarts" v-resize="resize"></div>
 </template>
 
 <script>
+  import Resize from '../../../../directives/Resize'
   export default {
     name: 'MChart',
+    directives: {Resize},
     props: {
       option: Object,
       nodes: {
@@ -34,6 +36,9 @@
           if (tempd.length >= this.nodes) tempd.shift()
           tempd.push(d)
         }
+      },
+      resize () {
+        if (this.$EChart) this.$EChart.resize()
       }
     },
     mounted () {
