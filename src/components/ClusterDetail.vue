@@ -12,7 +12,7 @@
         <m-btn class="comb-btn waves-effect lvse" v-if="editor" @click.native="cancelAlter">取消</m-btn>
       </div>
       <div class="info-left">
-        <div class="info-icon"><img class="vam" src="../assets/cluster-avatar.png" alt=""></div>
+        <div class="info-icon"><img class="vam" src="../assets/cover.png" alt=""></div>
       </div>
       <div class="info-right article">
         <h5 class="qingse-text el-editor detail-title" :contenteditable="editor" @input="inpChange($event,'title')">{{ title }}</h5>
