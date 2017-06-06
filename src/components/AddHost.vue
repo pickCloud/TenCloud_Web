@@ -35,6 +35,10 @@
           <div class="waiting-link" v-if="status === 'waiting'">
             <img src="../assets/spin.gif" class="vam" alt=""> <span class="vam">等待连接</span>
           </div>
+
+          <div v-if="status === 'error'">
+            <div class="hongse-text">异常，请联系客服</div>
+          </div>
         </div>
         <div class="tab-cont_item">
           <div class="addhost-title">合作服务商</div>

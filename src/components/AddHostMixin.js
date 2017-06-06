@@ -15,7 +15,7 @@ export default {
   methods: {
     addHost () {
       if (this.socket) {
-        console.log(this.formdata)
+        // console.log(this.formdata)
         if (this.formdata.name === '') {
           this.$toast('机器名称不能为空', 'cc')
           return
@@ -41,6 +41,13 @@ export default {
         })
       } else {
         this.initSocket()
+        if (this.timeoutajax) clearTimeout(this.timeoutajax)
+        this.timeoutajax = setTimeout(_ => {
+          this.status = 'error'
+          this.$toast('异常，请联系客服', 'cc')
+          this.socket.close()
+          clearTimeout(this.timeoutajax)
+        }, 10 * 60 * 1000)
       }
     },
     initSocket () {
@@ -55,11 +62,12 @@ export default {
             this.$toast(event.data, 'cc')
           }
         }
-        console.log(event)
       }
       // 监听Socket的关闭
-      this.socket.onclose = function (event) {
-        console.log('Client notified socket has closed', event)
+      this.socket.onclose = (event) => {
+        if (this.timeoutajax) clearTimeout(this.timeoutajax)
+        console.log('socket has closed')
+        // console.log('Client notified socket has closed', event)
       }
     }
   },

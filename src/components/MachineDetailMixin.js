@@ -180,7 +180,7 @@ export default {
           return t.Format('yyyy/MM/dd hh:mm:ss')
         }
         if (v < 1) {
-          let p = parseInt(v * 10000) / 100
+          let p = v * 100
           return p
         }
         return v
@@ -191,8 +191,8 @@ export default {
       return p.map((v, i) => {
         if (i === 0) {
           return {
-            value: v,
-            name: '使用',
+            value: this.toG(v),
+            name: '使用(G)',
             itemStyle: {
               normal: {color: '#ff8281'}
             }
@@ -200,14 +200,17 @@ export default {
         }
         if (i === 1) {
           return {
-            value: v - use,
-            name: '空余',
+            value: this.toG(v - use),
+            name: '空余(G)',
             itemStyle: {
               normal: {color: '#4dd1de'}
             }
           }
         }
       })
+    },
+    toG (v) {
+      return parseInt(v / 1024 / 1024 / 10.24) / 100
     },
     getPerformance (n = 1) {
       const nowdate = new Date()
@@ -251,5 +254,8 @@ export default {
   },
   mounted () {
     this.getApiData()
+  },
+  beforeDestroy () {
+    if (this.temptimeout) clearTimeout(this.temptimeout)
   }
 }
