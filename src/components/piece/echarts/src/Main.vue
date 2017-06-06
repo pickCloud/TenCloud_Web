@@ -3,10 +3,8 @@
 </template>
 
 <script>
-  import Resize from '../../../../directives/Resize'
   export default {
     name: 'MChart',
-    directives: {Resize},
     props: {
       option: Object,
       nodes: {

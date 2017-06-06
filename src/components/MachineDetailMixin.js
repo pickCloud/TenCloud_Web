@@ -179,10 +179,6 @@ export default {
           let t = new Date(v * 1000)
           return t.Format('yyyy/MM/dd hh:mm:ss')
         }
-        if (v < 1) {
-          let p = v * 100
-          return p
-        }
         return v
       })
     },
