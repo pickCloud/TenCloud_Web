@@ -171,6 +171,11 @@ export default {
     sysTabChange (idx) {
       if (idx === 2) {
         this.getPerformance(AJAX_ONE_TIME)
+      } else {
+        this.cpu.series[0].data = []
+        this.disk.series[0].data = []
+        this.memory.series[0].data = []
+        if (this.temptimeout) clearTimeout(this.temptimeout)
       }
     },
     formatDate (p) {
