@@ -143,7 +143,7 @@ export default {
         name: this.tempEditor.title
       }).then(d => {
         this.baseInfo.name = this.tempEditor.title
-        this.$toast(d.message)
+        this.$toast(d.message, 'cc')
       })
     },
     cancelAlter () {
@@ -164,7 +164,7 @@ export default {
             clearTimeout(timeout)
           }, temp[0] * 1000)
         } else {
-          this.$toast(d.message)
+          this.$toast(d.message, 'cc')
         }
       })
     },
@@ -250,7 +250,7 @@ export default {
       return temp || []
     }
   },
-  mounted () {
+  created () {
     this.getApiData()
   },
   beforeDestroy () {

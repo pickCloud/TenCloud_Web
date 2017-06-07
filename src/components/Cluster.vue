@@ -45,12 +45,7 @@
       },
       delbody: '',
       clusters: []
-    }),
-    created () {
-      this.$Global.async('clusters').getData().then(d => {
-        this.clusters = d.data
-      })
-    }
+    })
   }
 </script>
 

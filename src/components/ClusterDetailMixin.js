@@ -13,8 +13,6 @@ export default {
     cluster: {},
     hosts: [],
     editor: false,
-    title: '',
-    description: '',
     tempEditor: {
       title: '',
       description: ''
@@ -64,13 +62,13 @@ export default {
           ],
           callback: (msg, ...arg) => {
             if (arg[0] === 0) {
-              this.$Global.async('server_deletion').getData({
+              this.$Global.async('server_deletion', true).getData({
                 id: delids
               }).then(d => {
                 if (d.status === 0) {
                   this.getApiData()
                 }
-                this.$toast(d.msg)
+                this.$toast(d.message, 'cc')
               })
             }
             msg.actionPopper(false)
@@ -132,12 +130,12 @@ export default {
     },
     editorHandle () {
       this.editor = true
-      this.tempEditor.title = this.title
-      this.tempEditor.description = this.description
+      this.tempEditor.title = this.cluster.name
+      this.tempEditor.description = this.cluster.description
     },
     submitAlter () {
       this.editor = false
-      if (this.tempEditor.title === this.title && this.tempEditor.description === this.description) return
+      if (this.tempEditor.title === this.cluster.name && this.tempEditor.description === this.cluster.description) return
       this.$Global.async('cluster_update', true).getData({
         id: this.$route.params.id,
         name: this.tempEditor.title,
@@ -145,18 +143,19 @@ export default {
       }).then(d => {
         this.cluster.name = this.tempEditor.title
         this.cluster.description = this.tempEditor.description
-        this.$toast(d.message)
+        this.$toast(d.message, 'cc')
       })
     },
     cancelAlter () {
       this.editor = false
-      this.title = this.cluster.name + ' '
-      this.description = this.cluster.description + ' '
+      this.cluster.name = this.cluster.name + ' '
+      this.cluster.description = this.cluster.description + ' '
     },
     getApiData () {
       const cid = this.clusterid = this.$route.params.id
       this.$Global.async('cluster_detail', true).getData(null, cid).then(d => {
         this.hosts = d.data.server_list
+        this.cluster = d.data.basic_info[0]
 
         this.clusters_to_move = []
         this.$Global.async('clusters').getData().then(d => {
@@ -167,11 +166,7 @@ export default {
               value: tempd.id
             }
             if (parseInt(tempd.id) === parseInt(cid)) {
-              this.cluster = tempd
               tempobj.active = true
-
-              this.title = tempd.name
-              this.description = tempd.description
             }
             this.clusters_to_move.push(tempobj)
           }
@@ -179,7 +174,7 @@ export default {
       })
     }
   },
-  mounted () {
+  created () {
     this.getApiData()
   }
 }

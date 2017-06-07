@@ -15,9 +15,9 @@
         <div class="info-icon"><img class="vam" src="../assets/cover.png" alt=""></div>
       </div>
       <div class="info-right article">
-        <h5 class="qingse-text el-editor detail-title" :contenteditable="editor" @input="inpChange($event,'title')">{{ title }}</h5>
+        <h5 class="qingse-text el-editor detail-title" :contenteditable="editor" @input="inpChange($event,'title')">{{ cluster.name }}</h5>
         <p class="time">更新时间：{{ cluster.update_time }}</p>
-        <p class="el-editor" :contenteditable="editor" @input="inpChange($event,'description')">{{ description }}</p>
+        <p class="el-editor" :contenteditable="editor" @input="inpChange($event,'description')">{{ cluster.description }}</p>
       </div>
     </div>
     <div class="panel">

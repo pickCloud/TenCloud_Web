@@ -45,7 +45,7 @@ export default {
               this.$toast('集群名称不能为空', 'cc')
               return
             }
-            this.$Global.async('cluster_add').getData(this.newdata).then(d => {
+            this.$Global.async('cluster_add', true).getData(this.newdata).then(d => {
               this.$toast(d.message, 'cc')
               this.clusters.push({
                 id: d.data.id,
@@ -71,7 +71,7 @@ export default {
         ],
         callback: (msg, ...arg) => {
           if (arg[0] === 0) {
-            this.$Global.async('cluster_del').getData({id: [id]}).then(d => {
+            this.$Global.async('cluster_del', true).getData({id: [id]}).then(d => {
               if (d.status === 0) {
                 for (let i = 0; i < this.clusters.length; i++) {
                   if (this.clusters[i].id === id) {
@@ -80,7 +80,7 @@ export default {
                   }
                 }
               }
-              this.$toast(d.message)
+              this.$toast(d.message, 'cc')
               this.delid = null
             })
           }
@@ -88,21 +88,13 @@ export default {
         }
       })
     },
-    delSure (...arg) {
-      if (arg[0] === 0 && this.delid !== null) {
-        this.$Global.async('cluster_del').getData({id: [this.delid]}).then(d => {
-          if (d.status === 0) {
-            for (let i = 0; i < this.clusters.length; i++) {
-              if (this.clusters[i].id === this.delid) {
-                this.clusters.splice(i, 1)
-                break
-              }
-            }
-          }
-          this.$toast(d.message)
-          this.delid = null
-        })
-      }
+    getApiData () {
+      this.$Global.async('clusters', true).getData().then(d => {
+        this.clusters = d.data
+      })
     }
+  },
+  created () {
+    this.getApiData()
   }
 }
