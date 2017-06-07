@@ -55,7 +55,7 @@ export default {
       this.socket.onopen = (event) => {}
       this.socket.onmessage = (event) => {
         if (event.data === 'success') {
-          window.location.href = '/#/cluster-details/' + this.formdata.cluster_id
+          this.$router.push({name: 'ClusterDetail', params: {id: this.formdata.cluster_id}})
         } else {
           if (event.data !== 'open') {
             this.status = 'save'
