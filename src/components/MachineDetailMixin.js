@@ -192,19 +192,19 @@ export default {
       return p.map((v, i) => {
         if (i === 0) {
           return {
-            value: this.toG(v),
+            value: this.toG(v - use),
             name: '使用(G)',
             itemStyle: {
-              normal: {color: '#ff8281'}
+              normal: {color: '#4dd1de'}
             }
           }
         }
         if (i === 1) {
           return {
-            value: this.toG(v - use),
+            value: this.toG(v),
             name: '空余(G)',
             itemStyle: {
-              normal: {color: '#4dd1de'}
+              normal: {color: '#ff8281'}
             }
           }
         }
