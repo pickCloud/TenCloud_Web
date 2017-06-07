@@ -138,7 +138,7 @@ export default {
     submitAlter () {
       this.editor = false
       if (this.tempEditor.title === this.title && this.tempEditor.description === this.description) return
-      this.$Global.async('cluster_update').getData({
+      this.$Global.async('cluster_update', true).getData({
         id: this.$route.params.id,
         name: this.tempEditor.title,
         description: this.tempEditor.description

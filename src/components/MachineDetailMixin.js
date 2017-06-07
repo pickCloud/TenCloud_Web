@@ -120,7 +120,7 @@ export default {
   methods: {
     getApiData () {
       this.machineid = this.$route.params.id
-      this.$Global.async('server_detail').getData(null, this.machineid).then(d => {
+      this.$Global.async('server_detail', true).getData(null, this.machineid).then(d => {
         if (d.status === 0) {
           this.baseInfo = d.data.basic_info
           this.businessInfo = d.data.business_info
@@ -138,7 +138,7 @@ export default {
     submitAlter () {
       this.editor = false
       if (this.tempEditor.title === this.baseInfo.name) return
-      this.$Global.async('server_update').getData({
+      this.$Global.async('server_update', true).getData({
         id: this.$route.params.id,
         name: this.tempEditor.title
       }).then(d => {
