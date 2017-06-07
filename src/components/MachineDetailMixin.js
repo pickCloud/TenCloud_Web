@@ -188,27 +188,24 @@ export default {
       })
     },
     formatDisk (p) {
-      const use = p[0]
-      return p.map((v, i) => {
-        if (i === 0) {
-          return {
-            value: this.toG(v - use),
-            name: '使用(G)',
-            itemStyle: {
-              normal: {color: '#4dd1de'}
-            }
+      const free = p[0]
+      const total = p[1]
+      return [
+        {
+          value: this.toG(total - free),
+          name: '使用(G)',
+          itemStyle: {
+            normal: {color: '#ff8281'}
+          }
+        },
+        {
+          value: this.toG(free),
+          name: '空余(G)',
+          itemStyle: {
+            normal: {color: '#4dd1de'}
           }
         }
-        if (i === 1) {
-          return {
-            value: this.toG(v),
-            name: '空余(G)',
-            itemStyle: {
-              normal: {color: '#ff8281'}
-            }
-          }
-        }
-      })
+      ]
     },
     toG (v) {
       return parseInt(v / 1024 / 1024 / 10.24) / 100
