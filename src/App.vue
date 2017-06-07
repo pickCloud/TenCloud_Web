@@ -6,7 +6,11 @@
     <nav class="left-nav">
       <m-tree :data="navdata" collapse></m-tree>
     </nav>
-    <div class="view-box"><router-view></router-view></div>
+    <div class="view-box">
+      <transition :name="transitionName">
+        <router-view class="routerViewBox"></router-view>
+      </transition>
+    </div>
   </div>
 </template>
 
@@ -14,6 +18,7 @@
 export default {
   name: 'app',
   data: () => ({
+    transitionName: 'fade',
     navdata: [
       {
         label: '服务器',
@@ -53,7 +58,15 @@ export default {
         ]
       }
     ]
-  })
+  }),
+  watch: {
+    '$route' (to, from) {
+      const toDepth = to.meta.level
+      const fromDepth = from.meta.level
+      if (fromDepth === undefined) this.transitionName = 'fade'
+      else this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+    }
+  }
 }
 </script>
 

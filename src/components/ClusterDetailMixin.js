@@ -180,7 +180,6 @@ export default {
     }
   },
   mounted () {
-    console.log(document.querySelector('.v-clusterdetail').constructor.name.toLowerCase())
     this.getApiData()
   }
 }

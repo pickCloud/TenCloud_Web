@@ -23,46 +23,55 @@ export default new Router({
       path: '/',
       name: 'Main',
       redirect: { name: 'Cluster' },
+      meta: {level: 0},
       component: Main
     },
     {
       path: '/cluster',
       name: 'Cluster',
+      meta: {level: 1},
       component: Cluster
     },
     {
       path: '/clusterdetail/:id',
       name: 'ClusterDetail',
+      meta: {level: 2},
       component: ClusterDetail
     },
     {
       path: '/machinedetail/:id',
       name: 'MachineDetail',
+      meta: {level: 3},
       component: MachineDetail
     },
     {
       path: '/addhost/:id',
       name: 'AddHost',
+      meta: {level: 2},
       component: AddHost
     },
     {
       path: '/application',
       name: 'Application',
+      meta: {level: 1},
       component: Application
     },
     {
       path: '/appdetail/:id',
       name: 'ApplicationDetail',
+      meta: {level: 2},
       component: ApplicationDetail
     },
     {
       path: '/hub',
       name: 'Hub',
+      meta: {level: 1},
       component: Hub
     },
     {
       path: '/filehub',
       name: 'FileHub',
+      meta: {level: 1},
       component: FileHub
     }
   ]

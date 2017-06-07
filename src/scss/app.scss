@@ -69,9 +69,13 @@ p {
 }
 // 内容容器
 .view-box {
-  position: relative;
-  margin-left: $left-nav-w;
+  position: fixed;
+  left: $left-nav-w;
   top: $top-nav-h;
+  width: calc(100% - 250px);
+  min-height: calc(100% - 60px);
+  overflow-x: hidden;
+  overflow-y: auto;
   //margin-top: $top-nav-h;
 }
 //
@@ -380,5 +384,27 @@ textarea.form-control {
       background-color: map_get($comb-colors, 'lvse') !important;
       color: #fff;
     }
+  }
+}
+// 页面切换
+.routerViewBox {
+  position: absolute;
+  width:100%;
+  min-height: 100%;
+  opacity: 1;
+  transition: all 0.8s cubic-bezier(.55,0,.1,1);
+}
+.slide-left-enter, .slide-right-leave-active {
+  opacity: 0;
+  transform: translate(100px, 0);
+}
+.slide-left-leave-active, .slide-right-enter {
+  opacity: 0;
+  transform: translate(-100px, 0);
+}
+//
+.tree-node_child {
+  .tree-node_title {
+    padding: 0 32px !important;
   }
 }
