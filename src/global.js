@@ -14,7 +14,6 @@ const APIS = {
   server_detail: {u: '/api/server/', m: 'get'},
   server_update: {u: '/api/server/update', m: 'post'},
   server_migration: {u: '/api/server/migration', m: 'post'},
-  server_deletion: {u: '/api/server/deletion', m: 'post'},
   server_performance: {u: '/api/server/performance', m: 'post'},
   server_start: {u: '/api/server/start/', m: 'get'},
   server_reboot: {u: '/api/server/reboot/', m: 'get'},

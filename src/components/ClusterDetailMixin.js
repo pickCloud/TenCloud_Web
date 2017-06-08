@@ -62,7 +62,7 @@ export default {
           ],
           callback: (msg, ...arg) => {
             if (arg[0] === 0) {
-              this.$Global.async('server_deletion', true).getData({
+              this.$Global.async('server_del', true).getData({
                 id: delids
               }).then(d => {
                 if (d.status === 0) {
