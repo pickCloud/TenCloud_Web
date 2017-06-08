@@ -33,7 +33,7 @@
           </div>
 
           <div class="waiting-link" v-if="status === 'waiting'">
-            <img src="../assets/spin.gif" class="vam" alt=""> <span class="vam">等待连接</span>
+            <img src="../assets/spin.gif" class="vam" alt=""> <span class="vam">等待连接 大约需要1分钟</span>
           </div>
 
           <div v-if="status === 'error'">
