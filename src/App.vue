@@ -7,7 +7,7 @@
       <m-tree :data="navdata" collapse></m-tree>
     </nav>
     <div class="view-box">
-      <transition :name="transitionName">
+      <transition :name="transitionName" appear>
         <router-view class="routerViewBox"></router-view>
       </transition>
     </div>
