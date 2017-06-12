@@ -52,27 +52,26 @@ export default {
       if (delids.length === 0) {
         this.$toast('请选择要删除的主机', 'cc')
       } else {
-        this.$message({
+        this.$confirm({
           theme: 'comb-msg comb-msg-del mini',
           hasClose: false,
           content: h('m-icon', {attrs: {icon: 'icon-zhuyi-yin'}}, '您确定删除主机' + this.getNameById(delids).join(',') + '吗？'),
           buttons: [
             {label: '确定', theme: 'comb-btn lvse hover'},
             {label: '取消', theme: 'comb-btn qingse hover'}
-          ],
-          callback: (msg, ...arg) => {
-            if (arg[0] === 0) {
-              this.$Global.async('server_del', true).getData({
-                id: delids
-              }).then(d => {
-                if (d.status === 0) {
-                  this.getApiData()
-                }
-                this.$toast(d.message, 'cc')
-              })
-            }
-            msg.actionPopper(false)
+          ]
+        }, (msg, ...arg) => {
+          if (arg[0] === 0) {
+            this.$Global.async('server_del', true).getData({
+              id: delids
+            }).then(d => {
+              if (d.status === 0) {
+                this.getApiData()
+              }
+              this.$toast(d.message, 'cc')
+            })
           }
+          msg.actionPopper(false)
         })
       }
     },
@@ -83,45 +82,45 @@ export default {
       if (delids.length === 0) {
         this.$toast('请选择要迁移的主机', 'cc')
       } else {
-        this.$message({
+        this.$confirm({
           title: '主机迁移',
           theme: 'comb-msg mini',
           hasClose: false,
           content: h('m-select', {
             props: {
               listClass: 'hover',
+              sizeh: 40,
               datas: this.clusters_to_move
             },
             on: {
               input: (v) => {
                 this.select_move = v
-                console.log(v)
+                // console.log(v)
               }
             }
           }),
           buttons: [
             {label: '确定', theme: 'comb-btn lvse hover'},
             {label: '取消', theme: 'comb-btn qingse hover'}
-          ],
-          callback: (msg, ...arg) => {
-            if (arg[0] === 0 && this.select_move.id !== this.$route.params.id) {
-              this.$Global.async('server_migration', true).getData({
-                cluster_id: this.select_move.value,
-                id: delids
-              }).then(d => {
-                if (d.status === 0) {
-                  for (let i = 0; i < this.hosts.length; i++) {
-                    if (delids.indexOf(this.hosts[i].id + '') !== -1) {
-                      this.hosts.splice(i, 1)
-                      break
-                    }
+          ]
+        }, (msg, ...arg) => {
+          if (arg[0] === 0 && this.select_move.id !== this.$route.params.id) {
+            this.$Global.async('server_migration', true).getData({
+              cluster_id: this.select_move.value,
+              id: delids
+            }).then(d => {
+              if (d.status === 0) {
+                for (let i = 0; i < this.hosts.length; i++) {
+                  if (delids.indexOf(this.hosts[i].id + '') !== -1) {
+                    this.hosts.splice(i, 1)
+                    break
                   }
                 }
-                this.$toast(d.message, 'cc')
-              })
-            }
-            msg.actionPopper(false)
+              }
+              this.$toast(d.message, 'cc')
+            })
           }
+          msg.actionPopper(false)
         })
       }
     },

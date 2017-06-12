@@ -22,9 +22,20 @@
         <p>机器状态： <span :class="machineStatus[1]">{{machineStatus[0]}}</span></p>
         <p>商务状态： <span :class="businessStatus[1]">{{businessStatus[0]}}</span></p>
         <p class="machine-ctrl_icon" v-if="!isWaiting">
-          <i class="icon icon-qidong" v-if="machineStatus[2]==='stop'" @mouseover="$tip('开机', $event.target, 'top')" @click="machineCtr($event.target, 'server_start')"></i>
-          <i class="icon icon-icon" v-if="machineStatus[2]==='run'" @mouseover="$tip('关机', $event.target, 'top')" @click="machineCtr($event.target, 'server_stop')"></i>
-          <i class="icon icon-zhongzhi" v-if="machineStatus[2]==='run'" @mouseover="$tip('重启', $event.target, 'top')" @click="machineCtr($event.target, 'server_reboot')"></i>
+          <m-tip v-if="machineStatus[2]==='stop'" @click.native="machineCtr($event.target, 'server_start')" hasArrow>
+            <i class="icon icon-qidong" slot="label"></i>
+            <div slot="popper" class="popper-body">开机</div>
+          </m-tip>
+          <m-tip v-if="machineStatus[2]==='run'" @click.native="machineCtr($event.target, 'server_stop')" hasArrow>
+            <i class="icon icon-icon" slot="label"></i>
+            <div slot="popper" class="popper-body">关机</div>
+          </m-tip>
+          <m-tip v-if="machineStatus[2]==='run'" @click.native="machineCtr($event.target, 'server_reboot')" hasArrow>
+            <i class="icon icon-zhongzhi" slot="label"></i>
+            <div slot="popper" class="popper-body">重启</div>
+          </m-tip>
+          <!--<i class="icon icon-icon" v-if="machineStatus[2]==='run'" @mouseover="$tip('关机', $event.target, 'top')" @click="machineCtr($event.target, 'server_stop')"></i>-->
+          <!--<i class="icon icon-zhongzhi" v-if="machineStatus[2]==='run'" @mouseover="$tip('重启', $event.target, 'top')" @click="machineCtr($event.target, 'server_reboot')"></i>-->
         </p>
         <p v-else>
           <img src="../assets/spin.gif" class="vam" alt=""> <span class="vam">{{waitingTip}}</span>
@@ -137,7 +148,7 @@
   }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   .machine-ctrl_icon {
     padding-top: 4px;
     margin-bottom: 12px;
@@ -145,6 +156,12 @@
       font-size: 1.5rem;
       margin-right: 8px;
       cursor: pointer;
+    }
+    .tip-wrap {
+      display: inline-block;
+      .popper {
+        margin-bottom: 8px;
+      }
     }
   }
   .machine-info_panel {

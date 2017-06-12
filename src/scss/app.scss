@@ -142,26 +142,6 @@ p {
   padding: 0;
   color: #fff;
 }
-.comb-msg {
-  .msg-content_head {
-    color: map_get($comb-colors, 'qingse');
-    font-size: $font-size-title;
-    font-size: 500;
-  }
-  .msg-content {
-    max-width: 780px;
-    padding: 8px 8px 0 8px;
-    border-radius: 10px;
-  }
-  &.mini {
-    .msg-content {
-      max-width: 500px;
-    }
-  }
-  .msg-content_body {
-    margin-bottom: 8px;
-  }
-}
 // COMB表单
 input,textarea {
   outline: none;
@@ -186,8 +166,39 @@ textarea.form-control {
   padding-top: 16px;
 }
 // comb-dialog
+.comb-msg {
+  border-radius: 10px;
+  left: 50%;top: 50%;
+  padding: 16px 24px;
+  background-color: #fff;
+  &.mini {
+    width: 500px;
+    margin-left: -250px;
+    margin-top: -170px;
+  }
+  .popper-head {
+    color: map_get($comb-colors, 'qingse');
+    font-size: $font-size-title;
+    font-size: 500;
+    margin-bottom: 16px;
+  }
+  .popper-body {
+    margin-bottom: 8px;
+  }
+  .popper-foot {
+    text-align: right;
+    .btn {
+      margin-left: 16px;
+    }
+  }
+}
+.comb-msg-add {
+  width: 780px !important;
+  margin-left: -390px;
+  margin-top: -150px;
+}
 .comb-msg-del {
-  .msg-content_body {
+  .popper-body {
     margin-top: 64px;
     margin-bottom: 64px;
     color: red;
@@ -359,7 +370,7 @@ textarea.form-control {
   font-size: 1.1rem !important;
 }
 // select
-.select{
+.tip-select{
   &.active, &:hover{
     .select-label {
       border-color: map_get($comb-colors, 'qingse') !important;

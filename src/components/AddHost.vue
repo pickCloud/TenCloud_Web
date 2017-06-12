@@ -17,10 +17,10 @@
           <!--</ul>-->
           <div class="addhost-title">主机信息</div>
           <div class="addhost-form">
-            <m-input label-pos="left" :height="48" v-model="formdata.name">主机名称</m-input>
-            <m-input label-pos="left" :height="48" v-model="formdata.public_ip">IP</m-input>
-            <m-input label-pos="left" :height="48" v-model="formdata.username">用户名</m-input>
-            <m-input label-pos="left" :height="48" v-model="formdata.passwd">密码</m-input>
+            <m-input label-pos="left" :sizeh="48" v-model="formdata.name">主机名称</m-input>
+            <m-input label-pos="left" :sizeh="48" v-model="formdata.public_ip">IP</m-input>
+            <m-input label-pos="left" :sizeh="48" v-model="formdata.username">用户名</m-input>
+            <m-input label-pos="left" :sizeh="48" v-model="formdata.passwd">密码</m-input>
           </div>
 
           <div class="addhost-title" v-if="clusters.length > 0">选择集群</div>
