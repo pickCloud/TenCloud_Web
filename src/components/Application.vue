@@ -14,7 +14,7 @@
         <col width="60px">
         <thead slot="thead">
           <tr>
-            <th><m-checkbox class="text-center" :data="{label: '全选'}" :showlabel="false"></m-checkbox></th>
+            <th><m-checkbox class="text-center" :data="{label: '全选'}" hide-label></m-checkbox></th>
             <th>名称</th>
             <th>状态</th>
             <th>发布时间</th>
@@ -23,7 +23,7 @@
         </thead>
         <tbody slot="tbody">
           <tr>
-            <td><m-checkbox class="text-center" :data="{label: 1}" :showlabel="false" v-model="selectids"></m-checkbox></td>
+            <td><m-checkbox class="text-center" :data="{label: 1}" hide-label v-model="selectids"></m-checkbox></td>
             <td>应用1</td>
             <td><span class="comb-label lvse white-text">正常</span></td>
             <td>2017.04.20</td>
