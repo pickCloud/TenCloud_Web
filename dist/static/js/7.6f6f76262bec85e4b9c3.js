@@ -1,2 +1,0 @@
-webpackJsonp([7],{134:function(e,n,t){var s=t(13)(t(175),t(151),null,null);e.exports=s.exports},151:function(e,n){e.exports={render:function(){var e=this,n=e.$createElement;return(e._self._c||n)("div",{staticClass:"main"},[e._v("\n  this is main\n")])},staticRenderFns:[]}},175:function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0}),n.default={name:"Main"}}});
-//# sourceMappingURL=7.6f6f76262bec85e4b9c3.js.map

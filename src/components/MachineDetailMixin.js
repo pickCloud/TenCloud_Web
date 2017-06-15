@@ -208,7 +208,7 @@ export default {
       ]
     },
     toG (v) {
-      return parseInt(v / 1024 / 1024 / 10.24) / 100
+      return (v / 1024 / 1024 / 1024).toFixed(2)
     },
     getPerformance (n = 1) {
       const nowdate = new Date()
