@@ -42,16 +42,16 @@
             <td>名称</td>
             <td>说明</td>
             <td>
-              <!--<router-link :to="{name:'HubInfo', params:{id:1}}" class="lvse-text hub-btn">详情</router-link>-->
-              <!--<router-link :to="{name:'ProDeploy', params:{id:1}}" class="qingse-text hub-btn">部署</router-link>-->
+              <m-btn :href="{name:'HubDetail', params:{id:1}}" class="lvse-text hub-btn">详情</m-btn>
+              <m-btn :href="{name:'Deploy', params:{id:1}}" class="qingse-text hub-btn">部署</m-btn>
             </td>
           </tr>
           <tr>
             <td>名称</td>
             <td>说明</td>
             <td>
-              <!--<router-link :to="{name:'HubInfo', params:{id:1}}" class="lvse-text hub-btn">详情</router-link>-->
-              <!--<router-link :to="{name:'ProDeploy', params:{id:1}}" class="qingse-text hub-btn">部署</router-link>-->
+              <m-btn :href="{name:'HubDetail', params:{id:1}}" class="lvse-text hub-btn">详情</m-btn>
+              <m-btn :href="{name:'Deploy', params:{id:1}}" class="qingse-text hub-btn">部署</m-btn>
             </td>
           </tr>
           </tbody>

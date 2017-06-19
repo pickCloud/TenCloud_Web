@@ -39,7 +39,7 @@ export default {
       {
         label: '项目',
         icon: 'icon icon-xiangmu',
-        link: ''
+        link: {name: 'Project'}
       },
       {
         label: '仓库',

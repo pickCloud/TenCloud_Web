@@ -11,7 +11,13 @@ const AddHost = r => require.ensure([], () => r(require('@/components/AddHost'))
 const Application = r => require.ensure([], () => r(require('@/components/Application')), 'application')
 const ApplicationDetail = r => require.ensure([], () => r(require('@/components/ApplicationDetail')), 'applicationdetail')
 
+const Project = r => require.ensure([], () => r(require('@/components/Project')), 'project')
+const ProDetail = r => require.ensure([], () => r(require('@/components/ProDetail')), 'prodetail')
+const ProAdd = r => require.ensure([], () => r(require('@/components/ProAdd')), 'proadd')
+
 const Hub = r => require.ensure([], () => r(require('@/components/Hub')), 'hub')
+const HubDetail = r => require.ensure([], () => r(require('@/components/HubDetail')), 'hubdetail')
+const Deploy = r => require.ensure([], () => r(require('@/components/Deploy')), 'deploy')
 
 const FileHub = r => require.ensure([], () => r(require('@/components/FileHub')), 'filehub')
 
@@ -63,10 +69,40 @@ export default new Router({
       component: ApplicationDetail
     },
     {
+      path: '/project',
+      name: 'Project',
+      meta: {level: 1},
+      component: Project
+    },
+    {
+      path: '/proadd',
+      name: 'ProAdd',
+      meta: {level: 2},
+      component: ProAdd
+    },
+    {
+      path: '/prodetail/:id',
+      name: 'ProDetail',
+      meta: {level: 2},
+      component: ProDetail
+    },
+    {
       path: '/hub',
       name: 'Hub',
       meta: {level: 1},
       component: Hub
+    },
+    {
+      path: '/hubdetail/:id',
+      name: 'HubDetail',
+      meta: {level: 2},
+      component: HubDetail
+    },
+    {
+      path: '/deploy/:id',
+      name: 'Deploy',
+      meta: {level: 2},
+      component: Deploy
     },
     {
       path: '/filehub',
