@@ -20,43 +20,48 @@ export default {
   data: () => ({
     transitionName: 'fade',
     navdata: [
+//      {
+//        label: '服务器',
+//        icon: 'icon icon-msnui-server',
+//        children: [
+//          {
+//            label: '集群',
+//            icon: 'icon icon-jiqun',
+//            link: {name: 'Cluster'}
+//          }
+//          {
+//            label: '应用',
+//            icon: 'icon icon-yingyong',
+//            link: {name: 'Application'}
+//          }
+//        ]
+//      },
       {
-        label: '服务器',
-        icon: 'icon icon-msnui-server',
-        children: [
-          {
-            label: '集群',
-            icon: 'icon icon-jiqun',
-            link: {name: 'Cluster'}
-          },
-          {
-            label: '应用',
-            icon: 'icon icon-yingyong',
-            link: {name: 'Application'}
-          }
-        ]
+        label: '集群',
+        icon: 'icon icon-jiqun',
+        link: {name: 'Cluster'}
       },
       {
         label: '项目',
         icon: 'icon icon-xiangmu',
         link: {name: 'Project'}
-      },
-      {
-        label: '仓库',
-        icon: 'icon icon-cangku',
-        children: [
-          {
-            label: '镜像仓库',
-            icon: 'icon icon-jingxiang',
-            link: {name: 'Hub'}
-          },
-          {
-            label: '文件仓库',
-            icon: 'icon icon-552cd47fba2cc',
-            link: {name: 'FileHub'}
-          }
-        ]
       }
+//      {
+//        label: '仓库',
+//        icon: 'icon icon-cangku',
+//        children: [
+//          {
+//            label: '镜像仓库',
+//            icon: 'icon icon-jingxiang',
+//            link: {name: 'Hub'}
+//          },
+//          {
+//            label: '文件仓库',
+//            icon: 'icon icon-552cd47fba2cc',
+//            link: {name: 'FileHub'}
+//          }
+//        ]
+//      }
     ]
   }),
   watch: {

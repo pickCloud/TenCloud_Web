@@ -50,7 +50,7 @@
       系统信息
     </div>
     <div class="panel-tab">
-      <m-tab :labels="['配置','应用列表','性能']" theme="block" :tabkey="0" @change="sysTabChange">
+      <m-tab :labels="['配置','应用列表','性能']" type="block" :tabkey="0" @change="sysTabChange">
         <div>
           <m-table  class="striped">
             <tbody slot="tbody">
@@ -114,7 +114,7 @@
       商务信息
     </div>
     <div class="panel-tab">
-      <m-tab :labels="['服务商','合同','日志']" theme="block" :tabkey="0">
+      <m-tab :labels="['服务商','合同','日志']" type="block" :tabkey="0">
         <div>{{businessInfo.provider}}</div>
         <div>
           <m-table  class="striped">

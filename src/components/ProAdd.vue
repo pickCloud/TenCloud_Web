@@ -9,8 +9,8 @@
       <m-input :sizeh="48"></m-input>
       <div class="proadd-title">代码源</div>
       <m-input :sizeh="48"></m-input>
-      <div class="proadd-title">图标</div>
-      <m-file></m-file>
+      <!--<div class="proadd-title">图标</div>-->
+      <!--<m-file></m-file>-->
       <div class="proadd-title">描述</div>
       <m-textarea :sizeh="48"></m-textarea>
 

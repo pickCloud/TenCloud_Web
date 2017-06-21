@@ -27,7 +27,7 @@
         <m-btn class="comb-btn waves-effect hongse" @click.native="delMachine(-1)">删除主机</m-btn>
         <search class="right"></search>
       </div>
-      <table class="striped highlight">
+      <m-table class="striped highlight">
         <col width="60px">
         <thead>
         <tr>
@@ -53,7 +53,7 @@
           </td>
         </tr>
         </tbody>
-      </table>
+      </m-table>
     </div>
   </div>
 </template>

@@ -19,13 +19,14 @@
       </div>
       <div class="info-right article">
         <h5 class="qingse-text el-editor detail-title" :contenteditable="editor" @input="inpChange($event,'title')">{{prodata.name}}</h5>
-        <p>状态</p>
-        <p>当前版本: 更新版本</p>
+        <p>代码源</p>
+        <p>创建时间</p>
+        <!--<p>更新时间</p>-->
         <p class="el-editor" :contenteditable="editor" @input="inpChange($event,'description')">{{ prodata.description }}</p>
       </div>
     </div>
     <div class="panel-tab">
-      <m-tab :labels="['运行环境','版本管理','数据分析', '日志']" theme="block" :tabkey="0">
+      <m-tab :labels="['运行环境','版本管理','数据分析', '日志']" type="block" :tabkey="0">
         <div>运行环境</div>
         <div>版本管理</div>
         <div>数据分析</div>

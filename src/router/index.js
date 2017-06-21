@@ -17,6 +17,7 @@ const ProAdd = r => require.ensure([], () => r(require('@/components/ProAdd')), 
 
 const Hub = r => require.ensure([], () => r(require('@/components/Hub')), 'hub')
 const HubDetail = r => require.ensure([], () => r(require('@/components/HubDetail')), 'hubdetail')
+const Build = r => require.ensure([], () => r(require('@/components/Build')), 'build')
 const Deploy = r => require.ensure([], () => r(require('@/components/Deploy')), 'deploy')
 
 const FileHub = r => require.ensure([], () => r(require('@/components/FileHub')), 'filehub')
@@ -103,6 +104,12 @@ export default new Router({
       name: 'Deploy',
       meta: {level: 2},
       component: Deploy
+    },
+    {
+      path: '/build/:id',
+      name: 'Build',
+      meta: {level: 2},
+      component: Build
     },
     {
       path: '/filehub',
