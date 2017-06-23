@@ -4,7 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Jimu from 'jimu'
-import 'jimu/dist/jimu.all.min.css'
+import 'jimu/dist/jimu.base.min.css'
+import './theme/index.scss'
+
 import Global from './global'
 import Piece from './components/piece'
 

@@ -11,8 +11,11 @@ export default {
           h('div', {attrs: {class: 'row'}}, [
             h('div', {attrs: {class: 'col xs-12 md-1 text-center label-control'}}, '名称'),
             h('div', {attrs: {class: 'col xs-12 md-11 text-center'}}, [
-              h('input', {
-                attrs: {type: 'text', class: 'form-control'},
+              h('m-input', {
+                // attrs: {type: 'text', class: 'form-control'},
+                props: {
+                  sizeh: 48
+                },
                 on: {
                   input: event => {
                     this.newdata.name = event.target.value
@@ -24,8 +27,8 @@ export default {
           h('div', {attrs: {class: 'row'}}, [
             h('div', {attrs: {class: 'col xs-12 md-1 text-center label-control'}}, '描述'),
             h('div', {attrs: {class: 'col xs-12 md-11 text-center'}}, [
-              h('textarea', {
-                attrs: {class: 'form-control'},
+              h('m-textarea', {
+                // attrs: {class: 'form-control'},
                 on: {
                   input: event => {
                     this.newdata.description = event.target.value
@@ -36,8 +39,8 @@ export default {
           ])
         ]),
         buttons: [
-          {label: '确定', theme: 'comb-btn lvse hover'},
-          {label: '取消', theme: 'comb-btn qingse hover'}
+          {label: '确定', theme: 'theme-dft comb-btn lvse hover'},
+          {label: '取消', theme: 'theme-dft comb-btn qingse hover'}
         ]
       }, (msg, ...arg) => {
         if (arg[0] === 0) {

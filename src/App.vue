@@ -74,5 +74,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" src="./scss/app.scss"></style>
