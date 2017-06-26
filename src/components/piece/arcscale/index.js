@@ -1,4 +1,4 @@
-import Main from './src/Main.vue'
+import Main from './Main.vue'
 
 Main.install = function (Vue) {
   Vue.component(Main.name, Main)

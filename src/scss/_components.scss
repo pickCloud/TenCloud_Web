@@ -1,0 +1,24 @@
+.theme-dft {
+  .jmtree-label-wrap {
+    cursor: pointer;
+    &.active {
+      color: #fff;
+    }
+    color: #a2a2a2;
+  }
+  &.table {
+    td, th {
+      padding: 0;
+      height: 50px;
+      border-radius: 0;
+    }
+    thead > tr{
+      background-color: #b4b4b4;
+      color: #fff;
+    }
+  }
+}
+// arc
+.arc-text {
+  font-size: 1.8rem;
+}

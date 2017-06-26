@@ -1,12 +1,12 @@
-import Search from './search' // 按钮
-import ECharts from './echarts' // 图表
+import Panel from './panel/index'
+import D3 from './arcscale/index'
 
-const options = { Search, ECharts }
+const options = {Panel, D3}
 
 options.install = (Vue) => {
   for (let component in options) {
     const componentInstaller = options[component]
-    if (componentInstaller && component !== 'install') {
+    if (componentInstaller && component !== 'install' && component !== 'theme') {
       Vue.use(componentInstaller)
     }
   }

@@ -1,0 +1,32 @@
+.panle {
+  position: relative;
+  padding: $gutter*2;
+  margin-bottom: $gutter*2;
+  h5 {
+    font-size: 0.7rem;
+    margin-bottom: $gutter;
+  }
+}
+
+.panle-title {
+  margin-bottom: $gutter*2;
+}
+
+.panle-close {
+  position: absolute;
+  right: $gutter*2;
+  top: $gutter*2;
+  cursor: pointer;
+  &:hover {
+    transform: rotate(180deg);
+  }
+  transition: all 0.2s;
+}
+
+.panel-tongji {
+  height: 568px;
+}
+
+.panel-xinxi,.panel-anquan {
+  height: 276px;
+}

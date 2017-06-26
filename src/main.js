@@ -4,8 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Jimu from 'jimu'
-import 'jimu/dist/jimu.all.min.css'
 import Global from './global'
+
+// 引入样式
+import 'jimu/dist/jimu.base.min.css'
+import './scss/app.scss'
 import Piece from './components/piece'
 
 Vue.config.productionTip = false
