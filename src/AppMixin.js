@@ -13,14 +13,14 @@ export default {
       }
     ]
   }),
-  watch: {
-    '$route' (to, from) {
-      const toDepth = to.meta.level
-      const fromDepth = from.meta.level
-      if (fromDepth === undefined) this.transitionName = 'fade'
-      else this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
-    }
-  },
+  // watch: {
+  //   '$route' (to, from) {
+  //     const toDepth = to.meta.level
+  //     const fromDepth = from.meta.level
+  //     if (fromDepth === undefined) this.transitionName = 'fade'
+  //     else this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+  //   }
+  // },
   methods: {
     navChange (item, hasChild) {
       if (!hasChild) {

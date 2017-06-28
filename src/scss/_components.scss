@@ -4,21 +4,103 @@
     &.active {
       color: #fff;
     }
-    color: #a2a2a2;
+    color: $color-grey-d3;
   }
+  // table
   &.table {
     td, th {
       padding: 0;
       height: 50px;
       border-radius: 0;
     }
+    &.striped {
+      > tbody > tr:nth-child(odd) {background-color: #fff;}
+      > tbody > tr:nth-child(even) {background-color: $color-grey-l1;}
+    }
+  }
+  &.machines-table {
     thead > tr{
-      background-color: #b4b4b4;
+      background-color: $color-grey-d1;
       color: #fff;
     }
   }
+  &.block-table {
+    td,th {
+      padding: 0 $gutter*2;
+    }
+    thead th {
+      color: $color-grey-d1;
+    }
+  }
+  // pages
+  //.page-btn {
+  //  &.active {
+  //    background-color: $color-grey-d3;
+  //  }
+  //}
 }
-// arc
-.arc-text {
+// d3-scale
+.d3-scale-text {
   font-size: 1.8rem;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+.d3-scale-svg {
+  width: 100%;
+  height: 100%;
+  margin-bottom: $gutter*2;
+}
+.d3-scale-bg {
+  fill: #ddd;
+}
+.d3-scale-pg {
+  fill: orange;
+}
+// d3-line
+.d3-line-svg {
+  width: 100%;
+  height: 100%;
+}
+.d3-line-path {
+  fill: orange;
+}
+.d3-line-x {
+  text {
+    font-size: 0.6rem;
+  }
+}
+.d3-line-y {
+  text {
+    font-size: 0.6rem;
+  }
+}
+// d3-pie
+.d3-pies-svg {
+  width: 100%;
+  height: 100%;
+  margin-bottom: $gutter*2;
+}
+.d3-pies-path {
+  stroke-width: 5px;
+  stroke: #f2f2f2;
+}
+.d3-pies-label-wrap {
+  text-align: center;
+}
+.d3-pies-label {
+  display: inline-block;
+  margin-right: $gutter*2;
+  > span {
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: $gutter;
+  }
+}
+.d3-pies-icon {
+  width: 20px;height: 15px;
+  margin-right: $gutter;
+}
+.d3-pies-text {
+  text-anchor: middle;
+  //dominant-baseline: middle;
 }

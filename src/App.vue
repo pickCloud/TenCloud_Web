@@ -13,9 +13,9 @@
         <m-tree :model="navData" :sizeh="40" @change="navChange"></m-tree>
       </aside>
       <div class="lay-body left">
-        <transition :name="transitionName" appear>
+        <!--<transition :name="transitionName" appear>-->
           <router-view class="routerViewBox"></router-view>
-        </transition>
+        <!--</transition>-->
       </div>
     </div>
   </div>

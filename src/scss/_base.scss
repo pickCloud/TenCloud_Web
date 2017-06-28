@@ -17,6 +17,21 @@ body,a,a:link {
 .m-r16 {
   margin-top: 16px;
 }
+.m-no-b {
+  margin-bottom: 0 !important;
+}
+.p-b16 {
+  padding-bottom: 16px !important;
+}
+.no-pad {
+  padding: 0 !important;
+}
+.p-16 {
+  padding: 16px;
+}
+.uline {
+  border-bottom: 1px solid $color-border;
+}
 
 .use-icon {
   display: inline-block;
@@ -29,4 +44,31 @@ body,a,a:link {
 
 .list-check {
   margin-left: 16px;
+}
+
+.gird-list {
+  height: 40px;line-height: 40px;
+  background-color: $color-grey-bg;
+  margin-bottom: $gutter*2;
+  &:last-child {margin-bottom: 0}
+  .col {
+    padding: 0 $gutter*2;
+  }
+}
+
+// 页面切换
+.routerViewBox {
+  position: absolute;
+  width:100%;
+  min-height: 100%;
+  opacity: 1;
+  transition: all 0.8s cubic-bezier(.55,0,.1,1);
+}
+.slide-left-enter, .slide-right-leave-active {
+  opacity: 0;
+  transform: translate(100px, 0);
+}
+.slide-left-leave-active, .slide-right-enter {
+  opacity: 0;
+  transform: translate(-100px, 0);
 }

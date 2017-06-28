@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 const Main = r => require.ensure([], () => r(require('@/components/Main')), 'main')
 const Machines = r => require.ensure([], () => r(require('@/components/Machines')), 'machines')
+const MachineDetail = r => require.ensure([], () => r(require('@/components/MachineDetail')), 'machinedetail')
 // const ClusterDetail = r => require.ensure([], () => r(require('@/components/ClusterDetail')), 'clusterdetail')
 // const MachineDetail = r => require.ensure([], () => r(require('@/components/MachineDetail')), 'machinedetail')
 //
@@ -38,6 +39,12 @@ export default new Router({
       name: 'Machines',
       meta: {level: 1},
       component: Machines
+    },
+    {
+      path: '/machinedetail/:id',
+      name: 'MachineDetail',
+      meta: {level: 2},
+      component: MachineDetail
     }
   ]
 })

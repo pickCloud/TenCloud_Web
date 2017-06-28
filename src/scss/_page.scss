@@ -5,6 +5,27 @@
   padding-left: $gutter*2;
 }
 
-.page-main {
+.page-main,.page-machine-detail {
   padding: $gutter*2;
+  padding-bottom: 0;
+}
+
+.page-machines {
+  .pages {
+    position: absolute;
+    width: 100%;
+    left:0;bottom: 0;
+    background-color: $color-grey-d2;
+    .page-btn {
+      text-align: center;
+      border-radius: 0;
+      color: $color-grey-l3;
+    }
+  }
+}
+
+.page-machine-detail {
+  .panel-jiankong {
+    padding-bottom: 0;
+  }
 }

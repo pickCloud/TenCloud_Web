@@ -4,7 +4,7 @@
       <m-btn :sizew="70" class="white_bg">新增</m-btn>
       <m-btn :sizew="70" class="white_bg">删除</m-btn>
     </div>
-    <m-table class="bordered hover striped">
+    <m-table class="bordered hover striped machines-table">
       <col width="55px">
       <col width="15%">
       <col width="15%">
@@ -31,7 +31,7 @@
           <td>1.1.1.1</td>
           <td>正常</td>
           <td>
-            <m-btn>详情</m-btn>
+            <m-btn :href="{name:'MachineDetail', params:{id:1}}">详情</m-btn>
             <m-btn>删除</m-btn>
           </td>
         </tr>
@@ -43,7 +43,7 @@
           <td>1.1.1.1</td>
           <td>正常</td>
           <td>
-            <m-btn>详情</m-btn>
+            <m-btn :href="{name:'MachineDetail', params:{id:2}}">详情</m-btn>
             <m-btn>删除</m-btn>
           </td>
         </tr>
@@ -55,7 +55,7 @@
           <td>1.1.1.1</td>
           <td>正常</td>
           <td>
-            <m-btn>详情</m-btn>
+            <m-btn :href="{name:'MachineDetail', params:{id:3}}">详情</m-btn>
             <m-btn>删除</m-btn>
           </td>
         </tr>
@@ -67,11 +67,12 @@
           <td>1.1.1.1</td>
           <td>正常</td>
           <td>
-            <m-btn>详情</m-btn>
+            <m-btn :href="{name:'MachineDetail', params:{id:4}}">详情</m-btn>
             <m-btn>删除</m-btn>
           </td>
         </tr>
       </tbody>
     </m-table>
+    <m-page :allpage="10" :nowpage="1" :sizeh="48" :sizew="48"></m-page>
   </div>
 </template>
