@@ -5,27 +5,52 @@
   padding-left: $gutter*2;
 }
 
-.page-main,.page-machine-detail {
+.page-main,.page-machine-detail,.page-machines {
   padding: $gutter*2;
   padding-bottom: 0;
 }
 
+// 机器列表
 .page-machines {
   .pages {
     position: absolute;
     width: 100%;
     left:0;bottom: 0;
-    background-color: $color-grey-d2;
+    background-color: $color-panel-bg;
     .page-btn {
       text-align: center;
       border-radius: 0;
-      color: $color-grey-l3;
+      color: $color-font-base;
+      &.active {
+        background-color: $color-page-select-bg;
+      }
     }
   }
 }
-
-.page-machine-detail {
-  .panel-jiankong {
-    padding-bottom: 0;
+// 机器详情
+.mdc-chart {
+  .panel-title {
+    background-color: transparent;
+  }
+}
+.mcd-ctrl-group {
+  text-align: justify;
+}
+.mcd-ctrl-item {
+  display: inline-block;
+}
+.cpu-line {
+  .d3-line-path {
+    fill: #52b3b8;
+  }
+}
+.mem-line {
+  .d3-line-path {
+    fill: #fc6a6a;
+  }
+}
+.block-table {
+  td,th {
+    padding: 0 $gutter*2;
   }
 }

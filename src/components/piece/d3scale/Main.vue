@@ -1,7 +1,14 @@
 <template>
   <div class="d3-scale">
     <svg class="d3-scale-svg" :style="[stylew, styleh]" v-resize="lazyResize"></svg>
-    <slot></slot>
+    <slot>
+      <div class="d3-pies-label-wrap" v-if="legend">
+        <div class="d3-pies-label">
+          <span class="d3-pies-icon" :style="'background-color:'+legend.color"></span>
+          <span>{{legend.name}}</span>
+        </div>
+      </div>
+    </slot>
   </div>
 </template>
 
@@ -17,7 +24,7 @@
       fixed: Number,
       hideText: Boolean,
       data: {
-        type: Array,
+        type: Object,
         required: true
       },
       bgClass: {
@@ -90,7 +97,14 @@
     },
     computed: {
       scale () {
-        return this.data[0] / this.data.reduce((a, b) => (a + b), 0)
+        return this.scaleValue[0] / this.scaleValue.reduce((a, b) => (a + b), 0)
+      },
+      scaleValue () {
+        return this.data.value
+      },
+      legend () {
+//        console.log(this.data.legend)
+        return this.data.legend
       }
     },
     mounted () {

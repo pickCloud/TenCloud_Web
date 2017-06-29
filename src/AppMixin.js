@@ -1,6 +1,7 @@
 export default {
   data: () => ({
     transitionName: 'fade',
+    isMini: false,
     navData: [
       {
         label: '机器',
@@ -9,7 +10,7 @@ export default {
       },
       {
         label: '项目',
-        icon: 'icon icon-xiangmu'
+        icon: 'icon icon-xiangmu1'
       }
     ]
   }),
@@ -21,12 +22,22 @@ export default {
   //     else this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
   //   }
   // },
+  computed: {
+    miniClass () {
+      return this.isMini ? 'lay-mini' : ''
+    },
+    hasBack () {
+      return this.$route.meta.parent
+    }
+  },
   methods: {
     navChange (item, hasChild) {
       if (!hasChild) {
-        console.log(item.link)
         if (item.link) this.$router.push(item.link)
       }
+    },
+    back () {
+      if (this.$route.meta.parent) this.$router.push({name: this.$route.meta.parent})
     }
   }
 }

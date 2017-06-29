@@ -53,7 +53,7 @@
         // 获取半径
         this.radius = (this.sizeh || Math.min(this.svgel.clientWidth, this.svgel.clientHeight)) * 0.5
         // 获取饼状数据
-        this.pie.value((d) => d.value).sort((a, b) => (a.value - b.value))
+        this.pie.value((d) => d.value).sort(null)
         // 获取最大比例
         let max = D3.max(this.data, (d) => d.vr)
         // 获取最大半径

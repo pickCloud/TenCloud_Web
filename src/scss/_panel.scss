@@ -1,19 +1,39 @@
-.panle {
+.panel {
   position: relative;
-  padding: $gutter*2;
+  //padding: $gutter*2;
   padding-bottom: 0;
-  margin-bottom: $gutter*2;
+  //margin-bottom: $gutter*2;
+  background-color: $color-panel-bg;
   h5 {
     font-size: 0.7rem;
     margin-bottom: $gutter;
   }
+  .panel-list {
+    height: 50px;
+    line-height: 50px;
+    padding: 0 $gutter*2;
+    border-bottom: 1px solid #2b2f3a;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
 }
 
-.panle-title {
+.panel-title {
+  padding: $gutter*1.5 $gutter*2;
+  //margin-bottom: $gutter*2;
+  background-color: $color-panel-title-bg;
+}
+.panel-title-2 {
+  padding: $gutter*1.5 $gutter*2;
   margin-bottom: $gutter*2;
 }
 
-.panle-close {
+.panel-body {
+  padding: 0 $gutter*2;
+}
+
+.panel-close {
   position: absolute;
   right: $gutter*2;
   top: $gutter*2;

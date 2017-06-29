@@ -1,0 +1,9 @@
+.mini-ctrl {
+  font-size: $nav-font-size;
+  margin-bottom: $gutter;
+  transition: all 0.2s;
+  cursor: pointer;
+  &:hover {
+    color: $color-nav-hover;
+  }
+}

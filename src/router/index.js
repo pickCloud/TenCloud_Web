@@ -37,13 +37,13 @@ export default new Router({
     {
       path: '/machines',
       name: 'Machines',
-      meta: {level: 1},
+      meta: {level: 1, parent: 'Main'},
       component: Machines
     },
     {
       path: '/machinedetail/:id',
       name: 'MachineDetail',
-      meta: {level: 2},
+      meta: {level: 2, parent: 'Machines'},
       component: MachineDetail
     }
   ]

@@ -1,10 +1,19 @@
 .theme-dft {
   .jmtree-label-wrap {
     cursor: pointer;
-    &.active {
-      color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: all 0.2s;
+    padding: 0 $gutter*2;
+    &.active,&:hover {
+      background-color: $color-page-select-bg;
+      color: $color-font-base;
     }
-    color: $color-grey-d3;
+    .jmtree-label-icon {
+      margin-right: $gutter;
+    }
+    //color: $color-grey-d3;
+    font-size: $nav-font-size;
   }
   // table
   &.table {
@@ -13,31 +22,30 @@
       height: 50px;
       border-radius: 0;
     }
+    thead {
+      border: none;
+    }
     &.striped {
-      > tbody > tr:nth-child(odd) {background-color: #fff;}
-      > tbody > tr:nth-child(even) {background-color: $color-grey-l1;}
+      > tbody > tr:nth-child(odd) {background-color: $color-striped;}
     }
   }
-  &.machines-table {
-    thead > tr{
-      background-color: $color-grey-d1;
-      color: #fff;
+  //switch
+  &.switch {
+    .__icon {
+      background-color: $switch-bg;
+      border-color: $switch-bg;
+      &:before {
+        background-color: $switch-bar-bg;
+      }
     }
   }
-  &.block-table {
-    td,th {
-      padding: 0 $gutter*2;
-    }
-    thead th {
-      color: $color-grey-d1;
+  // checkbox
+  &.checkbox {
+    .__icon {
+      background-color: $color-checkbox-bg;
+      border-color: $color-checkbox-bg;
     }
   }
-  // pages
-  //.page-btn {
-  //  &.active {
-  //    background-color: $color-grey-d3;
-  //  }
-  //}
 }
 // d3-scale
 .d3-scale-text {
@@ -51,10 +59,10 @@
   margin-bottom: $gutter*2;
 }
 .d3-scale-bg {
-  fill: #ddd;
+  fill: $color-yellow-l;
 }
 .d3-scale-pg {
-  fill: orange;
+  fill: $color-primary;
 }
 // d3-line
 .d3-line-svg {
@@ -64,14 +72,9 @@
 .d3-line-path {
   fill: orange;
 }
-.d3-line-x {
-  text {
-    font-size: 0.6rem;
-  }
-}
-.d3-line-y {
-  text {
-    font-size: 0.6rem;
+.d3-line-x,.d3-line-y {
+  path {
+    stroke: $color-font-base;
   }
 }
 // d3-pie
@@ -82,7 +85,7 @@
 }
 .d3-pies-path {
   stroke-width: 5px;
-  stroke: #f2f2f2;
+  stroke: $color-panel-bg;
 }
 .d3-pies-label-wrap {
   text-align: center;
@@ -97,7 +100,8 @@
   }
 }
 .d3-pies-icon {
-  width: 20px;height: 15px;
+  width: $gutter*2;height: $gutter*2;
+  border-radius: $gutter;
   margin-right: $gutter;
 }
 .d3-pies-text {

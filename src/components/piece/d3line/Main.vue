@@ -13,6 +13,10 @@
     name: 'D3Line',
     mixins: [D3Mixin],
     props: {
+      data: {
+        type: Array,
+        required: true
+      },
       yticks: {
         type: Number,
         default: 5
@@ -43,6 +47,11 @@
       h: null,
       w: null
     }),
+    watch: {
+      data (n, o) {
+        this.resize()
+      }
+    },
     methods: {
       lazyResize () {
         if (this.timeout) clearTimeout(this.timeout)
@@ -56,7 +65,7 @@
         this.w = this.width || this.svgel.clientWidth
         this.h = this.height || this.svgel.clientHeight
 
-        this.g.attr('style', 'transform:translate(' + this.padding.left + 'px,' + this.padding.top + 'px)')
+        this.svg.attr('style', 'transform:translate(' + this.padding.left + 'px,' + this.padding.top + 'px)')
 
         this.scaleX = D3.scaleTime().rangeRound([0, this.axisw])
         this.scaleY = D3.scaleLinear().rangeRound([this.axish, 0])
@@ -73,10 +82,18 @@
         this.xAxis
           .attr('style', 'transform:translateY(' + this.axish + 'px)')
           .call(D3.axisBottom(this.scaleX))
-//        console.log(this.axish)
         // y轴
         this.yAxis
           .call(D3.axisLeft(this.scaleY).ticks(this.yticks))
+      },
+      initVars () {
+        this.svgel = this.$el.querySelector('svg')
+        this.svg = D3.select(this.svgel).append('g')
+        this.path = this.svg.append('path').attr('class', this.pathClass)
+        this.xAxis = this.svg.append('g').attr('class', this.xClass)
+        this.yAxis = this.svg.append('g').attr('class', this.yClass)
+
+        this.resize()
       }
     },
     computed: {
@@ -88,28 +105,7 @@
       }
     },
     mounted () {
-      this.data = [
-        {date: new Date(2017, 3, 3), value: 50},
-        {date: new Date(2017, 3, 4), value: 30},
-        {date: new Date(2017, 3, 5), value: 60},
-        {date: new Date(2017, 3, 6), value: 40},
-        {date: new Date(2017, 3, 7), value: 80},
-        {date: new Date(2017, 3, 8), value: 50},
-        {date: new Date(2017, 3, 8), value: 50},
-        {date: new Date(2017, 3, 9), value: 90},
-        {date: new Date(2017, 3, 10), value: 70},
-        {date: new Date(2017, 3, 11), value: 50},
-        {date: new Date(2017, 3, 12), value: 10},
-        {date: new Date(2017, 3, 13), value: 50},
-        {date: new Date(2017, 3, 14), value: 30},
-        {date: new Date(2017, 3, 15), value: 100}
-      ]
-      this.svgel = this.$el.querySelector('svg')
-      this.g = D3.select(this.svgel).append('g')
-      this.path = this.g.append('path').attr('class', this.pathClass)
-      this.xAxis = this.g.append('g').attr('class', this.xClass)
-      this.yAxis = this.g.append('g').attr('class', this.yClass)
-      this.resize()
+      this.initVars()
     }
   }
 </script>

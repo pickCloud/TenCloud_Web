@@ -1,9 +1,9 @@
 <template>
-  <div class="panle" :style="[panelStyle]">
+  <div class="panel" :style="[panelStyle]">
     <!--<div class="panle-title"></div>-->
-    <slot name="title"><div class="panle-title">{{title}}</div></slot>
+    <slot name="title"><div class="panel-title">{{title}}</div></slot>
     <slot></slot>
-    <div class="panle-close close" v-if="hasClose"></div>
+    <div class="panel-close close" v-if="hasClose"></div>
   </div>
 </template>
 
