@@ -4,7 +4,9 @@ import Router from 'vue-router'
 const Main = r => require.ensure([], () => r(require('@/components/Main')), 'main')
 const Machines = r => require.ensure([], () => r(require('@/components/Machines')), 'machines')
 const MachineDetail = r => require.ensure([], () => r(require('@/components/MachineDetail')), 'machinedetail')
-// const ClusterDetail = r => require.ensure([], () => r(require('@/components/ClusterDetail')), 'clusterdetail')
+const MachineAdd = r => require.ensure([], () => r(require('@/components/MachineAdd')), 'machineadd')
+
+const AppDetail = r => require.ensure([], () => r(require('@/components/AppDetail')), 'appdetail')
 // const MachineDetail = r => require.ensure([], () => r(require('@/components/MachineDetail')), 'machinedetail')
 //
 // const AddHost = r => require.ensure([], () => r(require('@/components/AddHost')), 'addhost')
@@ -30,21 +32,33 @@ export default new Router({
     {
       path: '/',
       name: 'Main',
-      // redirect: { name: 'Cluster' },
+      redirect: { name: 'Machines' },
       meta: {level: 0},
       component: Main
     },
     {
       path: '/machines',
       name: 'Machines',
-      meta: {level: 1, parent: 'Main'},
+      meta: {level: 1},
       component: Machines
     },
     {
       path: '/machinedetail/:id',
       name: 'MachineDetail',
-      meta: {level: 2, parent: 'Machines'},
+      meta: {level: 2},
       component: MachineDetail
+    },
+    {
+      path: '/machineadd/:id',
+      name: 'MachineAdd',
+      meta: {level: 2},
+      component: MachineAdd
+    },
+    {
+      path: '/appdetail/:id',
+      name: 'AppDetail',
+      meta: {level: 2},
+      component: AppDetail
     }
   ]
 })

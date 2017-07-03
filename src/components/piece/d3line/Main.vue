@@ -72,7 +72,7 @@
         this.area = D3.area().x((d) => this.scaleX(d.date)).y1((d) => this.scaleY(d.value)).curve(D3.curveBasis)
 
         this.scaleX.domain(D3.extent(this.data, (d) => d.date))
-        this.scaleY.domain([0, D3.max(this.data, (d) => d.value)])
+        this.scaleY.domain([0, D3.max(this.data, (d) => d.value) * 2])
         this.area.y0(this.scaleY(0))
 
         this.path
@@ -81,7 +81,9 @@
         // 时间轴
         this.xAxis
           .attr('style', 'transform:translateY(' + this.axish + 'px)')
-          .call(D3.axisBottom(this.scaleX))
+          .call(D3.axisBottom(this.scaleX).tickFormat((d) => {
+            return D3.timeFormat('%H:%M:%S')(d)
+          }))
         // y轴
         this.yAxis
           .call(D3.axisLeft(this.scaleY).ticks(this.yticks))

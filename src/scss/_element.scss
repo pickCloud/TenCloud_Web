@@ -7,3 +7,44 @@
     color: $color-nav-hover;
   }
 }
+
+.panel-form-list {
+  .col {
+    height: 50px;
+    line-height: 50px;
+    margin-top: $gutter;
+    .__content {
+      background-color: $color-page-select-bg;
+    }
+  }
+  input {
+    border: none;
+    background: none;
+    width: 100%;
+    padding: 0 $gutter*2;
+    height: 50px;
+    line-height: 50px;
+    color: $color-font-base;
+  }
+}
+
+.comb-msg {
+  background-color: #2f3543;
+  font-size: 1rem;
+  &.comb-msg-del {
+    .popper-body {
+      padding: $gutter*4;
+      border-bottom:1px solid #262a35;
+    }
+    .popper-foot {
+      padding: $gutter $gutter*4;
+      .btn {
+        margin-left: $gutter*3;
+        font-size: 1rem;
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+  }
+}

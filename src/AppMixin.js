@@ -14,20 +14,21 @@ export default {
       }
     ]
   }),
-  // watch: {
-  //   '$route' (to, from) {
-  //     const toDepth = to.meta.level
-  //     const fromDepth = from.meta.level
-  //     if (fromDepth === undefined) this.transitionName = 'fade'
-  //     else this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
-  //   }
-  // },
+  watch: {
+    '$route' (to, from) {
+      if (from.name !== null) to.meta.from = from
+      // const toDepth = to.meta.level
+      // const fromDepth = from.meta.level
+      // if (fromDepth === undefined) this.transitionName = 'fade'
+      // else this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+    }
+  },
   computed: {
     miniClass () {
       return this.isMini ? 'lay-mini' : ''
     },
     hasBack () {
-      return this.$route.meta.parent
+      return true
     }
   },
   methods: {
@@ -37,7 +38,10 @@ export default {
       }
     },
     back () {
-      if (this.$route.meta.parent) this.$router.push({name: this.$route.meta.parent})
+      // console.log(this.$router)
+      this.$router.back()
+      // let from = this.$route.meta.from
+      // if (from) this.$router.push({name: from.name, params: from.params})
     }
   }
 }

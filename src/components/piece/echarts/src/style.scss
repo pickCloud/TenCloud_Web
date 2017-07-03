@@ -1,0 +1,16 @@
+.echarts {
+  width: 100%;
+  min-height: 350px;
+}
+
+.eline {
+  overflow: hidden;
+  .echarts {
+    margin-top: -50px;
+  }
+}
+
+.epie {
+  overflow: hidden;
+  height: 280px;
+}

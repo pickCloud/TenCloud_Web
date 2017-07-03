@@ -1,5 +1,5 @@
 <template>
-  <div class="page-main">
+  <div class="page-pad page-main">
     <m-row :gutter="16">
       <m-col class="xs-12 lg-9">
         <panel class="m-b16" title="统计"></panel>

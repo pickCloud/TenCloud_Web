@@ -2,7 +2,7 @@ body {
   background-color: $color-body-bg;
   font-size: 0.8rem !important;
 }
-body,a,a:link,button {
+body,a,button {
   color:$color-font-base;
 }
 text {
@@ -17,6 +17,14 @@ button {
 }
 
 small {color: $color-small;}
+
+/** 滚动条 **/
+::-webkit-scrollbar{width: 10px; height: 10px;}
+::-webkit-scrollbar-button:vertical{display: none;}
+::-webkit-scrollbar-track, ::-webkit-scrollbar-corner{background-color: $color-app-top-bg;}
+::-webkit-scrollbar-thumb{border-radius: 10px; background-color: $color-panel-title-bg;}
+::-webkit-scrollbar-thumb:vertical:hover{background-color: $color-primary;}
+::-webkit-scrollbar-thumb:vertical:active{background-color: $color-primary;}
 
 .m-b16 {
   margin-bottom: $gutter*2;
@@ -112,15 +120,11 @@ small {color: $color-small;}
 // 对齐text-align justify
 .justify_fix{display:inline-block; width:100%; height:0; overflow:hidden;}
 //colors
-.primary_bg {
-  background-color: $color-primary;
-}
-.pink_bg {
-  background-color: $color-pint;
-}
-.grey-dark_txt {
-  color: #282828;
-}
+@include color2css($colors)
 .no-radius {
   border-radius: 0 !important;
+}
+// plate
+.plate {
+  padding: $gutter $gutter*2;
 }

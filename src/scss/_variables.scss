@@ -36,3 +36,12 @@ $nav-normal-w:180px;
 
 $switch-bg:#2f3543;
 $switch-bar-bg:$color-primary;
+
+$colors:(
+  'primary': $color-primary,
+  'pink':$color-pint,
+  'yellow': #ffd180,
+  'green-l': #a5d6a7,
+  'grey-dark': #282828,
+  'alpha-black': rgba(0, 0, 0, 0.8)
+) !default;
