@@ -35,6 +35,9 @@
 }
 .mcd-ctrl-group {
   text-align: justify;
+  .btn {
+    padding: 0;
+  }
 }
 .mcd-ctrl-item {
   display: inline-block;

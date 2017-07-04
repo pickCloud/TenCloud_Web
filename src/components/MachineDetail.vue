@@ -36,18 +36,35 @@
         <panel class="m-b16">
           <div class="panel-title clearfix" slot="title">
             <span class="bold">基本信息</span>
-            <span class="right"><span class="inline-block m-r8">修改</span> <i class="icon-quan"></i></span>
+            <span class="right">
+              <span v-if="!isInfoEditor" @click="editorBegin"><span class="inline-block m-r8">修改</span> <i class="icon-quan"></i></span>
+              <span v-if="isInfoEditor" @click="editorSure"><span class="inline-block m-r8">确定</span> <i class="icon-quan"></i></span>
+              <span v-if="isInfoEditor" @click="editorCancel"><span class="inline-block m-r8">取消</span> <i class="icon-quan"></i></span>
+            </span>
           </div>
           <div class="panel-list mcd-ctrl-group">
-            <div class="mcd-ctrl-item">关/开 <m-switch></m-switch></div>
-            <div class="mcd-ctrl-item">重启 <i class="icon-quan"></i></div>
-            <div class="mcd-ctrl-item">迁移 <i class="icon-quan"></i></div>
-            <div class="mcd-ctrl-item">删除 <i class="icon-quan"></i></div>
+            <div class="mcd-ctrl-item">
+              <span v-if="!isWaiting">开机 <m-switch class="switchMachine" v-model="isOpen" @change="machineChange" :disabled="isDisabled"></m-switch></span>
+            </div>
+            <div class="mcd-ctrl-item">
+              <m-btn v-if="machineStatus[2]==='run' && !isWaiting" @click.native="machineCtrPop('server_reboot')">重启 <i class="icon-quan"></i></m-btn>
+            </div>
+            <!--<div class="mcd-ctrl-item">-->
+              <!--<m-btn>迁移 <i class="icon-quan"></i></m-btn>-->
+            <!--</div>-->
+            <div class="mcd-ctrl-item">
+              <m-btn @click.native="deleteMachine">删除 <i class="icon-quan"></i></m-btn>
+            </div>
             <span class="justify_fix"></span>
           </div>
+          <m-row class="panel-list" v-if="isWaiting">
+            <m-col class="xs-12">{{waitingTip}}</m-col>
+          </m-row>
           <m-row class="panel-list">
             <m-col class="xs-4">名称</m-col>
-            <m-col class="xs-8">{{baseInfo.name}}</m-col>
+            <m-col class="xs-8">
+              <input class="edirot-input" type="text" data-key="baseInfo.name" data-name="name" v-model="baseInfo.name" readonly>
+            </m-col>
           </m-row>
           <m-row class="panel-list">
             <m-col class="xs-4">服务商</m-col>
@@ -63,7 +80,7 @@
           </m-row>
           <m-row class="panel-list">
             <m-col class="xs-4">状态</m-col>
-            <m-col class="xs-8"><span :class="machineStatus[1]">{{machineStatus[0]}}</span></m-col>
+            <m-col class="xs-8"><span class="plate" :class="machineStatus[1]">{{machineStatus[0]}}</span></m-col>
           </m-row>
         </panel>
         <!-- 基本信息END -->
@@ -100,57 +117,30 @@
         <!-- 配置信息 END -->
       </m-col>
       <m-col class="xs-12">
-        <panel title="应用">
+        <panel title="应用" class="p-b16 m-b16">
           <div class="panel-body">
             <m-table class="hover striped block-table centered">
-              <col width="10%">
-              <col width="20%">
-              <col width="15%">
               <col width="15%">
               <col width="20%">
               <col width="20%">
+              <col width="25%">
+              <col width="15%">
               <thead>
               <tr>
-                <th>名称</th>
                 <th>containerID</th>
-                <th>pid</th>
-                <th>更新时间</th>
+                <th>名称</th>
                 <th>状态</th>
+                <th>更新时间</th>
                 <th>操作</th>
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>NAME</td>
-                <td>78</td>
-                <td>15</td>
-                <td>2017.1.2</td>
-                <td>运行中</td>
-                <td><m-btn :href="{name:'AppDetail', params: {id: 1}}">详情</m-btn></td>
-              </tr>
-              <tr>
-                <td>NAME</td>
-                <td>78</td>
-                <td>15</td>
-                <td>2017.1.2</td>
-                <td>运行中</td>
-                <td><m-btn :href="{name:'AppDetail', params: {id: 2}}">详情</m-btn></td>
-              </tr>
-              <tr>
-                <td>NAME</td>
-                <td>78</td>
-                <td>15</td>
-                <td>2017.1.2</td>
-                <td>运行中</td>
-                <td><m-btn :href="{name:'AppDetail', params: {id: 3}}">详情</m-btn></td>
-              </tr>
-              <tr>
-                <td>NAME</td>
-                <td>78</td>
-                <td>15</td>
-                <td>2017.1.2</td>
-                <td>运行中</td>
-                <td><m-btn :href="{name:'AppDetail', params: {id: 1}}">详情</m-btn></td>
+              <tr v-for="item in applists">
+                <td>{{item[0]}}</td>
+                <td>{{item[1]}}</td>
+                <td>{{item[2]}}</td>
+                <td>{{item[3]}}</td>
+                <td><m-btn class="primary_txt">详情</m-btn></td>
               </tr>
               </tbody>
             </m-table>

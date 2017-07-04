@@ -15,7 +15,7 @@
           <col width="15%">
           <thead>
           <tr>
-            <th><m-checkbox class="list-check" :data="{label: '全选'}" v-model="selectAll" hideLabel></m-checkbox></th>
+            <th><m-checkbox class="list-check" :data="{label: '全选'}" v-model="isSelectAll" hideLabel></m-checkbox></th>
             <th>名称</th>
             <th>服务商</th>
             <th>地址</th>
@@ -25,8 +25,8 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-for="item in hosts">
-            <td><m-checkbox class="list-check" v-model="hostids" :data="{label:(item.id+'')}" hide-label></m-checkbox></td>
+          <tr v-for="item in listts">
+            <td><m-checkbox class="list-check" v-model="selects" :data="{label:(item.id+'')}" hide-label></m-checkbox></td>
             <td>{{item.name}}</td>
             <td>阿里云</td>
             <td>{{item.address}}</td>

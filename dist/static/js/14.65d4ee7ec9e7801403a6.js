@@ -1,2 +1,0 @@
-webpackJsonp([14],{126:function(e,t,n){var s=n(13)(n(187),n(161),null,null);e.exports=s.exports},161:function(e,t){e.exports={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"v-build"},[e._v("\n  this is build\n")])},staticRenderFns:[]}},187:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default={name:"Build"}}});
-//# sourceMappingURL=14.65d4ee7ec9e7801403a6.js.map
