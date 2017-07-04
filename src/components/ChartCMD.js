@@ -1,4 +1,4 @@
-const AJAX_ONE_TIME = 2400 // 分钟
+const AJAX_ONE_TIME = 60 // 分钟
 const AJAX_TWO_TIME = 1 // 分钟
 const AJAX_LOOP_TIME = 1 // 分钟
 
