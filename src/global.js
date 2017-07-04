@@ -1,6 +1,6 @@
 import axios from 'axios'
 const islocal = /.+localhost.+/.test(window.location.href)
-
+// http://10.0.1.9
 const APIS = {
   baseURL: islocal ? 'http://10.0.1.9' : 'http://47.94.18.22',
   wsURL: islocal ? 'ws://10.0.1.9:8010' : 'ws://47.94.18.22',
@@ -12,6 +12,7 @@ const APIS = {
   server_add: {u: '/api/server/new', m: 'post'},
   server_del: {u: '/api/server/del', m: 'post'},
   server_detail: {u: '/api/server/', m: 'get'},
+  server_applist: {u: '/api/server/docker/containers/', m: 'get'},
   server_update: {u: '/api/server/update', m: 'post'},
   server_migration: {u: '/api/server/migration', m: 'post'},
   server_performance: {u: '/api/server/performance', m: 'post'},

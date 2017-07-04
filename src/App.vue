@@ -1,76 +1,34 @@
 <template>
   <div id="app">
-    <nav class="top-nav">
-      <div class="top-nav_logo text-center"><router-link :to="{name:'Main'}">COMB</router-link></div>
+    <nav class="app-top" :class="[miniClass]">
+      <aside class="lay-aside left">
+        <span class="_logo vam"><router-link :to="{name:'Main'}"><span class="show-lay-mini">CO</span><span class="hide-lay-mini">Console</span></router-link></span>
+        <span class="_cndesc vam right hide-mini">控制台</span>
+      </aside>
+      <div class="lay-body">
+        <m-btn @click.native="back" v-if="hasBack"><i class="icon icon-return"></i></m-btn>
+      </div>
     </nav>
-    <nav class="left-nav">
-      <m-tree :data="navdata" collapse></m-tree>
-    </nav>
-    <div class="view-box">
-      <transition :name="transitionName" appear>
-        <router-view class="routerViewBox"></router-view>
-      </transition>
+    <div class="app-body clearfix" :class="[miniClass]">
+      <aside class="lay-aside left">
+        <div class="mini-ctrl text-center" @click="isMini = !isMini">
+          <i class="icon icon-category"></i>
+        </div>
+        <m-tree :model="navData" :sizeh="50" @change="navChange"></m-tree>
+      </aside>
+      <div class="lay-body left">
+        <!--<transition :name="transitionName" appear>-->
+          <router-view class="routerViewBox"></router-view>
+        <!--</transition>-->
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app',
-  data: () => ({
-    transitionName: 'fade',
-    navdata: [
-//      {
-//        label: '服务器',
-//        icon: 'icon icon-msnui-server',
-//        children: [
-//          {
-//            label: '集群',
-//            icon: 'icon icon-jiqun',
-//            link: {name: 'Cluster'}
-//          }
-//          {
-//            label: '应用',
-//            icon: 'icon icon-yingyong',
-//            link: {name: 'Application'}
-//          }
-//        ]
-//      },
-      {
-        label: '集群',
-        icon: 'icon icon-jiqun',
-        link: {name: 'Cluster'}
-      },
-      {
-        label: '项目',
-        icon: 'icon icon-xiangmu',
-        link: {name: 'Project'}
-      }
-//      {
-//        label: '仓库',
-//        icon: 'icon icon-cangku',
-//        children: [
-//          {
-//            label: '镜像仓库',
-//            icon: 'icon icon-jingxiang',
-//            link: {name: 'Hub'}
-//          },
-//          {
-//            label: '文件仓库',
-//            icon: 'icon icon-552cd47fba2cc',
-//            link: {name: 'FileHub'}
-//          }
-//        ]
-//      }
-    ]
-  }),
-  watch: {
-    '$route' (to, from) {
-      const toDepth = to.meta.level
-      const fromDepth = from.meta.level
-      if (fromDepth === undefined) this.transitionName = 'fade'
-      else this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
-    }
+  import AppMixin from './AppMixin.js'
+  export default {
+    name: 'app',
+    mixins: [AppMixin]
   }
-}
 </script>

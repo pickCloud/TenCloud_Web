@@ -1,0 +1,47 @@
+$color-body-bg:#1d202a;// body背景色
+
+$color-app-top-bg:#171a21;// 布局上面背景色
+$color-app-left-bg:#232730;//  布局左边背景色
+
+$color-small:#6a778d; // small颜色
+
+$color-striped-bg:#1d212a;
+
+$color-nav-hover: #fff;
+
+$color-panel-bg:#262a35;
+$color-panel-title-bg:#2f3543;
+
+$color-font-base:#7f8da4;
+
+$color-checkbox-bg: #4c5c77;
+
+$color-hover: rgba(255, 255, 255, 0.1);
+$color-primary: #48bbc0;
+$color-pint: #ef9a9a;
+$color-yellow-l: #ffe0b2;
+
+$color-page-select-bg:#1d212a;
+
+$color-grey-bg:#f2f2f2; // 灰色背景
+$color-grey-l1:#fafafa; // 灰色背景
+$color-grey-l3:#e7e7e7; // 灰色减淡
+$color-grey-d1:#b4b4b4; // 灰色加深
+$color-grey-d2:#b2b2b2; // 灰色加深
+$color-grey-d3:#a2a2a2; // 灰色加深
+
+$nav-font-size:1rem;
+$nav-mini-w:58px;
+$nav-normal-w:180px;
+
+$switch-bg:#2f3543;
+$switch-bar-bg:$color-primary;
+
+$colors:(
+  'primary': $color-primary,
+  'pink':$color-pint,
+  'yellow': #ffd180,
+  'green-l': #a5d6a7,
+  'grey-dark': #282828,
+  'alpha-black': rgba(0, 0, 0, 0.8)
+) !default;

@@ -15,9 +15,7 @@
     watch: {
       'option': {
         handler (n, o) {
-          if (this.$EChart && n) {
-            this.$EChart.setOption(n)
-          }
+          this.$EChart.setOption(n)
         },
         deep: true
       }

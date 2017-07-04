@@ -1,177 +1,159 @@
 <template>
-  <div class="v-machinedetail">
-    <div class="crumbs">
-      <span class="crumbs-item">服务器</span>
-      <router-link class="crumbs-item" :to="{name:'Cluster'}">集群</router-link>
-      <router-link class="crumbs-item" :to="{name:'ClusterDetail', params:{id:baseInfo.cluster_id}}">{{baseInfo.cluster_name}}</router-link>
-      <span class="qingse-text">{{ baseInfo.name }}</span>
-    </div>
-    <div class="panel info-panel">
-      <div class="btns-group alter-button">
-        <m-btn class="comb-btn waves-effect lvse" v-if="!editor" @click.native="editorHandle">修改</m-btn>
-        <m-btn class="comb-btn waves-effect lvse" v-if="editor" @click.native="submitAlter">确认</m-btn>
-        <m-btn class="comb-btn waves-effect lvse" v-if="editor" @click.native="cancelAlter">取消</m-btn>
-      </div>
-      <div class="info-left">
-        <div class="info-icon">
-          <img class="vam" src="../assets/cover.png" alt="">
-        </div>
-      </div>
-      <div class="info-right article">
-        <h5 class="qingse-text el-editor detail-title" :contenteditable="editor" @input="inpChange($event,'title')">{{baseInfo.name}}</h5>
-        <p>机器状态： <span :class="machineStatus[1]">{{machineStatus[0]}}</span></p>
-        <p>商务状态： <span :class="businessStatus[1]">{{businessStatus[0]}}</span></p>
-        <p class="machine-ctrl_icon" v-if="!isWaiting">
-          <m-tip v-if="machineStatus[2]==='stop'" @click.native="machineCtr($event.target, 'server_start')" hasArrow>
-            <i class="icon icon-qidong" slot="label"></i>
-            <div slot="popper" class="popper-body">开机</div>
-          </m-tip>
-          <m-tip v-if="machineStatus[2]==='run'" @click.native="machineCtr($event.target, 'server_stop')" hasArrow>
-            <i class="icon icon-icon" slot="label"></i>
-            <div slot="popper" class="popper-body">关机</div>
-          </m-tip>
-          <m-tip v-if="machineStatus[2]==='run'" @click.native="machineCtr($event.target, 'server_reboot')" hasArrow>
-            <i class="icon icon-zhongzhi" slot="label"></i>
-            <div slot="popper" class="popper-body">重启</div>
-          </m-tip>
-          <!--<i class="icon icon-icon" v-if="machineStatus[2]==='run'" @mouseover="$tip('关机', $event.target, 'top')" @click="machineCtr($event.target, 'server_stop')"></i>-->
-          <!--<i class="icon icon-zhongzhi" v-if="machineStatus[2]==='run'" @mouseover="$tip('重启', $event.target, 'top')" @click="machineCtr($event.target, 'server_reboot')"></i>-->
-        </p>
-        <p v-else>
-          <img src="../assets/spin.gif" class="vam" alt=""> <span class="vam">{{waitingTip}}</span>
-        </p>
-        <m-row class="machine-info_panel">
-          <m-col class="xs-6">IP ： {{baseInfo.public_ip}}</m-col>
-          <m-col class="xs-6">地址 ： {{baseInfo.address}}</m-col>
-        </m-row>
-      </div>
-    </div>
-    <div class="machine-title">
-      系统信息
-    </div>
-    <div class="panel-tab">
-      <m-tab :labels="['配置','应用列表','性能']" type="block" :tabkey="0" @change="sysTabChange">
-        <div>
-          <m-table  class="striped">
-            <tbody slot="tbody">
-              <tr>
-                <th>CPU</th>
-                <td>{{sysInfo.config.cpu}}个</td>
-              </tr>
-              <tr>
-                <th>内存</th>
-                <td>{{parseInt(sysInfo.config.memory) / 1024}}G</td>
-              </tr>
-              <tr>
-                <th>系统名称</th>
-                <td>{{sysInfo.config.os_name}}</td>
-              </tr>
-              <tr>
-                <th>系统类型</th>
-                <td>{{sysInfo.config.os_type}}</td>
-              </tr>
-            </tbody>
-          </m-table>
-        </div>
-        <div>
-          <table class="striped highlight">
-            <col width="15%">
-            <col width="15%">
-            <col width="50%">
-            <col width="20%">
-            <thead>
-            <tr>
-              <th>版本号</th>
-              <th>创建时间</th>
-              <th>文件</th>
-              <th>操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="app in sysInfo.apps">
-              <td>{{ app.version }}</td>
-              <td>{{ app.create_time }}</td>
-              <td>{{ app.path }}</td>
-              <td>
-                <span class="lvse-text table-details_btn">详情</span>
-                <span class="qingse-text table-details_btn" @click="moveMachine">迁移</span>
-                <span class="hongse-text table-details_btn" @click="delMachine">删除</span>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-        <div>
-          <m-row>
-            <m-col class="xs-6"><m-chart :option="cpu" ref="cpuchart"></m-chart></m-col>
-            <m-col class="xs-6"><m-chart :option="memory" ref="memorychart"></m-chart></m-col>
-            <m-col class="xs-6"><m-chart :option="disk" ref="diskchart" :nodes="2"></m-chart></m-col>
+  <div class="page-pad page-machine-detail">
+    <m-row :gutter="16">
+      <m-col class="xs-12 lg-8">
+        <panel class="m-b16">
+          <div class="panel-title" slot="title">
+            <span class="bold m-r8">监控</span>
+            <!--<small>2017-06-26</small>-->
+          </div>
+          <m-row :gutter="16" class="mdc-chart">
+            <m-col class="xs-12 lg-6">
+              <panel title="CPU" class="p-b16">
+                <e-line :data="cpu" label="CPU使用量"></e-line>
+              </panel>
+            </m-col>
+            <m-col class="xs-12 lg-6">
+              <panel title="内存" class="p-b16">
+                <e-line :data="memory" label="内存使用量" border-color="#eb6565" :linearg="['rgba(235,101,101,1)','rgba(235,101,101,0)']"></e-line>
+              </panel>
+            </m-col>
+            <m-col class="xs-12 lg-6">
+              <panel class="p-b16">
+                <div class="panel-title m-b16" slot="title">硬盘使用情况</div>
+                <e-pie :data="disk" :label="[{name: '使用', icon: 'circle'}, {name: '空余', icon: 'circle'}]" :radius="['60%', '50%']"></e-pie>
+                <!--<m-chart :option="disk" ref="diskchart" :nodes="2"></m-chart>-->
+              </panel>
+            </m-col>
+            <m-col class="xs-12 lg-6">
+              <panel title="网络" class="p-b16"></panel>
+            </m-col>
           </m-row>
-        </div>
-      </m-tab>
-    </div>
-    <div class="machine-title">
-      商务信息
-    </div>
-    <div class="panel-tab">
-      <m-tab :labels="['服务商','合同','日志']" type="block" :tabkey="0">
-        <div>{{businessInfo.provider}}</div>
-        <div>
-          <m-table  class="striped">
-            <tbody>
+        </panel>
+      </m-col>
+      <m-col class="xs-12 lg-4">
+        <!-- 基本信息-->
+        <panel class="m-b16">
+          <div class="panel-title clearfix" slot="title">
+            <span class="bold">基本信息</span>
+            <span class="right">
+              <span v-if="!isInfoEditor" @click="editorBegin"><span class="inline-block m-r8">修改</span> <i class="icon-quan"></i></span>
+              <span v-if="isInfoEditor" @click="editorSure"><span class="inline-block m-r8">确定</span> <i class="icon-quan"></i></span>
+              <span v-if="isInfoEditor" @click="editorCancel"><span class="inline-block m-r8">取消</span> <i class="icon-quan"></i></span>
+            </span>
+          </div>
+          <div class="panel-list mcd-ctrl-group">
+            <div class="mcd-ctrl-item">
+              <span v-if="!isWaiting">开机 <m-switch class="switchMachine" v-model="isOpen" @change="machineChange" :disabled="isDisabled"></m-switch></span>
+            </div>
+            <div class="mcd-ctrl-item">
+              <m-btn v-if="machineStatus[2]==='run' && !isWaiting" @click.native="machineCtrPop('server_reboot')">重启 <i class="icon-quan"></i></m-btn>
+            </div>
+            <!--<div class="mcd-ctrl-item">-->
+              <!--<m-btn>迁移 <i class="icon-quan"></i></m-btn>-->
+            <!--</div>-->
+            <div class="mcd-ctrl-item">
+              <m-btn @click.native="deleteMachine">删除 <i class="icon-quan"></i></m-btn>
+            </div>
+            <span class="justify_fix"></span>
+          </div>
+          <m-row class="panel-list" v-if="isWaiting">
+            <m-col class="xs-12">{{waitingTip}}</m-col>
+          </m-row>
+          <m-row class="panel-list">
+            <m-col class="xs-4">名称</m-col>
+            <m-col class="xs-8">
+              <input class="edirot-input" type="text" data-key="baseInfo.name" data-name="name" v-model="baseInfo.name" readonly>
+            </m-col>
+          </m-row>
+          <m-row class="panel-list">
+            <m-col class="xs-4">服务商</m-col>
+            <m-col class="xs-8">{{baseInfo.cluster_name}}</m-col>
+          </m-row>
+          <m-row class="panel-list">
+            <m-col class="xs-4">地址</m-col>
+            <m-col class="xs-8">{{baseInfo.address}}</m-col>
+          </m-row>
+          <m-row class="panel-list">
+            <m-col class="xs-4">IP</m-col>
+            <m-col class="xs-8">{{baseInfo.public_ip}}</m-col>
+          </m-row>
+          <m-row class="panel-list">
+            <m-col class="xs-4">状态</m-col>
+            <m-col class="xs-8"><span class="plate" :class="machineStatus[1]">{{machineStatus[0]}}</span></m-col>
+          </m-row>
+        </panel>
+        <!-- 基本信息END -->
+        <!-- 配置信息 -->
+        <panel class="m-b16">
+          <div class="panel-title clearfix" slot="title">
+            <span class="bold">配置信息</span>
+          </div>
+          <m-row class="panel-list">
+            <m-col class="xs-4">操作系统</m-col>
+            <m-col class="xs-8">{{sysInfo.config.os_name}}</m-col>
+          </m-row>
+          <m-row class="panel-list">
+            <m-col class="xs-4">系统类型</m-col>
+            <m-col class="xs-8">{{sysInfo.config.os_type}}</m-col>
+          </m-row>
+          <m-row class="panel-list">
+            <m-col class="xs-4">CPU</m-col>
+            <m-col class="xs-8">{{sysInfo.config.cpu}}</m-col>
+          </m-row>
+          <m-row class="panel-list">
+            <m-col class="xs-4">内存</m-col>
+            <m-col class="xs-8">{{parseInt(sysInfo.config.memory) / 1024}}G</m-col>
+          </m-row>
+          <m-row class="panel-list">
+            <m-col class="xs-4"></m-col>
+            <m-col class="xs-8"></m-col>
+          </m-row>
+          <!--<m-row class="panel-list">-->
+          <!--<m-col class="xs-4">网络</m-col>-->
+          <!--<m-col class="xs-8">2M</m-col>-->
+          <!--</m-row>-->
+        </panel>
+        <!-- 配置信息 END -->
+      </m-col>
+      <m-col class="xs-12">
+        <panel title="应用" class="p-b16 m-b16">
+          <div class="panel-body">
+            <m-table class="hover striped block-table centered">
+              <col width="15%">
+              <col width="20%">
+              <col width="20%">
+              <col width="25%">
+              <col width="15%">
+              <thead>
               <tr>
-                <th>创建日期</th>
-                <td>{{businessInfo.contract.create_time}}</td>
+                <th>containerID</th>
+                <th>名称</th>
+                <th>状态</th>
+                <th>更新时间</th>
+                <th>操作</th>
               </tr>
-              <tr>
-                <th>截止日期</th>
-                <td>{{businessInfo.contract.expired_time}}</td>
+              </thead>
+              <tbody>
+              <tr v-for="item in applists">
+                <td>{{item[0]}}</td>
+                <td>{{item[1]}}</td>
+                <td>{{item[2]}}</td>
+                <td>{{item[3]}}</td>
+                <td><m-btn class="primary_txt">详情</m-btn></td>
               </tr>
-              <tr>
-                <th>支付方式</th>
-                <td>{{businessInfo.contract.charge_type}}</td>
-              </tr>
-            </tbody>
-          </m-table>
-        </div>
-        <div>neirong3</div>
-      </m-tab>
-    </div>
+              </tbody>
+            </m-table>
+          </div>
+        </panel>
+      </m-col>
+    </m-row>
   </div>
 </template>
 
 <script>
-  import MachineDetailMixin from './MachineDetailMixin'
+  import MachineDetailMixin from './MachineDetailMixin.js'
   export default {
-    name: 'MachineDetail',
     mixins: [MachineDetailMixin]
   }
 </script>
-
-<style lang="scss">
-  .machine-ctrl_icon {
-    padding-top: 4px;
-    margin-bottom: 12px;
-    .icon {
-      font-size: 1.5rem;
-      margin-right: 8px;
-      cursor: pointer;
-    }
-    .tip-wrap {
-      display: inline-block;
-      .popper {
-        margin-bottom: 8px;
-      }
-    }
-  }
-  .machine-info_panel {
-    background-color: #f8f8f8;
-    .col {
-      padding: 12px 16px;
-    }
-  }
-  .machine-title {
-    padding: 0 24px;
-    margin-bottom: 16px;
-  }
-</style>

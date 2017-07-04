@@ -1,0 +1,69 @@
+.app-top {
+  position: fixed;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  left: 0;top: 0;
+  padding: 0 $gutter*2;
+  background-color: $color-app-top-bg;
+  padding-left: $nav-normal-w;
+  transition: all 0.2s;
+  &.lay-mini {
+    padding-left: $nav-mini-w;
+  }
+  .lay-aside {
+    //color: #fff;
+    padding:0 $gutter*2;
+  }
+  ._logo {
+    font-size: 0.9rem;
+  }
+}
+.app-body {
+  position: fixed;
+  width: 100%;
+  height: calc(100% - 60px);
+  left: 0;top: 60px;
+  padding-left: $nav-normal-w;
+  transition: all 0.2s;
+  &.lay-mini {
+    padding-left: $nav-mini-w;
+  }
+  .lay-aside {
+    background-color: $color-app-left-bg;
+    padding-top: $gutter;
+    border-right: $gutter solid $color-app-top-bg;
+  }
+  .lay-body {
+    position: relative;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+.lay-aside {
+  width: $nav-normal-w;
+  height: 100%;
+  margin-left: -$nav-normal-w;
+  transition: all 0.2s;
+}
+.lay-body {
+  width: 100%;
+}
+
+.lay-mini {
+  .lay-aside {
+    width: $nav-mini-w;
+    margin-left: -$nav-mini-w;
+  }
+  .hide-lay-mini {
+    display: none;
+  }
+  .show-lay-mini {
+    display: block;
+  }
+}
+
+.show-lay-mini {
+  display: none;
+}
