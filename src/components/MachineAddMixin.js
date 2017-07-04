@@ -57,7 +57,7 @@ export default {
       }
       this.socket.onmessage = (event) => {
         if (event.data === 'success') {
-          this.$router.push({name: 'ClusterDetail', params: {id: this.formdata.cluster_id}})
+          this.$router.push({name: 'Machines'})
         } else {
           if (event.data !== 'open') {
             this.status = 'save'

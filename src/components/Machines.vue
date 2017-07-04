@@ -5,7 +5,7 @@
         <m-btn :href="{name:'MachineAdd', params:{id:1}}" class="primary_bg no-radius grey-dark_txt">添加已有主机</m-btn>
         <m-btn class="pink_bg no-radius grey-dark_txt" @click.native="delMachine(-1)">删除</m-btn>
       </div>
-      <div class="panel-body">
+      <div class="panel-body p-b16">
         <m-table class="hover striped machines-table">
           <col width="55px">
           <col width="15%">
