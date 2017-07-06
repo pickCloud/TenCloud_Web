@@ -9,19 +9,25 @@
           </div>
           <m-row :gutter="16" class="mdc-chart">
             <m-col class="xs-12 lg-6">
-              <panel title="CPU" class="p-b16">
-                <e-line :data="cpu" label="CPU使用量"></e-line>
+              <panel title="CPU(%)" class="p-b16">
+                <div class="panel-body">
+                  <e-line :data="cpu" label="CPU使用率"></e-line>
+                </div>
               </panel>
             </m-col>
             <m-col class="xs-12 lg-6">
-              <panel title="内存" class="p-b16">
-                <e-line :data="memory" label="内存使用量" border-color="#eb6565" :linearg="['rgba(235,101,101,1)','rgba(235,101,101,0)']"></e-line>
+              <panel title="内存(%)" class="p-b16">
+                <div class="panel-body">
+                  <e-line :data="memory" label="内存使用率" border-color="#eb6565" :linearg="['rgba(235,101,101,1)','rgba(235,101,101,0)']"></e-line>
+                </div>
               </panel>
             </m-col>
             <m-col class="xs-12 lg-6">
-              <panel class="p-b16">
-                <div class="panel-title m-b16" slot="title">硬盘使用情况</div>
-                <e-pie :data="disk" :label="[{name: '使用', icon: 'circle'}, {name: '空余', icon: 'circle'}]" :radius="['60%', '50%']"></e-pie>
+              <panel title="硬盘使用情况(%)" class="p-b16">
+                <div class="panel-body">
+                  <e-line :data="disk" label="硬盘使用率" border-color="#95c099" :linearg="['rgba(93,117,103,1)','rgba(93,117,103,0)']"></e-line>
+                </div>
+                <!--<e-pie :data="disk" :label="[{name: '使用', icon: 'circle'}, {name: '空余', icon: 'circle'}]" :radius="['60%', '50%']"></e-pie>-->
                 <!--<m-chart :option="disk" ref="diskchart" :nodes="2"></m-chart>-->
               </panel>
             </m-col>
@@ -58,7 +64,7 @@
             <span class="justify_fix"></span>
           </div>
           <m-row class="panel-list" v-if="isWaiting">
-            <m-col class="xs-12">{{waitingTip}}</m-col>
+            <m-col class="xs-12"><img src="../assets/spin.gif" class="vam" alt=""> <span class="vam">{{waitingTip}}</span></m-col>
           </m-row>
           <m-row class="panel-list">
             <m-col class="xs-4">名称</m-col>
@@ -117,7 +123,11 @@
         <!-- 配置信息 END -->
       </m-col>
       <m-col class="xs-12">
-        <panel title="应用" class="p-b16 m-b16">
+        <panel class="p-b16 m-b16">
+          <div class="panel-title" slot="title">
+            <span class="m-r8">容器列表</span>
+            <small>(容器: 独立运行的一个或一组应用，以及它们的运行生态环境)	</small>
+          </div>
           <div class="panel-body">
             <m-table class="hover striped block-table centered">
               <col width="15%">
@@ -140,7 +150,7 @@
                 <td>{{item[1]}}</td>
                 <td>{{item[2]}}</td>
                 <td>{{item[3]}}</td>
-                <td><m-btn class="primary_txt">详情</m-btn></td>
+                <td><m-btn class="primary_txt" :href="{name:'AppDetail',params:{id:item[0],mid:$route.params.id}}">详情</m-btn></td>
               </tr>
               </tbody>
             </m-table>

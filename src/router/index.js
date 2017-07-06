@@ -55,7 +55,7 @@ export default new Router({
       component: MachineAdd
     },
     {
-      path: '/appdetail/:id',
+      path: '/appdetail/:mid/:id',
       name: 'AppDetail',
       meta: {level: 2},
       component: AppDetail

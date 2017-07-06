@@ -42,7 +42,9 @@
         return {
           tooltip: {
             trigger: 'axis',
-            axisPointer: { animation: false }
+            formatter: (a) => {
+              return a[0].data[2]
+            }
           },
           xAxis: Merge({
             type: 'time',
@@ -50,8 +52,7 @@
           }, this.axis),
           yAxis: Merge({
             type: 'value',
-            min: 0,
-            max: 100,
+            boundaryGap: ['0%', '30%'],
             splitLine: { show: false }
           }, this.axis),
           series: [{

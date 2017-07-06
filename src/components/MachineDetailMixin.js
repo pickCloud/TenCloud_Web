@@ -40,6 +40,7 @@ export default {
       this.$Global.async('server_applist', true).getData(null, this.machineid).then(d => {
         if (d.status === 0) {
           this.applists = d.data
+          console.log(this.applists)
         }
       })
     },
@@ -73,6 +74,8 @@ export default {
         } else {
           this.$toast(d.message, 'cc')
         }
+      }, e => {
+        console.log(typeof e)
       })
     },
     deleteMachine () {

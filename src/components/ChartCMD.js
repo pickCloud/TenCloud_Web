@@ -13,8 +13,15 @@ export default {
     formatDate (p) {
       return [
         (new Date(p[0] * 1000)).Format('yyyy/MM/dd hh:mm:ss'),
-        p[1].percent
+        p[1].percent,
+        this.tipinfo(p[1])
       ]
+    },
+    tipinfo (p) {
+      let temp = '使用率：' + p.percent + '%'
+      if (p.free) temp += '<br>空余：' + this.toG(p.free) + 'G'
+      if (p.total) temp += '<br>总量：' + this.toG(p.total) + 'G'
+      return temp
     },
     formatDisk (p) {
       const free = p[0][1].free
@@ -63,7 +70,12 @@ export default {
           }
           this.chartData('memory', tempData.memory)
           // console.log(this.formatDisk(tempData.disk))
-          if (tempData.disk.length > 0) this.disk = this.formatDisk(tempData.disk.slice(-1))
+          if (tempData.disk.length > 20) tempData.disk = tempData.disk.slice(-20)
+          for (let dk in tempData.disk) {
+            tempData.disk[dk] = this.formatDate(tempData.disk[dk])
+          }
+          this.chartData('disk', tempData.disk)
+          // if (tempData.disk.length > 0) this.disk = this.formatDisk(tempData.disk.slice(-1))
           // this.$refs.diskchart.update(this.formatDisk(tempData.disk), true)
           // console.log(tempData)
           // 定期抓取

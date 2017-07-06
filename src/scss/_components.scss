@@ -71,64 +71,64 @@
     background-color: #000;
   }
 }
-// d3-scale
-.d3-scale-text {
-  font-size: 1.8rem;
-  text-anchor: middle;
-  dominant-baseline: middle;
-}
-.d3-scale-svg {
-  width: 100%;
-  height: 100%;
-  margin-bottom: $gutter*2;
-}
-.d3-scale-bg {
-  fill: $color-yellow-l;
-}
-.d3-scale-pg {
-  fill: $color-primary;
-}
-// d3-line
-.d3-line-svg {
-  width: 100%;
-  height: 100%;
-}
-.d3-line-path {
-  fill: orange;
-}
-.d3-line-x,.d3-line-y {
-  path {
-    stroke: $color-font-base;
-  }
-}
-// d3-pie
-.d3-pies-svg {
-  width: 100%;
-  height: 100%;
-  margin-bottom: $gutter*2;
-}
-.d3-pies-path {
-  stroke-width: 5px;
-  stroke: $color-panel-bg;
-}
-.d3-pies-label-wrap {
-  text-align: center;
-}
-.d3-pies-label {
-  display: inline-block;
-  margin-right: $gutter*2;
-  > span {
-    display: inline-block;
-    vertical-align: middle;
-    margin-bottom: $gutter;
-  }
-}
-.d3-pies-icon {
-  width: $gutter*2;height: $gutter*2;
-  border-radius: $gutter;
-  margin-right: $gutter;
-}
-.d3-pies-text {
-  text-anchor: middle;
-  //dominant-baseline: middle;
-}
+//// d3-scale
+//.d3-scale-text {
+//  font-size: 1.8rem;
+//  text-anchor: middle;
+//  dominant-baseline: middle;
+//}
+//.d3-scale-svg {
+//  width: 100%;
+//  height: 100%;
+//  margin-bottom: $gutter*2;
+//}
+//.d3-scale-bg {
+//  fill: $color-yellow-l;
+//}
+//.d3-scale-pg {
+//  fill: $color-primary;
+//}
+//// d3-line
+//.d3-line-svg {
+//  width: 100%;
+//  height: 100%;
+//}
+//.d3-line-path {
+//  fill: orange;
+//}
+//.d3-line-x,.d3-line-y {
+//  path {
+//    stroke: $color-font-base;
+//  }
+//}
+//// d3-pie
+//.d3-pies-svg {
+//  width: 100%;
+//  height: 100%;
+//  margin-bottom: $gutter*2;
+//}
+//.d3-pies-path {
+//  stroke-width: 5px;
+//  stroke: $color-panel-bg;
+//}
+//.d3-pies-label-wrap {
+//  text-align: center;
+//}
+//.d3-pies-label {
+//  display: inline-block;
+//  margin-right: $gutter*2;
+//  > span {
+//    display: inline-block;
+//    vertical-align: middle;
+//    margin-bottom: $gutter;
+//  }
+//}
+//.d3-pies-icon {
+//  width: $gutter*2;height: $gutter*2;
+//  border-radius: $gutter;
+//  margin-right: $gutter;
+//}
+//.d3-pies-text {
+//  text-anchor: middle;
+//  //dominant-baseline: middle;
+//}

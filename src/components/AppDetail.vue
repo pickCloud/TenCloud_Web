@@ -10,22 +10,31 @@
           <m-row :gutter="16" class="mdc-chart">
             <m-col class="xs-12 lg-6">
               <panel title="CPU" class="p-b16">
-                <d3-line class="panel-body cpu-line" :sizeh="250" :data="linedata"></d3-line>
+                <div class="panel-body">
+                  <e-line :data="cpu" label="CPU使用率"></e-line>
+                </div>
               </panel>
             </m-col>
             <m-col class="xs-12 lg-6">
               <panel title="内存" class="p-b16">
-                <d3-line class="panel-body mem-line" :sizeh="250" :data="linedata"></d3-line>
+                <div class="panel-body">
+                  <e-line :data="cpu" label="CPU使用率"></e-line>
+                </div>
               </panel>
             </m-col>
             <m-col class="xs-12 lg-6">
-              <panel class="p-b16">
-                <div class="panel-title m-b16" slot="title">硬盘使用情况</div>
-                <d3-pies class="panel-body" :sizeh="177" :data="piedata"></d3-pies>
+              <panel class="p-b16" title="硬盘使用情况">
+                <div class="panel-body">
+                  <e-line :data="cpu" label="CPU使用率"></e-line>
+                </div>
               </panel>
             </m-col>
             <m-col class="xs-12 lg-6">
-              <panel title="网络" class="p-b16"></panel>
+              <panel title="网络" class="p-b16">
+                <div class="panel-body">
+                  <e-line :data="cpu" label="CPU使用率"></e-line>
+                </div>
+              </panel>
             </m-col>
           </m-row>
         </panel>
@@ -86,25 +95,8 @@
 </template>
 
 <script>
+  import AppDetailMixin from './AppDetailMixin.js'
   export default {
-    data: () => ({
-      piedata: [
-        {color: '#48bbc0', value: 250, vr: 1.1, name: '使用'},
-        {color: '#ffe0b2', value: 150, vr: 1, name: '空余'}
-      ],
-      linedata: [
-        {date: new Date(2017, 3, 8), value: 50},
-        {date: new Date(2017, 3, 9), value: 40},
-        {date: new Date(2017, 3, 10), value: 70},
-        {date: new Date(2017, 3, 11), value: 50},
-        {date: new Date(2017, 3, 12), value: 90}
-      ]
-    }),
-    mounted () {
-      let tio = setTimeout(_ => {
-        clearTimeout(tio)
-        this.linedata.push({date: new Date(2017, 3, 13), value: 70})
-      }, 1000)
-    }
+    mixins: [AppDetailMixin]
   }
 </script>
