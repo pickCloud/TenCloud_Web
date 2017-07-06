@@ -42,10 +42,10 @@
         <panel class="m-b16">
           <div class="panel-title clearfix" slot="title">
             <span class="bold">基本信息</span>
-            <span class="right">
-              <span v-if="!isInfoEditor" @click="editorBegin"><span class="inline-block m-r8">修改</span> <i class="icon-quan"></i></span>
-              <span v-if="isInfoEditor" @click="editorSure"><span class="inline-block m-r8">确定</span> <i class="icon-quan"></i></span>
-              <span v-if="isInfoEditor" @click="editorCancel"><span class="inline-block m-r8">取消</span> <i class="icon-quan"></i></span>
+            <span class="right editor-btn-group">
+              <span v-if="!isInfoEditor" @click="editorBegin"><m-btn :sizeh="-1"><span class="vam">修改</span> <i class="icon icon-editor vam"></i></m-btn></span>
+              <span v-if="isInfoEditor" @click="editorSure"><m-btn :sizeh="-1">确定</m-btn></span>
+              <span v-if="isInfoEditor" @click="editorCancel"><m-btn :sizeh="-1">取消</m-btn></span>
             </span>
           </div>
           <div class="panel-list mcd-ctrl-group">
@@ -53,13 +53,13 @@
               <span v-if="!isWaiting">开机 <m-switch class="switchMachine" v-model="isOpen" @change="machineChange" :disabled="isDisabled"></m-switch></span>
             </div>
             <div class="mcd-ctrl-item">
-              <m-btn v-if="machineStatus[2]==='run' && !isWaiting" @click.native="machineCtrPop('server_reboot')">重启 <i class="icon-quan"></i></m-btn>
+              <m-btn v-if="machineStatus[2]==='run' && !isWaiting" @click.native="machineCtrPop('server_reboot')"><span class="vam">重启</span> <i class="icon icon-zhongzhi vam"></i></m-btn>
             </div>
             <!--<div class="mcd-ctrl-item">-->
               <!--<m-btn>迁移 <i class="icon-quan"></i></m-btn>-->
             <!--</div>-->
             <div class="mcd-ctrl-item">
-              <m-btn @click.native="deleteMachine">删除 <i class="icon-quan"></i></m-btn>
+              <m-btn @click.native="deleteMachine"><span class="vam">删除</span> <i class="icon icon-delete vam"></i></m-btn>
             </div>
             <span class="justify_fix"></span>
           </div>

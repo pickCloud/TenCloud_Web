@@ -14,3 +14,21 @@
   overflow: hidden;
   height: 280px;
 }
+
+.tooltip-title {
+  border-bottom: 1px solid #262a35;
+  padding: 6px 12px;
+}
+.tooltip-body {
+  padding: 6px 12px;
+  line-height: 24px;
+}
+
+.tooltip-dian {
+  display: inline-block;
+  width: 8px;height: 8px;
+  border-radius: 4px;
+  background-color: #fff;
+  margin-right: 8px;
+  box-shadow: 0 0 8px #fff;
+}

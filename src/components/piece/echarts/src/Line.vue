@@ -44,6 +44,11 @@
             trigger: 'axis',
             formatter: (a) => {
               return a[0].data[2]
+            },
+            padding: 0,
+            backgroundColor: 'rgba(0,0,0,0.8)',
+            textStyle: {
+              color: '#7f8da4'
             }
           },
           xAxis: Merge({

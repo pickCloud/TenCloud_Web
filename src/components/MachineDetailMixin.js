@@ -35,12 +35,14 @@ export default {
           this.sysInfo = d.data.system_info
           if (this.machineStatus[2] === 'run') this.isOpen = true
           if (this.machineStatus[2] === 'stop') this.isOpen = false
+          this.statusApiSuf = this.baseInfo.region_id + '/' + this.baseInfo.instance_id + '/status'
+          console.log(d.data)
         }
       })
       this.$Global.async('server_applist', true).getData(null, this.machineid).then(d => {
         if (d.status === 0) {
           this.applists = d.data
-          console.log(this.applists)
+          // console.log(this.applists)
         }
       })
     },
@@ -60,23 +62,39 @@ export default {
     },
     machineCtr (t) {
       let temp = StatusCode.server[t]
-      this.waitingTip = temp[3] + temp[0] + '秒'
+      this.waitingTip = temp[3]
       this.$Global.async(t, true).getData(null, this.machineid).then(d => {
         if (d.status === 0) {
           this.isWaiting = true
           this.baseInfo.machine_status = temp[1]
-          const timeout = setTimeout(_ => {
-            this.baseInfo.machine_status = temp[2]
-            this.isWaiting = false
-            this.isDisabled = false
-            clearTimeout(timeout)
-          }, temp[0] * 1000)
+          this.yqvalue = temp[2]
+          this.loopGetStatus(temp[0] * 1000)
+          // const timeout = setTimeout(_ => {
+          //   this.baseInfo.machine_status = temp[2]
+          //   this.isWaiting = false
+          //   this.isDisabled = false
+          //   clearTimeout(timeout)
+          // }, temp[0] * 1000)
         } else {
           this.$toast(d.message, 'cc')
         }
       }, e => {
         console.log(typeof e)
       })
+    },
+    loopGetStatus (t) {
+      this.loopIV = setInterval(_ => {
+        this.$Global.async('server_status', true).getData(null, this.statusApiSuf).then(d => {
+          if (d.status === 0) {
+            this.baseInfo.machine_status = d.data
+            if (d.data === this.yqvalue) {
+              this.isWaiting = false
+              this.isDisabled = false
+              clearInterval(this.loopIV)
+            }
+          }
+        })
+      }, t)
     },
     deleteMachine () {
       this.popperDelete(this.baseInfo.name, _ => {
@@ -103,5 +121,8 @@ export default {
   },
   created () {
     this.getApiData()
+  },
+  beforeDestroy () {
+    if (this.loopIV) clearInterval(this.loopIV)
   }
 }

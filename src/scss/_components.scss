@@ -61,7 +61,12 @@
       }
     }
   }
-  &.btn:not([class*='_bg']) {
+  &.btn:not([class*='_bg']):not([class*='_txt']):not([class*='active']) {
+    &:hover {
+      color: $color-primary;
+    }
+  }
+  &.btn[class*='_txt'] {
     &:hover {
       color: #fff;
     }
@@ -70,7 +75,12 @@
   &.popper-toast {
     background-color: #000;
   }
+  // btn-group
+  &.btn-group {
+    background-color: $color-panel-bg;
+  }
 }
+
 //// d3-scale
 //.d3-scale-text {
 //  font-size: 1.8rem;

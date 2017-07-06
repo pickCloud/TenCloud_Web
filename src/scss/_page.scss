@@ -28,6 +28,16 @@
   }
 }
 // 机器详情
+.page-machine-detail {
+  .icon {
+    font-size: 1rem;
+  }
+  .editor-btn-group {
+    .btn {
+      padding: 0;
+    }
+  }
+}
 .mdc-chart {
   .panel-title {
     background-color: transparent;

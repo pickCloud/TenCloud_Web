@@ -14,14 +14,15 @@ export default {
       return [
         (new Date(p[0] * 1000)).Format('yyyy/MM/dd hh:mm:ss'),
         p[1].percent,
-        this.tipinfo(p[1])
+        this.tipinfo(p)
       ]
     },
-    tipinfo (p) {
-      let temp = '使用率：' + p.percent + '%'
-      if (p.free) temp += '<br>空余：' + this.toG(p.free) + 'G'
-      if (p.total) temp += '<br>总量：' + this.toG(p.total) + 'G'
-      return temp
+    tipinfo (ppp) {
+      let p = ppp[1]
+      let temp = '<p class="tooltip-title">' + (new Date(ppp[0] * 1000)).Format('yyyy/MM/dd hh:mm:ss') + '</p><p class="tooltip-body"><i class="tooltip-dian"></i>使用率：' + p.percent + '%'
+      if (p.free) temp += '<br><i class="tooltip-dian"></i>空余：' + this.toG(p.free) + 'G'
+      if (p.total) temp += '<br><i class="tooltip-dian"></i>总量：' + this.toG(p.total) + 'G'
+      return temp + '</p>'
     },
     formatDisk (p) {
       const free = p[0][1].free

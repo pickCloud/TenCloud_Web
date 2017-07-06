@@ -3,7 +3,8 @@ const islocal = /.+localhost.+/.test(window.location.href)
 // axios.defaults.headers['Content-Type'] = 'application/json'
 // http://10.0.1.9
 const APIS = {
-  baseURL: islocal ? 'http://47.94.18.22' : 'http://47.94.18.22',
+  baseURL: islocal ? 'http://10.0.1.9' : 'http://47.94.18.22',
+  // baseURL: 'http://47.94.18.22',
   wsURL: islocal ? 'ws://10.0.1.9:8010' : 'ws://47.94.18.22',
   clusters: {u: '/api/clusters', m: 'get'},
   cluster_add: {u: '/api/cluster/new', m: 'post'},
@@ -19,7 +20,8 @@ const APIS = {
   server_performance: {u: '/api/server/performance', m: 'post'},
   server_start: {u: '/api/server/start/', m: 'get'},
   server_reboot: {u: '/api/server/reboot/', m: 'get'},
-  server_stop: {u: '/api/server/stop/', m: 'get'}
+  server_stop: {u: '/api/server/stop/', m: 'get'},
+  server_status: {u: '/api/server/', m: 'get'} // {region_id}/{instance_id}/status
 }
 
 class AsyncData {

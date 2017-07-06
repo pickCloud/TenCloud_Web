@@ -15,8 +15,8 @@ export default {
     'Deleted': ['已释放', 'pink_bg alpha-black_txt', 'stop']
   },
   server: {
-    'server_start': [3, 'Starting', 'Running', '机器启动中，这个过程需要大约', '开机'],
-    'server_stop': [30, 'Stopping', 'Stopped', '机器关机中，这个过程需要大约', '关机'],
-    'server_reboot': [30, 'Stopping', 'Running', '机器重启中，这个过程需要大约', '重启机器']
+    'server_start': [3, 'Starting', 'Running', '机器启动中，请耐心等待', '开机'],
+    'server_stop': [30, 'Stopping', 'Stopped', '机器关机中，请耐心等待', '关机'],
+    'server_reboot': [30, 'Stopping', 'Running', '机器重启中，请耐心等待', '重启机器']
   }
 }
