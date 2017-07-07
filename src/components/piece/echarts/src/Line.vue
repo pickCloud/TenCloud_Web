@@ -10,16 +10,12 @@
   export default {
     name: 'ELine',
     props: {
-      label: String,
       data: Array,
       lineColor: String,
-      borderColor: {
-        type: String,
-        default: '#48bbc0'
-      },
-      linearg: {
+      series: Array,
+      colors: {
         type: Array,
-        default: _ => (['rgba(73, 97, 106, 1)', 'rgba(73, 97, 106, 0)'])
+        default: _ => ([['#48bbc0', 'rgba(73, 97, 106, 1)', 'rgba(73, 97, 106, 0)']])
       },
       axis: {
         type: Object,
@@ -39,6 +35,7 @@
     },
     computed: {
       opt () {
+//        console.log(this.seriesFormat)
         return {
           tooltip: {
             trigger: 'axis',
@@ -60,35 +57,42 @@
             boundaryGap: ['0%', '30%'],
             splitLine: { show: false }
           }, this.axis),
-          series: [{
-            name: this.label,
+          series: this.seriesFormat
+        }
+      },
+      seriesFormat () {
+//        console.log(this.colors)
+        return this.series.map((v, i) => {
+//          console.log(this.colors[i])
+          return Merge({
+//            name: this.label,
             type: 'line',
             smooth: true,
-            data: this.data,
+//            data: this.data,
             sampling: 'average',
             itemStyle: {
               normal: {
-                color: this.borderColor
+                color: this.colors[i][0]
               }
             },
             lineStyle: {
               normal: {
-                color: this.borderColor
+                color: this.colors[i][0]
               }
             },
             areaStyle: {
               normal: {
                 color: new window.echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                   offset: 0,
-                  color: this.linearg[0]
+                  color: this.colors[i][1]
                 }, {
                   offset: 1,
-                  color: this.linearg[1]
+                  color: this.colors[i][2]
                 }])
               }
             }
-          }]
-        }
+          }, v)
+        })
       }
     },
     mixins: [Mixins]

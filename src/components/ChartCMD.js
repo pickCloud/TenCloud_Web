@@ -6,16 +6,48 @@ export default {
   data: () => ({
     cpu: [],
     memory: [],
+    block: [],
     disk: [],
-    performance: 'server_performance'
+    nets: [],
+    maxChartNum: 5
   }),
   methods: {
     formatDate (p) {
+      // if (p.length > this.maxnum) p = p.slice(-this.maxnum)
       return [
-        (new Date(p[0] * 1000)).Format('yyyy/MM/dd hh:mm:ss'),
-        p[1].percent,
-        this.tipinfo(p)
+        p.map((v, i) => {
+          return [
+            (new Date(v[0] * 1000)).Format('yyyy/MM/dd hh:mm:ss'),
+            v[1].percent,
+            this.tipinfo(v)
+          ]
+        })
       ]
+    },
+    formatNet (p) {
+      // if (p.length > this.maxnum) p = p.slice(-this.maxnum)
+      // console.log(parseFloat(p[0][1].input), parseFloat(p[0][1].output))
+      return [
+        p.map((v, i) => {
+          return [
+            (new Date(v[0] * 1000)).Format('yyyy/MM/dd hh:mm:ss'),
+            parseFloat(v[1].input),
+            this.netTip(v)
+          ]
+        }),
+        p.map((v, i) => {
+          return [
+            (new Date(v[0] * 1000)).Format('yyyy/MM/dd hh:mm:ss'),
+            parseFloat(v[1].output)
+          ]
+        })
+      ]
+    },
+    netTip (p) {
+      let temp = '<p class="tooltip-title">' + (new Date(p[0] * 1000)).Format('yyyy/MM/dd hh:mm:ss') + '</p><p class="tooltip-body">'
+      temp += '<i class="tooltip-dian" style="background-color: #95c099;"></i>入带宽：' + p[1].input + 'KB/S'
+      temp += '<br><i class="tooltip-dian" style="background-color: #eb6565;"></i>出带宽：' + p[1].output + 'KB/S'
+      return temp + '</p>'
     },
     tipinfo (ppp) {
       let p = ppp[1]
@@ -24,61 +56,47 @@ export default {
       if (p.total) temp += '<br><i class="tooltip-dian"></i>总量：' + this.toG(p.total) + 'G'
       return temp + '</p>'
     },
-    formatDisk (p) {
-      const free = p[0][1].free
-      const total = p[0][1].total
-      return [
-        {
-          value: this.toG(total - free),
-          name: '使用',
-          itemStyle: {
-            normal: {color: '#48bbc0'}
-          }
-        },
-        {
-          value: this.toG(free),
-          name: '空余',
-          itemStyle: {
-            normal: {color: '#ffe0b2'}
-          }
-        }
-      ]
-    },
+    // formatDisk (p) {
+    //   const free = p[0][1].free
+    //   const total = p[0][1].total
+    //   return [
+    //     {
+    //       value: this.toG(total - free),
+    //       name: '使用',
+    //       itemStyle: {
+    //         normal: {color: '#48bbc0'}
+    //       }
+    //     },
+    //     {
+    //       value: this.toG(free),
+    //       name: '空余',
+    //       itemStyle: {
+    //         normal: {color: '#ffe0b2'}
+    //       }
+    //     }
+    //   ]
+    // },
     toG (v) {
       return (v / 1024 / 1024 / 1024).toFixed(2)
     },
     getPerformance (n = 1) {
       const nowdate = new Date()
       const olddate = new Date(nowdate.getTime() - 1000 * 60 * n)
-      this.$Global.async(this.performance, true).getData({
-        id: this.machineid,
-        start_time: Date.parse(olddate) / 1000,
-        end_time: Date.parse(nowdate) / 1000
-      }).then(d => {
-        if (d.status === 0) {
-          // console.log(d)
-          let tempData = d.data
-          if (tempData.cpu.length > 20) tempData.cpu = tempData.cpu.slice(-20)
-          for (let ck in tempData.cpu) {
-            tempData.cpu[ck] = this.formatDate(tempData.cpu[ck])
-          }
-          // this.cpu = tempData.cpu
-          this.chartData('cpu', tempData.cpu)
 
-          if (tempData.memory.length > 20) tempData.memory = tempData.memory.slice(-20)
-          for (let mk in tempData.memory) {
-            tempData.memory[mk] = this.formatDate(tempData.memory[mk])
-          }
-          this.chartData('memory', tempData.memory)
-          // console.log(this.formatDisk(tempData.disk))
-          if (tempData.disk.length > 20) tempData.disk = tempData.disk.slice(-20)
-          for (let dk in tempData.disk) {
-            tempData.disk[dk] = this.formatDate(tempData.disk[dk])
-          }
-          this.chartData('disk', tempData.disk)
-          // if (tempData.disk.length > 0) this.disk = this.formatDisk(tempData.disk.slice(-1))
-          // this.$refs.diskchart.update(this.formatDisk(tempData.disk), true)
-          // console.log(tempData)
+      this.performanceData.start_time = Date.parse(olddate) / 1000
+      this.performanceData.end_time = Date.parse(nowdate) / 1000
+
+      this.$Global.async(this.performance, true).getData(this.performanceData).then(d => {
+        if (d.status === 0) {
+          console.log(d)
+          let tempData = d.data
+          if (tempData.cpu) this.chartData('cpu', this.formatDate(tempData.cpu))
+          if (tempData.memory) this.chartData('memory', this.formatDate(tempData.memory))
+          if (tempData.disk) this.chartData('disk', this.formatDate(tempData.disk))
+          if (tempData.block) this.chartData('block', this.formatNet(tempData.block))
+          if (tempData.net) this.chartData('nets', this.formatNet(tempData.net))
+          // put
+          // console.log(tempData.net)
           // 定期抓取
           this.temptimeout = setTimeout(_ => {
             this.getPerformance(AJAX_TWO_TIME)
@@ -87,16 +105,28 @@ export default {
         }
       })
     },
-    chartData (k, d, n = 10) {
-      let len = this[k].length
-      if (len === 0) {
-        this[k] = d.slice(d.length - n)
-      } else {
-        d.forEach((v, i) => {
-          if (this[k].length >= n) this[k].shift()
-          this[k].push(v)
+    chartData (k, d) {
+      d.forEach((v, i) => {
+        if (!this[k][i]) this.$set(this[k], i, {data: []})
+        let temp = this[k][i].data
+        v.slice(-this.maxChartNum).forEach((d, j) => {
+          if (!temp.slice(-1)[0] || temp.slice(-1)[0][0] !== d[0]) {
+            if (temp.length > this.maxChartNum) temp.shift()
+            temp.push(d)
+          }
         })
-      }
+      })
+      // console.log(this[k])
+      // console.log(this[k])
+      // let len = this[k].length
+      // if (len === 0) {
+      //   this[k] = d.slice(d.length - n)
+      // } else {
+      //   d.forEach((v, i) => {
+      //     if (this[k].length >= n) this[k].shift()
+      //     this[k].push(v)
+      //   })
+      // }
     }
   },
   mounted () {

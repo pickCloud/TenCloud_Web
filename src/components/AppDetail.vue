@@ -19,28 +19,28 @@
             <m-col class="xs-12 lg-6">
               <panel title="CPU" class="p-b16">
                 <div class="panel-body">
-                  <e-line :data="cpu" label="CPU使用率"></e-line>
+                  <e-line :series="cpu"></e-line>
                 </div>
               </panel>
             </m-col>
             <m-col class="xs-12 lg-6">
               <panel title="内存" class="p-b16">
                 <div class="panel-body">
-                  <e-line :data="cpu" label="CPU使用率"></e-line>
+                  <e-line :series="memory" :colors="[['#eb6565', 'rgba(235,101,101,1)','rgba(235,101,101,0)']]"></e-line>
                 </div>
               </panel>
             </m-col>
             <m-col class="xs-12 lg-6">
-              <panel class="p-b16" title="硬盘使用情况">
+              <panel class="p-b16" title="Net I/O">
                 <div class="panel-body">
-                  <e-line :data="cpu" label="CPU使用率"></e-line>
+                  <e-line :series="nets" :colors="[['#95c099', 'rgba(93,117,103,1)','rgba(93,117,103,0)'],['#eb6565', 'rgba(235,101,101,1)','rgba(235,101,101,0)']]"></e-line>
                 </div>
               </panel>
             </m-col>
             <m-col class="xs-12 lg-6">
-              <panel title="网络" class="p-b16">
+              <panel title="Block I/O" class="p-b16">
                 <div class="panel-body">
-                  <e-line :data="cpu" label="CPU使用率"></e-line>
+                  <e-line :series="block" :colors="[['#95c099', 'rgba(93,117,103,1)','rgba(93,117,103,0)'],['#eb6565', 'rgba(235,101,101,1)','rgba(235,101,101,0)']]"></e-line>
                 </div>
               </panel>
             </m-col>

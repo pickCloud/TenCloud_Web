@@ -9,9 +9,9 @@ export default {
   machine: {
     'Pending': ['准备中', 'primary_bg alpha-black_txt', 'run'],
     'Stopped': ['已停止', 'pink_bg alpha-black_txt', 'stop'],
-    'Starting': ['启动中', 'primary_bg alpha-black_txt', 'run'],
+    'Starting': ['启动中', 'primary_bg alpha-black_txt', 'run', 'server_start'],
     'Running': ['运行中', 'primary_bg alpha-black_txt', 'run'],
-    'Stopping': ['停止中', 'pink_bg alpha-black_txt', 'stop'],
+    'Stopping': ['停止中', 'pink_bg alpha-black_txt', 'stop', 'server_stop'],
     'Deleted': ['已释放', 'pink_bg alpha-black_txt', 'stop']
   },
   server: {

@@ -11,28 +11,32 @@
             <m-col class="xs-12 lg-6">
               <panel title="CPU(%)" class="p-b16">
                 <div class="panel-body">
-                  <e-line :data="cpu" label="CPU使用率"></e-line>
+                  <e-line :series="cpu"></e-line>
                 </div>
               </panel>
             </m-col>
             <m-col class="xs-12 lg-6">
               <panel title="内存(%)" class="p-b16">
                 <div class="panel-body">
-                  <e-line :data="memory" label="内存使用率" border-color="#eb6565" :linearg="['rgba(235,101,101,1)','rgba(235,101,101,0)']"></e-line>
+                  <e-line :series="memory" :colors="[['#eb6565', 'rgba(235,101,101,1)','rgba(235,101,101,0)']]"></e-line>
                 </div>
               </panel>
             </m-col>
             <m-col class="xs-12 lg-6">
               <panel title="硬盘使用情况(%)" class="p-b16">
                 <div class="panel-body">
-                  <e-line :data="disk" label="硬盘使用率" border-color="#95c099" :linearg="['rgba(93,117,103,1)','rgba(93,117,103,0)']"></e-line>
+                  <e-line :series="disk" :colors="[['#95c099', 'rgba(93,117,103,1)','rgba(93,117,103,0)']]"></e-line>
                 </div>
                 <!--<e-pie :data="disk" :label="[{name: '使用', icon: 'circle'}, {name: '空余', icon: 'circle'}]" :radius="['60%', '50%']"></e-pie>-->
                 <!--<m-chart :option="disk" ref="diskchart" :nodes="2"></m-chart>-->
               </panel>
             </m-col>
             <m-col class="xs-12 lg-6">
-              <panel title="网络" class="p-b16"></panel>
+              <panel title="网络" class="p-b16">
+                <div class="panel-body">
+                  <e-line :series="nets" :colors="[['#95c099', 'rgba(93,117,103,1)','rgba(93,117,103,0)'],['#eb6565', 'rgba(235,101,101,1)','rgba(235,101,101,0)']]"></e-line>
+                </div>
+              </panel>
             </m-col>
           </m-row>
         </panel>
@@ -150,7 +154,7 @@
                 <td>{{item[1]}}</td>
                 <td>{{item[2]}}</td>
                 <td>{{item[3]}}</td>
-                <td><m-btn class="primary_txt" :href="{name:'AppDetail',params:{id:item[0],mid:$route.params.id}}">详情</m-btn></td>
+                <td><m-btn class="primary_txt" :href="{name:'AppDetail',params:{mid:$route.params.id,name:item[1]}}">详情</m-btn></td>
               </tr>
               </tbody>
             </m-table>

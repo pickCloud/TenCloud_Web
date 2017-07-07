@@ -23,11 +23,13 @@ export default {
     waitingTip: '',
     isOpen: false,
     isDisabled: false,
-    updateApi: 'server_update'
+    updateApi: 'server_update',
+    performance: 'server_performance',
+    performanceData: {}
   }),
   methods: {
     getApiData () {
-      this.machineid = this.$route.params.id
+      this.performanceData.id = this.machineid = this.$route.params.id
       this.$Global.async('server_detail', true).getData(null, this.machineid).then(d => {
         if (d.status === 0) {
           this.baseInfo = d.data.basic_info
@@ -35,14 +37,15 @@ export default {
           this.sysInfo = d.data.system_info
           if (this.machineStatus[2] === 'run') this.isOpen = true
           if (this.machineStatus[2] === 'stop') this.isOpen = false
-          this.statusApiSuf = this.baseInfo.region_id + '/' + this.baseInfo.instance_id + '/status'
-          console.log(d.data)
+          this.statusApiSuf = this.baseInfo.instance_id + '/status'
+          // console.log(d.data)
+          // console.log(this.baseInfo.machine_status)
+          if (this.baseInfo.machine_status === 'Starting' || this.baseInfo.machine_status === 'Stopping') this.loopGetStatus(this.machineStatus[3])
         }
       })
       this.$Global.async('server_applist', true).getData(null, this.machineid).then(d => {
         if (d.status === 0) {
           this.applists = d.data
-          // console.log(this.applists)
         }
       })
     },
@@ -61,20 +64,9 @@ export default {
       })
     },
     machineCtr (t) {
-      let temp = StatusCode.server[t]
-      this.waitingTip = temp[3]
       this.$Global.async(t, true).getData(null, this.machineid).then(d => {
         if (d.status === 0) {
-          this.isWaiting = true
-          this.baseInfo.machine_status = temp[1]
-          this.yqvalue = temp[2]
-          this.loopGetStatus(temp[0] * 1000)
-          // const timeout = setTimeout(_ => {
-          //   this.baseInfo.machine_status = temp[2]
-          //   this.isWaiting = false
-          //   this.isDisabled = false
-          //   clearTimeout(timeout)
-          // }, temp[0] * 1000)
+          this.loopGetStatus(t)
         } else {
           this.$toast(d.message, 'cc')
         }
@@ -83,6 +75,11 @@ export default {
       })
     },
     loopGetStatus (t) {
+      let temp = StatusCode.server[t]
+      this.waitingTip = temp[3]
+      this.isWaiting = true
+      this.baseInfo.machine_status = temp[1]
+      this.yqvalue = temp[2]
       this.loopIV = setInterval(_ => {
         this.$Global.async('server_status', true).getData(null, this.statusApiSuf).then(d => {
           if (d.status === 0) {
@@ -94,7 +91,7 @@ export default {
             }
           }
         })
-      }, t)
+      }, temp[0] * 1000)
     },
     deleteMachine () {
       this.popperDelete(this.baseInfo.name, _ => {
