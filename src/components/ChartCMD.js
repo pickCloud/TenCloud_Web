@@ -2,6 +2,11 @@ const AJAX_ONE_TIME = 60 // 分钟
 const AJAX_TWO_TIME = 1 // 分钟
 const AJAX_LOOP_TIME = 1 // 分钟
 
+const MAP = {
+  'app_performance': ['入量', '出量', 'KB'],
+  'server_performance': ['入带宽', '出带宽', 'KB/S']
+}
+
 export default {
   data: () => ({
     cpu: [],
@@ -44,9 +49,10 @@ export default {
       ]
     },
     netTip (p) {
+      let temptxt = MAP[this.performance]
       let temp = '<p class="tooltip-title">' + (new Date(p[0] * 1000)).Format('yyyy/MM/dd hh:mm:ss') + '</p><p class="tooltip-body">'
-      temp += '<i class="tooltip-dian" style="background-color: #95c099;"></i>入带宽：' + p[1].input + 'KB/S'
-      temp += '<br><i class="tooltip-dian" style="background-color: #eb6565;"></i>出带宽：' + p[1].output + 'KB/S'
+      temp += '<i class="tooltip-dian" style="background-color: #95c099;"></i>' + temptxt[0] + '：' + p[1].input + temptxt[2]
+      temp += '<br><i class="tooltip-dian" style="background-color: #eb6565;"></i>' + temptxt[1] + '：' + p[1].output + temptxt[2]
       return temp + '</p>'
     },
     tipinfo (ppp) {

@@ -67,3 +67,12 @@
     padding: 0 $gutter*2;
   }
 }
+
+
+.page-app-detail {
+  .btn-group {
+    .btn {
+      min-width: 100px;
+    }
+  }
+}

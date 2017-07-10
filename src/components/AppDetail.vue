@@ -7,9 +7,9 @@
             <span class="bold m-r8">监控</span>
             <div class="right" style="margin-top: -5px">
               <m-btn-group :idx="0" class="m-r8">
-                <m-btn :sizew="100">实时</m-btn>
-                <m-btn :sizew="100">24小时</m-btn>
-                <m-btn :sizew="100">1周</m-btn>
+                <m-btn>实时</m-btn>
+                <m-btn>24小时</m-btn>
+                <m-btn>1周</m-btn>
               </m-btn-group>
               <m-btn class="panel-bg_bg">查看历史</m-btn>
             </div>
