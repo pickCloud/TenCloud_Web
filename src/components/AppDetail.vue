@@ -86,15 +86,18 @@
             <span class="bold">MemData</span>
           </div>
           <div class="panel-list mcd-ctrl-group">
-            <div class="mcd-ctrl-item">关/开 <m-switch></m-switch></div>
-            <div class="mcd-ctrl-item"><m-btn><span class="vam">暂停</span> <i class="icon icon-zanting"></i></m-btn></div>
+            <div class="mcd-ctrl-item">开机 <m-switch v-model="isOpen" @change="containerChange" :disabled="isDisabled"></m-switch></div>
+            <!--<div class="mcd-ctrl-item"><m-btn><span class="vam">暂停</span> <i class="icon icon-zanting"></i></m-btn></div>-->
             <!--<div class="mcd-ctrl-item">迁移 <i class="icon-quan"></i></div>-->
-            <div class="mcd-ctrl-item"><m-btn><span class="vam">删除</span> <i class="icon icon-delete vam"></i></m-btn></div>
+            <div class="mcd-ctrl-item"><m-btn @click.native="delContainer"><span class="vam">删除</span> <i class="icon icon-delete vam"></i></m-btn></div>
             <span class="justify_fix"></span>
           </div>
+          <m-row class="panel-list" v-if="isWaiting">
+            <m-col class="xs-12"><img src="../assets/spin.gif" class="vam" alt=""> <span class="vam">{{waitingTip}}</span></m-col>
+          </m-row>
           <m-row class="panel-list">
             <m-col class="xs-4">状态</m-col>
-            <m-col class="xs-8"><span class="plate green-l_bg grey-dark_txt">正常</span><span class="plate pink_bg grey-dark_txt">停止</span></m-col>
+            <m-col class="xs-8"><span class="plate green-l_bg grey-dark_txt" v-if="isOpen">正常</span><span class="plate pink_bg grey-dark_txt" v-else>停止</span></m-col>
           </m-row>
           <m-row class="panel-list">
             <m-col class="xs-4">更新时间</m-col>

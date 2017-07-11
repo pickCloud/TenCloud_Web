@@ -43,7 +43,7 @@ export default {
           if (this.baseInfo.machine_status === 'Starting' || this.baseInfo.machine_status === 'Stopping') this.loopGetStatus(this.machineStatus[3])
         }
       })
-      this.$Global.async('server_applist', true).getData(null, this.machineid).then(d => {
+      this.$Global.async('server_containers', true).getData(null, this.machineid).then(d => {
         if (d.status === 0) {
           this.applists = d.data
         }

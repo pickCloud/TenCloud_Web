@@ -14,7 +14,7 @@ const APIS = {
   server_add: {u: '/api/server/new', m: 'post'},
   server_del: {u: '/api/server/del', m: 'post'},
   server_detail: {u: '/api/server/', m: 'get'},
-  server_applist: {u: '/api/server/docker/containers/', m: 'get'},
+  server_containers: {u: '/api/server/containers/', m: 'get'},
   server_update: {u: '/api/server/update', m: 'post'},
   server_migration: {u: '/api/server/migration', m: 'post'},
   server_performance: {u: '/api/server/performance', m: 'post'},
@@ -22,7 +22,10 @@ const APIS = {
   server_reboot: {u: '/api/server/reboot/', m: 'get'},
   server_stop: {u: '/api/server/stop/', m: 'get'},
   app_performance: {u: '/api/server/docker/performance', m: 'post'},
-  server_status: {u: '/api/server/', m: 'get'} // {region_id}/{instance_id}/status
+  server_status: {u: '/api/server/', m: 'get'}, // {region_id}/{instance_id}/status
+  container_start: {u: '/api/server/container/start', m: 'post'},
+  container_stop: {u: '/api/server/container/stop', m: 'post'},
+  container_del: {u: '/api/server/container/del', m: 'post'}
 }
 
 class AsyncData {

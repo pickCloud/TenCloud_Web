@@ -154,7 +154,7 @@
                 <td>{{item[1]}}</td>
                 <td>{{item[2]}}</td>
                 <td>{{item[3]}}</td>
-                <td><m-btn class="primary_txt" :href="{name:'AppDetail',params:{mid:$route.params.id,name:item[1]}}">详情</m-btn></td>
+                <td><m-btn class="primary_txt" :href="{name:'AppDetail',params:{mid:$route.params.id,name:item[1],cid:item[0]}}">详情</m-btn></td>
               </tr>
               </tbody>
             </m-table>

@@ -94,7 +94,7 @@ export default {
 
       this.$Global.async(this.performance, true).getData(this.performanceData).then(d => {
         if (d.status === 0) {
-          console.log(d)
+          // console.log(d)
           let tempData = d.data
           if (tempData.cpu) this.chartData('cpu', this.formatDate(tempData.cpu))
           if (tempData.memory) this.chartData('memory', this.formatDate(tempData.memory))
