@@ -60,7 +60,7 @@ export default {
           theme: 'comb-msg',
           hasClose: false,
           maskClose: false,
-          content: h('span', null, [h('img', {attrs: {src: '../static/img/spin.gif', class: 'vam m-r8'}}), h('span', {attrs: {class: 'vam'}}, '删除中')]),
+          content: h('span', null, [h('img', {attrs: {src: './static/img/spin.gif', class: 'vam m-r8'}}), h('span', {attrs: {class: 'vam'}}, '删除中')]),
           buttons: []
         })
         // let ttt = setTimeout(_ => {
