@@ -7,23 +7,8 @@ const MachineDetail = r => require.ensure([], () => r(require('@/components/Mach
 const MachineAdd = r => require.ensure([], () => r(require('@/components/MachineAdd')), 'machineadd')
 
 const AppDetail = r => require.ensure([], () => r(require('@/components/AppDetail')), 'appdetail')
-// const MachineDetail = r => require.ensure([], () => r(require('@/components/MachineDetail')), 'machinedetail')
-//
-// const AddHost = r => require.ensure([], () => r(require('@/components/AddHost')), 'addhost')
-//
-// const Application = r => require.ensure([], () => r(require('@/components/Application')), 'application')
-// const ApplicationDetail = r => require.ensure([], () => r(require('@/components/ApplicationDetail')), 'applicationdetail')
-//
-// const Project = r => require.ensure([], () => r(require('@/components/Project')), 'project')
-// const ProDetail = r => require.ensure([], () => r(require('@/components/ProDetail')), 'prodetail')
-// const ProAdd = r => require.ensure([], () => r(require('@/components/ProAdd')), 'proadd')
-//
-// const Hub = r => require.ensure([], () => r(require('@/components/Hub')), 'hub')
-// const HubDetail = r => require.ensure([], () => r(require('@/components/HubDetail')), 'hubdetail')
-// const Build = r => require.ensure([], () => r(require('@/components/Build')), 'build')
-// const Deploy = r => require.ensure([], () => r(require('@/components/Deploy')), 'deploy')
-//
-// const FileHub = r => require.ensure([], () => r(require('@/components/FileHub')), 'filehub')
+
+const Projects = r => require.ensure([], () => r(require('@/components/Projects')), 'projects')
 
 Vue.use(Router)
 
@@ -59,6 +44,12 @@ export default new Router({
       name: 'AppDetail',
       meta: {level: 2},
       component: AppDetail
+    },
+    {
+      path: '/projects',
+      name: 'Projects',
+      meta: {level: 1},
+      component: Projects
     }
   ]
 })

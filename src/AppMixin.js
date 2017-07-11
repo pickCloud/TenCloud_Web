@@ -10,6 +10,7 @@ export default {
       },
       {
         label: '项目',
+        link: {name: 'Projects'},
         icon: 'icon icon-xiangmu1'
       }
     ]

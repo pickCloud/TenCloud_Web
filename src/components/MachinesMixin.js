@@ -18,7 +18,7 @@ export default {
       if (delids.length === 0) {
         this.$toast('请选择要删除的主机', 'cc')
       } else {
-        this.popperDelete(this.getAttrById(delids).join(','), _ => {
+        this.popperDelete('您确定要删除主机' + this.getAttrById(delids).join(',') + '吗？', _ => {
           this.$Global.async('server_del', true).getData({
             id: delids
           }).then(d => {

@@ -13,6 +13,12 @@ export default {
     isWaiting: false,
     waitingTip: '',
     performance: 'app_performance',
+    runtime: {},
+    network: {},
+    container: {},
+    timedata: '',
+    name: '',
+    status: '',
     performanceData: {}
   }),
   mixins: [ChartCMD, Popper],
@@ -20,6 +26,19 @@ export default {
     getApiData () {
       this.performanceData.server_id = this.$route.params.mid
       this.performanceData.container_name = this.$route.params.name
+      this.$Global.async('container_detail', true).getData(null, this.$route.params.mid + '/container/' + this.$route.params.cid).then(d => {
+        if (d.status === 0) {
+          this.runtime = d.data.runtime
+          this.network = d.data.network
+          this.container = d.data.container
+          this.status = d.data.status
+          this.name = d.data.name.substr(1)
+          this.timedata = (new Date(d.data.created)).Format('yyyy/MM/dd hh:mm:ss')
+          this.isOpen = this.status.toLowerCase() === 'running'
+        }
+      }, e => {
+        console.log(e)
+      })
       // console.log(this.$route.params)
     },
     containerChange () {
@@ -55,7 +74,7 @@ export default {
     },
     delContainer () {
       const h = this.$createElement
-      this.popperInfo('您确定要删除 ' + '你妹' + ' 吗?', _ => {
+      this.popperInfo('您确定要删除 ' + this.name + ' 吗?', _ => {
         let deltip = this.$confirm({
           theme: 'comb-msg',
           hasClose: false,

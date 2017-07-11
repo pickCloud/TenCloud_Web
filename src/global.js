@@ -21,11 +21,14 @@ const APIS = {
   server_start: {u: '/api/server/start/', m: 'get'},
   server_reboot: {u: '/api/server/reboot/', m: 'get'},
   server_stop: {u: '/api/server/stop/', m: 'get'},
-  app_performance: {u: '/api/server/docker/performance', m: 'post'},
+  app_performance: {u: '/api/server/container/performance', m: 'post'},
   server_status: {u: '/api/server/', m: 'get'}, // {region_id}/{instance_id}/status
   container_start: {u: '/api/server/container/start', m: 'post'},
   container_stop: {u: '/api/server/container/stop', m: 'post'},
-  container_del: {u: '/api/server/container/del', m: 'post'}
+  container_del: {u: '/api/server/container/del', m: 'post'},
+  container_detail: {u: '/api/server/', m: 'get'},
+  projects: {u: '/api/projects', m: 'get'},
+  projects_del: {u: '/api/project/del', m: 'post'}
 }
 
 class AsyncData {

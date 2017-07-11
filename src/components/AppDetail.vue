@@ -83,7 +83,7 @@
         <!-- 基本信息-->
         <panel class="m-b16">
           <div class="panel-title clearfix" slot="title">
-            <span class="bold">MemData</span>
+            <span class="bold">{{name}}</span>
           </div>
           <div class="panel-list mcd-ctrl-group">
             <div class="mcd-ctrl-item">开机 <m-switch v-model="isOpen" @change="containerChange" :disabled="isDisabled"></m-switch></div>
@@ -97,11 +97,13 @@
           </m-row>
           <m-row class="panel-list">
             <m-col class="xs-4">状态</m-col>
-            <m-col class="xs-8"><span class="plate green-l_bg grey-dark_txt" v-if="isOpen">正常</span><span class="plate pink_bg grey-dark_txt" v-else>停止</span></m-col>
+            <m-col class="xs-8" v-text="status">
+              <!--<span class="plate green-l_bg grey-dark_txt" v-if="isOpen">正常</span><span class="plate pink_bg grey-dark_txt" v-else>停止</span>-->
+            </m-col>
           </m-row>
           <m-row class="panel-list">
             <m-col class="xs-4">更新时间</m-col>
-            <m-col class="xs-8">2017-6-30</m-col>
+            <m-col class="xs-8">{{timedata}}</m-col>
           </m-row>
         </panel>
         <!-- 基本信息END -->
@@ -112,19 +114,19 @@
           </div>
           <m-row class="panel-list">
             <m-col class="xs-4">运行环境</m-col>
-            <m-col class="xs-8">机器的名称或集群的名称</m-col>
+            <m-col class="xs-8">{{runtime.hostname}}</m-col>
           </m-row>
           <m-row class="panel-list">
             <m-col class="xs-4">IP</m-col>
-            <m-col class="xs-8">120.24.86.72</m-col>
+            <m-col class="xs-8">{{runtime.ip}}</m-col>
           </m-row>
           <m-row class="panel-list">
             <m-col class="xs-4">容器端口</m-col>
-            <m-col class="xs-8">8080</m-col>
+            <m-col class="xs-8" v-text="runtime.port"></m-col>
           </m-row>
           <m-row class="panel-list">
             <m-col class="xs-4">访问地址</m-col>
-            <m-col class="xs-8">http://www.10.com:8080</m-col>
+            <m-col class="xs-8">{{runtime.address}}</m-col>
           </m-row>
         </panel>
         <!-- 运行信息 END -->
@@ -135,19 +137,20 @@
           </div>
           <m-row class="panel-list">
             <m-col class="xs-4">数据卷</m-col>
-            <m-col class="xs-8">_dataxxx</m-col>
+            <m-col class="xs-8"></m-col>
+            <!--<m-col class="xs-8">{{container.volumes}}</m-col>-->
           </m-row>
           <m-row class="panel-list">
             <m-col class="xs-4">数据卷容器</m-col>
-            <m-col class="xs-8">dbdata</m-col>
+            <m-col class="xs-8" v-text="container.volumesfrom"></m-col>
           </m-row>
           <m-row class="panel-list">
             <m-col class="xs-4">工作目录</m-col>
-            <m-col class="xs-8">/APP</m-col>
+            <m-col class="xs-8">{{container.workingdir}}</m-col>
           </m-row>
           <m-row class="panel-list">
             <m-col class="xs-4">启动命令</m-col>
-            <m-col class="xs-8">nginx -g‘daemon off</m-col>
+            <m-col class="xs-8">{{container.cmd}}</m-col>
           </m-row>
         </panel>
         <!-- 容器配置 END -->
@@ -158,24 +161,24 @@
           </div>
           <m-row class="panel-list">
             <m-col class="xs-4">DNS</m-col>
-            <m-col class="xs-8"></m-col>
-          </m-row>
-          <m-row class="panel-list">
-            <m-col class="xs-4">访问控制</m-col>
-            <m-col class="xs-8"></m-col>
+            <m-col class="xs-8" v-text="network.dns"></m-col>
           </m-row>
           <m-row class="panel-list">
             <m-col class="xs-4">端口映射</m-col>
-            <m-col class="xs-8"></m-col>
-          </m-row>
-          <m-row class="panel-list">
-            <m-col class="xs-4">桥接模式</m-col>
-            <m-col class="xs-8"></m-col>
+            <m-col class="xs-8">{{network.portbind}}</m-col>
           </m-row>
           <m-row class="panel-list">
             <m-col class="xs-4">容器连接</m-col>
-            <m-col class="xs-8"></m-col>
+            <m-col class="xs-8">{{network.links}}</m-col>
           </m-row>
+          <!--<m-row class="panel-list">-->
+            <!--<m-col class="xs-4">桥接模式</m-col>-->
+            <!--<m-col class="xs-8"></m-col>-->
+          <!--</m-row>-->
+          <!--<m-row class="panel-list">-->
+            <!--<m-col class="xs-4">容器连接</m-col>-->
+            <!--<m-col class="xs-8"></m-col>-->
+          <!--</m-row>-->
         </panel>
         <!-- 网路配置 END -->
       </m-col>

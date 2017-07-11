@@ -16,7 +16,7 @@ export default {
       this.$confirm(Merge({}, config, {
         content: h('div', [
           h('img', {attrs: {src: './static/img/error_icon.png', class: 'vam m-r16'}}),
-          h('span', {attrs: {class: 'vam'}}, '您确定删除主机' + s + '吗？')
+          h('span', {attrs: {class: 'vam'}}, s)
         ])
       }), (msg, ...arg) => {
         if (arg[0] === 0) {
