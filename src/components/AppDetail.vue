@@ -86,7 +86,7 @@
             <span class="bold">{{name}}</span>
           </div>
           <div class="panel-list mcd-ctrl-group">
-            <div class="mcd-ctrl-item">开机 <m-switch v-model="isOpen" @change="containerChange" :disabled="isDisabled"></m-switch></div>
+            <div class="mcd-ctrl-item">启动/停止 <m-switch v-model="isOpen" @change="containerChange" :disabled="isDisabled"></m-switch></div>
             <!--<div class="mcd-ctrl-item"><m-btn><span class="vam">暂停</span> <i class="icon icon-zanting"></i></m-btn></div>-->
             <!--<div class="mcd-ctrl-item">迁移 <i class="icon-quan"></i></div>-->
             <div class="mcd-ctrl-item"><m-btn @click.native="delContainer"><span class="vam">删除</span> <i class="icon icon-delete vam"></i></m-btn></div>
