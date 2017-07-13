@@ -1,6 +1,8 @@
 import Selects from './Selects.js'
+import Poppers from './Poppers.js'
+
 export default {
-  mixins: [Selects],
+  mixins: [Poppers, Selects],
   methods: {
     delProject (id) {
       let delids = this.selects
