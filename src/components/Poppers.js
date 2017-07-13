@@ -36,6 +36,16 @@ export default {
         }
         msg.actionPopper(false)
       })
+    },
+    popperWaiting (s) {
+      const h = this.$createElement
+      return this.$confirm({
+        theme: 'comb-msg',
+        hasClose: false,
+        maskClose: false,
+        content: h('span', null, [h('img', {attrs: {src: './static/img/spin.gif', class: 'vam m-r8'}}), h('span', {attrs: {class: 'vam'}}, s)]),
+        buttons: []
+      })
     }
   }
 }

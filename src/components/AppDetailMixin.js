@@ -73,15 +73,9 @@ export default {
       })
     },
     delContainer () {
-      const h = this.$createElement
+      // const h = this.$createElement
       this.popperInfo('您确定要删除 ' + this.name + ' 吗?', _ => {
-        let deltip = this.$confirm({
-          theme: 'comb-msg',
-          hasClose: false,
-          maskClose: false,
-          content: h('span', null, [h('img', {attrs: {src: './static/img/spin.gif', class: 'vam m-r8'}}), h('span', {attrs: {class: 'vam'}}, '删除中')]),
-          buttons: []
-        })
+        let deltip = this.popperWaiting('删除中')
         // let ttt = setTimeout(_ => {
         //   deltip.actionPopper()
         //   clearTimeout(ttt)
@@ -99,6 +93,21 @@ export default {
           console.log(typeof e)
         })
       })
+    }
+  },
+  computed: {
+    volumes () {
+      let res = []
+      for (let key in this.container.volumes) {
+        res.push({
+          label: key,
+          value: this.container.volumes[key]
+        })
+      }
+      return res
+    },
+    volumesfrom () {
+      return this.container.volumesfrom ? this.container.volumesfrom.join() : ''
     }
   },
   created () {

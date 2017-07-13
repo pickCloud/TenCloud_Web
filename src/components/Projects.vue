@@ -2,7 +2,7 @@
   <div class="page-pad page-machines">
     <panel>
       <div class="panel-title" slot="title">
-        <m-btn :href="{name:'MachineAdd', params:{id:1}}" class="primary_bg no-radius grey-dark_txt">添加项目</m-btn>
+        <m-btn :href="{name:'ProjectAdd'}" class="primary_bg no-radius grey-dark_txt">添加项目</m-btn>
         <m-btn class="pink_bg no-radius grey-dark_txt" @click.native="delMachine(-1)">删除</m-btn>
       </div>
       <div class="panel-body p-b16">

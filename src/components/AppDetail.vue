@@ -122,7 +122,7 @@
           </m-row>
           <m-row class="panel-list">
             <m-col class="xs-4">容器端口</m-col>
-            <m-col class="xs-8" v-text="runtime.port"></m-col>
+            <m-col class="xs-8" v-text="runtime.port?runtime.port.join():''"></m-col>
           </m-row>
           <m-row class="panel-list">
             <m-col class="xs-4">访问地址</m-col>
@@ -130,20 +130,38 @@
           </m-row>
         </panel>
         <!-- 运行信息 END -->
+        <!--数据配置-->
+        <panel class="m-b16 data-config-panel">
+          <div class="panel-title clearfix" slot="title">
+            <span class="bold">数据配置</span>
+          </div>
+          <div class="panle-body">
+            <m-tip has-arrow v-for="item in volumes" :key="item.label">
+              <div slot="label" class="data-tip-label">{{item.label}}</div>
+              <div slot="popper" class="popper-body">
+                <div class="data-tip-item" v-for="(v,k) in item.value">{{k}}: {{v}}</div>
+              </div>
+            </m-tip>
+            <div class="tip-wrap" v-if="volumesfrom">
+              <div class="data-tip-label">{{volumesfrom}}</div>
+            </div>
+          </div>
+        </panel>
+        <!--数据配置 end-->
         <!-- 容器配置 -->
         <panel class="m-b16">
           <div class="panel-title clearfix" slot="title">
             <span class="bold">容器配置</span>
           </div>
-          <m-row class="panel-list">
-            <m-col class="xs-4">数据卷</m-col>
-            <m-col class="xs-8"></m-col>
-            <!--<m-col class="xs-8">{{container.volumes}}</m-col>-->
-          </m-row>
-          <m-row class="panel-list">
-            <m-col class="xs-4">数据卷容器</m-col>
-            <m-col class="xs-8" v-text="container.volumesfrom"></m-col>
-          </m-row>
+          <!--<m-row class="panel-list">-->
+            <!--<m-col class="xs-4">数据卷</m-col>-->
+            <!--<m-col class="xs-8"></m-col>-->
+            <!--&lt;!&ndash;<m-col class="xs-8">{{container.volumes}}</m-col>&ndash;&gt;-->
+          <!--</m-row>-->
+          <!--<m-row class="panel-list">-->
+            <!--<m-col class="xs-4">数据卷容器</m-col>-->
+            <!--<m-col class="xs-8" v-text="container.volumesfrom"></m-col>-->
+          <!--</m-row>-->
           <m-row class="panel-list">
             <m-col class="xs-4">工作目录</m-col>
             <m-col class="xs-8">{{container.workingdir}}</m-col>
@@ -161,11 +179,18 @@
           </div>
           <m-row class="panel-list">
             <m-col class="xs-4">DNS</m-col>
-            <m-col class="xs-8" v-text="network.dns"></m-col>
+            <m-col class="xs-8" v-text="network.dns ? network.dns.join() : ''"></m-col>
           </m-row>
-          <m-row class="panel-list">
-            <m-col class="xs-4">端口映射</m-col>
-            <m-col class="xs-8">{{network.portbind}}</m-col>
+          <m-row class="panel-list" style="height: auto">
+            <m-col class="xs-12">端口映射</m-col>
+            <m-col class="xs-12 clearfix">
+              <m-tip has-arrow v-for="(v,k) in network.portbind" :key="k">
+                <div slot="label" class="data-tip-label">{{k}}</div>
+                <div slot="popper" class="popper-body">
+                  <div class="data-tip-item">{{v}}</div>
+                </div>
+              </m-tip>
+            </m-col>
           </m-row>
           <m-row class="panel-list">
             <m-col class="xs-4">容器连接</m-col>

@@ -28,7 +28,9 @@ const APIS = {
   container_del: {u: '/api/server/container/del', m: 'post'},
   container_detail: {u: '/api/server/', m: 'get'},
   projects: {u: '/api/projects', m: 'get'},
-  projects_del: {u: '/api/project/del', m: 'post'}
+  project_del: {u: '/api/project/del', m: 'post'},
+  project_add: {u: '/api/project/new', m: 'post'},
+  project_repos: {u: '/api/repos', m: 'get'}
 }
 
 class AsyncData {

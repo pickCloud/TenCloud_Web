@@ -9,7 +9,7 @@ export default {
         this.$toast('请选择要删除的项目', 'cc')
       } else {
         this.popperDelete('您确定要删除项目' + this.getAttrById(delids).join(',') + '吗？', _ => {
-          this.$Global.async('projects_del', true).getData({
+          this.$Global.async('project_del', true).getData({
             id: delids
           }).then(d => {
             if (d.status === 0) {

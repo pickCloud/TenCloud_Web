@@ -77,4 +77,29 @@
       min-width: 100px;
     }
   }
+  .panle-body {
+    padding: $gutter*2;
+  }
+  .data-tip-label {
+    background-color: $color-striped-bg;
+    padding: $gutter*2;
+  }
+  .tip-wrap {
+    margin-bottom: $gutter*2;
+    line-height: normal;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.page-project-add {
+  .__table-content {
+    padding: $gutter*2;
+  }
+  .table {
+    th,td {
+      padding: 0 $gutter*2;
+    }
+  }
 }

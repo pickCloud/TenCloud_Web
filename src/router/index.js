@@ -9,6 +9,7 @@ const MachineAdd = r => require.ensure([], () => r(require('@/components/Machine
 const AppDetail = r => require.ensure([], () => r(require('@/components/AppDetail')), 'appdetail')
 
 const Projects = r => require.ensure([], () => r(require('@/components/Projects')), 'projects')
+const ProjectAdd = r => require.ensure([], () => r(require('@/components/ProjectAdd')), 'projectadd')
 
 Vue.use(Router)
 
@@ -50,6 +51,12 @@ export default new Router({
       name: 'Projects',
       meta: {level: 1},
       component: Projects
+    },
+    {
+      path: '/projectadd',
+      name: 'ProjectAdd',
+      meta: {level: 2},
+      component: ProjectAdd
     }
   ]
 })
