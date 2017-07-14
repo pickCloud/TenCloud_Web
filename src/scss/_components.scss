@@ -79,6 +79,12 @@
   &.btn-group {
     background-color: $color-panel-bg;
   }
+  // radio
+  &.label-inp-group .__icon {
+    margin-right: $gutter*0.8;
+    background-color: #899ab6;
+    border-color: #899ab6;
+  }
 }
 
 //// d3-scale
