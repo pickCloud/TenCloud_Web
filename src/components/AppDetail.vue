@@ -113,7 +113,7 @@
             <span class="bold">运行信息</span>
           </div>
           <m-row class="panel-list">
-            <m-col class="xs-4">运行环境</m-col>
+            <m-col class="xs-4">所在机器</m-col>
             <m-col class="xs-8">{{runtime.hostname}}</m-col>
           </m-row>
           <m-row class="panel-list">

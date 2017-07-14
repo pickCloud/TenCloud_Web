@@ -102,4 +102,9 @@
       padding: 0 $gutter*2;
     }
   }
+  .btn-github {
+    &.loading {
+      background-color: transparent;
+    }
+  }
 }

@@ -3,6 +3,9 @@ import Poppers from './Poppers.js'
 
 export default {
   mixins: [Poppers, Selects],
+  data: () => ({
+    modelCn: ['普通项目', '基础服务', '应用组件']
+  }),
   methods: {
     delProject (id) {
       let delids = this.selects

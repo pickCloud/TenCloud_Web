@@ -7,9 +7,11 @@ export default {
       name: '',
       // repos_name: '',
       // repos_url: '',
-      description: ''
+      description: '',
+      mode: '0'
     },
     repos_idx: '0',
+    git_tip: '绑定github代码仓库',
     githubs: []
   }),
   methods: {
@@ -34,21 +36,32 @@ export default {
 
       })
     },
+    bindGitHub () {
+      if (this.git_tip.indexOf('<img') !== -1) return
+      this.getApiData()
+    },
     getApiData () {
-      let tips = this.popperWaiting('读取中')
+      this.git_tip = '<img class="vam" src="./static/img/spin.gif"></img> <span class="vam">数据加载中</span>'
+      // let tips = this.popperWaiting('读取中')
       this.$Global.async('project_repos', true).getData().then(d => {
         if (d.status === 0) {
           this.githubs = d.data
           this.repos_idx = '0'
+          this.git_tip = '重新绑定github代码仓库'
         } else {
           this.$toast(d.message, 'cc')
         }
         // console.log(tips)
-        tips.actionPopper()
+        // tips.actionPopper()
       })
     }
   },
+  computed: {
+    gitLoadStyle () {
+      return this.git_tip.indexOf('<img') !== -1 ? 'loading' : ''
+    }
+  },
   created () {
-    this.getApiData()
+    // this.getApiData()
   }
 }

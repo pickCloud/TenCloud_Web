@@ -28,7 +28,7 @@
           <tr v-for="item in listts">
             <td><m-checkbox class="list-check" v-model="selects" :data="{label:(item.id+'')}" hide-label></m-checkbox></td>
             <td>{{item.name}}</td>
-            <td>普通项目</td>
+            <td>{{modelCn[item.mode]}}</td>
             <td>{{item.repos_name}}</td>
             <td>{{item.repos_url}}</td>
             <td>{{item.update_time}}</td>
