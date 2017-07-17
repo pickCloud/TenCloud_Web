@@ -33,7 +33,7 @@
             <td>{{item.repos_url}}</td>
             <td>{{item.update_time}}</td>
             <td>
-              <m-btn :href="{name:'MachineDetail', params:{id:item.id}}" class="primary_txt">详情</m-btn>
+              <m-btn :href="{name:'ProjectDetail', params:{id:item.id}}" class="primary_txt">详情</m-btn>
               <m-btn class="pink_txt" @click.native="delProject(item.id)">删除</m-btn>
             </td>
           </tr>

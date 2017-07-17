@@ -57,12 +57,12 @@
   border-spacing: 8px 16px;
   width: calc(100% - 16px);
   margin: 0 auto;
-  > tbody > tr {
-    margin-bottom: 16px;
-    > td {
+  > tbody > tr > td {
       background-color: $color-page-select-bg;
       height: 50px;
-    }
+  }
+  > tfoot > tr> td {
+    height: 40px;
   }
   input {
     border: 1px solid transparent;
@@ -77,5 +77,18 @@
   }
   .btn-group {
     margin: $gutter*2 0;
+  }
+}
+
+.line-50 {
+  height: 50px;
+  line-height: 50px;
+}
+.striped_bg {
+  background-color: $color-striped-bg;
+}
+.pad-table {
+  th,td {
+    padding-left: $gutter*2 !important;
   }
 }

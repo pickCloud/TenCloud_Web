@@ -30,7 +30,8 @@ const APIS = {
   projects: {u: '/api/projects', m: 'get'},
   project_del: {u: '/api/project/del', m: 'post'},
   project_add: {u: '/api/project/new', m: 'post'},
-  project_repos: {u: '/api/repos', m: 'get'}
+  project_repos: {u: '/api/repos', m: 'get'},
+  project_detail: {u: '/api/project/', m: 'get'}
 }
 
 class AsyncData {
