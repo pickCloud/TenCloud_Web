@@ -16,9 +16,9 @@ export default {
   }),
   methods: {
     addProject () {
-      this.formdata.repos_name = this.githubs[this.repos_idx].repos_name
-      this.formdata.repos_url = this.githubs[this.repos_idx].repos_url
-      console.log(this.formdata)
+      let temp = this.githubs[this.repos_idx]
+      // console.log(this.formdata)
+      if (!temp) return
       if (this.formdata.name === '') {
         this.$toast('名称不能为空', 'cc')
         return
@@ -27,13 +27,16 @@ export default {
         this.$toast('description不能为空', 'cc')
         return
       }
+      this.formdata.repos_name = temp.repos_name
+      this.formdata.repos_url = temp.repos_url
       this.$Global.async('project_add', true).getData(this.formdata).then(d => {
         if (d.status === 0) {
           this.$router.push({name: 'Projects'})
         }
         this.$toast('添加成功', 'cc')
+        // console.log(d)
       }, e => {
-
+        this.$toast(e.response.data.message, 'cc')
       })
     },
     bindGitHub () {

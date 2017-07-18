@@ -155,3 +155,7 @@ small {color: $color-small;}
 .txt-wrap {
   word-wrap:break-word;
 }
+
+::-webkit-input-placeholder {
+  color: $color-font-base;
+}

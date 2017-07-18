@@ -1,5 +1,10 @@
 import axios from 'axios'
 const islocal = /.+localhost.+/.test(window.location.href)
+// axios.interceptors.response.use(response => {
+//   return response
+// }, error => {
+//   console.log(error)
+// })
 // axios.defaults.headers['Content-Type'] = 'application/json'
 // http://10.0.1.9
 const APIS = {
