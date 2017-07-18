@@ -31,12 +31,13 @@ export default {
       }
       this.formdata.repos_name = temp.repos_name
       this.formdata.repos_url = temp.repos_url
+      if (this.isEditor) this.formdata.id = this.$route.params.id
       this.$Global.async(this.isEditor ? 'project_update' : 'project_add', true).getData(this.formdata).then(d => {
         if (d.status === 0) {
           if (!this.isEditor) this.$router.push({name: 'Projects'})
           else this.$router.push({name: 'ProjectDetail', params: {id: this.$route.params.id}})
         }
-        this.$toast('添加成功', 'cc')
+        this.$toast(this.isEditor ? '修改成功' : '添加成功', 'cc')
         // console.log(d)
       }, e => {
         // this.$toast(e.response.data.message, 'cc')
