@@ -1,11 +1,6 @@
 import axios from 'axios'
+import Vue from 'vue'
 const islocal = /.+localhost.+/.test(window.location.href)
-// axios.interceptors.response.use(response => {
-//   return response
-// }, error => {
-//   console.log(error)
-// })
-// axios.defaults.headers['Content-Type'] = 'application/json'
 // http://10.0.1.9
 const APIS = {
   // baseURL: islocal ? 'http://10.0.1.9' : 'http://47.94.18.22',
@@ -35,6 +30,7 @@ const APIS = {
   projects: {u: '/api/projects', m: 'get'},
   project_del: {u: '/api/project/del', m: 'post'},
   project_add: {u: '/api/project/new', m: 'post'},
+  project_update: {u: '/api/project/update', m: 'post'},
   project_repos: {u: '/api/repos', m: 'get'},
   project_detail: {u: '/api/project/', m: 'get'}
 }
@@ -57,6 +53,7 @@ class AsyncData {
                 resolve(res.data)
               }
             }).catch(error => {
+              Vue.prototype.$toast(error.response.data.message, 'cc')
               reject(error)
             })
             break
@@ -67,6 +64,7 @@ class AsyncData {
                 resolve(res.data)
               }
             }).catch(error => {
+              Vue.prototype.$toast(error.response.data.message, 'cc')
               reject(error)
             })
             break

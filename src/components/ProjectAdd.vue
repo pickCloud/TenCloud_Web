@@ -1,6 +1,6 @@
 <template>
   <div class="page-pad page-project-add">
-    <panel title="添加项目">
+    <panel :title="isEditor?'项目修改':'添加项目'">
       <table class="add-table">
         <col width="20%">
         <col width="80%">
@@ -45,7 +45,7 @@
           </tr>
         </tbody>
       </table>
-      <div class="p-16 text-center"><m-btn class="primary_bg no-radius grey-dark_txt" @click.native="addProject">确定添加</m-btn></div>
+      <div class="p-16 text-center"><m-btn class="primary_bg no-radius grey-dark_txt" @click.native="addProject">{{isEditor?'确定修改':'确定添加'}}</m-btn></div>
     </panel>
   </div>
 </template>

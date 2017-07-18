@@ -14,9 +14,12 @@ export default {
       this.$Global.async('project_detail', true).getData(null, this.$route.params.id).then(d => {
         if (d.status === 0) {
           this.base = d.data[0]
-          console.log(this.base)
+          // console.log(this.base)
         }
       })
+    },
+    editorHandle () {
+      this.$router.push({name: 'ProjectEditor', params: {id: this.$route.params.id}})
     }
   },
   computed: {

@@ -60,6 +60,12 @@ export default new Router({
       component: ProjectAdd
     },
     {
+      path: '/projecteditor/:id',
+      name: 'ProjectEditor',
+      meta: {level: 2},
+      component: ProjectAdd
+    },
+    {
       path: '/projectdetail/:id',
       name: 'ProjectDetail',
       meta: {level: 2},
