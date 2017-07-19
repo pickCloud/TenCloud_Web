@@ -127,7 +127,7 @@
               <thead>
               <tr>
                 <th>版本号</th>
-                <th>构建时间</th>
+                <th>最后构建时间</th>
                 <th>操作</th>
               </tr>
               </thead>
