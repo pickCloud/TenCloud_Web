@@ -20,6 +20,12 @@ export default {
     },
     editorHandle () {
       this.$router.push({name: 'ProjectEditor', params: {id: this.$route.params.id}})
+    },
+    build () {
+      this.$router.push({name: 'Build', params: {id: this.$route.params.id}})
+    },
+    deploy () {
+      this.$router.push({name: 'Deploy', params: {id: this.$route.params.id}})
     }
   },
   computed: {

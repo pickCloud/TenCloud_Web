@@ -7,15 +7,15 @@
           <div class="panel-title" slot="title">
             <span>基本信息</span>
             <div class="right" style="margin-top: -5px">
-              <m-btn class="primary_bg grey-dark_txt">版本构建</m-btn>
-              <m-btn class="primary_bg grey-dark_txt m-r16">项目部署</m-btn>
+              <m-btn class="primary_bg grey-dark_txt" @click.native="build">版本构建</m-btn>
+              <m-btn class="primary_bg grey-dark_txt m-r16" @click.native="deploy">项目部署</m-btn>
               <m-btn class="primary_bg grey-dark_txt" @click.native="editorHandle"><span class="vam">修改</span> <i class="icon icon-editor vam"></i></m-btn>
             </div>
           </div>
-          <table class="add-table">
+          <table class="list-table">
             <col width="20%">
             <col width="80%">
-            <tbody>
+            <tfoot>
               <tr>
                 <td>名称</td>
                 <td>{{base.name}}</td>
@@ -24,11 +24,9 @@
                 <td>描述</td>
                 <td>{{base.description}}</td>
               </tr>
-            </tbody>
-            <tfoot>
               <tr>
                 <td>项目来源</td>
-                <td><span class="m-r8">{{base.repos_name}}</span><span class="m-r8">{{base.repos_url}}</span><m-btn class="primary_bg grey-dark_txt">重新绑定github代码仓库</m-btn></td>
+                <td><span class="m-r8">{{base.repos_name}}:</span><span class="m-r8">{{base.repos_url}}</span></td>
               </tr>
               <tr>
                 <td>创建时间</td>

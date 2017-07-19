@@ -52,6 +52,17 @@
   }
 }
 
+.list-table {
+  width: calc(100% - 16px);
+  margin: 0 auto;
+  tr {
+    border-bottom: 1px solid #2b2f3a;
+  }
+  td {
+    padding: 14px 16px;
+  }
+}
+
 .add-table {
   border-collapse: separate;
   border-spacing: 8px 16px;

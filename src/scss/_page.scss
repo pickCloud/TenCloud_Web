@@ -114,3 +114,51 @@
     td {padding: 0 $gutter*2}
   }
 }
+
+// page-build
+.build-step {
+  margin-bottom: $gutter*2 !important;
+  li {
+    float: left;
+    padding: 0 $gutter*3;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border: 1px solid #2b2f3a;
+  }
+}
+.build-intro {
+  background-color: $color-striped-bg;
+  border: 1px solid #2b2f3a;
+  li {
+    padding: 0 $gutter*2;
+    margin: 16px 0;
+    &:after{
+      display: block;
+      content: "";
+      clear: both;
+    }
+    .__icon {
+      float: left;
+      width: 6px;height: 6px;
+      border-radius: 6px;
+      background-color: #556278;
+      margin-left: -100%;
+      margin-top: 8px;
+    }
+    .__txt {
+      float: left;
+      padding-left: 16px;
+      width: 100%;
+    }
+    //&:before {
+    //  content: " ";
+    //  display: inline-block;
+    //  width: 6px;height: 6px;
+    //  border-radius: 6px;
+    //  background-color: #556278;
+    //  margin-right: 16px;
+    //  vertical-align: middle;
+    //}
+  }
+}
