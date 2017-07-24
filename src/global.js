@@ -34,7 +34,10 @@ const APIS = {
   project_repos: {u: '/api/repos', m: 'get'},
   project_detail: {u: '/api/project/', m: 'get'},
   project_vers: {u: '/api/project/', m: 'get'},
-  project_image: {u: '/api/project/', m: 'get'}
+  project_image: {u: '/api/project/', m: 'get'},
+  project_branch: {u: '/api/repos/branches?repos_name=', m: 'get'},
+  project_create: {u: '/api/project/image/creation', m: 'post'},
+  project_deployment: {u: '/api/project/deployment', m: 'post'}
 }
 
 class AsyncData {

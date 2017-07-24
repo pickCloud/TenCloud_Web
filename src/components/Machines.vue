@@ -1,18 +1,18 @@
 <template>
   <div class="page-pad page-machines">
-    <panel>
-      <div class="panel-title" slot="title">
+    <panel :title="!isDeploy?'':'机器列表'">
+      <div class="panel-title" slot="title" v-if="!isDeploy">
         <m-btn :href="{name:'MachineAdd', params:{id:1}}" class="primary_bg no-radius grey-dark_txt">添加已有主机</m-btn>
         <m-btn class="pink_bg no-radius grey-dark_txt" @click.native="delMachine(-1)">删除</m-btn>
       </div>
       <div class="panel-body p-b16">
-        <m-table class="hover striped machines-table">
+        <m-table class="hover striped machines-table m-b16">
           <col width="55px">
+          <col :width="!isDeploy?'15%':'20%'">
+          <col :width="!isDeploy?'15%':'20%'">
+          <col :width="!isDeploy?'15%':'20%'">
           <col width="15%">
-          <col width="15%">
-          <col width="15%">
-          <col width="15%">
-          <col width="15%">
+          <col width="15%" v-if="!isDeploy">
           <thead>
           <tr>
             <th><m-checkbox class="list-check" :data="{label: '全选'}" v-model="isSelectAll" hideLabel></m-checkbox></th>
@@ -21,7 +21,7 @@
             <th>地址</th>
             <th>IP</th>
             <th>状态</th>
-            <td>操作</td>
+            <th v-if="!isDeploy">操作</th>
           </tr>
           </thead>
           <tbody>
@@ -32,13 +32,16 @@
             <td>{{item.address}}</td>
             <td>{{item.public_ip}}</td>
             <td><span class="plate" :class="item.machine_status | mclass">{{item.machine_status | mstatus}}</span></td>
-            <td>
+            <td v-if="!isDeploy">
               <m-btn :href="{name:'MachineDetail', params:{id:item.id}}" class="primary_txt">详情</m-btn>
               <m-btn class="pink_txt" @click.native="delMachine(item.id)">删除</m-btn>
             </td>
           </tr>
           </tbody>
         </m-table>
+        <div class="text-center" v-if="isDeploy">
+          <m-btn class="primary_bg grey-dark_txt" @click.native="deploySelect">确定</m-btn>
+        </div>
       </div>
     </panel>
     <!--<m-page :allpage="10" :nowpage="1" :sizeh="48" :sizew="48"></m-page>-->

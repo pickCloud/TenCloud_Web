@@ -1,7 +1,7 @@
 <template>
   <div class="page-pad page-project-detail">
     <m-row :gutter="16">
-      <m-col class="xs-12 lg-8">
+      <m-col class="xs-12 md-7 lg-8">
         <!--基本信息-->
         <panel class="m-b16">
           <div class="panel-title" slot="title">
@@ -115,11 +115,11 @@
         </panel>
         <!--日志 end-->
       </m-col>
-      <m-col class="xs-12 lg-4">
+      <m-col class="xs-12 md-5 lg-4">
         <!--版本列表-->
         <panel class="m-b16">
           <div class="panel-title" slot="title">版本列表</div>
-          <div class="panel-body">
+          <div class="panel-body p-b16">
             <table class="table hover striped theme-dft pad-table">
               <col width="30%">
               <col width="40%">

@@ -1,5 +1,56 @@
 <template>
   <div class="page-pad page-deploy">
-    this is deploy
+    <panel title="部署">
+      <table class="add-table">
+        <col width="20%">
+        <col width="80%">
+        <tbody>
+        <tr>
+          <td class="text-center">选择版本</td>
+          <td>
+            <m-select v-model="version" :datas="verdata" :sizeh="50"></m-select>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-center">选择服务器</td>
+          <td class="p-lr-16 p-b16">
+            <div style="padding: 16px 0">
+              <m-btn @click.native="gomlist">进入机器列表</m-btn>
+            </div>
+            <div class="git-list" v-if="machines.length > 0">
+              <table class="table hover striped machines-table theme-dft">
+                <thead>
+                <tr>
+                  <th>名称</th>
+                  <th>服务商</th>
+                  <th>地址</th>
+                  <th>IP</th>
+                  <th>状态</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(item, i) in machines">
+                  <td>{{item.name}}</td>
+                  <td>阿里云</td>
+                  <td>{{item.address}}</td>
+                  <td>{{item.public_ip}}</td>
+                  <td><span class="plate" :class="item.machine_status | mclass">{{item.machine_status | mstatus}}</span></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="p-16 text-center"><m-btn class="primary_bg no-radius grey-dark_txt" @click.native="startDeploy">开始部署</m-btn></div>
+    </panel>
   </div>
 </template>
+
+<script>
+  import DeployMixin from './DeployMixin.js'
+  export default {
+    mixins: [DeployMixin]
+  }
+</script>

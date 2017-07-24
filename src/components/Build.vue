@@ -51,14 +51,12 @@
             <m-col class="xs-12"><div class="title">选择分支</div></m-col>
             <m-col class="xs-12">
               <div class="title">
-                <m-radio :data="{label:'abc'}"></m-radio>
-                <m-radio :data="{label:'abc'}"></m-radio>
-                <m-radio :data="{label:'abc'}"></m-radio>
+                <m-radio v-model="branch" :data="{label:item.branch_name}" v-for="(item, key) in branchs" :key="key"></m-radio>
               </div>
             </m-col>
           </m-row>
           <div class="save-box text-center">
-            <m-btn class="primary_bg grey-dark_txt">开始构建</m-btn>
+            <m-btn class="primary_bg grey-dark_txt" @click.native="startBuild">开始构建</m-btn>
           </div>
         </div>
       </div>

@@ -3,6 +3,9 @@ import Selects from './Selects.js'
 import StatusCode from './StatusCode.js'
 export default {
   mixins: [Poppers, Selects],
+  data: () => ({
+    isDeploy: false
+  }),
   filters: {
     'mstatus' (v) {
       return StatusCode.machine[v][0]
@@ -35,9 +38,31 @@ export default {
       this.$Global.async('cluster_detail', true).getData(null, cid).then(d => {
         this.listts = d.data.server_list
       })
+    },
+    getMdataByIds (ids) {
+      let i = -1
+      let temp = []
+      while (++i < this.listts.length) {
+        let v = this.listts[i]
+        if (ids.indexOf(v.id + '') !== -1) temp.push(v)
+      }
+      return temp
+    },
+    deploySelect () {
+      let delids = this.selects
+      if (delids.length === 0) {
+        this.$toast('请选择要部署的主机', 'cc')
+      } else {
+        let params = this.$route.params
+        params.machines = this.getMdataByIds(delids)
+        params.machineids = delids
+        this.$router.replace({name: 'Deploy', params: params})
+      }
     }
   },
   created () {
     this.getApiData()
+    this.isDeploy = this.$route.params.type && this.$route.params.type === 'deploy'
+    if (this.$route.params.machineids) this.selects = this.$route.params.machineids
   }
 }

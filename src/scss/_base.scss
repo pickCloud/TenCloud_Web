@@ -164,3 +164,7 @@ small {color: $color-small;}
 input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
 }
+
+.caret {
+  border-top-color: $color-font-base !important;
+}

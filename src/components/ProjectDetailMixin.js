@@ -15,7 +15,7 @@ export default {
       this.$Global.async('project_detail', true).getData(null, this.$route.params.id).then(d => {
         if (d.status === 0) {
           this.base = d.data[0]
-          // console.log(this.base)
+          this.getVerList()
         }
       })
     },
@@ -30,10 +30,10 @@ export default {
       this.$router.push({name: 'ProjectEditor', params: {id: this.$route.params.id}})
     },
     build () {
-      this.$router.push({name: 'Build', params: {name: this.base.name}})
+      this.$router.push({name: 'Build', params: {name: this.base.name, repos_url: this.base.repos_url, repos_name: this.base.repos_name, id: this.$route.params.id}})
     },
     deploy () {
-      this.$router.push({name: 'Deploy', params: {id: this.$route.params.id}})
+      this.$router.push({name: 'Deploy', params: {id: this.$route.params.id, name: this.base.name, type: 'deploy'}})
     }
   },
   computed: {
@@ -43,6 +43,5 @@ export default {
   },
   created () {
     this.getApiData()
-    this.getVerList()
   }
 }

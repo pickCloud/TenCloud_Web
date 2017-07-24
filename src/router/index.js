@@ -74,7 +74,7 @@ export default new Router({
       component: ProjectDetail
     },
     {
-      path: '/build/:name',
+      path: '/build/:id',
       name: 'Build',
       meta: {level: 2},
       component: Build

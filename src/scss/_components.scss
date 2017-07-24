@@ -85,6 +85,14 @@
     background-color: #899ab6;
     border-color: #899ab6;
   }
+  .select-label {
+    border: none;
+    background-color: transparent;
+  }
+  &.list {
+    border: transparent;
+    background-color: $color-striped-bg;
+  }
 }
 
 //// d3-scale

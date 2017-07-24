@@ -8,6 +8,13 @@
 </template>
 
 <script>
+//  [
+//    {'version': 1},
+//    {'version': 2222},
+//    {'version': 33},
+//    {'version': 456},
+//    {'version': 489}
+//  ]
   import { focus } from 'vue-focus'
   export default {
     directives: { focus: focus },
@@ -31,21 +38,24 @@
     }),
     methods: {
       inpChange () {
-        this.search()
+        let temp = {}
+        temp[this.okey] = this.selfmodel
+        this.$emit('input', temp)
       },
       onFocus () {
         this.isfocus = true
         this.search()
       },
       onBlur (e) {
-        console.log(e)
-        let tt = setTimeout(_ => {
-          clearTimeout(tt)
-          this.isfocus = false
-          let temp = {}
-          temp[this.okey] = this.selfmodel
-          this.$emit('input', temp)
-        }, 120)
+//        console.log(e)
+//        let tt = setTimeout(_ => {
+//          clearTimeout(tt)
+//          this.isfocus = false
+//          let temp = {}
+//          temp[this.okey] = this.selfmodel
+//          console.log(temp)
+//          this.$emit('input', temp)
+//        }, 150)
       },
       search () {
         this.dataitems = this.items.filter((v, i) => {
@@ -54,11 +64,13 @@
       },
       itemSelect (d) {
         this.$emit('input', d)
+        this.isfocus = false
       }
     },
     watch: {
       value (n, o) {
         this.selfmodel = this.value ? this.value[this.okey] : ''
+        this.search()
       }
     },
     mounted () {
@@ -70,7 +82,7 @@
 <style>
   .data-list {
     position: relative;
-    z-index: 1;
+    z-index: 999;
   }
   .data-list-item {
     padding: 16px;
