@@ -7,7 +7,8 @@ const STATUS = {
 }
 export default {
   data: () => ({
-    base: {}
+    base: {},
+    vers: []
   }),
   methods: {
     getApiData () {
@@ -18,11 +19,18 @@ export default {
         }
       })
     },
+    getVerList () {
+      this.$Global.async('project_vers', true).getData(null, this.base.name + '/versions').then(d => {
+        if (d.status === 0) {
+          this.vers = d.data
+        }
+      })
+    },
     editorHandle () {
       this.$router.push({name: 'ProjectEditor', params: {id: this.$route.params.id}})
     },
     build () {
-      this.$router.push({name: 'Build', params: {id: this.$route.params.id}})
+      this.$router.push({name: 'Build', params: {name: this.base.name}})
     },
     deploy () {
       this.$router.push({name: 'Deploy', params: {id: this.$route.params.id}})
@@ -35,5 +43,6 @@ export default {
   },
   created () {
     this.getApiData()
+    this.getVerList()
   }
 }

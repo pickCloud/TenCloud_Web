@@ -158,4 +158,9 @@ small {color: $color-small;}
 
 ::-webkit-input-placeholder {
   color: $color-font-base;
+  font-size: 0.8rem;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
 }

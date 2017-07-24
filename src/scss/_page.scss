@@ -130,6 +130,7 @@
 .build-intro {
   background-color: $color-striped-bg;
   border: 1px solid #2b2f3a;
+  margin-bottom: $gutter*2 !important;
   li {
     padding: 0 $gutter*2;
     margin: 16px 0;
@@ -161,4 +162,37 @@
     //  vertical-align: middle;
     //}
   }
+}
+.build-form {
+  .bg-cc {
+    background-color: #1d212a;
+  }
+  .title {
+    padding: $gutter*2 - 1.5px;
+  }
+  input {
+    border: 1px solid transparent;
+    background: none;
+    width: 100%;
+    padding: $gutter*2;
+    color: $color-font-base;
+    background-color: $color-page-select-bg;
+    &:focus {
+      border-color: currentColor;
+    }
+  }
+  .branch {
+    border: 1px solid #2b2f3a;
+  }
+  .radio {
+    margin-right: 16px;
+  }
+}
+.ap-input-icon {
+  display: none;
+}
+.ap-input, .ap-hint {
+  height: 50px;
+  line-height: 50px;
+  border-radius: 0;
 }

@@ -122,8 +122,8 @@
           <div class="panel-body">
             <table class="table hover striped theme-dft pad-table">
               <col width="30%">
-              <col width="30%">
               <col width="40%">
+              <col width="30%">
               <thead>
               <tr>
                 <th>版本号</th>
@@ -132,14 +132,9 @@
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>版本1</td>
-                <td>2017-06-28</td>
-                <td><m-btn class="primary_txt">查看日志</m-btn></td>
-              </tr>
-              <tr>
-                <td>版本2</td>
-                <td>2017-06-28</td>
+              <tr v-for="item in vers">
+                <td>{{item.version}}</td>
+                <td>{{item.update_time}}</td>
                 <td><m-btn class="primary_txt">查看日志</m-btn></td>
               </tr>
               </tbody>

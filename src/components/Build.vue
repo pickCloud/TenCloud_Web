@@ -1,6 +1,6 @@
 <template>
   <div class="page-pad page-build">
-    <panel>
+    <panel class="m-b16">
       <div class="panel-title" slot="title">
         项目构建
         <small>(代码经过构建，可生成能适合部署上线的版本，版本文件以镜像的形式存在。)</small>
@@ -42,7 +42,34 @@
             <div class="__icon"></div>
           </li>
         </ul>
+        <div class="build-form">
+          <m-row :gutter="16" class="m-b16">
+            <m-col class="xs-12 sm-3"><div class="title bg-cc">选择版本</div></m-col>
+            <m-col class="xs-12 sm-9"><dlist v-model="version" okey="version"></dlist></m-col>
+          </m-row>
+          <m-row class="branch m-b16">
+            <m-col class="xs-12"><div class="title">选择分支</div></m-col>
+            <m-col class="xs-12">
+              <div class="title">
+                <m-radio :data="{label:'abc'}"></m-radio>
+                <m-radio :data="{label:'abc'}"></m-radio>
+                <m-radio :data="{label:'abc'}"></m-radio>
+              </div>
+            </m-col>
+          </m-row>
+          <div class="save-box text-center">
+            <m-btn class="primary_bg grey-dark_txt">开始构建</m-btn>
+          </div>
+        </div>
       </div>
     </panel>
+    <panel title="构建过程"></panel>
   </div>
 </template>
+
+<script>
+  import BuildMixin from './BuildMixin.js'
+  export default {
+    mixins: [BuildMixin]
+  }
+</script>
