@@ -1,6 +1,6 @@
 <template>
   <div class="data-list">
-    <input type="text" v-model="selfmodel" @input="inpChange" @blur="onBlur" @focus="onFocus" placeholder="请输入">
+    <input type="text" v-model="selfmodel" @input="inpChange" @blur="onBlur" @focus="onFocus" placeholder="输入/选择版本号">
     <div class="data-list-items" v-if="isfocus && dataitems.length > 0">
       <div class="data-list-item" v-for="item in dataitems" @click="itemSelect(item)">{{item[okey]}}</div>
     </div>

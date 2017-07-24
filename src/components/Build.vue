@@ -8,7 +8,7 @@
       <div class="p-16">
         <ul class="clearfix build-step">
           <li>1.编写Dockerfile文件</li>
-          <li>2.选择版本文件</li>
+          <li>2.输入版本号</li>
           <li>3.选择代码分支</li>
           <li>4.开始构建</li>
         </ul>
@@ -44,8 +44,8 @@
         </ul>
         <div class="build-form">
           <m-row :gutter="16" class="m-b16">
-            <m-col class="xs-12 sm-3"><div class="title bg-cc">选择版本</div></m-col>
-            <m-col class="xs-12 sm-9"><dlist v-model="version" okey="version"></dlist></m-col>
+            <m-col class="xs-12 md-3 lg-2"><div class="title">版本号</div></m-col>
+            <m-col class="xs-12 md-9 lg-10"><dlist v-model="version" okey="version"></dlist></m-col>
           </m-row>
           <m-row class="branch m-b16">
             <m-col class="xs-12"><div class="title">选择分支</div></m-col>
