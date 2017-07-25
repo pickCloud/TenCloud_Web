@@ -47,15 +47,10 @@
         this.search()
       },
       onBlur (e) {
-//        console.log(e)
-//        let tt = setTimeout(_ => {
-//          clearTimeout(tt)
-//          this.isfocus = false
-//          let temp = {}
-//          temp[this.okey] = this.selfmodel
-//          console.log(temp)
-//          this.$emit('input', temp)
-//        }, 150)
+        let tt = setTimeout(_ => {
+          clearTimeout(tt)
+          this.isfocus = false
+        }, 150)
       },
       search () {
         this.dataitems = this.items.filter((v, i) => {

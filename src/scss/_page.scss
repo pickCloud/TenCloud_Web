@@ -128,9 +128,18 @@
   }
 }
 .build-intro {
+  position: relative;
   background-color: $color-striped-bg;
   border: 1px solid #2b2f3a;
   margin-bottom: $gutter*2 !important;
+  height: 54px;
+  overflow: hidden;
+  &.open {
+    height: auto;
+    .build-intro__open-btn {
+      transform: rotate(180deg);
+    }
+  }
   li {
     padding: 0 $gutter*2;
     margin: 16px 0;
@@ -164,6 +173,17 @@
     //}
   }
 }
+.build-intro__open-btn {
+  position: absolute;
+  padding: 2px 8px !important;
+  margin: 0 !important;
+  background-color: #262a35;
+  right: 8px;top: 8px;
+  cursor: pointer;
+  &:hover{
+    background-color: #393f50;
+  }
+}
 .build-form {
   .bg-cc {
     background-color: #1d212a;
@@ -187,6 +207,16 @@
   }
   .radio {
     margin-right: 16px;
+  }
+}
+.build-form__select-ver {
+  .__ver {
+    width: 150px;
+    border: 1px solid #2b2f3a;
+  }
+  .__inp {
+    width: calc(100% - 150px);
+    border: 1px solid #2b2f3a;
   }
 }
 .ap-input-icon {

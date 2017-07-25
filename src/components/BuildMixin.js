@@ -5,11 +5,15 @@ export default {
     branchs: [],
     branch: '1',
     isDoing: false,
+    isOpen: false,
     version: {
       version: ''
     }
   }),
   methods: {
+    openIntro () {
+      this.isOpen = !this.isOpen
+    },
     getVerList () {
       this.$Global.async('project_vers', true).getData(null, this.$route.params.name + '/versions').then(d => {
         if (d.status === 0) {

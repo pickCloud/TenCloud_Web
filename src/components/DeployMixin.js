@@ -32,10 +32,15 @@ export default {
       temp.version = this.version
       this.$router.replace({name: 'Machines', params: temp})
     },
+    getMachineIps () {
+      return this.$route.params.machines.map((v, i) => {
+        return v.public_ip
+      })
+    },
     startDeploy () {
       let pdata = {
         image_name: this.version.value,
-        public_ip: this.$route.params.machineids.join(',')
+        public_ip: this.getMachineIps().join(',')
       }
       if (!pdata.public_ip) {
         this.$toast('请选择机器', 'cc')

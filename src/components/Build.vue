@@ -12,7 +12,7 @@
           <li>3.选择代码分支</li>
           <li>4.开始构建</li>
         </ul>
-        <ul class="build-intro clearfix">
+        <ul class="build-intro clearfix" :class="{'open':isOpen}">
           <li>
             <div class="__txt">镜像：由多层文件系统联合组成，除了提供运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数。</div>
             <div class="__icon"></div>
@@ -41,12 +41,13 @@
             <div class="__txt">以上，仍然不知道Dockerfile如何写的，可以联系我们的工程师，@洪炯腾 @洪国安</div>
             <div class="__icon"></div>
           </li>
+          <li class="build-intro__open-btn" @click="openIntro"><i class="icon icon-menudown"></i></li>
         </ul>
         <div class="build-form">
-          <m-row :gutter="16" class="m-b16">
-            <m-col class="xs-12 md-3 lg-2"><div class="title">版本号</div></m-col>
-            <m-col class="xs-12 md-9 lg-10"><dlist v-model="version" :items="verdata" okey="version"></dlist></m-col>
-          </m-row>
+          <div class="build-form__select-ver clearfix m-b16">
+            <div class="left __ver"><div class="title">版本号</div></div>
+            <div class="left __inp"><dlist v-model="version" :items="verdata" okey="version"></dlist></div>
+          </div>
           <m-row class="branch m-b16">
             <m-col class="xs-12"><div class="title">选择分支</div></m-col>
             <m-col class="xs-12">
