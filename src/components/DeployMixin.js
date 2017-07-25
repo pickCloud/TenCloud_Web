@@ -39,7 +39,7 @@ export default {
     },
     startDeploy () {
       let pdata = {
-        image_name: this.version.value,
+        image_name: this.$route.params.name + ':' + this.version.value,
         public_ip: this.getMachineIps().join(',')
       }
       if (!pdata.public_ip) {
