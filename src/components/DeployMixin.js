@@ -14,7 +14,8 @@ export default {
   }),
   methods: {
     getVerList () {
-      this.$Global.async('project_image', true).getData(null, this.$route.params.name + '/versions').then(d => {
+      const reload = this.$route.params.machines === undefined
+      this.$Global.async('project_image', reload).getData(null, this.$route.params.name + '/versions').then(d => {
         if (d.status === 0) {
           this.verdata = d.data.map((v, i) => {
             return {
@@ -22,12 +23,14 @@ export default {
               value: v.version
             }
           })
-          this.version = this.verdata[0]
+          this.version = reload ? this.verdata[0] : this.$route.params.version
         }
       })
     },
     gomlist () {
-      this.$router.replace({name: 'Machines', params: this.$route.params})
+      let temp = this.$route.params
+      temp.version = this.version
+      this.$router.replace({name: 'Machines', params: temp})
     },
     startDeploy () {
       let pdata = {
