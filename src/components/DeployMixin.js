@@ -10,7 +10,8 @@ export default {
   },
   data: () => ({
     verdata: [],
-    version: {}
+    version: {},
+    isDoing: false
   }),
   methods: {
     getVerList () {
@@ -46,8 +47,13 @@ export default {
         this.$toast('请选择机器', 'cc')
         return
       }
+      this.isDoing = true
       this.$Global.async('project_deployment', true).getData(pdata).then(d => {
-        console.log(d)
+        if (d.status === 0) {
+          this.$router.replace({name: 'ProjectDetail', params: {id: this.$route.params.id}})
+        }
+        this.$toast(d.message, 'cc')
+        this.isDoing = false
       })
     }
   },
@@ -58,7 +64,7 @@ export default {
   },
   created () {
     if (!this.$route.params.name) {
-      this.$router.push({name: 'ProjectDetail', params: {id: this.$route.params.id}})
+      this.$router.replace({name: 'ProjectDetail', params: {id: this.$route.params.id}})
     } else {
       this.getVerList()
     }

@@ -43,7 +43,10 @@
         </tr>
         </tbody>
       </table>
-      <div class="p-16 text-center"><m-btn class="primary_bg no-radius grey-dark_txt" @click.native="startDeploy">开始部署</m-btn></div>
+      <div class="p-16 text-center" v-if="!isDoing"><m-btn class="primary_bg no-radius grey-dark_txt" @click.native="startDeploy">开始部署</m-btn></div>
+      <div class="p-16 text-center" v-else>
+        <img class="vam" src="../assets/spin.gif"></img> <span class="vam">部署中请耐心等待...</span>
+      </div>
     </panel>
   </div>
 </template>

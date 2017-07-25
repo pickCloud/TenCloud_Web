@@ -45,7 +45,7 @@ export default {
       this.isDoing = true
       this.$Global.async('project_create', true).getData(pdata).then(d => {
         if (d.status === 0) {
-          this.$router.push({name: 'ProjectDetail', params: {id: this.$route.params.id}})
+          this.$router.replace({name: 'ProjectDetail', params: {id: this.$route.params.id}})
         }
         this.$toast(d.message, 'cc')
         this.isDoing = false
@@ -54,7 +54,7 @@ export default {
   },
   created () {
     if (!this.$route.params.repos_url) {
-      this.$router.push({name: 'ProjectDetail', params: {id: this.$route.params.id}})
+      this.$router.replace({name: 'ProjectDetail', params: {id: this.$route.params.id}})
     } else {
       this.getVerList()
       this.getBranch()
