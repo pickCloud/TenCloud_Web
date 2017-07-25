@@ -33,7 +33,11 @@ export default {
       this.$router.push({name: 'Build', params: {name: this.base.name, repos_url: this.base.repos_url, repos_name: this.base.repos_name, id: this.$route.params.id}})
     },
     deploy () {
-      this.$router.push({name: 'Deploy', params: {id: this.$route.params.id, name: this.base.name, type: 'deploy'}})
+      if (this.vers.length === 0) {
+        this.$toast('请先进行版本构建', 'cc')
+      } else {
+        this.$router.push({name: 'Deploy', params: {id: this.$route.params.id, name: this.base.name, type: 'deploy'}})
+      }
     }
   },
   computed: {
