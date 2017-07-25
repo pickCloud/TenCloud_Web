@@ -4,6 +4,7 @@ export default {
     verdata: [],
     branchs: [],
     branch: '1',
+    isDoing: false,
     version: {
       version: ''
     }
@@ -36,11 +37,13 @@ export default {
         this.$toast('请输入版本号', 'cc')
         return
       }
+      this.isDoing = true
       this.$Global.async('project_create', true).getData(pdata).then(d => {
         if (d.status === 0) {
           this.$router.push({name: 'ProjectDetail', params: {id: this.$route.params.id}})
         }
         this.$toast(d.message, 'cc')
+        this.isDoing = false
       })
     }
   },

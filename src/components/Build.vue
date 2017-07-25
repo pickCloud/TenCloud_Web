@@ -55,8 +55,11 @@
               </div>
             </m-col>
           </m-row>
-          <div class="save-box text-center">
+          <div class="save-box text-center" v-if="!isDoing">
             <m-btn class="primary_bg grey-dark_txt" @click.native="startBuild">开始构建</m-btn>
+          </div>
+          <div class="text-center" v-else>
+            <img class="vam" src="../assets/spin.gif"></img> <span class="vam">构建中请耐心等待...</span>
           </div>
         </div>
       </div>
