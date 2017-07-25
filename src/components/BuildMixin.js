@@ -14,6 +14,7 @@ export default {
       this.$Global.async('project_vers', true).getData(null, this.$route.params.name + '/versions').then(d => {
         if (d.status === 0) {
           this.verdata = d.data
+          console.log(d)
         }
       })
     },
@@ -29,7 +30,7 @@ export default {
       if (this.branchs.length === 0) return
       let pdata = {
         prj_name: this.$route.params.name,
-        version: this.version.version + '',
+        version: (this.version.version + '').replace(/(^\s+)|(\s+$)/g, ''),
         branch_name: this.branch,
         repos_url: this.$route.params.repos_url
       }

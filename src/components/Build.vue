@@ -45,7 +45,7 @@
         <div class="build-form">
           <m-row :gutter="16" class="m-b16">
             <m-col class="xs-12 md-3 lg-2"><div class="title">版本号</div></m-col>
-            <m-col class="xs-12 md-9 lg-10"><dlist v-model="version" okey="version"></dlist></m-col>
+            <m-col class="xs-12 md-9 lg-10"><dlist v-model="version" :items="verdata" okey="version"></dlist></m-col>
           </m-row>
           <m-row class="branch m-b16">
             <m-col class="xs-12"><div class="title">选择分支</div></m-col>
