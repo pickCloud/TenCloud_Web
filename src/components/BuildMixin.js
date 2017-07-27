@@ -33,7 +33,7 @@ export default {
     startBuild () {
       if (this.branchs.length === 0) return
       let pdata = {
-        // prj_name: this.$route.params.name,
+        prj_name: this.$route.params.name,
         image_name: this.$route.params.image_name,
         version: (this.version.version + '').replace(/(^\s+)|(\s+$)/g, ''),
         branch_name: this.branch,
