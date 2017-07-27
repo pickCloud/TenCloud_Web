@@ -30,7 +30,7 @@
             <td>{{item.name}}</td>
             <td>{{modelCn[item.mode]}}</td>
             <td>{{item.repos_name}}</td>
-            <td>{{item.repos_url}}</td>
+            <td><m-btn class="primary_txt" :href="item.http_url" :sizeh="-1" target="_blank">{{item.repos_url}}</m-btn></td>
             <td>{{item.update_time}}</td>
             <td>
               <m-btn :href="{name:'ProjectDetail', params:{id:item.id}}" class="primary_txt">详情</m-btn>

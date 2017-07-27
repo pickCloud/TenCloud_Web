@@ -23,6 +23,7 @@ export default {
       this.$Global.async('project_vers', true).getData(null, this.base.name + '/versions').then(d => {
         if (d.status === 0) {
           this.vers = d.data
+          // console.log(d.data)
         }
       })
     },
@@ -38,11 +39,18 @@ export default {
       } else {
         this.$router.push({name: 'Deploy', params: {id: this.$route.params.id, name: this.base.name, type: 'deploy'}})
       }
+    },
+    gotVerListMore () {
+      // console.log(this.vers)
+      this.$router.push({name: 'Verlist', params: {verlist: this.vers}})
     }
   },
   computed: {
     pstatus () {
       return STATUS[this.base.status + '']
+    },
+    verLimit () {
+      return this.vers.slice(0, 5)
     }
   },
   created () {

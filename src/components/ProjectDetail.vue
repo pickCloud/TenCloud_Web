@@ -1,7 +1,7 @@
 <template>
   <div class="page-pad page-project-detail">
     <m-row :gutter="16">
-      <m-col class="xs-12 md-7 lg-8">
+      <m-col class="xs-12 lg-8">
         <!--基本信息-->
         <panel class="m-b16">
           <div class="panel-title" slot="title">
@@ -26,7 +26,7 @@
               </tr>
               <tr>
                 <td>项目来源</td>
-                <td><span class="m-r8">{{base.repos_name}}:</span><span class="m-r8">{{base.repos_url}}</span></td>
+                <td><span class="m-r8">{{base.repos_name}}:</span><m-btn :sizeh="-1" :href="base.http_url" class="m-r8 primary_txt" target="_blank">{{base.repos_url}}</m-btn></td>
               </tr>
               <tr>
                 <td>创建时间</td>
@@ -115,10 +115,13 @@
         </panel>
         <!--日志 end-->
       </m-col>
-      <m-col class="xs-12 md-5 lg-4">
+      <m-col class="xs-12 lg-4">
         <!--版本列表-->
         <panel class="m-b16">
-          <div class="panel-title" slot="title">版本列表</div>
+          <div class="panel-title" slot="title">
+            <span class="title">版本列表</span>
+            <m-btn :sizeh="-1" class="right" @click.native="gotVerListMore">更多</m-btn>
+          </div>
           <div class="panel-body p-b16">
             <table class="table hover striped theme-dft pad-table">
               <col width="30%">
@@ -132,10 +135,10 @@
               </tr>
               </thead>
               <tbody>
-              <tr v-for="item in vers">
+              <tr v-for="item in verLimit">
                 <td>{{item.version}}</td>
                 <td>{{item.update_time}}</td>
-                <td><m-btn class="primary_txt">查看日志</m-btn></td>
+                <td><m-btn class="primary_txt" @click.native="">日志</m-btn></td>
               </tr>
               </tbody>
             </table>
