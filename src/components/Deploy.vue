@@ -12,6 +12,10 @@
           </td>
         </tr>
         <tr>
+          <td class="text-center">容器名称</td>
+          <td><input type="text" v-model="image_name"></td>
+        </tr>
+        <tr>
           <td class="text-center">选择服务器</td>
           <td class="p-lr-16 p-b16">
             <div style="padding: 16px 0">

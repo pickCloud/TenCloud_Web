@@ -11,6 +11,7 @@ export default {
   data: () => ({
     verdata: [],
     version: {},
+    image_name: '',
     isDoing: false
   }),
   methods: {
@@ -34,14 +35,20 @@ export default {
       this.$router.replace({name: 'Machines', params: temp})
     },
     getMachineIps () {
-      return this.$route.params.machines.map((v, i) => {
+      let temp = []
+      if (this.$route.params.machines) temp = this.$route.params.machines
+      return temp.map((v, i) => {
         return v.public_ip
       })
     },
     startDeploy () {
       let pdata = {
-        image_name: this.$route.params.name + ':' + this.version.value,
+        image_name: this.image_name + ':' + this.version.value,
         public_ip: this.getMachineIps().join(',')
+      }
+      if (this.image_name === '') {
+        this.$toast('容器名称不能为空', 'cc')
+        return
       }
       if (!pdata.public_ip) {
         this.$toast('请选择机器', 'cc')
@@ -66,6 +73,7 @@ export default {
     if (!this.$route.params.name) {
       this.$router.replace({name: 'ProjectDetail', params: {id: this.$route.params.id}})
     } else {
+      this.image_name = this.$route.params.image_name || ''
       this.getVerList()
     }
   }

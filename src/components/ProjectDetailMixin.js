@@ -37,7 +37,7 @@ export default {
       if (this.vers.length === 0) {
         this.$toast('请先进行版本构建', 'cc')
       } else {
-        this.$router.push({name: 'Deploy', params: {id: this.$route.params.id, name: this.base.name, type: 'deploy'}})
+        this.$router.push({name: 'Deploy', params: {id: this.$route.params.id, name: this.base.name, type: 'deploy', image_name: this.base.image_name}})
       }
     },
     gotVerListMore () {

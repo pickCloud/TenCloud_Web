@@ -7,7 +7,11 @@
         <tbody>
           <tr>
             <td class="text-center">名称</td>
-            <td><input type="text" v-model="formdata.name" placeholder="请输入小写字母"></td>
+            <td><input type="text" v-model="formdata.name"></td>
+          </tr>
+          <tr>
+            <td class="text-center">镜像名称</td>
+            <td><input type="text" v-model="formdata.image_name" placeholder="请输入小写字母"></td>
           </tr>
           <tr>
             <td class="text-center">项目描述</td>

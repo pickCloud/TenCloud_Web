@@ -7,6 +7,7 @@ export default {
       name: '',
       // repos_name: '',
       // repos_url: '',
+      image_name: '',
       description: '',
       mode: '0'
     },
@@ -20,13 +21,20 @@ export default {
     addProject () {
       let temp = this.githubs[this.repos_idx]
       // console.log(this.formdata)
-      if (!temp) return
+      if (!temp) {
+        this.$toast('请先拉取来源', 'cc')
+        return
+      }
       if (this.formdata.name === '') {
         this.$toast('名称不能为空', 'cc')
         return
       }
+      if (this.formdata.image_name === '') {
+        this.$toast('镜像名称不能为空', 'cc')
+        return
+      }
       if (this.formdata.description === '') {
-        this.$toast('description不能为空', 'cc')
+        this.$toast('描述不能为空', 'cc')
         return
       }
       this.formdata.repos_name = temp.repos_name
@@ -80,6 +88,7 @@ export default {
           this.formdata.name = temp.name
           this.formdata.description = temp.description
           this.formdata.mode = temp.mode + ''
+          this.formdata.image_name = temp.image_name
           this.getApiData(this.initReposIdx)
         }
       })
