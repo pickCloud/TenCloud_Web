@@ -31,7 +31,7 @@ export default {
       this.$router.push({name: 'ProjectEditor', params: {id: this.$route.params.id}})
     },
     build () {
-      this.$router.push({name: 'Build', params: {name: this.base.name, repos_url: this.base.repos_url, repos_name: this.base.repos_name, id: this.$route.params.id}})
+      this.$router.push({name: 'Build', params: {name: this.base.name, repos_url: this.base.repos_url, repos_name: this.base.repos_name, id: this.$route.params.id, image_name: this.base.image_name}})
     },
     deploy () {
       if (this.vers.length === 0) {

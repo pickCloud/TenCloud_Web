@@ -139,6 +139,10 @@
     .build-intro__open-btn {
       transform: rotate(180deg);
     }
+    .__txt {
+      white-space: normal;
+      overflow: auto;
+    }
   }
   li {
     padding: 0 $gutter*2;
@@ -161,6 +165,9 @@
       float: left;
       padding-left: 16px;
       width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     //&:before {
     //  content: " ";
