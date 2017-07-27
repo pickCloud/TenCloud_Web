@@ -39,6 +39,7 @@ export default {
       }
       this.formdata.repos_name = temp.repos_name
       this.formdata.repos_url = temp.repos_url
+      this.formdata.http_url = temp.http_url
       if (this.isEditor) this.formdata.id = this.$route.params.id
       this.$Global.async(this.isEditor ? 'project_update' : 'project_add', true).getData(this.formdata).then(d => {
         if (d.status === 0) {
