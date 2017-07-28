@@ -38,19 +38,21 @@ export default {
       let temp = []
       if (this.$route.params.machines) temp = this.$route.params.machines
       return temp.map((v, i) => {
-        return v.public_ip
+        return {
+          public_ip: v.public_ip
+        }
       })
     },
     startDeploy () {
       let pdata = {
         image_name: this.image_name + ':' + this.version.value,
-        public_ip: this.getMachineIps().join(',')
+        ips: this.getMachineIps()
       }
       if (this.image_name === '') {
         this.$toast('容器名称不能为空', 'cc')
         return
       }
-      if (!pdata.public_ip) {
+      if (!pdata.ips.length === 0) {
         this.$toast('请选择机器', 'cc')
         return
       }
