@@ -4,8 +4,8 @@ const islocal = /.+localhost.+/.test(window.location.href)
 // http://10.0.1.9
 const APIS = {
   // baseURL: islocal ? 'http://10.0.1.9' : 'http://47.94.18.22',
-  baseURL: 'http://47.94.18.22',
-  wsURL: islocal ? 'ws://10.0.1.9:8010' : 'ws://47.94.18.22',
+  baseURL: 'http://console.10.com',
+  wsURL: islocal ? 'ws://10.0.1.9:8010' : 'ws://console.10.com',
   clusters: {u: '/api/clusters', m: 'get'},
   cluster_add: {u: '/api/cluster/new', m: 'post'},
   cluster_del: {u: '/api/cluster/del', m: 'post'},

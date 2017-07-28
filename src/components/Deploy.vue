@@ -64,12 +64,3 @@
     mixins: [DeployMixin]
   }
 </script>
-
-<style>
-  .deploy-name_tip {
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    margin-top: -12px;
-  }
-</style>

@@ -3,7 +3,7 @@
     <nav class="app-top" :class="[miniClass]">
       <aside class="lay-aside left">
         <span class="_logo vam"><router-link :to="{name:'Main'}"><span class="show-lay-mini">CO</span><span class="hide-lay-mini">Console</span></router-link></span>
-        <span class="_cndesc vam right hide-mini">控制台</span>
+        <!--<span class="_cndesc vam right hide-mini">控制台</span>-->
       </aside>
       <div class="lay-body">
         <m-btn @click.native="back" v-if="hasBack"><i class="icon icon-return"></i></m-btn>

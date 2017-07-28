@@ -11,7 +11,10 @@
           </tr>
           <tr>
             <td class="text-center">镜像名称</td>
-            <td><input type="text" v-model="formdata.image_name" placeholder="请输入小写字母"></td>
+            <td style="position: relative;">
+              <input type="text" v-model="formdata.image_name" placeholder="请输入小写字母">
+              <p class="deploy-name_tip">项目部署后以容器的形式运行：容器名称仅允许英文小写字母</p>
+            </td>
           </tr>
           <tr>
             <td class="text-center">项目描述</td>
