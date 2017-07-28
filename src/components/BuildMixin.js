@@ -6,6 +6,7 @@ export default {
     branch: '1',
     isDoing: false,
     isOpen: false,
+    notes: [],
     version: {
       version: ''
     }
@@ -18,7 +19,7 @@ export default {
       this.$Global.async('project_vers', true).getData(null, this.$route.params.name + '/versions').then(d => {
         if (d.status === 0) {
           this.verdata = d.data
-          console.log(d)
+          // console.log(d)
         }
       })
     },
@@ -46,7 +47,8 @@ export default {
       this.isDoing = true
       this.$Global.async('project_create', true).getData(pdata).then(d => {
         if (d.status === 0) {
-          this.$router.replace({name: 'ProjectDetail', params: {id: this.$route.params.id}})
+          this.notes = d.data
+          // this.$router.replace({name: 'ProjectDetail', params: {id: this.$route.params.id}})
         }
         this.$toast(d.message, 'cc')
         this.isDoing = false

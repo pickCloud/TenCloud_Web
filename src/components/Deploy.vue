@@ -13,7 +13,10 @@
         </tr>
         <tr>
           <td class="text-center">容器名称</td>
-          <td><input type="text" v-model="image_name"></td>
+          <td style="position: relative;">
+            <input type="text" v-model="image_name">
+            <p class="deploy-name_tip">项目部署后以容器的形式运行：容器名称仅允许英文小写字母</p>
+          </td>
         </tr>
         <tr>
           <td class="text-center">选择服务器</td>
@@ -61,3 +64,12 @@
     mixins: [DeployMixin]
   }
 </script>
+
+<style>
+  .deploy-name_tip {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    margin-top: -12px;
+  }
+</style>

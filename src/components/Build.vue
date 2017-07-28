@@ -65,7 +65,11 @@
         </div>
       </div>
     </panel>
-    <panel title="构建过程"></panel>
+    <panel title="构建过程" class="build-note">
+      <div class="p-16" style="overflow-y: auto;max-height: 300px;">
+        <p v-for="item in notes">{{item}}</p>
+      </div>
+    </panel>
   </div>
 </template>
 
@@ -75,3 +79,9 @@
     mixins: [BuildMixin]
   }
 </script>
+
+<style>
+  .build-note p {
+    margin-bottom: 8px;
+  }
+</style>
