@@ -15,6 +15,7 @@ const Build = r => require.ensure([], () => r(require('@/components/Build')), 'b
 const Deploy = r => require.ensure([], () => r(require('@/components/Deploy')), 'deploy')
 
 const Verlist = r => require.ensure([], () => r(require('@/components/Verlist')), 'verlist')
+const VerNotes = r => require.ensure([], () => r(require('@/components/VerNotes')), 'vernotes')
 
 Vue.use(Router)
 
@@ -92,6 +93,12 @@ export default new Router({
       name: 'Verlist',
       meta: {level: 2},
       component: Verlist
+    },
+    {
+      path: '/vernotes/:id',
+      name: 'VerNotes',
+      meta: {level: 2},
+      component: VerNotes
     }
   ]
 })
