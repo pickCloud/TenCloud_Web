@@ -1,6 +1,6 @@
 <template>
   <div class="page-pad page-deploy">
-    <panel title="部署">
+    <panel title="部署" class="m-b16">
       <table class="add-table">
         <col width="20%">
         <col width="80%">
@@ -55,6 +55,23 @@
         <img class="vam" src="../assets/spin.gif"></img> <span class="vam">部署中请耐心等待...</span>
       </div>
     </panel>
+    <panel title="部署日志" class="deploy-note">
+      <div class="p-16">
+        <div class="panel" v-for="(item, key) in notes">
+          <div class="panel-title">{{key}}</div>
+          <div class="p-16">
+            <h5>OUTPUT</h5>
+            <ul class="m-b16">
+              <li v-for="l in item.output">{{l}}</li>
+            </ul>
+            <h5>ERROR</h5>
+            <ul>
+              <li v-for="l in item.error">{{l}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </panel>
   </div>
 </template>
 
@@ -64,3 +81,14 @@
     mixins: [DeployMixin]
   }
 </script>
+
+<style lang="scss">
+  .deploy-note {
+    h5 {
+      font-weight: bold;
+    }
+    li {
+      padding: 8px 0;
+    }
+  }
+</style>

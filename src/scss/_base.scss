@@ -27,7 +27,7 @@ small {color: $color-small;}
 ::-webkit-scrollbar-thumb:vertical:active{background-color: $color-primary;}
 
 .m-b16 {
-  margin-bottom: $gutter*2;
+  margin-bottom: $gutter*2 !important;
 }
 .m-b32 {
   margin-bottom: 32px;

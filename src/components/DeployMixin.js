@@ -12,6 +12,7 @@ export default {
     verdata: [],
     version: {},
     image_name: '',
+    notes: {},
     isDoing: false
   }),
   methods: {
@@ -59,7 +60,8 @@ export default {
       this.isDoing = true
       this.$Global.async('project_deployment', true).getData(pdata).then(d => {
         if (d.status === 0) {
-          this.$router.replace({name: 'ProjectDetail', params: {id: this.$route.params.id}})
+          this.notes = d.data
+          // this.$router.replace({name: 'ProjectDetail', params: {id: this.$route.params.id}})
         }
         this.$toast(d.message, 'cc')
         this.isDoing = false
