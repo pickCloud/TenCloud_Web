@@ -86,6 +86,8 @@ class AsyncData {
 
 const Asyncs = {}
 
+let isLogin = false
+
 const opations = {
   apis: APIS,
   async: (key, re = false) => {
@@ -94,6 +96,12 @@ const opations = {
       Asyncs[key] = new AsyncData(key)
     }
     return Asyncs[key]
+  },
+  login: () => {
+    isLogin = true
+  },
+  isLogin: () => {
+    return isLogin
   }
 }
 

@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Global from '../global.js'
 
+const LayMain = r => require.ensure([], () => r(require('@/views/layout/Main')), 'laymain')
 const Main = r => require.ensure([], () => r(require('@/components/Main')), 'main')
 const Machines = r => require.ensure([], () => r(require('@/components/Machines')), 'machines')
 const MachineDetail = r => require.ensure([], () => r(require('@/components/MachineDetail')), 'machinedetail')
@@ -17,88 +19,119 @@ const Deploy = r => require.ensure([], () => r(require('@/components/Deploy')), 
 const Verlist = r => require.ensure([], () => r(require('@/components/Verlist')), 'verlist')
 const VerNotes = r => require.ensure([], () => r(require('@/components/VerNotes')), 'vernotes')
 
+const Login = r => require.ensure([], () => r(require('@/views/layout/Login')), 'login')
+const UserInfo = r => require.ensure([], () => r(require('@/components/UserInfo')), 'userinfo')
+
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Main',
-      redirect: { name: 'Machines' },
+      component: LayMain,
+      beforeEnter: (to, from, next) => {
+        if (Global.isLogin()) next()
+        else router.replace({name: 'Login'})
+        // console.log(router)
+      },
+      children: [
+        {
+          path: '/',
+          name: 'Main',
+          redirect: { name: 'Machines' },
+          meta: {level: 0},
+          component: Main
+        },
+        {
+          path: '/machines',
+          name: 'Machines',
+          meta: {level: 1},
+          component: Machines
+        },
+        {
+          path: '/machinedetail/:id',
+          name: 'MachineDetail',
+          meta: {level: 2},
+          component: MachineDetail
+        },
+        {
+          path: '/machineadd/:id',
+          name: 'MachineAdd',
+          meta: {level: 2},
+          component: MachineAdd
+        },
+        {
+          path: '/appdetail/:mid/:name/:cid',
+          name: 'AppDetail',
+          meta: {level: 2},
+          component: AppDetail
+        },
+        {
+          path: '/projects',
+          name: 'Projects',
+          meta: {level: 1},
+          component: Projects
+        },
+        {
+          path: '/projectadd',
+          name: 'ProjectAdd',
+          meta: {level: 2},
+          component: ProjectAdd
+        },
+        {
+          path: '/projecteditor/:id',
+          name: 'ProjectEditor',
+          meta: {level: 2},
+          component: ProjectAdd
+        },
+        {
+          path: '/projectdetail/:id',
+          name: 'ProjectDetail',
+          meta: {level: 2},
+          component: ProjectDetail
+        },
+        {
+          path: '/build/:id',
+          name: 'Build',
+          meta: {level: 2},
+          component: Build
+        },
+        {
+          path: '/deploy/:id',
+          name: 'Deploy',
+          meta: {level: 2},
+          component: Deploy
+        },
+        {
+          path: '/verlist',
+          name: 'Verlist',
+          meta: {level: 2},
+          component: Verlist
+        },
+        {
+          path: '/vernotes/:id',
+          name: 'VerNotes',
+          meta: {level: 2},
+          component: VerNotes
+        },
+        {
+          path: '/userinfo',
+          name: 'UserInfo',
+          meta: {level: 2},
+          component: UserInfo
+        }
+      ]
+    },
+    {
+      path: '/login',
+      name: 'Login',
       meta: {level: 0},
-      component: Main
-    },
-    {
-      path: '/machines',
-      name: 'Machines',
-      meta: {level: 1},
-      component: Machines
-    },
-    {
-      path: '/machinedetail/:id',
-      name: 'MachineDetail',
-      meta: {level: 2},
-      component: MachineDetail
-    },
-    {
-      path: '/machineadd/:id',
-      name: 'MachineAdd',
-      meta: {level: 2},
-      component: MachineAdd
-    },
-    {
-      path: '/appdetail/:mid/:name/:cid',
-      name: 'AppDetail',
-      meta: {level: 2},
-      component: AppDetail
-    },
-    {
-      path: '/projects',
-      name: 'Projects',
-      meta: {level: 1},
-      component: Projects
-    },
-    {
-      path: '/projectadd',
-      name: 'ProjectAdd',
-      meta: {level: 2},
-      component: ProjectAdd
-    },
-    {
-      path: '/projecteditor/:id',
-      name: 'ProjectEditor',
-      meta: {level: 2},
-      component: ProjectAdd
-    },
-    {
-      path: '/projectdetail/:id',
-      name: 'ProjectDetail',
-      meta: {level: 2},
-      component: ProjectDetail
-    },
-    {
-      path: '/build/:id',
-      name: 'Build',
-      meta: {level: 2},
-      component: Build
-    },
-    {
-      path: '/deploy/:id',
-      name: 'Deploy',
-      meta: {level: 2},
-      component: Deploy
-    },
-    {
-      path: '/verlist',
-      name: 'Verlist',
-      meta: {level: 2},
-      component: Verlist
-    },
-    {
-      path: '/vernotes/:id',
-      name: 'VerNotes',
-      meta: {level: 2},
-      component: VerNotes
+      component: Login
     }
   ]
 })
+// router.beforeEach((to, from, next) => {
+//   console.log(to)
+// })
+
+export default router

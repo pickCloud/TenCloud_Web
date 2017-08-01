@@ -1,0 +1,120 @@
+<template>
+  <div id="app" class="page-login">
+    <navtop></navtop>
+    <div class="login-box">
+      <div class="login-form m-b32">
+        <div class="login-form_title m-b32">登录</div>
+        <div class="login-tip error m-b16">
+          <i class="icon icon-xinxi-yin vam"></i> <span class="vam">账号错误 或 账号不存在</span>
+        </div>
+        <div class="login-form_inp m-b16">
+          <input type="text" placeholder="请输入电话号码">
+          <i class="icon icon-seeuser"></i>
+        </div>
+        <div class="login-form_inp m-b32">
+          <input type="text" placeholder="请输入验证码">
+          <m-btn :sizeh="-1">获取验证码</m-btn>
+        </div>
+        <m-btn class="login-form_sure m-b16" :sizeh="50" @click.native="login">登录</m-btn>
+        <div class="text-right"><m-btn>注册</m-btn></div>
+        <!--<div class="login-form_sure">登录</div>-->
+      </div>
+      <div class="text-center">厦门十全十美网络科技有限公司</div>
+    </div>
+  </div>
+</template>
+
+<script>
+  import Navtop from './NavTop.vue'
+  import Global from '../../global.js'
+  export default {
+    data: () => ({
+      TD: true
+    }),
+    methods: {
+      login () {
+        Global.login()
+        this.$router.replace({name: 'Main'})
+      }
+    },
+    components: {Navtop}
+  }
+</script>
+
+<style lang="scss">
+  .page-login {
+    position: fixed;
+    left: 0;top: 0;
+    width: 100%;height: 100%;
+    background: url("../../../static/img/login_bg.jpg") no-repeat;
+    background-size: cover;
+  }
+  .login-box {
+    position: absolute;
+    width: 600px;
+    left: 50%;top: 50%;
+    margin-left: -300px;
+    margin-top: -280px;
+
+  }
+  .login-form {
+    padding: 50px;
+    background-color: #2f3543;
+  }
+  .login-form_title {
+    color: #91a3c0;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  .login-form_inp {
+    position: relative;
+    input {
+      background-color: transparent;
+      border:1px solid #464e5c;
+      color: #6a778d;
+      display: block;
+      height: 50px;
+      width: 100%;
+      line-height: 50px;
+      padding: 0 16px;
+    }
+    .btn {
+      position: absolute;
+      right: 16px;
+      top: 10px;
+      background-color: #262a35;
+      padding: 4px 8px;
+    }
+    .icon {
+      font-size: 1rem;
+      position: absolute;
+      right: 16px;
+      top: 14px;
+    }
+  }
+  .login-form_sure {
+    display: block;
+    width: 100%;
+    background-color: #48bbc0;
+    text-align: center;
+    color: #05484b;
+    font-weight: bold;
+    &:hover {
+      color: #fff!important;
+    }
+  }
+  .login-tip {
+    padding: 0 16px;
+    height: 50px;
+    line-height: 50px;
+    border: 1px solid transparent;
+    .icon {
+      font-size: 1rem;
+    }
+    &.error {
+      color: #f15532;
+      background-color: #feeeeb;
+      border-color: currentColor;
+    }
+  }
+</style>

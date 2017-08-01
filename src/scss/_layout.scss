@@ -8,6 +8,7 @@
   background-color: $color-app-top-bg;
   padding-left: $nav-normal-w;
   transition: all 0.2s;
+  z-index: 999;
   &.lay-mini {
     padding-left: $nav-mini-w;
   }
