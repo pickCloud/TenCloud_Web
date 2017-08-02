@@ -103,3 +103,28 @@
     padding-left: $gutter*2 !important;
   }
 }
+
+// 左右
+.lay-left-right {
+  &:after{
+    content: ' ';
+    display: block;
+    clear: both;
+  }
+  [class^='lay'] {
+    float: left;
+    padding: 16px;
+  }
+}
+.lay-left {
+  width: 140px;
+}
+.lay-right {
+  width: calc(100% - 140px);
+}
+.lay-border {
+  border:1px solid rgba(255,255,255,0.1);
+}
+.lay-bg {
+  background-color: $color-striped-bg;
+}

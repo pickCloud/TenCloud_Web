@@ -4,16 +4,16 @@
     <div class="login-box">
       <div class="login-form m-b32">
         <div class="login-form_title m-b32">登录</div>
-        <div class="login-tip error m-b16">
-          <i class="icon icon-xinxi-yin vam"></i> <span class="vam">账号错误 或 账号不存在</span>
+        <div class="login-tip m-b16" :class="tip.type" v-if="tip.info">
+          <i class="icon icon-xinxi-yin vam"></i> <span class="vam">{{tip.info}}</span>
         </div>
         <div class="login-form_inp m-b16">
-          <input type="text" placeholder="请输入电话号码">
+          <input type="text" placeholder="请输入电话号码" v-model="loginData.mobile">
           <i class="icon icon-seeuser"></i>
         </div>
         <div class="login-form_inp m-b32">
-          <input type="text" placeholder="请输入验证码">
-          <m-btn :sizeh="-1">获取验证码</m-btn>
+          <input type="text" placeholder="请输入验证码" v-model="loginData.auth_code">
+          <m-btn :sizeh="-1" @click.native="getVerifyCode">获取验证码</m-btn>
         </div>
         <m-btn class="login-form_sure m-b16" :sizeh="50" @click.native="login">登录</m-btn>
         <div class="text-right"><m-btn>注册</m-btn></div>
@@ -29,12 +29,44 @@
   import Global from '../../global.js'
   export default {
     data: () => ({
-      TD: true
+      TD: true,
+      tip: {
+        type: 'error',
+        info: ''
+      },
+      loginData: {
+        mobile: '',
+        auth_code: ''
+      }
     }),
     methods: {
       login () {
-        Global.login()
-        this.$router.replace({name: 'Main'})
+        let {loginData} = this
+        if (this.checkMobile()) return false
+        if (this.checkCode()) return false
+        Global.login(loginData, (d) => {
+//          console.log(d)
+          this.$router.replace({name: 'Main'})
+        }, e => {
+          this.tip.type = 'error'
+          this.tip.info = e.response.data.message
+        })
+      },
+      checkMobile () {
+        let temp = this.loginData.mobile === '' || !(/^1[34578]\d{9}$/.test(this.loginData.mobile))
+        if (temp) this.$toast('手机格式有误', 'cc')
+        return temp
+      },
+      checkCode () {
+        let temp = this.loginData.auth_code === ''
+        if (temp) this.$toast('验证码不能为空', 'cc')
+        return temp
+      },
+      getVerifyCode () {
+        if (this.checkMobile()) return false
+        this.$Global.async('user_verify', true).getData({}, this.loginData.mobile).then(d => {
+          console.log(d)
+        })
       }
     },
     components: {Navtop}

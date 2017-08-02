@@ -1,10 +1,12 @@
 import axios from 'axios'
 import Vue from 'vue'
+import Cookies from 'js-cookie'
 const islocal = /.+localhost.+/.test(window.location.href)
 // http://10.0.1.9
 const APIS = {
   // baseURL: islocal ? 'http://10.0.1.9' : 'http://47.94.18.22',
   baseURL: 'http://console.10.com',
+  // baseURL: 'http://10.0.1.29',
   wsURL: islocal ? 'ws://10.0.1.9:8010' : 'ws://console.10.com',
   clusters: {u: '/api/clusters', m: 'get'},
   cluster_add: {u: '/api/cluster/new', m: 'post'},
@@ -37,7 +39,12 @@ const APIS = {
   project_image: {u: '/api/project/', m: 'get'},
   project_branch: {u: '/api/repos/branches?repos_name=', m: 'get'},
   project_create: {u: '/api/project/image/creation', m: 'post'},
-  project_deployment: {u: '/api/project/deployment', m: 'post'}
+  project_deployment: {u: '/api/project/deployment', m: 'post'},
+  user_update: {u: '/api/user/update', m: 'post'},
+  user_login: {u: '/api/user/login', m: 'post'},
+  user_verify: {u: '/api/user/sms/', m: 'post'},
+  user_logout: {u: '/api/user/logout', m: 'post'},
+  user_info: {u: '/api/user', m: 'get'}
 }
 
 class AsyncData {
@@ -46,7 +53,7 @@ class AsyncData {
     this._api = APIS.baseURL + APIS[key].u
     this._method = APIS[key].m
   }
-  getData (p = null, suffix = '') {
+  getData (p = null, suffix = '', canTip = true) {
     return new Promise((resolve, reject) => {
       if (this._data === null) {
         switch (this._method) {
@@ -58,7 +65,7 @@ class AsyncData {
                 resolve(res.data)
               }
             }).catch(error => {
-              Vue.prototype.$toast(error.response.data.message, 'cc')
+              if (canTip) Vue.prototype.$toast(error.response.data.message, 'cc')
               reject(error)
             })
             break
@@ -69,7 +76,7 @@ class AsyncData {
                 resolve(res.data)
               }
             }).catch(error => {
-              Vue.prototype.$toast(error.response.data.message, 'cc')
+              if (canTip) Vue.prototype.$toast(error.response.data.message, 'cc')
               reject(error)
             })
             break
@@ -85,8 +92,8 @@ class AsyncData {
 }
 
 const Asyncs = {}
-
-let isLogin = false
+// Cookies.remove('user')
+// Cookies.set('user', true, { expires: 1 })
 
 const opations = {
   apis: APIS,
@@ -97,11 +104,28 @@ const opations = {
     }
     return Asyncs[key]
   },
-  login: () => {
-    isLogin = true
+  login: (p, ok, err) => {
+    let hasLogin = Cookies.get('user')
+    if (!hasLogin) {
+      opations.async('user_login', true).getData(p, '', false).then(d => {
+        ok(d)
+        Cookies.set('user', true, { expires: 1 })
+      }, e => {
+        err(e)
+      })
+    } else {
+      ok({
+        status: 0,
+        data: hasLogin
+      })
+    }
+  },
+  logout () {
+    Cookies.remove('user')
   },
   isLogin: () => {
-    return isLogin
+    return Cookies.get('user')
+    // return true
   }
 }
 

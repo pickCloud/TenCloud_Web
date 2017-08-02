@@ -7,10 +7,10 @@
     <div class="lay-body" v-if="!$parent.TD">
       <m-btn @click.native="back" v-if="hasBack"><i class="icon icon-return"></i></m-btn>
       <m-tip class="user-box" has-arrow popperMouse>
-        <div slot="label"><i class="icon icon-user vam"></i> <span class="vam">登录</span></div>
+        <div slot="label" class="user-box_label"><i class="icon icon-user vam"></i> <span class="vam">登录</span></div>
         <ul slot="popper">
           <li><router-link :to="{name:'UserInfo'}"><i class="icon icon-ziliao vam"></i> <span class="vam">查看资料</span></router-link></li>
-          <li class="text-center">退出登录</li>
+          <li class="text-center"><div class="__btn" @click="logout">退出登录</div></li>
         </ul>
       </m-tip>
     </div>
@@ -22,6 +22,15 @@
     methods: {
       back () {
         this.$router.back()
+      },
+      logout () {
+        this.$Global.async('user_logout', true).getData({}).then(d => {
+          if (d.status === 0) {
+            this.$Global.logout()
+            this.$router.replace({name: 'Login'})
+          }
+          this.$toast(d.message, 'cc')
+        })
       }
     },
     computed: {
@@ -58,17 +67,28 @@
       li {
         height: 50px;
         line-height: 50px;
-        padding: 0 16px;
         border-bottom: 1px solid rgba(255,255,255,0.1);
+        position: relative;
         &:last-child {
           border-bottom-color: transparent;
         }
-        &:hover {
+        a,.__btn {
+          position: absolute;
+          display: block;
+          width: 100%;
+          height: 100%;
+          left: 0;top:0;
+          padding: 0 16px;
           cursor: pointer;
-          background-color: #91a3c0;
-          color: #171a21;
+          &:hover {
+            background-color: #91a3c0;
+            color: #171a21;
+          }
         }
       }
+    }
+    .user-box_label {
+      cursor: pointer;
     }
   }
 </style>
