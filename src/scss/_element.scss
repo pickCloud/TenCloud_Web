@@ -137,7 +137,7 @@
 
 .inp-editor {
   display: block;
-  width: 100%;
+  width: calc(100% + 16px);
   height: 100%;
   border: none;
   background: none;
