@@ -50,36 +50,25 @@
           <div class="panel-body">
             <table class="table hover striped theme-dft pad-table">
               <col width="20%">
-              <col width="15%">
-              <col width="15%">
               <col width="20%">
               <col width="20%">
-              <col width="10%">
+              <col width="20%">
+              <col width="20%">
               <thead>
               <tr>
                 <th>容器名称</th>
                 <th>容器ID</th>
                 <th>状态</th>
                 <th>创建时间</th>
-                <th>更新时间</th>
                 <th>操作</th>
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>容器名1</td>
-                <td>111</td>
-                <td>良好</td>
-                <td>2017-06-28</td>
-                <td>2017-06-28</td>
-                <td>详情</td>
-              </tr>
-              <tr>
-                <td>容器名1</td>
-                <td>111</td>
-                <td>良好</td>
-                <td>2017-06-28</td>
-                <td>2017-06-28</td>
+              <tr v-for="item in containers">
+                <td>{{item[1]}}</td>
+                <td>{{item[0]}}</td>
+                <td>{{item[2]}}</td>
+                <td>{{item[3]}}</td>
                 <td>详情</td>
               </tr>
               </tbody>

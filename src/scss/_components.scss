@@ -62,7 +62,7 @@
     }
   }
   &.btn:not([class*='_bg']):not([class*='_txt']):not([class*='active']) {
-    &:hover {
+    &:not([disabled]):hover {
       color: $color-primary;
     }
   }

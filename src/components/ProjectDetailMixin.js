@@ -8,7 +8,8 @@ const STATUS = {
 export default {
   data: () => ({
     base: {},
-    vers: []
+    vers: [],
+    containers: []
   }),
   methods: {
     getApiData () {
@@ -43,6 +44,13 @@ export default {
     gotVerListMore () {
       // console.log(this.vers)
       this.$router.push({name: 'Verlist', params: {verlist: this.vers}})
+    },
+    getContainerList () {
+      this.$Global.async('project_container_list', true).getData(null, this.base.deploy_ips).then(d => {
+        if (d.status === 0) {
+          this.containers = d.data
+        }
+      })
     }
   },
   computed: {

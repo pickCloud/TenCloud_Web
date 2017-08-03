@@ -13,7 +13,7 @@
         </div>
         <div class="login-form_inp m-b32">
           <input type="text" placeholder="请输入验证码" v-model="loginData.auth_code">
-          <m-btn :sizeh="-1" @click.native="getVerifyCode">获取验证码</m-btn>
+          <m-btn :sizeh="-1" @click.native="getVerifyCode" :disabled="btndis">{{btntip}}</m-btn>
         </div>
         <m-btn class="login-form_sure m-b16" :sizeh="50" @click.native="login">登录</m-btn>
         <div class="text-right"><m-btn>注册</m-btn></div>
@@ -37,7 +37,9 @@
       loginData: {
         mobile: '',
         auth_code: ''
-      }
+      },
+      btntip: '获取验证码',
+      btndis: false
     }),
     methods: {
       login () {
@@ -64,10 +66,30 @@
       },
       getVerifyCode () {
         if (this.checkMobile()) return false
+        this.waittip()
+        this.btndis = true
         this.$Global.async('user_verify', true).getData({}, this.loginData.mobile).then(d => {
-          console.log(d)
+          //
+        }, e => {
+          this.overwati()
         })
+      },
+      waittip () {
+        let alltime = 5
+        this.btntip = '重新获取(' + alltime + 's)'
+        this.sit = setInterval(_ => {
+          this.btntip = '重新获取(' + (alltime--) + 's)'
+          if (alltime === -1) this.overwati()
+        }, 1000)
+      },
+      overwati () {
+        this.btntip = '重新获取'
+        this.btndis = false
+        clearInterval(this.sit)
       }
+    },
+    destroyed () {
+      clearInterval(this.sit)
     },
     components: {Navtop}
   }
