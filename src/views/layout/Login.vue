@@ -75,7 +75,7 @@
         })
       },
       waittip () {
-        let alltime = 5
+        let alltime = 60
         this.btntip = '重新获取(' + alltime + 's)'
         this.sit = setInterval(_ => {
           this.btntip = '重新获取(' + (alltime--) + 's)'
