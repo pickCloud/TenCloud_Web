@@ -93,7 +93,7 @@ class AsyncData {
 }
 
 const Asyncs = {}
-Cookies.remove('user')
+// Cookies.remove('user')
 // Cookies.set('user', true, { expires: 1 })
 
 const opations = {
