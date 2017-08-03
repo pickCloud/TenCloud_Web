@@ -61,6 +61,7 @@ class AsyncData {
           case 'post':
             if (p === null) throw new Error('post need params')
             axios.post(this._api + suffix, p).then(res => {
+              // console.log(res)
               if (res.status === 200) {
                 this._data = res.data
                 resolve(res.data)
@@ -109,8 +110,8 @@ const opations = {
     let hasLogin = Cookies.get('user')
     if (!hasLogin) {
       opations.async('user_login', true).getData(p, '', false).then(d => {
-        ok(d)
         Cookies.set('user', true, { expires: 1 })
+        ok(d)
       }, e => {
         err(e)
       })

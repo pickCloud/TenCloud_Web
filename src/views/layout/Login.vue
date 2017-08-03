@@ -47,7 +47,7 @@
         if (this.checkMobile()) return false
         if (this.checkCode()) return false
         Global.login(loginData, (d) => {
-//          console.log(d)
+          console.log(d)
           this.$router.replace({name: 'Main'})
         }, e => {
           this.tip.type = 'error'
