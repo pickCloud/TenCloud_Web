@@ -17,6 +17,7 @@ export default {
         if (d.status === 0) {
           this.base = d.data[0]
           this.getVerList()
+          this.getContainerList()
         }
       })
     },
