@@ -26,6 +26,9 @@ small {color: $color-small;}
 ::-webkit-scrollbar-thumb:vertical:hover{background-color: $color-primary;}
 ::-webkit-scrollbar-thumb:vertical:active{background-color: $color-primary;}
 
+.m-t04 {
+  margin-top: -4px;
+}
 .m-b16 {
   margin-bottom: $gutter*2 !important;
 }
