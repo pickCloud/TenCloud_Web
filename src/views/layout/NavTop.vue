@@ -7,7 +7,7 @@
     <div class="lay-body" v-if="!$parent.TD">
       <m-btn @click.native="back" v-if="hasBack"><i class="icon icon-return"></i></m-btn>
       <m-tip class="user-box" has-arrow popperMouse>
-        <div slot="label" class="user-box_label"><i class="icon icon-user vam"></i> <span class="vam">登录</span></div>
+        <div slot="label" class="user-box_label"><i class="icon icon-user vam"></i></div>
         <ul slot="popper">
           <li><router-link :to="{name:'UserInfo'}"><i class="icon icon-ziliao vam"></i> <span class="vam">查看资料</span></router-link></li>
           <li class="text-center"><div class="__btn" @click="logout">退出登录</div></li>
