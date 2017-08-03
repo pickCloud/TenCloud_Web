@@ -39,6 +39,7 @@ const APIS = {
   project_image: {u: '/api/project/', m: 'get'},
   project_branch: {u: '/api/repos/branches?repos_name=', m: 'get'},
   project_create: {u: '/api/project/image/creation', m: 'post'},
+  project_container_list: {u: '/api/project/container/', m: 'get'},
   project_deployment: {u: '/api/project/deployment', m: 'post'},
   user_update: {u: '/api/user/update', m: 'post'},
   user_login: {u: '/api/user/login', m: 'post'},

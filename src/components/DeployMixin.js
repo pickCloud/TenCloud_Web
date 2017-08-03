@@ -47,6 +47,7 @@ export default {
     startDeploy () {
       let pdata = {
         image_name: this.image_name + ':' + this.version.value,
+        project_id: this.$route.params.id,
         ips: this.getMachineIps()
       }
       if (this.image_name === '') {
