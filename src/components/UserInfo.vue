@@ -28,21 +28,29 @@
         </div>
       </div>
     </panel>
-    <!--<panel title='基本信息'>-->
-      <!--<m-row class="p-16" :gutter="16">-->
-        <!--<m-col class="xs-12 md-4 text-center m-b16">-->
-          <!--<div class="info-head">-->
-            <!--<img :src="infos.image_url" alt="">-->
-          <!--</div>-->
-        <!--</m-col>-->
-        <!--<m-col class="xs-12 md-8">-->
-          <!--<div class="lay-left-right">-->
-            <!--<div class="lay-left">姓名</div>-->
-            <!--<div class="lay-right lay-bg">{{infos.name}}</div>-->
-          <!--</div>-->
-        <!--</m-col>-->
-      <!--</m-row>-->
-    <!--</panel>-->
+    <panel title='基本信息'>
+      <m-row class="p-16" :gutter="16">
+        <m-col class="xs-12 md-4 text-center m-b16">
+          <div class="info-head m-b16">
+            <img :src="infos.image_url" alt="" v-if="infos.image_url">
+          </div>
+          <div class="text-center m-b16">
+            <div class="formbylabel file theme-dft" style="height: 32px; line-height: 32px;">
+              <input type="file" id="a5wpj6gl9z">
+              <label for="a5wpj6gl9z" class="file-label">修改头像</label>
+            </div>
+            <!--<m-btn class="lay-border">修改头像</m-btn>-->
+          </div>
+          <p><i class="icon icon-xinxi-yin m-r8"></i>仅支持JPG、PNG格式，文件小于1M（方形图）</p>
+        </m-col>
+        <m-col class="xs-12 md-8">
+          <div class="lay-left-right">
+            <div class="lay-left">姓名</div>
+            <div class="lay-right lay-bg">{{infos.name}}</div>
+          </div>
+        </m-col>
+      </m-row>
+    </panel>
   </div>
 </template>
 
@@ -57,7 +65,8 @@
         'image_url': ''
       },
       isEditor: false,
-      updateing: false
+      updateing: false,
+      thumbFile: ''
     }),
     watch: {
       isEditor (n, o) {
@@ -107,13 +116,31 @@
           this.isEditor = false
           this.updateing = false
         })
+      },
+      headHeigth () {
+        const headel = this.$el.querySelector('.info-head')
+        headel.style.height = headel.clientWidth + 'px'
+      },
+      getThumbToken () {
+        this.$Global.async('user_thumb_token', true).getData(null).then(d => {
+          console.log(d)
+        })
       }
     },
     mounted () {
       this.changeInpState(false)
+      this.headHeigth()
     },
     created () {
       this.getApiData()
+      this.resizeFunc = () => {
+        this.headHeigth()
+//        console.log(22)
+      }
+      window.addEventListener('resize', this.resizeFunc)
+    },
+    destroyed () {
+      window.removeEventListener('resize', this.resizeFunc)
     }
   }
 </script>
@@ -122,9 +149,10 @@
   .info-head {
     width: 50%;
     margin: 0 auto;
+    border-radius: 50%;
+    background-color: #1d212a;
     img {
       width: 100%;
-      border-radius: 50%;
     }
   }
 </style>

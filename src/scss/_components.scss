@@ -93,6 +93,21 @@
     border: transparent;
     background-color: $color-striped-bg;
   }
+  //
+  &.file {
+    > input {
+      position: absolute;
+      left: -10000px;
+    }
+    .file-label {
+      background-color: transparent;
+      border-color: rgba(255,255,255,0.1);
+      cursor: pointer;
+      &:hover {
+        color: #48bbc0;
+      }
+    }
+  }
 }
 
 //// d3-scale

@@ -2,11 +2,12 @@ import axios from 'axios'
 import Vue from 'vue'
 import Cookies from 'js-cookie'
 const islocal = /.+localhost.+/.test(window.location.href)
+axios.defaults.withCredentials = true
 // http://10.0.1.9
 const APIS = {
   // baseURL: islocal ? 'http://10.0.1.9' : 'http://47.94.18.22',
   baseURL: 'http://console.10.com',
-  // baseURL: 'http://10.0.1.29',
+  // baseURL: 'http://192.168.1.122:8010',
   wsURL: islocal ? 'ws://10.0.1.9:8010' : 'ws://console.10.com',
   clusters: {u: '/api/clusters', m: 'get'},
   cluster_add: {u: '/api/cluster/new', m: 'post'},
@@ -45,7 +46,8 @@ const APIS = {
   user_login: {u: '/api/user/login', m: 'post'},
   user_verify: {u: '/api/user/sms/', m: 'post'},
   user_logout: {u: '/api/user/logout', m: 'post'},
-  user_info: {u: '/api/user', m: 'get'}
+  user_info: {u: '/api/user', m: 'get'},
+  user_thumb_token: {u: '/api/user/token', m: 'get'}
 }
 
 class AsyncData {
@@ -94,6 +96,7 @@ class AsyncData {
 }
 
 const Asyncs = {}
+if (islocal) Cookies.set('user', true)
 // Cookies.remove('user')
 // Cookies.set('user', true, { expires: 1 })
 
