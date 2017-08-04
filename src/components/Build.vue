@@ -30,7 +30,7 @@
             <div class="__icon"></div>
           </li>
           <li>
-            <div class="__txt">我们的私有镜像：<a href="https://www.jmkbio.com/harbor/sign-in" target="_blank" class="primary_txt">https://www.jmkbio.com/harbor/sign-in</a></div>
+            <div class="__txt">我们的私有镜像：<a href="https://hub.10.com" target="_blank" class="primary_txt">https://hub.10.com</a></div>
             <div class="__icon"></div>
           </li>
           <li>
