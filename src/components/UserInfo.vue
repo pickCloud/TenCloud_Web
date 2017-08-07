@@ -55,6 +55,7 @@
 </template>
 
 <script>
+  import * as Qiniu from '../Qiniu'
   export default {
     data: () => ({
       infos: {
@@ -75,7 +76,7 @@
     },
     methods: {
       getApiData () {
-        this.$Global.async('user_info').getData(null).then(d => {
+        this.$Global.async('user_info', true).getData(null).then(d => {
           this.infos = d.data
         })
       },
@@ -106,8 +107,8 @@
         }
         return result
       },
-      sureHandle () {
-        let cdata = this.checkChangeData()
+      sureHandle (data = null) {
+        let cdata = data || this.checkChangeData()
         if (cdata === null || this.updateing) return
 
         this.updateing = true
@@ -115,6 +116,7 @@
           this.$toast(d.message, 'cc')
           this.isEditor = false
           this.updateing = false
+          this.getApiData()
         })
       },
       headHeigth () {
@@ -124,10 +126,15 @@
       getThumbToken () {
         this.$Global.async('user_thumb_token', true).getData(null).then(d => {
           console.log(d)
+//          this.uploadFile(d.data.token)
+          Qiniu.upload(this.thumbFile, d.data.token).then(d => {
+            this.sureHandle({image_url: d.key})
+          })
         })
       },
       fileChange (e) {
-        console.log(e)
+        this.thumbFile = e.target.value
+        this.getThumbToken()
       }
     },
     mounted () {
