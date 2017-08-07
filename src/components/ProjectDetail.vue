@@ -69,7 +69,7 @@
                 <td>{{item[0]}}</td>
                 <td>{{item[2]}}</td>
                 <td>{{item[3]}}</td>
-                <td>详情</td>
+                <td><m-btn class="primary_txt" :href="{name:'AppDetail',params:{mid:item[4], name:item[1],cid:item[0]}}">详情</m-btn></td>
               </tr>
               </tbody>
             </table>
@@ -119,7 +119,7 @@
               <thead>
               <tr>
                 <th>版本号</th>
-                <th>最后构建时间</th>
+                <th>更新时间</th>
                 <th>操作</th>
               </tr>
               </thead>

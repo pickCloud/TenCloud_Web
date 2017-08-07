@@ -11,7 +11,7 @@
           <tr>
             <th>镜像名称</th>
             <th>版本号</th>
-            <th>构建时间</th>
+            <th>更新时间</th>
             <th>操作</th>
           </tr>
           </thead>
