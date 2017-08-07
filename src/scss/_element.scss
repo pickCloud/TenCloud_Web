@@ -51,6 +51,11 @@
     }
   }
 }
+.msg-upload {
+  padding: 8px 16px;
+  background-color: $color-primary;
+  color: #333;
+}
 
 .list-table {
   width: calc(100% - 16px);

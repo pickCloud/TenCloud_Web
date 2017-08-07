@@ -117,6 +117,10 @@
           this.isEditor = false
           this.updateing = false
           this.getApiData()
+          if (this.confirm) {
+            this.confirm.actionPopper(false)
+            this.confirm = null
+          }
         })
       },
       headHeigth () {
@@ -125,14 +129,28 @@
       },
       getThumbToken () {
         this.$Global.async('user_thumb_token', true).getData(null).then(d => {
-          console.log(d)
-//          this.uploadFile(d.data.token)
           Qiniu.upload(this.thumbFile, d.data.token).then(d => {
             this.sureHandle({image_url: d.key})
           })
         })
       },
       fileChange (e) {
+        if (e.target.value === '') return
+        const h = this.$createElement
+        this.confirm = this.$confirm({
+          content: h('div', null, [
+            h('span', {attrs: {class: 'vam'}}, '上传中'),
+            h('div', {attrs: {class: 'vam spinner'}}, [
+              h('div', {attrs: {class: 'bounce1'}}),
+              h('div', {attrs: {class: 'bounce2'}}),
+              h('div', {attrs: {class: 'bounce3'}})
+            ])
+          ]),
+          themeClass: 'msg-upload',
+          hasClose: false,
+          maskClose: false,
+          buttons: []
+        })
         this.thumbFile = e.target.value
         this.getThumbToken()
       }
