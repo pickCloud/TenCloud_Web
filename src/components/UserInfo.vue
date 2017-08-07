@@ -36,7 +36,7 @@
           </div>
           <div class="text-center m-b16">
             <div class="formbylabel file theme-dft" style="height: 32px; line-height: 32px;">
-              <input type="file" id="a5wpj6gl9z" @change="fileChange">
+              <input type="file" id="a5wpj6gl9z" name="file" @change="fileChange">
               <label for="a5wpj6gl9z" class="file-label">修改头像</label>
             </div>
             <!--<m-btn class="lay-border">修改头像</m-btn>-->
@@ -151,7 +151,7 @@
           maskClose: false,
           buttons: []
         })
-        this.thumbFile = e.target.value
+        this.thumbFile = e.target.files[0]
         this.getThumbToken()
       }
     },

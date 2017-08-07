@@ -7,6 +7,7 @@ export function upload (f, token, key, ing = null) {
     if (key) formData.append('key', key)
     formData.append('token', token)
     formData.append('file', f)
+    // formData.append('fileBinaryData', f)
     xhr.upload.addEventListener('progress', evt => {
       if (evt.lengthComputable) {
         let percentComplete = Math.round(evt.loaded * 100 / evt.total)
