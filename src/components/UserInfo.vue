@@ -179,6 +179,7 @@
     margin: 0 auto;
     border-radius: 50%;
     background-color: #1d212a;
+    overflow: hidden;
     img {
       width: 100%;
     }

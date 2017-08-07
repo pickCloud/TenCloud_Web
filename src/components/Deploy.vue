@@ -14,7 +14,7 @@
         <tr>
           <td class="text-center">容器名称</td>
           <td style="position: relative;">
-            <input type="text" v-model="image_name">
+            <input type="text" v-model="container_name">
             <p class="deploy-name_tip">项目部署后以容器的形式运行：容器名称仅允许英文小写字母</p>
           </td>
         </tr>

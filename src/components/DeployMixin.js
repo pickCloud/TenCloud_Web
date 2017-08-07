@@ -11,7 +11,7 @@ export default {
   data: () => ({
     verdata: [],
     version: {},
-    image_name: '',
+    container_name: '',
     notes: {},
     isDoing: false
   }),
@@ -45,8 +45,13 @@ export default {
       })
     },
     startDeploy () {
+      if (!/^[a-z0-9]+$/.test(this.container_name)) {
+        this.$toast('容器名称仅允许英文小写字母', 'cc')
+        return false
+      }
       let pdata = {
-        image_name: this.image_name + ':' + this.version.value,
+        image_name: this.$route.params.image_name + ':' + this.version.value,
+        container_name: this.container_name,
         project_id: this.$route.params.id,
         ips: this.getMachineIps()
       }
