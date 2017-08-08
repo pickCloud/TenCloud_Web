@@ -133,10 +133,13 @@ small {color: $color-small;}
 }
 // 编辑
 .edirot-input {
+  position: absolute;
   border: 1px solid $color-font-base;
   background: none;
   color: $color-font-base;
   width: 100%;
+  top: -16px;
+  left: 0;
   height: 50px;
   line-height: 50px;
   &[readonly] {

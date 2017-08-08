@@ -13,6 +13,9 @@
     //line-height: 50px;
     padding: $gutter*2;
     border-bottom: 1px solid #2b2f3a;
+    .col {
+      position: relative;
+    }
     &:last-child {
       border-bottom: none;
     }

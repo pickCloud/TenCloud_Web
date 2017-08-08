@@ -96,9 +96,10 @@ class AsyncData {
 }
 
 const Asyncs = {}
-if (islocal) Cookies.set('user', true)
+// if (islocal) Cookies.set('user', true)
 // Cookies.remove('user')
-// Cookies.set('user', true, { expires: 1 })
+// Cookies.set('user', {mobile: '13695245784'}, { expires: 1 })
+// console.log(Cookies.get('user'))
 
 const opations = {
   apis: APIS,
@@ -113,7 +114,7 @@ const opations = {
     let hasLogin = Cookies.get('user')
     if (!hasLogin) {
       opations.async('user_login', true).getData(p, '', false).then(d => {
-        Cookies.set('user', true, { expires: 1 })
+        Cookies.set('user', p, { expires: 1 })
         ok(d)
       }, e => {
         err(e)
