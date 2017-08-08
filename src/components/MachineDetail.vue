@@ -54,16 +54,18 @@
           </div>
           <div class="panel-list mcd-ctrl-group">
             <div class="mcd-ctrl-item">
-              <span v-if="!isWaiting">开机/关机 <m-switch class="switchMachine" v-model="isOpen" @change="machineChange" :disabled="isDisabled"></m-switch></span>
+              <span v-if="!isWaiting">开机/关机 <m-switch class="switchMachine" v-model="isOpen" @change="machineChange" :disabled="isDisabled" :sizeh="-1"></m-switch></span>
             </div>
             <div class="mcd-ctrl-item">
-              <m-btn v-if="machineStatus[2]==='run' && !isWaiting" @click.native="machineCtrPop('server_reboot')"><span class="vam">重启</span> <i class="icon icon-zhongzhi vam"></i></m-btn>
+              <m-btn v-if="machineStatus[2]==='run' && !isWaiting" @click.native="machineCtrPop('server_reboot')" :sizeh="-1">
+                <span class="vam">重启</span> <i class="icon icon-zhongzhi vam"></i>
+              </m-btn>
             </div>
             <!--<div class="mcd-ctrl-item">-->
               <!--<m-btn>迁移 <i class="icon-quan"></i></m-btn>-->
             <!--</div>-->
             <div class="mcd-ctrl-item">
-              <m-btn @click.native="deleteMachine"><span class="vam">删除</span> <i class="icon icon-delete vam"></i></m-btn>
+              <m-btn @click.native="deleteMachine" :sizeh="-1"><span class="vam">删除</span> <i class="icon icon-delete vam"></i></m-btn>
             </div>
             <span class="justify_fix"></span>
           </div>
