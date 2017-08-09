@@ -12,11 +12,26 @@ export default {
       mode: '0'
     },
     repos_idx: '0',
-    git_tip: '绑定github代码仓库',
+    git_tip: '绑定GitHub代码仓库',
     githubs: [],
     isEditor: false,
-    editorData: {}
+    editorData: {},
+    btnActive: 'primary_bg grey-dark_txt',
+    btnIdx: 0,
+    upfile: ''
   }),
+  watch: {
+    btnIdx (n, o) {
+      if (n !== 0) {
+        this.git_tip = 'GitHub代码仓库'
+      } else {
+        this.git_tip = this.githubs.length > 0 ? '重新绑定GitHub代码仓库' : '绑定GitHub代码仓库'
+      }
+    },
+    'formdata.mode' (n, o) {
+      if (n === '0') this.btnIdx = 0
+    }
+  },
   methods: {
     addProject () {
       let temp = this.githubs[this.repos_idx]
@@ -53,8 +68,14 @@ export default {
       })
     },
     bindGitHub () {
-      if (this.git_tip.indexOf('<img') !== -1) return
-      this.getApiData()
+      if (this.btnIdx === 0) {
+        if (this.git_tip.indexOf('<img') !== -1) return
+        this.getApiData()
+      }
+      this.btnIdx = 0
+    },
+    fileChange (e) {
+      this.upfile = e.target
     },
     getApiData (cb) {
       this.git_tip = '<img class="vam" src="./static/img/spin.gif"></img> <span class="vam">数据加载中</span>'
@@ -63,7 +84,7 @@ export default {
         if (d.status === 0) {
           this.githubs = d.data
           this.repos_idx = '0'
-          this.git_tip = '重新绑定github代码仓库'
+          this.git_tip = '重新绑定GitHub代码仓库'
           if (cb) cb()
         } else {
           this.$toast(d.message, 'cc')
@@ -71,6 +92,12 @@ export default {
         // console.log(tips)
         // tips.actionPopper()
       })
+    },
+    upImage () {
+      this.btnIdx = 1
+    },
+    downImage () {
+      this.btnIdx = 2
     },
     initReposIdx () {
       let i = -1

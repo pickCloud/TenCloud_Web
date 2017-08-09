@@ -5,6 +5,7 @@ const STATUS = {
   '-1': '构建失败',
   '-2': '部署失败'
 }
+const MODE_CN = ['普通项目', '基础服务', '应用组件']
 export default {
   data: () => ({
     base: {},
@@ -60,6 +61,9 @@ export default {
   computed: {
     pstatus () {
       return STATUS[this.base.status + '']
+    },
+    modecn () {
+      return MODE_CN[this.base.mode]
     },
     verLimit () {
       return this.vers.slice(0, 5)

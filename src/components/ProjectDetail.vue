@@ -25,6 +25,10 @@
                 <td>{{base.description}}</td>
               </tr>
               <tr>
+                <td>项目类型</td>
+                <td>{{modecn}}</td>
+              </tr>
+              <tr>
                 <td>项目来源</td>
                 <td><span class="m-r8">{{base.repos_name}}:</span><m-btn :sizeh="-1" :href="base.http_url" class="m-r8 primary_txt" target="_blank">{{base.repos_url}}</m-btn></td>
               </tr>
