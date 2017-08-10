@@ -1,4 +1,5 @@
 import Popper from './Poppers.js'
+import {upStream} from '../Qiniu.js'
 
 export default {
   mixins: [Popper],
@@ -95,6 +96,39 @@ export default {
     },
     upImage () {
       this.btnIdx = 1
+    },
+    startUpImage () {
+      // console.log(this.upfile.files[0])
+      let file = this.upfile.files[0]
+      if (file.size > 1024 * 1024 * 1024) {
+        this.$toast('镜像不能大于1G', 'cc')
+      }
+      // console.log(file.size / 1000 + 'kb')
+      // let reader = new FileReader()
+      // reader.readAsBinaryString(file)
+      // reader.onloadstart = function () {
+      //   console.log('onloadstart')
+      // }
+      // reader.onprogress = function (p) {
+      //   console.log('onprogress')
+      //   console.log(p.loaded / p.total)
+      // }
+      // reader.onload = function (...arg) {
+      //   console.log('load complete')
+      //   console.log(arg)
+      // }
+      let formata = new FormData()
+      formata.append('file', file)
+      upStream({
+        file: formata,
+        method: this.$Global.apis['project_up_image'].m.toUpperCase(),
+        url: this.$Global.apis.baseURL + this.$Global.apis['project_up_image'].u,
+        ing: (d) => {
+          console.log(d.loaded / 1024 / 1024 + 'MB')
+        }
+      }).then(d => {
+        console.log(d)
+      })
     },
     downImage () {
       this.btnIdx = 2

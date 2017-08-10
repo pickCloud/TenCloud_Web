@@ -88,6 +88,9 @@
         clearInterval(this.sit)
       }
     },
+//    created () {
+//      console.log(document.cookie)
+//    },
     destroyed () {
       clearInterval(this.sit)
     },

@@ -56,7 +56,7 @@
                 <div class="lay-lcr clearfix m-b16">
                   <div class="lay-left text-center">
                     <div class="formbylabel file theme-dft">
-                      <input type="file" id="a5wpj6gl9za" name="file" @change="fileChange">
+                      <input type="file" id="a5wpj6gl9za" name="file" @change="fileChange" accept=".tar">
                       <label for="a5wpj6gl9za" class="file-label">选择文件</label>
                     </div>
                   </div>
@@ -64,7 +64,7 @@
                     <div class="lay-striped-bg p-lr-16">{{upfile.value}} </div>
                   </div>
                   <div class="lay-right">
-                    <m-btn class="primary_bg grey-dark_txt" :sizeh="-1">开始上传</m-btn>
+                    <m-btn class="primary_bg grey-dark_txt" :sizeh="-1" @click.native="startUpImage">开始上传</m-btn>
                   </div>
                 </div>
                 <div class="lay-lcr clearfix">
