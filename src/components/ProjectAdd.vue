@@ -64,7 +64,11 @@
                     <div class="lay-striped-bg p-lr-16">{{upfile.value}} </div>
                   </div>
                   <div class="lay-right">
-                    <m-btn class="primary_bg grey-dark_txt" :sizeh="-1" @click.native="startUpImage">开始上传</m-btn>
+                    <m-btn class="primary_bg grey-dark_txt" :sizeh="-1" @click.native="startUpImage" v-if="!uping">开始上传</m-btn>
+                    <div class="text-center ing-box primary_bg" :sizeh="-1">
+                      <div class="ing-box-bar"></div>
+                      <div class="ing-box-txt grey-dark_txt">{{uping}}</div>
+                    </div>
                   </div>
                 </div>
                 <div class="lay-lcr clearfix">
@@ -164,5 +168,22 @@
   .lay-striped-bg {
     background-color: #1d212a;
     height: 100%;
+  }
+  .ing-box {
+    border: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+  }
+  .ing-box-bar {
+    position: absolute;
+    width: 0;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(255,255,255,0.5);
+    z-index: 0;
+  }
+  .ing-box-txt {
+    position: relative;
+    z-index: 1;
   }
 </style>

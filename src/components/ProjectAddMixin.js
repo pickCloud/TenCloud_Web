@@ -19,7 +19,9 @@ export default {
     editorData: {},
     btnActive: 'primary_bg grey-dark_txt',
     btnIdx: 0,
-    upfile: ''
+    upfile: '',
+    uping: '',
+    upok: false
   }),
   watch: {
     btnIdx (n, o) {
@@ -35,28 +37,36 @@ export default {
   },
   methods: {
     addProject () {
-      let temp = this.githubs[this.repos_idx]
-      // console.log(this.formdata)
-      if (!temp) {
-        this.$toast('请先拉取来源', 'cc')
-        return
+      if (this.btnIdx === 0) {
+        let temp = this.githubs[this.repos_idx]
+        if (!temp) {
+          this.$toast('请先拉取来源', 'cc')
+          return
+        }
+        if (this.formdata.name === '') {
+          this.$toast('名称不能为空', 'cc')
+          return
+        }
+        if (this.formdata.image_name === '') {
+          this.$toast('镜像名称不能为空', 'cc')
+          return
+        }
+        if (this.formdata.description === '') {
+          this.$toast('描述不能为空', 'cc')
+          return
+        }
+        this.formdata.repos_name = temp.repos_name
+        this.formdata.repos_url = temp.repos_url
+        this.formdata.http_url = temp.http_url
+        if (this.isEditor) this.formdata.id = this.$route.params.id
       }
-      if (this.formdata.name === '') {
-        this.$toast('名称不能为空', 'cc')
-        return
+      if (this.btnIdx === 1) {
+        if (!this.upok) {
+          this.$toast('镜像还在上传中', 'cc')
+          return
+        }
       }
-      if (this.formdata.image_name === '') {
-        this.$toast('镜像名称不能为空', 'cc')
-        return
-      }
-      if (this.formdata.description === '') {
-        this.$toast('描述不能为空', 'cc')
-        return
-      }
-      this.formdata.repos_name = temp.repos_name
-      this.formdata.repos_url = temp.repos_url
-      this.formdata.http_url = temp.http_url
-      if (this.isEditor) this.formdata.id = this.$route.params.id
+
       this.$Global.async(this.isEditor ? 'project_update' : 'project_add', true).getData(this.formdata).then(d => {
         if (d.status === 0) {
           if (!this.isEditor) this.$router.push({name: 'Projects'})
@@ -90,8 +100,6 @@ export default {
         } else {
           this.$toast(d.message, 'cc')
         }
-        // console.log(tips)
-        // tips.actionPopper()
       })
     },
     upImage () {
@@ -102,21 +110,8 @@ export default {
       let file = this.upfile.files[0]
       if (file.size > 1024 * 1024 * 1024) {
         this.$toast('镜像不能大于1G', 'cc')
+        return
       }
-      // console.log(file.size / 1000 + 'kb')
-      // let reader = new FileReader()
-      // reader.readAsBinaryString(file)
-      // reader.onloadstart = function () {
-      //   console.log('onloadstart')
-      // }
-      // reader.onprogress = function (p) {
-      //   console.log('onprogress')
-      //   console.log(p.loaded / p.total)
-      // }
-      // reader.onload = function (...arg) {
-      //   console.log('load complete')
-      //   console.log(arg)
-      // }
       let formata = new FormData()
       formata.append('file', file)
       upStream({
@@ -124,10 +119,13 @@ export default {
         method: this.$Global.apis['project_up_image'].m.toUpperCase(),
         url: this.$Global.apis.baseURL + this.$Global.apis['project_up_image'].u,
         ing: (d) => {
-          console.log(d.loaded / 1024 / 1024 + 'MB')
+          let bfb = parseInt(d.loaded * 100 / d.total)
+          this.uping = bfb + '%'
+          this.$el.querySelector('.ing-box-bar').style.width = bfb + '%'
         }
       }).then(d => {
         console.log(d)
+        this.upok = true
       })
     },
     downImage () {
