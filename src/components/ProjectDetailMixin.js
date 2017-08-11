@@ -1,9 +1,11 @@
 const STATUS = {
-  '0': '无',
-  '1': '构建成功',
-  '2': '部署成功',
-  '-1': '构建失败',
-  '-2': '部署失败'
+  '0': ['初创建', 'primary_bg alpha-black_txt'],
+  '1': ['构建中', 'primary_bg alpha-black_txt'],
+  '2': ['构建成功', 'primary_bg alpha-black_txt'],
+  '3': ['部署中', 'primary_bg alpha-black_txt'],
+  '4': ['部署成功', 'primary_bg alpha-black_txt'],
+  '-2': ['构建失败', 'pink_bg alpha-black_txt'],
+  '-4': ['部署失败', 'pink_bg alpha-black_txt']
 }
 const MODE_CN = ['普通项目', '基础服务', '应用组件']
 export default {
@@ -60,7 +62,13 @@ export default {
   },
   computed: {
     pstatus () {
-      return STATUS[this.base.status + '']
+      return STATUS[this.base.status + ''][0]
+    },
+    pclass () {
+      return STATUS[this.base.status + ''][1]
+    },
+    imgSource () {
+      return this.base.image_source === 0 ? '代码仓库' : '外部镜像'
     },
     modecn () {
       return MODE_CN[this.base.mode]

@@ -39,6 +39,7 @@ const APIS = {
   project_vers: {u: '/api/project/', m: 'get'},
   project_image: {u: '/api/project/', m: 'get'},
   project_up_image: {u: '/api/project/image/upload', m: 'post'},
+  project_down_image: {u: '/api/project/image/cloud/download', m: 'post'},
   project_branch: {u: '/api/repos/branches?repos_name=', m: 'get'},
   project_create: {u: '/api/project/image/creation', m: 'post'},
   project_container_list: {u: '/api/project/containers/list', m: 'post'},
@@ -78,6 +79,7 @@ class AsyncData {
             axios.get(this._api + suffix, p).then(res => {
               if (res.status === 200) {
                 this._data = res.data
+                // console.log(res)
                 resolve(res.data)
               }
             }).catch(error => {

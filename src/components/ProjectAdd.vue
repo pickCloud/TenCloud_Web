@@ -31,70 +31,10 @@
           <tr>
             <td class="text-center">项目来源</td>
             <td class="p-lr-16">
-              <div class="btn-group">
-                <m-btn class="no-radius btn-github" :class="[gitLoadStyle, btnIdx === 0 ? btnActive : '']" @click.native="bindGitHub" v-html="git_tip"></m-btn>
-                <m-btn class="no-radius btn-github" :class="[btnIdx === 1 ? btnActive : '']" @click.native="upImage" v-if="formdata.mode!=0">从本地上传镜像</m-btn>
-                <m-btn class="no-radius btn-github" :class="[btnIdx === 2 ? btnActive : '']" @click.native="downImage" v-if="formdata.mode!=0">从云端下载镜像</m-btn>
-              </div>
-              <div class="git-list" v-if="githubs.length > 0 && btnIdx === 0">
-                <table class="table hover striped machines-table theme-dft">
-                  <thead>
-                  <tr>
-                    <th>仓库名称</th>
-                    <th>仓库路径</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr v-for="(item, i) in githubs">
-                    <td><m-radio v-model="repos_idx" :data="{label:item.repos_name, value:i+''}"></m-radio></td>
-                    <td>{{item.repos_url}}</td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="up-image m-b16 p-16" v-if="btnIdx === 1">
-                <div class="lay-lcr clearfix m-b16">
-                  <div class="lay-left text-center">
-                    <div class="formbylabel file theme-dft">
-                      <input type="file" id="a5wpj6gl9za" name="file" @change="fileChange" accept=".tar">
-                      <label for="a5wpj6gl9za" class="file-label">选择文件</label>
-                    </div>
-                  </div>
-                  <div class="lay-center">
-                    <div class="lay-striped-bg p-lr-16">{{upfile.value}} </div>
-                  </div>
-                  <div class="lay-right">
-                    <m-btn class="primary_bg grey-dark_txt" :sizeh="-1" @click.native="startUpImage" v-if="!uping">开始上传</m-btn>
-                    <div class="text-center ing-box primary_bg" :sizeh="-1">
-                      <div class="ing-box-bar"></div>
-                      <div class="ing-box-txt grey-dark_txt">{{uping}}</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="lay-lcr clearfix">
-                  <div class="lay-left text-center lay-border">版本号</div>
-                  <div class="lay-center2">
-                    <input type="text">
-                  </div>
-                </div>
-              </div>
-              <div class="down-image m-b16 p-16" v-if="btnIdx === 2">
-                <div class="lay-lcr clearfix m-b16">
-                  <div class="lay-left text-center lay-border">镜像地址</div>
-                  <div class="lay-center">
-                    <input type="text">
-                  </div>
-                  <div class="lay-right">
-                    <m-btn class="primary_bg grey-dark_txt" :sizeh="-1">开始下载</m-btn>
-                  </div>
-                </div>
-                <div class="lay-lcr clearfix">
-                  <div class="lay-left text-center lay-border">版本号</div>
-                  <div class="lay-center2">
-                    <input type="text">
-                  </div>
-                </div>
-              </div>
+              <bgroup v-model="imageMode" :mode="formdata.mode"></bgroup>
+              <keep-alive>
+                <component :is="imageMode" ref="proSource" :data="propData"></component>
+              </keep-alive>
             </td>
           </tr>
         </tbody>
@@ -172,18 +112,33 @@
   .ing-box {
     border: 1px solid rgba(255,255,255,0.1);
     position: relative;
+    overflow: hidden;
   }
   .ing-box-bar {
     position: absolute;
-    width: 0;
+    width: 100%;
     height: 100%;
-    left: 0;
+    left: -100%;
     top: 0;
-    background-color: rgba(255,255,255,0.5);
     z-index: 0;
+    overflow: hidden;
+    &:before {
+      content: ' ';
+      position: absolute;
+      left: -100%;
+      top: 0;
+      width: 200%;
+      height: 100%;
+      background: url("../assets/progress.png") repeat-x;
+      animation: progressLoop 2s infinite linear;
+    }
   }
   .ing-box-txt {
     position: relative;
     z-index: 1;
+  }
+  @keyframes progressLoop {
+    from {left: -100%;}
+    to {left: 0;}
   }
 </style>

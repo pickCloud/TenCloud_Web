@@ -30,7 +30,10 @@
               </tr>
               <tr>
                 <td>项目来源</td>
-                <td><span class="m-r8">{{base.repos_name}}:</span><m-btn :sizeh="-1" :href="base.http_url" class="m-r8 primary_txt" target="_blank">{{base.repos_url}}</m-btn></td>
+                <td>
+                  <span class="m-r8">{{imgSource}}</span>
+                </td>
+                <!--<td><span class="m-r8">{{base.repos_name}}:</span><m-btn :sizeh="-1" :href="base.http_url" class="m-r8 primary_txt" target="_blank">{{base.repos_url}}</m-btn></td>-->
               </tr>
               <tr>
                 <td>创建时间</td>
@@ -38,7 +41,7 @@
               </tr>
               <tr>
                 <td>状态</td>
-                <td><span class="vam">{{pstatus}}</span> <m-btn class="primary_txt">部署详情</m-btn> <m-btn class="primary_txt">容器详情</m-btn> <m-btn class="primary_txt">停止</m-btn></td>
+                <td><span class="vam plate" :class="[pclass]">{{pstatus}}</span> <m-btn class="primary_txt">部署详情</m-btn> <m-btn class="primary_txt">容器详情</m-btn> <m-btn class="primary_txt">停止</m-btn></td>
               </tr>
               <tr>
                 <td>更新时间</td>
