@@ -1,9 +1,10 @@
 import axios from 'axios'
 import Vue from 'vue'
 import router from './router'
-// import Cookies from 'js-cookie'
+
 const islocal = /.+localhost.+/.test(window.location.href)
 axios.defaults.withCredentials = true
+
 // http://10.0.1.9
 const APIS = {
   // baseURL: islocal ? 'http://10.0.1.9' : 'http://47.94.18.22',
@@ -71,7 +72,11 @@ class AsyncData {
                 resolve(res.data)
               }
             }).catch(error => {
-              if (canTip) Vue.prototype.$toast(error.response.data.message, 'cc')
+              if (canTip && error.response.status !== 403) Vue.prototype.$toast(error.response.data.message, 'cc')
+              if (error.response.status === 403) {
+                opations.isLogin = false
+                router.replace({name: 'Login'})
+              }
               reject(error)
             })
             break
@@ -85,7 +90,7 @@ class AsyncData {
               if (canTip && error.response.status !== 403) Vue.prototype.$toast(error.response.data.message, 'cc')
               if (error.response.status === 403) {
                 opations.isLogin = false
-                router.push({name: 'Login'})
+                router.replace({name: 'Login'})
               }
               reject(error)
             })
@@ -102,11 +107,6 @@ class AsyncData {
 }
 
 const Asyncs = {}
-// console.log(document.cookie)
-// if (islocal) Cookies.set('user', true)
-// Cookies.remove('user')
-// Cookies.set('user', {mobile: '13695245784'}, { expires: 1 })
-// console.log(Cookies.get('user'))
 
 const opations = {
   apis: APIS,
@@ -118,24 +118,14 @@ const opations = {
     return Asyncs[key]
   },
   login: (p, ok, err) => {
-    // let hasLogin = Cookies.get('user')
-    // if (!hasLogin) {
     opations.async('user_login', true).getData(p, '', false).then(d => {
-      // Cookies.set('user', p, { expires: 1 })
       ok(d)
     }, e => {
       err(e)
     })
-    // } else {
-    //   ok({
-    //     status: 0,
-    //     data: hasLogin
-    //   })
-    // }
   },
   logout () {
     opations.isLogin = false
-    // Cookies.remove('user')
   },
   isLogin: null
 }

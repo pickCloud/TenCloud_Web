@@ -133,8 +133,9 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  // console.log(to)
-  // console.log(from)
+  console.log(to)
+  console.log(from)
+  console.log(Global.isLogin)
   if (Global.isLogin === null) {
     Global.async('user_info', true).getData(null).then(d => {
       Global.isLogin = true
@@ -143,7 +144,7 @@ router.beforeEach((to, from, next) => {
       window.ROOT_DATA.userinfo = d.data
     })
   } else {
-    if (to.name === 'Login' && from.name === null) router.replace({name: 'Main'})
+    if (Global.isLogin && to.name === 'Login' && from.name === null) router.replace({name: 'Main'})
     else next()
   }
 })
