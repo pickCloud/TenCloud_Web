@@ -1,6 +1,7 @@
 import axios from 'axios'
 import Vue from 'vue'
-import Cookies from 'js-cookie'
+import router from './router'
+// import Cookies from 'js-cookie'
 const islocal = /.+localhost.+/.test(window.location.href)
 axios.defaults.withCredentials = true
 // http://10.0.1.9
@@ -65,7 +66,6 @@ class AsyncData {
           case 'post':
             if (p === null) throw new Error('post need params')
             axios.post(this._api + suffix, p).then(res => {
-              // console.log(res)
               if (res.status === 200) {
                 this._data = res.data
                 resolve(res.data)
@@ -79,11 +79,14 @@ class AsyncData {
             axios.get(this._api + suffix, p).then(res => {
               if (res.status === 200) {
                 this._data = res.data
-                // console.log(res)
                 resolve(res.data)
               }
             }).catch(error => {
-              if (canTip) Vue.prototype.$toast(error.response.data.message, 'cc')
+              if (canTip && error.response.status !== 403) Vue.prototype.$toast(error.response.data.message, 'cc')
+              if (error.response.status === 403) {
+                opations.isLogin = false
+                router.push({name: 'Login'})
+              }
               reject(error)
             })
             break
@@ -99,6 +102,7 @@ class AsyncData {
 }
 
 const Asyncs = {}
+// console.log(document.cookie)
 // if (islocal) Cookies.set('user', true)
 // Cookies.remove('user')
 // Cookies.set('user', {mobile: '13695245784'}, { expires: 1 })
@@ -114,28 +118,25 @@ const opations = {
     return Asyncs[key]
   },
   login: (p, ok, err) => {
-    let hasLogin = Cookies.get('user')
-    if (!hasLogin) {
-      opations.async('user_login', true).getData(p, '', false).then(d => {
-        Cookies.set('user', p, { expires: 1 })
-        ok(d)
-      }, e => {
-        err(e)
-      })
-    } else {
-      ok({
-        status: 0,
-        data: hasLogin
-      })
-    }
+    // let hasLogin = Cookies.get('user')
+    // if (!hasLogin) {
+    opations.async('user_login', true).getData(p, '', false).then(d => {
+      // Cookies.set('user', p, { expires: 1 })
+      ok(d)
+    }, e => {
+      err(e)
+    })
+    // } else {
+    //   ok({
+    //     status: 0,
+    //     data: hasLogin
+    //   })
+    // }
   },
   logout () {
-    Cookies.remove('user')
+    // Cookies.remove('user')
   },
-  isLogin: () => {
-    return Cookies.get('user')
-    // return true
-  }
+  isLogin: null
 }
 
 export default opations

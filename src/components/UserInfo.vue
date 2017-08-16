@@ -77,7 +77,7 @@
     methods: {
       getApiData () {
         this.$Global.async('user_info', true).getData(null).then(d => {
-          this.infos = d.data
+          this.$root.userinfo = this.infos = d.data
         })
       },
       changeInpState (n) {
@@ -88,7 +88,7 @@
       },
       cancelHandle () {
         this.isEditor = false
-        this.infos = JSON.parse(this.temp_data)
+        this.$root.userinfo = this.infos = JSON.parse(this.temp_data)
       },
       editorHandle () {
         this.isEditor = true
@@ -108,6 +108,7 @@
         return result
       },
       sureHandle (data = null) {
+        if (data instanceof MouseEvent) data = null
         let cdata = data || this.checkChangeData()
         if (cdata === null || this.updateing) return
 

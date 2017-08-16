@@ -7,7 +7,7 @@
     <div class="lay-body" v-if="!$parent.TD">
       <m-btn @click.native="back" v-if="hasBack"><i class="icon icon-return"></i></m-btn>
       <m-tip class="user-box" has-arrow popperMouse>
-        <div slot="label" class="user-box_label"><i class="icon icon-user vam"></i> <span class="vam">{{user.mobile}}</span></div>
+        <div slot="label" class="user-box_label"><i class="icon icon-user vam"></i> <span class="vam">{{userinfo.mobile}}</span></div>
         <ul slot="popper">
           <li><router-link :to="{name:'UserInfo'}"><i class="icon icon-ziliao vam"></i> <span class="vam">查看资料</span></router-link></li>
           <li class="text-center"><div class="__btn" @click="logout">退出登录</div></li>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-  import Cookies from 'js-cookie'
+//  import Cookies from 'js-cookie'
   export default {
     data: () => ({
       user: {}
@@ -43,10 +43,10 @@
       },
       hasBack () {
         return true
+      },
+      userinfo () {
+        return this.$root.userinfo
       }
-    },
-    mounted () {
-      this.user = JSON.parse(Cookies.get('user'))
     }
   }
 </script>

@@ -33,13 +33,14 @@ window.Date.prototype.Format = function (fmt) {
   return fmt
 }
 
+window.ROOT_DATA = {
+  userinfo: {}
+}
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  data: () => ({
-    come: 'comoa'
-  }),
+  data: window.ROOT_DATA,
   template: '<App/>',
   components: { App }
 })

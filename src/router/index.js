@@ -29,11 +29,12 @@ const router = new Router({
     {
       path: '/',
       component: LayMain,
-      beforeEnter: (to, from, next) => {
-        if (Global.isLogin()) next()
-        else router.replace({name: 'Login'})
-        // console.log(router)
-      },
+      // beforeEnter: (to, from, next) => {
+      //   // if (Global.isLogin()) next()
+      //   // else router.replace({name: 'Login'})
+      //   // console.log(router)
+      //   next()
+      // },
       children: [
         {
           path: '/',
@@ -130,8 +131,21 @@ const router = new Router({
     }
   ]
 })
-// router.beforeEach((to, from, next) => {
-//   console.log(to)
-// })
+
+router.beforeEach((to, from, next) => {
+  // console.log(to)
+  // console.log(from)
+  if (Global.isLogin === null) {
+    Global.async('user_info', true).getData(null).then(d => {
+      Global.isLogin = true
+      if (to.name === 'Login') router.replace({name: 'Main'})
+      else next()
+      window.ROOT_DATA.userinfo = d.data
+    })
+  } else {
+    if (to.name === 'Login' && from.name === null) router.replace({name: 'Main'})
+    else next()
+  }
+})
 
 export default router
