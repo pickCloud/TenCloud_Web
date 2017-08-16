@@ -133,9 +133,9 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(to)
-  console.log(from)
-  console.log(Global.isLogin)
+  // console.log(to)
+  // console.log(from)
+  // console.log(Global.isLogin)
   if (Global.isLogin === null) {
     Global.async('user_info', true).getData(null).then(d => {
       Global.isLogin = true
