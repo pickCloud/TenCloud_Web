@@ -134,6 +134,7 @@ const opations = {
     // }
   },
   logout () {
+    opations.isLogin = false
     // Cookies.remove('user')
   },
   isLogin: null
