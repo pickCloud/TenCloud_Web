@@ -31,6 +31,16 @@
         }).then(d => {
           console.log(d)
         })
+      },
+      getData () {
+        const temp = {
+          version: this.image_ver
+        }
+        if (this.image_ver === '') {
+          this.$toast('请输入版本号', 'cc')
+          return false
+        }
+        return temp
       }
     }
   }

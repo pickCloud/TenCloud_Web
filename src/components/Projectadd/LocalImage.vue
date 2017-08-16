@@ -69,12 +69,11 @@
           return false
         }
         if (this.ver === '') {
-          this.$toast('请输入版本', 'cc')
+          this.$toast('请输入版本号', 'cc')
           return false
         }
         return {
-          ver: this.ver,
-          data: this.updata
+          version: this.ver
         }
       }
     }
