@@ -157,3 +157,16 @@
     opacity: 1;
   }
 }
+
+.cov-datepicker {
+  background-color: transparent;
+  border-color: transparent;
+  color: $color-font-base;
+  font-size: 100%;
+}
+.cov-date-caption {
+  small {
+    font-size: 1rem;
+    color: #000000;
+  }
+}

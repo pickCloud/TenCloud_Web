@@ -41,7 +41,12 @@
               </tr>
               <tr>
                 <td>状态</td>
-                <td><span class="vam plate" :class="[pclass]">{{pstatus}}</span> <m-btn class="primary_txt">部署详情</m-btn> <m-btn class="primary_txt">容器详情</m-btn> <m-btn class="primary_txt">停止</m-btn></td>
+                <td>
+                  <span class="vam plate" :class="[pclass]">{{pstatus}}</span>
+                  <!--<m-btn class="primary_txt">部署详情</m-btn> -->
+                  <!--<m-btn class="primary_txt">容器详情</m-btn> -->
+                  <!--<m-btn class="primary_txt">停止</m-btn>-->
+                </td>
               </tr>
               <tr>
                 <td>更新时间</td>

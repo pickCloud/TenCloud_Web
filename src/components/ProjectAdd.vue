@@ -79,10 +79,10 @@
       }
     }
   }
-  .lay-left {
+  .lay-l {
     width: 100px;
   }
-  .lay-right {
+  .lay-r {
     width: 200px;
     .btn {
       height: 100%;
@@ -90,11 +90,11 @@
       margin-top: -1px;
     }
   }
-  .lay-center {
+  .lay-c {
     width: calc(100% - 300px);
     padding: 0 16px;
   }
-  .lay-center2 {
+  .lay-c2 {
     width: calc(100% - 100px);
     padding-left: 16px;
   }

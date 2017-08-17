@@ -3,9 +3,9 @@
     <panel class='m-b16'>
       <div class="panel-title" slot="title">
         账号安全
-        <m-btn class="right primary_bg grey-dark_txt m-t04" v-if="!isEditor" @click.native="editorHandle">修改</m-btn>
-        <m-btn class="right primary_bg grey-dark_txt m-t04" v-if="isEditor" @click.native="cancelHandle">取消</m-btn>
-        <m-btn class="right primary_bg grey-dark_txt m-t04 m-r8" v-if="isEditor" @click.native="sureHandle">保存</m-btn>
+        <m-btn class="right primary_bg grey-dark_txt m-t04" v-if="!isEditor" @click.native="editorHandle(0)">修改</m-btn>
+        <m-btn class="right primary_bg grey-dark_txt m-t04" v-if="isEditor" @click.native="cancelHandle(0)">取消</m-btn>
+        <m-btn class="right primary_bg grey-dark_txt m-t04 m-r8" v-if="isEditor" @click.native="sureHandle(0)">保存</m-btn>
       </div>
       <div class="p-16">
         <!--<div class="lay-left-right">-->
@@ -23,12 +23,18 @@
         <div class="lay-left-right">
           <div class="lay-left">邮箱</div>
           <div class="lay-right lay-border-bottom">
-            <input type="email" class="inp-editor" :class="{'editor':isEditor}" v-model="infos.email">
+            <input type="email" class="inp-editor" :disabled="!isEditor" :class="{'editor':isEditor}" v-model="infos.email">
           </div>
         </div>
       </div>
     </panel>
-    <panel title='基本信息'>
+    <panel>
+      <div class="panel-title" slot="title">
+        基本信息
+        <m-btn class="right primary_bg grey-dark_txt m-t04" v-if="!isEditor2" @click.native="editorHandle(1)">修改</m-btn>
+        <m-btn class="right primary_bg grey-dark_txt m-t04" v-if="isEditor2" @click.native="cancelHandle(1)">取消</m-btn>
+        <m-btn class="right primary_bg grey-dark_txt m-t04 m-r8" v-if="isEditor2" @click.native="sureHandle(1)">保存</m-btn>
+      </div>
       <m-row class="p-16" :gutter="16">
         <m-col class="xs-12 md-4 text-center m-b16">
           <div class="info-head m-b16">
@@ -46,7 +52,28 @@
         <m-col class="xs-12 md-8">
           <div class="lay-left-right">
             <div class="lay-left">姓名</div>
-            <div class="lay-right lay-bg">{{infos.name}}</div>
+            <div class="lay-right lay-border-bottom">
+              <input type="text" class="inp-editor" :disabled="!isEditor2" :class="{'editor':isEditor2}" v-model="infos.name">
+            </div>
+          </div>
+          <div class="lay-left-right">
+            <div class="lay-left">性别</div>
+            <div class="lay-right lay-border-bottom">
+              <span v-if="!isEditor2">{{sex}}</span>
+              <span v-else>
+                <m-radio v-model="xingbie" class="m-r8" :data="{label:'男', value:'0'}"></m-radio>
+                <m-radio v-model="xingbie" :data="{label:'女', value:'1'}"></m-radio>
+              </span>
+            </div>
+          </div>
+          <div class="lay-left-right">
+            <div class="lay-left">生日</div>
+            <div class="lay-right lay-border-bottom">
+              <span v-if="!isEditor2">{{date.time}}</span>
+              <span v-else>
+                <datepicker :date="date" :option="dateop"></datepicker>
+              </span>
+            </div>
           </div>
         </m-col>
       </m-row>
@@ -55,7 +82,10 @@
 </template>
 
 <script>
+  import moment from 'moment'
   import * as Qiniu from '../Qiniu'
+  import DatePickerMixin from './DatePickerMixins'
+
   export default {
     data: () => ({
       infos: {
@@ -63,35 +93,50 @@
         'name': '',
         'mobile': '',
         'email': '',
-        'image_url': ''
+        'image_url': '',
+        'gender': 0,
+        'birthday': 1502952797
       },
       isEditor: false,
+      isEditor2: false,
       updateing: false,
+      xingbie: '-1',
       thumbFile: ''
     }),
-    watch: {
-      isEditor (n, o) {
-        this.changeInpState(n)
-      }
-    },
+    mixins: [DatePickerMixin],
     methods: {
       getApiData () {
         this.$Global.async('user_info', true).getData(null).then(d => {
           this.$root.userinfo = this.infos = d.data
+          if (this.infos.birthday !== undefined) this.date.time = moment.unix(this.infos.birthday).format('YYYY-MM-DD')
+          if (this.infos.gender !== undefined) this.xingbie = this.infos.gender + ''
+          console.log(moment('2017-8-17', 'YYYY-M-D').unix())
         })
       },
-      changeInpState (n) {
-        this.$el.querySelectorAll('.inp-editor').forEach((v, i) => {
-          if (!n) v.setAttribute('disabled', true)
-          else v.removeAttribute('disabled')
-        })
-      },
-      cancelHandle () {
-        this.isEditor = false
+      cancelHandle (p) {
+        switch (p) {
+          case 0:
+            this.isEditor = false
+            break
+          case 1:
+            this.isEditor2 = false
+            break
+        }
         this.$root.userinfo = this.infos = JSON.parse(this.temp_data)
+        if (this.infos.gender !== undefined) this.xingbie = this.infos.gender + ''
+        else this.xingbie = '-1'
+        if (this.infos.birthday !== undefined) this.date.time = moment.unix(this.infos.birthday).format('YYYY-MM-DD')
+        else this.date.time = ''
       },
-      editorHandle () {
-        this.isEditor = true
+      editorHandle (p) {
+        switch (p) {
+          case 0:
+            this.isEditor = true
+            break
+          case 1:
+            this.isEditor2 = true
+            break
+        }
         this.temp_data = JSON.stringify(this.infos)
       },
       checkChangeData () {
@@ -105,17 +150,22 @@
             result[key] = nv
           }
         }
+        let tempxb = parseInt(this.xingbie)
+        if (this.infos['gender'] !== tempxb) result['gender'] = tempxb
+        let tempbd = moment(this.date.time).unix()
+        if (this.infos['birthday'] !== tempbd) result['birthday'] = tempbd
         return result
       },
-      sureHandle (data = null) {
-        if (data instanceof MouseEvent) data = null
-        let cdata = data || this.checkChangeData()
+      sureHandle (p) {
+        if ((typeof p).toLowerCase() === 'number') p = null
+        let cdata = p || this.checkChangeData()
         if (cdata === null || this.updateing) return
 
         this.updateing = true
         this.$Global.async('user_update', true).getData(cdata).then(d => {
           this.$toast(d.message, 'cc')
           this.isEditor = false
+          this.isEditor2 = false
           this.updateing = false
           this.getApiData()
           if (this.confirm) {
@@ -157,8 +207,12 @@
       }
     },
     mounted () {
-      this.changeInpState(false)
       this.headHeigth()
+    },
+    computed: {
+      sex () {
+        return this.infos.gender === undefined ? '' : parseInt(this.infos.gender) === 0 ? '男' : '女'
+      }
     },
     created () {
       this.getApiData()

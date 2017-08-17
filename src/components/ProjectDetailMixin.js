@@ -62,10 +62,10 @@ export default {
   },
   computed: {
     pstatus () {
-      return this.base.status ? STATUS[this.base.status + ''][0] : ''
+      return this.base.status !== undefined ? STATUS[this.base.status + ''][0] : ''
     },
     pclass () {
-      return this.base.status ? STATUS[this.base.status + ''][1] : ''
+      return this.base.status !== undefined ? STATUS[this.base.status + ''][1] : ''
     },
     imgSource () {
       return this.base.image_source === 0 ? '代码仓库' : '外部镜像'
