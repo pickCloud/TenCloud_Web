@@ -110,7 +110,7 @@
           this.$root.userinfo = this.infos = d.data
           if (this.infos.birthday !== undefined) this.date.time = moment.unix(this.infos.birthday).format('YYYY-MM-DD')
           if (this.infos.gender !== undefined) this.xingbie = this.infos.gender + ''
-          console.log(moment('2017-8-17', 'YYYY-M-D').unix())
+//          console.log(moment('2017-8-17', 'YYYY-M-D').unix())
         })
       },
       cancelHandle (p) {
@@ -150,10 +150,13 @@
             result[key] = nv
           }
         }
+        if (result === null) result = {}
         let tempxb = parseInt(this.xingbie)
-        if (this.infos['gender'] !== tempxb) result['gender'] = tempxb
+        if (this.infos.gender !== undefined && parseInt(this.infos.gender) !== tempxb) result['gender'] = tempxb
+        if (this.infos.gender === undefined && tempxb !== -1) result['gender'] = tempxb
         let tempbd = moment(this.date.time).unix()
-        if (this.infos['birthday'] !== tempbd) result['birthday'] = tempbd
+        if (this.infos.birthday !== undefined && parseInt(this.infos.birthday) !== tempbd) result['birthday'] = tempbd
+        if (!this.infos.birthday === undefined && this.date.time !== '') result['birthday'] = tempbd
         return result
       },
       sureHandle (p) {
