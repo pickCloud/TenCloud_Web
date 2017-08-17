@@ -61,8 +61,8 @@
             <div class="lay-right lay-border-bottom">
               <span v-if="!isEditor2">{{sex}}</span>
               <span v-else>
-                <m-radio v-model="xingbie" class="m-r8" :data="{label:'男', value:'0'}"></m-radio>
-                <m-radio v-model="xingbie" :data="{label:'女', value:'1'}"></m-radio>
+                <m-radio v-model="xingbie" class="m-r8" :data="{label:'男', value:'1'}"></m-radio>
+                <m-radio v-model="xingbie" :data="{label:'女', value:'2'}"></m-radio>
               </span>
             </div>
           </div>
@@ -214,7 +214,7 @@
     },
     computed: {
       sex () {
-        return this.infos.gender === undefined ? '' : parseInt(this.infos.gender) === 0 ? '男' : '女'
+        return this.infos.gender === undefined ? '' : parseInt(this.infos.gender) === 1 ? '男' : '女'
       }
     },
     created () {
