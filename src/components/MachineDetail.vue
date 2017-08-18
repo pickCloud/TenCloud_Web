@@ -80,7 +80,7 @@
           </m-row>
           <m-row class="panel-list">
             <m-col class="xs-4">服务商</m-col>
-            <m-col class="xs-8">{{baseInfo.cluster_name}}</m-col>
+            <m-col class="xs-8">{{businessInfo.provider}}</m-col>
           </m-row>
           <m-row class="panel-list">
             <m-col class="xs-4">地址</m-col>

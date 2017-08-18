@@ -28,7 +28,7 @@
           <tr v-for="item in listts">
             <td><m-checkbox class="list-check" v-model="selects" :data="{label:(item.id+'')}" hide-label></m-checkbox></td>
             <td>{{item.name}}</td>
-            <td>阿里云</td>
+            <td>{{item.provider}}</td>
             <td>{{item.address}}</td>
             <td>{{item.public_ip}}</td>
             <td><span class="plate" :class="item.machine_status | mclass">{{item.machine_status | mstatus}}</span></td>
