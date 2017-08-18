@@ -8,7 +8,7 @@ axios.defaults.withCredentials = true
 // http://10.0.1.9
 const APIS = {
   // baseURL: islocal ? 'http://10.0.1.9' : 'http://47.94.18.22',
-  baseURL: 'http://console.10.com',
+  baseURL: 'http://c.10.com',
   // baseURL: 'http://192.168.1.122:8010',
   wsURL: islocal ? 'ws://10.0.1.9:8010' : 'ws://console.10.com',
   clusters: {u: '/api/clusters', m: 'get'},
