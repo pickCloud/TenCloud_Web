@@ -50,6 +50,7 @@ export default {
       this.$router.push({name: 'Verlist', params: {verlist: this.vers}})
     },
     getContainerList () {
+      if (!this.base.deploy_ips || this.base.deploy_ips.length === 0 || this.base.deploy_ips === '') return
       this.$Global.async('project_container_list', true).getData({
         container_list: this.base.deploy_ips,
         container_name: this.base.container_name
