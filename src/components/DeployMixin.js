@@ -33,6 +33,7 @@ export default {
     gomlist () {
       let temp = this.$route.params
       temp.version = this.version
+      temp.container_name = this.container_name
       this.$router.replace({name: 'Machines', params: temp})
     },
     getMachineIps () {
@@ -84,6 +85,7 @@ export default {
       this.$router.replace({name: 'ProjectDetail', params: {id: this.$route.params.id}})
     } else {
       this.image_name = this.$route.params.image_name || ''
+      this.container_name = this.$route.params.container_name || ''
       this.getVerList()
     }
   }
