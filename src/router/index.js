@@ -22,6 +22,10 @@ const VerNotes = r => require.ensure([], () => r(require('@/components/VerNotes'
 const Login = r => require.ensure([], () => r(require('@/views/layout/Login')), 'login')
 const UserInfo = r => require.ensure([], () => r(require('@/components/UserInfo')), 'userinfo')
 
+const FileHub = r => require.ensure([], () => r(require('@/components/FileHub')), 'filehub')
+const FileHubIn = r => require.ensure([], () => r(require('@/components/filehub/FileHubIn')), 'filehubin')
+const FileHubOut = r => require.ensure([], () => r(require('@/components/filehub/FileHubOut')), 'filehubout')
+
 Vue.use(Router)
 
 const router = new Router({
@@ -120,6 +124,26 @@ const router = new Router({
           name: 'UserInfo',
           meta: {level: 2},
           component: UserInfo
+        },
+        {
+          path: '/filehub',
+          name: 'FileHub',
+          meta: {level: 1},
+          component: FileHub,
+          children: [
+            {
+              path: '/',
+              name: 'FileHubIn',
+              meta: {level: 2},
+              component: FileHubIn
+            },
+            {
+              path: '/hubout',
+              name: 'FileHubOut',
+              meta: {level: 2},
+              component: FileHubOut
+            }
+          ]
         }
       ]
     },

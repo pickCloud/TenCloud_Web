@@ -20,6 +20,11 @@
           label: '项目',
           link: {name: 'Projects'},
           icon: 'icon icon-xiangmu1'
+        },
+        {
+          label: '文件',
+          link: {name: 'FileHub'},
+          icon: 'icon icon-wenjiancunchu'
         }
       ]
     }),

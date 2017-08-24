@@ -35,13 +35,13 @@
   .lay-aside {
     background-color: $color-app-left-bg;
     padding-top: $gutter;
-    border-right: $gutter solid $color-app-top-bg;
   }
   .lay-body {
     position: relative;
     height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
+    border-left: $gutter solid $color-app-top-bg;
   }
 }
 .lay-aside {
