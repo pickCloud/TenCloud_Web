@@ -37,12 +37,6 @@
     height: 100%;
     overflow-y: auto;
     padding: 16px;
-    .path-box {
-      height: 60px;
-      line-height: 60px;
-      padding: 0 16px;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
   }
   .page-filehub-left-title {
     font-size: 1rem;

@@ -23,7 +23,7 @@
         },
         {
           label: '文件',
-          link: {name: 'FileHub'},
+          link: {name: 'FileHubIn'},
           icon: 'icon icon-wenjiancunchu'
         }
       ]
