@@ -51,7 +51,9 @@ const APIS = {
   user_verify: {u: '/api/user/sms/', m: 'post'},
   user_logout: {u: '/api/user/logout', m: 'post'},
   user_info: {u: '/api/user', m: 'get'},
-  user_thumb_token: {u: '/api/user/token', m: 'get'}
+  user_thumb_token: {u: '/api/user/token', m: 'get'},
+  file_list: {u: '/api/file/list', m: 'post'},
+  file_pages: {u: '/api/file/pages', m: 'get'}
 }
 
 class AsyncData {

@@ -2,8 +2,8 @@
   <div class="page-filehub">
     <div class="page-filehub-left">
       <div class="page-filehub-left-title">文件储存</div>
-      <router-link class="page-filehub-menu-item" :to="{name:'FileHubIn'}">内部文件</router-link>
-      <router-link class="page-filehub-menu-item" :to="{name:'FileHubOut'}">用户文件</router-link>
+      <router-link class="page-filehub-menu-item" :to="{name:'FileHubIn'}">文件列表</router-link>
+      <!--<router-link class="page-filehub-menu-item" :to="{name:'FileHubOut'}">用户文件</router-link>-->
     </div>
     <div class="page-filehub-right">
       <router-view></router-view>
@@ -47,7 +47,7 @@
   .page-filehub-left-title {
     font-size: 1rem;
     margin-top: 40px;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
   }
   .page-filehub-menu-item {
     display: block;

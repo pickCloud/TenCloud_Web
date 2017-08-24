@@ -108,6 +108,18 @@
       }
     }
   }
+  &.pages {
+    position: absolute;
+    background-color: #303542;
+    width: 100%;
+    bottom: 0;
+    .page-btn {
+      text-align: center;
+      &.active {
+        background-color: #1e2129;
+      }
+    }
+  }
 }
 
 //// d3-scale

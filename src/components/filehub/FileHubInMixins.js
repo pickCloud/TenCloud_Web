@@ -1,19 +1,14 @@
 import Poppers from '../Poppers.js'
 import Selects from '../Selects.js'
-import StatusCode from '../StatusCode.js'
+
 export default {
   mixins: [Poppers, Selects],
   data: () => ({
-    isDeploy: false
+    now_page: 1,
+    page_number: 2,
+    total_page: 20,
+    listts: []
   }),
-  filters: {
-    'mstatus' (v) {
-      return StatusCode.machine[v][0]
-    },
-    'mclass' (v) {
-      return StatusCode.machine[v][1]
-    }
-  },
   methods: {
     delMachine (id) {
       let delids = this.selects
@@ -34,10 +29,19 @@ export default {
       }
     },
     getApiData () {
-      // const cid = this.clusterid = 1
-      // this.$Global.async('cluster_detail', true).getData(null, cid).then(d => {
-      //   this.listts = d.data.server_list
-      // })
+      this.$Global.async('file_list', true).getData({
+        now_page: this.now_page,
+        page_number: this.page_number
+      }).then(d => {
+        this.listts = d.data.files
+        // console.log(d.data.files)
+      })
+    },
+    getPagesNumber () {
+      this.$Global.async('file_pages').getData(null).then(d => {
+        // console.log(d)
+        this.total_page = Math.ceil(d.data / this.page_number)
+      })
     },
     getMdataByIds (ids) {
       let i = -1
@@ -58,9 +62,14 @@ export default {
         params.machineids = delids
         this.$router.replace({name: 'Deploy', params: params})
       }
+    },
+    numChange (n) {
+      this.now_page = n
+      this.getApiData()
     }
   },
   created () {
+    this.getPagesNumber()
     this.getApiData()
     this.isDeploy = this.$route.params.type && this.$route.params.type === 'deploy'
     if (this.$route.params.machineids) this.selects = this.$route.params.machineids

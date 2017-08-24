@@ -1,9 +1,9 @@
 <template>
-  <panel title="内部文件">
+  <panel class="file-list-box" title="文件列表">
     <div class="path-box clearfix">
-          <span class="path-span">
-            a/b/c
-          </span>
+      <span class="path-span">
+        a/b/c
+      </span>
       <div class="btn-group right">
         <m-btn class="primary_bg no-radius grey-dark_txt">上传文件</m-btn>
         <m-btn class="primary_bg no-radius grey-dark_txt m-r8">新建文件夹</m-btn>
@@ -29,14 +29,13 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
+        <tr v-for="item in listts">
           <td><m-checkbox class="list-check" v-model="selects" :data="{label:'11'}" hide-label></m-checkbox></td>
-          <td>111</td>
-          <td>222</td>
+          <td>{{item.filename}}</td>
+          <td>{{item.size}}</td>
           <td>333</td>
-          <td>444</td>
+          <td>{{item.owner}}</td>
           <td>
-            555
             <!--<m-btn :href="{name:'ProjectDetail', params:{id:item.id}}" class="primary_txt">详情</m-btn>-->
             <!--<m-btn class="pink_txt" @click.native="delProject(item.id)">删除</m-btn>-->
           </td>
@@ -44,6 +43,7 @@
         </tbody>
       </m-table>
     </div>
+    <m-page :allpage="total_page" :nowpage="now_page" :sizeh="40" :sizew="40" @change="numChange"></m-page>
   </panel>
 </template>
 
@@ -53,3 +53,9 @@
     mixins: [HubInMixin]
   }
 </script>
+
+<style lang="scss">
+  .file-list-box {
+    height: 100%;
+  }
+</style>
