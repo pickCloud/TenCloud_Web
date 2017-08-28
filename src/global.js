@@ -53,7 +53,8 @@ const APIS = {
   user_info: {u: '/api/user', m: 'get'},
   user_thumb_token: {u: '/api/user/token', m: 'get'},
   file_list: {u: '/api/file/list', m: 'post'},
-  file_pages: {u: '/api/file/pages', m: 'get'}
+  file_pages: {u: '/api/file/pages', m: 'get'},
+  file_create_dir: {u: '/api/file', m: 'post'}
 }
 
 class AsyncData {

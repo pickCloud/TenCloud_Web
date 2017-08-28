@@ -1,5 +1,6 @@
 import Poppers from '../Poppers.js'
 import Selects from '../Selects.js'
+import CreateNewVue from '../popx/CreateNewFile.vue'
 
 export default {
   mixins: [Poppers, Selects],
@@ -7,16 +8,17 @@ export default {
     now_page: 1,
     page_number: 2,
     total_page: 20,
+    pid: null,
     listts: []
   }),
   methods: {
-    delMachine (id) {
+    delFile (id) {
       let delids = this.selects
       if (id !== -1) delids = [id + '']
       if (delids.length === 0) {
-        this.$toast('请选择要删除的主机', 'cc')
+        this.$toast('请选择要删除的文件', 'cc')
       } else {
-        this.popperDelete('您确定要删除主机' + this.getAttrById(delids).join(',') + '吗？', _ => {
+        this.popperDelete('您确定要删除文件' + this.getAttrById(delids, 'filename').join(',') + '吗？', _ => {
           this.$Global.async('server_del', true).getData({
             id: delids
           }).then(d => {
@@ -43,35 +45,40 @@ export default {
         this.total_page = Math.ceil(d.data / this.page_number)
       })
     },
-    getMdataByIds (ids) {
-      let i = -1
-      let temp = []
-      while (++i < this.listts.length) {
-        let v = this.listts[i]
-        if (ids.indexOf(v.id + '') !== -1) temp.push(v)
-      }
-      return temp
-    },
-    deploySelect () {
-      let delids = this.selects
-      if (delids.length === 0) {
-        this.$toast('请选择要部署的主机', 'cc')
-      } else {
-        let params = this.$route.params
-        params.machines = this.getMdataByIds(delids)
-        params.machineids = delids
-        this.$router.replace({name: 'Deploy', params: params})
-      }
-    },
     numChange (n) {
       this.now_page = n
       this.getApiData()
+    },
+    createNew () {
+      this.$Popx({
+        popper: CreateNewVue,
+        data: {
+          title: '新建文件夹'
+        },
+        callback: (type, payload, next) => {
+          console.log(payload)
+          if (payload.type === 'sure') {
+            this.$Global.async('file_create_dir', true).getData({
+              pid: this.pid,
+              dir_name: payload.filename
+            }).then(d => {
+              console.log(d)
+            })
+          } else {
+            next()
+          }
+        }
+      })
+    },
+    clipboard (d) {
+      if (d.action === 'copy') {
+        this.$toast('复制成功', 'cc')
+      }
     }
   },
   created () {
     this.getPagesNumber()
     this.getApiData()
-    this.isDeploy = this.$route.params.type && this.$route.params.type === 'deploy'
-    if (this.$route.params.machineids) this.selects = this.$route.params.machineids
+    this.pid = this.$route.params.id
   }
 }

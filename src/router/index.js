@@ -126,7 +126,7 @@ const router = new Router({
           component: UserInfo
         },
         {
-          path: '/filehub',
+          path: '/filehub/:id',
           name: 'FileHubIn',
           meta: {level: 1},
           component: FileHubIn
