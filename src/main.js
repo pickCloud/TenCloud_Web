@@ -1,10 +1,12 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
+import Jimu from 'jimu'
 import Vuepopx from './vue-popx'
+import Vuetask from './vue-tasks'
+import Vuepages from './vue-pages'
 import App from './App'
 import router from './router'
-import Jimu from 'jimu'
 import Global from './global'
 // 引入自定义指令
 import Clipboard from './vue-clipboard'
@@ -16,6 +18,8 @@ import Piece from './components/piece'
 Vue.config.productionTip = false
 Vue.prototype.$Global = Global
 Vue.use(Vuepopx)
+Vue.use(Vuetask)
+Vue.use(Vuepages)
 Vue.use(Jimu)
 Vue.use(Piece)
 Vue.directive('clipboard', Clipboard)

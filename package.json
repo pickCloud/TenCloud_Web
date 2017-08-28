@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "axios": "^0.16.1",
+    "browser-md5-file": "^1.0.0",
     "chart.js": "^2.6.0",
     "clipboard": "^1.7.1",
     "jimu": "^0.0.94",

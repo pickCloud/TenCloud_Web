@@ -6,13 +6,16 @@
         <span v-if="pid === 0">全部文件</span>
       </span>
         <div class="btn-group right">
-          <m-btn class="primary_bg no-radius grey-dark_txt">上传文件</m-btn>
+          <div class="formbylabel file theme-dft">
+            <input type="file" id="a5wpj6gl9zab" name="file" multiple accept="*/*" @change="fileChange">
+            <label for="a5wpj6gl9zab" class="file-label">上传文件</label>
+          </div>
           <m-btn class="primary_bg no-radius grey-dark_txt m-r8" @click.native="createNew">新建文件夹</m-btn>
-          <m-btn class="primary_bg no-radius grey-dark_txt">下载</m-btn>
+          <m-btn class="primary_bg no-radius grey-dark_txt" @click.native="downFile(-1)">下载</m-btn>
           <m-btn class="pink_bg no-radius grey-dark_txt" @click.native="delFile(-1)">删除</m-btn>
         </div>
       </div>
-      <div class="p-lr-16">
+      <div class="p-lr-16 file-list-body">
         <m-table class="hover striped machines-table">
           <col width="55px">
           <col width="12%">
@@ -41,15 +44,15 @@
             <td>{{item.owner}}</td>
             <td>
               <m-btn class="primary_txt" v-if="item.type === 0">预览</m-btn>
-              <m-btn class="primary_txt" data-clipboard-text='nihao zhong' v-clipboard="clipboard">复制URL</m-btn>
-              <m-btn class="primary_txt">下载</m-btn>
+              <m-btn class="primary_txt" data-clipboard-text='nihao zhong' v-clipboard="clipboard" v-if="item.type === 0">复制URL</m-btn>
+              <m-btn class="primary_txt" @click.native="downFile(item.id)" v-if="item.type === 0">下载</m-btn>
               <m-btn class="pink_txt" @click.native="delFile(item.id)">删除</m-btn>
             </td>
           </tr>
           </tbody>
         </m-table>
       </div>
-      <m-page :allpage="total_page" :nowpage="now_page" :sizeh="40" :sizew="40" @change="numChange"></m-page>
+      <pages :allpage="total_page" :shownum="page_number" :nowpage="now_page" :sizeh="40" :sizew="40" @change="numChange"></pages>
     </panel>
   </div>
 </template>
@@ -64,9 +67,32 @@
 <style lang="scss">
   .page-filehubin {
     height: 100%;
+    .file {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .file-label {
+      display: inline-block;
+      background-color: #48bbc0 !important;
+      border: none !important;
+      height: 32px;
+      line-height: 32px;
+      color: #282828;
+      padding: 0 16px !important;
+      &:hover {
+        color: #fff !important;
+      }
+    }
   }
   .file-list-box {
+    position: relative;
     height: 100%;
+  }
+  .file-list-body {
+    position: relative;
+    width: 100%;
+    height: calc(100% - 150px);
+    overflow-y: auto;
   }
   .path-box {
     height: 60px;
