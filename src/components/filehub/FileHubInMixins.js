@@ -153,6 +153,5 @@ export default {
       this.getPagesNumber()
       this.getApiData()
     }
-    console.log(window.clipboardData)
   }
 }
