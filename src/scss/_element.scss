@@ -55,6 +55,10 @@
   .popper-body {
     padding: $gutter*4;
     border-bottom:1px solid #262a35;
+    max-width: 640px;
+    .vam {
+      word-break:break-all;
+    }
   }
   .popper-foot {
     padding: $gutter $gutter*4;

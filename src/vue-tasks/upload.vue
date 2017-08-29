@@ -4,7 +4,7 @@
     <div class="task-upload-item task-item-b">{{filesize}}</div>
     <div class="task-upload-item task-item-c">
       <span>{{uping}}%</span>
-      <i class="icon icon-close right" v-if="upok"></i>
+      <i class="icon icon-close right" v-if="upok" @click="removeTask"></i>
     </div>
   </div>
 </template>
@@ -23,27 +23,42 @@
     },
     data: () => ({
       uping: 0,
-      updata: {},
       upok: false
     }),
     methods: {
       upload () {
         let temppost = {}
         this.$Global.async('file_upload', true).getData({
-          hash: this.data.hash,
-          pid: this.data.pid
+          file_infos: [
+            {
+              hash: this.data.hash,
+              pid: this.data.pid
+            }
+          ]
         }).then(d => {
-          temppost.file_id = d.data.file_id
+          temppost.file_id = d.data[0].file_id
           let formata = new FormData()
           formata.append('file', this.data.file)
-          formata.append('token', d.data.token)
-          upload(this.data.file, d.data.token, null, (d) => {
-            this.uping = Math.ceil(d.loaded * 100 / d.total)
-          }).then(d => {
-            this.updata = d.data
+          formata.append('token', d.data[0].token)
+          upload(this.data.file, d.data[0].token, null, (progress) => {
+            this.uping = Math.ceil(progress.loaded * 100 / progress.total)
+          }).then(res => {
             this.upok = true
+            temppost.filename = res.filename
+            temppost.size = res.size
+            temppost.mime = res.type
+            temppost.qiniu_id = res.key
+            this.update(temppost)
           })
         })
+      },
+      update (p) {
+        this.$Global.async('file_update', true).getData(p).then(d => {
+          if (this.data.cb) this.data.cb(d)
+        })
+      },
+      removeTask () {
+        this.$parent.removeTask(this.data.hash)
       }
     },
     computed: {
@@ -78,7 +93,7 @@
   }
   .task-upload-item {
     float: left;
-    padding-right: 16px;
+    /*padding-right: 16px;*/
   }
   .task-item-a {
     width: 55%;

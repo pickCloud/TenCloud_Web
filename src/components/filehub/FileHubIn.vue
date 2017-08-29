@@ -4,6 +4,14 @@
       <div class="path-box clearfix">
       <span class="path-span">
         <span v-if="pid === 0">全部文件</span>
+        <ul class="file-mbx" v-else>
+          <li><router-link :to="{name:'FileHubIn', params: {id: 0}}">全部文件</router-link></li>
+          <li v-for="(item, key) in file_dir">
+            <span>/</span>
+            <router-link :to="{name:'FileHubIn', params: {id: item[0]}}" v-if="key<(file_dir.length - 1)">{{item[1]}}</router-link>
+            <span v-else>{{item[1]}}</span>
+          </li>
+        </ul>
       </span>
         <div class="btn-group right">
           <div class="formbylabel file theme-dft">
@@ -37,14 +45,14 @@
             <td><m-checkbox class="list-check" v-model="selects" :data="{label:item.id + ''}" hide-label></m-checkbox></td>
             <td>
               <span v-if="item.type === 0">{{item.filename}}</span>
-              <router-link :to="{name: 'FileHubIn', params: {id: item.id}}" v-else>{{item.filename}}</router-link>
+              <router-link :to="{name: 'FileHubIn', params: {id: item.id, filename: item.filename}}" v-else>{{item.filename}}</router-link>
             </td>
             <td>{{item.size}}</td>
             <td>{{item.update_time}}</td>
             <td>{{item.owner}}</td>
             <td>
-              <m-btn class="primary_txt" v-if="item.type === 0">预览</m-btn>
-              <m-btn class="primary_txt" data-clipboard-text='nihao zhong' v-clipboard="clipboard" v-if="item.type === 0">复制URL</m-btn>
+              <m-btn class="primary_txt" v-if="item.type === 0" @click.native="preview(item)">预览</m-btn>
+              <m-btn class="primary_txt" :data-text="item.filename" :data-params="item.id" v-clipboard="clipboard" v-if="item.type === 0">复制URL</m-btn>
               <m-btn class="primary_txt" @click.native="downFile(item.id)" v-if="item.type === 0">下载</m-btn>
               <m-btn class="pink_txt" @click.native="delFile(item.id)">删除</m-btn>
             </td>
@@ -99,5 +107,18 @@
     line-height: 60px;
     padding: 0 16px;
     border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .file-mbx {
+    display: inline-block;
+    li {
+      display: inline-block;
+    }
+    a {
+      color: #4dd1de;
+      transition: all 0.2s;
+      &:hover {
+        color: #fff;
+      }
+    }
   }
 </style>

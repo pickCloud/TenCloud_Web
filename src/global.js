@@ -53,12 +53,12 @@ const APIS = {
   user_info: {u: '/api/user', m: 'get'},
   user_thumb_token: {u: '/api/user/token', m: 'get'},
   file_list: {u: '/api/file/list', m: 'post'},
-  file_pages: {u: '/api/file/pages', m: 'get'},
+  file_pages: {u: '/api/file/', m: 'get'},
   file_create_dir: {u: '/api/file/dir/create', m: 'post'},
   file_upload: {u: '/api/file/upload', m: 'post'},
   file_update: {u: '/api/file/update', m: 'post'},
-  file_download: {u: '/api/file/', m: 'get'},
-  file_del: {u: '/api/file/', m: 'get'}
+  file_download: {u: '/api/file/download', m: 'post'},
+  file_del: {u: '/api/file/delete', m: 'post'}
 }
 
 class AsyncData {

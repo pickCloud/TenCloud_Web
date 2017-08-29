@@ -1,6 +1,7 @@
 import Poppers from '../Poppers.js'
 import Selects from '../Selects.js'
 import CreateNewVue from '../popx/CreateNewFile.vue'
+import Preview from '../popx/Preview.vue'
 
 export default {
   mixins: [Poppers, Selects],
@@ -9,8 +10,25 @@ export default {
     page_number: 20,
     total_page: 1,
     pid: null,
+    file_dir: [],
     listts: []
   }),
+  watch: {
+    // 如果路由有变化，会再次执行该方法
+    '$route' () {
+      this.pid = parseInt(this.$route.params.id)
+      this.now_page = 1
+
+      if (this.pid !== 0) {
+        this.file_dir.push([this.pid, this.$route.params.filename])
+      } else {
+        this.file_dir = []
+      }
+
+      this.getPagesNumber()
+      this.getApiData()
+    }
+  },
   methods: {
     delFile (id) {
       let delids = this.selects
@@ -20,9 +38,10 @@ export default {
       } else {
         this.popperDelete('您确定要删除文件' + this.getAttrById(delids, 'filename').join(',') + '吗？', _ => {
           this.$Global.async('file_del', true).getData({
-            id: delids
+            file_ids: delids
           }).then(d => {
             if (d.status === 0) {
+              this.selects = []
               this.getApiData()
             }
             this.$toast(d.message, 'cc')
@@ -36,24 +55,26 @@ export default {
       if (delids.length === 0) {
         this.$toast('请选择要下载的文件', 'cc')
       } else {
-        delids.forEach((v, i) => {
-          this.$Global.async('file_download', true).getData(null, v + '/download').then(d => {
-            console.log(d)
-          })
+        this.$Global.async('file_download', true).getData({
+          file_ids: delids
+        }).then(d => {
+          this.selects = []
+          console.log(d)
         })
       }
     },
     getApiData () {
       this.$Global.async('file_list', true).getData({
+        file_id: this.pid,
         now_page: this.now_page,
         page_number: this.page_number
       }).then(d => {
-        this.listts = d.data.files
+        this.listts = d.data
         // console.log(d.data.files)
       })
     },
     getPagesNumber () {
-      this.$Global.async('file_pages').getData(null).then(d => {
+      this.$Global.async('file_pages').getData(null, this.pid + '/pages').then(d => {
         // console.log(d)
         this.total_page = Math.ceil(d.data / this.page_number)
       })
@@ -74,13 +95,30 @@ export default {
               pid: this.pid,
               dir_name: payload.filename
             }).then(d => {
-              console.log(d)
+              this.listts.push(d.data[0])
               next()
             })
           } else {
             next()
           }
         }
+      })
+    },
+    preview (d) {
+      this.$Popx({
+        popper: Preview,
+        data: d
+      })
+    },
+    copyUrl (p) {
+      return new Promise((resolve, reject) => {
+        this.$Global.async('file_download', true).getData({
+          file_ids: [p]
+        }).then(d => {
+          resolve(d.data.urls[0])
+        }, e => {
+          reject(e)
+        })
       })
     },
     clipboard (d) {
@@ -97,7 +135,10 @@ export default {
           temp.push({
             type: 'upload',
             file: e.target.files[i],
-            pid: this.pid
+            pid: this.pid,
+            cb: (d) => {
+              this.getApiData()
+            }
           })
         }
         this.$Task.addTask(temp)
@@ -105,8 +146,13 @@ export default {
     }
   },
   created () {
-    this.getPagesNumber()
-    this.getApiData()
-    this.pid = this.$route.params.id
+    this.pid = parseInt(this.$route.params.id)
+    if (!this.$route.params.filename && this.pid !== 0) {
+      this.$router.replace({name: 'FileHubIn', params: {id: 0}})
+    } else {
+      this.getPagesNumber()
+      this.getApiData()
+    }
+    console.log(window.clipboardData)
   }
 }
