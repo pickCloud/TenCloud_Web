@@ -5,6 +5,7 @@ import Jimu from 'jimu'
 import Vuepopx from './vue-popx'
 import Vuetask from './vue-tasks'
 import Vuepages from './vue-pages'
+import VueQiniu from './vue-qiniu'
 import App from './App'
 import router from './router'
 import Global from './global'
@@ -20,6 +21,7 @@ Vue.prototype.$Global = Global
 Vue.use(Vuepopx)
 Vue.use(Vuetask)
 Vue.use(Vuepages)
+Vue.use(VueQiniu)
 Vue.use(Jimu)
 Vue.use(Piece)
 Vue.directive('clipboard', Clipboard)

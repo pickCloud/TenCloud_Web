@@ -16,7 +16,7 @@
         <div class="btn-group right">
           <div class="formbylabel file theme-dft">
             <input type="file" id="a5wpj6gl9zab" name="file" multiple accept="*/*" @change="fileChange">
-            <label for="a5wpj6gl9zab" class="file-label">上传文件</label>
+            <label for="a5wpj6gl9zab" class="file-label browser_button">上传文件</label>
           </div>
           <m-btn class="primary_bg no-radius grey-dark_txt m-r8" @click.native="createNew">新建文件夹</m-btn>
           <m-btn class="primary_bg no-radius grey-dark_txt" @click.native="downFile(-1)">下载</m-btn>
