@@ -51,8 +51,8 @@
             <td>{{item.update_time}}</td>
             <td>{{item.owner}}</td>
             <td>
-              <m-btn class="primary_txt" v-if="item.type === 0" @click.native="preview(item)">预览</m-btn>
-              <m-btn class="primary_txt" :data-text="item.filename" :data-params="item.id" v-clipboard="clipboard" v-if="item.type === 0">复制URL</m-btn>
+              <m-btn class="primary_txt" v-if="item.type === 0 && item.mime.indexOf('image') !== -1" @click.native="preview(item)">预览</m-btn>
+              <m-btn class="primary_txt" :data-text="item.url" :data-params="item.id" v-clipboard="clipboard" v-if="item.type === 0">复制URL</m-btn>
               <m-btn class="primary_txt" @click.native="downFile(item.id)" v-if="item.type === 0">下载</m-btn>
               <m-btn class="pink_txt" @click.native="delFile(item.id)">删除</m-btn>
             </td>

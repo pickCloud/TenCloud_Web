@@ -2,7 +2,9 @@
   <div class="popx-preview">
     <div class="popx-preview-overfllow"></div>
     <div class="popx-preview-content">
-      <div class="popx-preview-content-left">a</div>
+      <div class="popx-preview-content-left">
+        <img :src="popxdata.url" alt="">
+      </div>
       <div class="popx-preview-content-right">
         <m-row class="popx-preview-info-item">
           <m-col class="xs-5">文件名称</m-col>
@@ -69,7 +71,15 @@
   .popx-preview-content-left {
     position: absolute;
     left: 0;top: 0;right: 250px;bottom: 0;
-    background-color: #fff;
+    /*background-color: #fff;*/
+    img {
+      position: absolute;
+      max-width: 90%;
+      max-height: 90%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+    }
   }
   .popx-preview-content-right {
     position: absolute;

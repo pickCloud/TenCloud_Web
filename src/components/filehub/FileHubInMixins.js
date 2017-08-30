@@ -55,12 +55,20 @@ export default {
       if (delids.length === 0) {
         this.$toast('请选择要下载的文件', 'cc')
       } else {
-        this.$Global.async('file_download', true).getData({
-          file_ids: delids
-        }).then(d => {
-          this.selects = []
-          console.log(d)
+        let downlist = this.getAttrById(delids, 'url')
+        let namelist = this.getAttrById(delids, 'filename')
+        downlist.forEach((v, i) => {
+          let downa = document.createElement('a')
+          downa.download = namelist[i]
+          downa.href = v
+          downa.click()
         })
+        // this.$Global.async('file_download', true).getData({
+        //   file_ids: delids
+        // }).then(d => {
+        //   this.selects = []
+        //   console.log(d)
+        // })
       }
     },
     getApiData () {
