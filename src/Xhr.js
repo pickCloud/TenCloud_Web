@@ -1,6 +1,7 @@
-export default function ({method, url, data, progress = null, overrideMimeType = null}) {
+export default function ({method, url, data, progress = null, overrideMimeType = null, withCredentials = false}) {
   return new Promise((resolve, reject) => {
     let xhr = new XMLHttpRequest()
+    xhr.withCredentials = withCredentials
     xhr.open(method, url)
     // console.log(overrideMimeType)
     // xhr.setRequestHeader('Content-type', 'application/octet-stream')

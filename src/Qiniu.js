@@ -9,6 +9,7 @@ export function upload (f, token, key, ing = null) {
     method: 'POST',
     url: 'http://upload.qiniu.com/',
     data: formData,
+    withCredentials: true,
     progress: ing
   })
 }
