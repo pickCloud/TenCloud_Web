@@ -2,7 +2,7 @@ import axios from 'axios'
 import Vue from 'vue'
 import router from './router'
 
-const islocal = /.+localhost.+/.test(window.location.href)
+const islocal = window.isLoacal = /.+localhost.+/.test(window.location.href)
 if (islocal) axios.defaults.withCredentials = true
 
 // http://10.0.1.9

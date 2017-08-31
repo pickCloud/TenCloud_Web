@@ -68,7 +68,7 @@ export default {
           let ajax = new XMLHttpRequest()
           ajax.open('GET', v, true)
           ajax.responseType = 'blob'
-          ajax.withCredentials = true
+          ajax.withCredentials = window.isLoacal
           ajax.onload = function (e) {
             DownloadJS(e.target.response, namelist[i])
           }
