@@ -27,9 +27,9 @@
       <div class="p-lr-16 file-list-body">
         <m-table class="hover striped machines-table">
           <col width="55px">
-          <col width="12%">
-          <col width="10%">
           <col width="25%">
+          <col width="10%">
+          <col width="20%">
           <col width="12%">
           <thead>
           <tr>
@@ -45,8 +45,10 @@
           <tr v-for="item in listts" @dblclick="trClick(item)">
             <td><m-checkbox class="list-check" v-model="selects" :data="{label:item.id + ''}" hide-label></m-checkbox></td>
             <td>
-              <span v-if="item.type === 0">{{item.filename}}</span>
-              <router-link :to="{name: 'FileHubIn', params: {id: item.id, filename: item.filename}}" v-else>{{item.filename}}</router-link>
+              <img class="vam img-icon" src="../../assets/file.png" alt="" v-if="item.type === 0">
+              <img class="vam img-icon" src="../../assets/dir.png" alt="" v-else>
+              <span class="vam" v-if="item.type === 0">{{item.filename}}</span>
+              <router-link class="vam" :to="{name: 'FileHubIn', params: {id: item.id, filename: item.filename}}" v-else>{{item.filename}}</router-link>
             </td>
             <td>
               <span v-if="item.type === 0">{{item.size|fsize}}</span>
@@ -127,5 +129,9 @@
         color: #fff;
       }
     }
+  }
+  .img-icon {
+    width: 18px;
+    margin-right: 8px;
   }
 </style>
