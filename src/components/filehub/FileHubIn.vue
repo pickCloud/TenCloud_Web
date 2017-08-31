@@ -8,7 +8,8 @@
           <li><router-link :to="{name:'FileHubIn', params: {id: 0}}">全部文件</router-link></li>
           <li v-for="(item, key) in file_dir">
             <span>/</span>
-            <router-link :to="{name:'FileHubIn', params: {id: item[0]}}" v-if="key<(file_dir.length - 1)">{{item[1]}}</router-link>
+            <!--<router-link :to="{name:'FileHubIn', params: {id: item[0]}}" v-if="key<(file_dir.length - 1)">{{item[1]}}</router-link>-->
+            <a href="#" style="padding-right: 5px" v-if="key<(file_dir.length - 1)" @click.prevent="filePathChange(item,key)">{{item[1]}}</a>
             <span v-else>{{item[1]}}</span>
           </li>
         </ul>
@@ -34,22 +35,25 @@
           <tr>
             <th><m-checkbox class="list-check" :data="{label: '全选'}" v-model="isSelectAll" hideLabel></m-checkbox></th>
             <th>名称</th>
-            <th>尺寸</th>
+            <th>大小</th>
             <th>更新时间</th>
             <th>所有者</th>
             <th>操作</th>
           </tr>
           </thead>
           <tbody>
-          <tr v-for="item in listts">
+          <tr v-for="item in listts" @dblclick="trClick(item)">
             <td><m-checkbox class="list-check" v-model="selects" :data="{label:item.id + ''}" hide-label></m-checkbox></td>
             <td>
               <span v-if="item.type === 0">{{item.filename}}</span>
               <router-link :to="{name: 'FileHubIn', params: {id: item.id, filename: item.filename}}" v-else>{{item.filename}}</router-link>
             </td>
-            <td>{{item.size}}</td>
+            <td>
+              <span v-if="item.type === 0">{{item.size|fsize}}</span>
+              <span v-else>--</span>
+            </td>
             <td>{{item.update_time}}</td>
-            <td>{{item.owner}}</td>
+            <td>{{item.name}}</td>
             <td>
               <m-btn class="primary_txt" v-if="item.type === 0 && item.mime.indexOf('image') !== -1" @click.native="preview(item)">预览</m-btn>
               <m-btn class="primary_txt" :data-text="item.url" :data-params="item.id" v-clipboard="clipboard" v-if="item.type === 0">复制URL</m-btn>
@@ -101,6 +105,9 @@
     width: 100%;
     height: calc(100% - 150px);
     overflow-y: auto;
+    a:hover {
+      color: #4dd1de;
+    }
   }
   .path-box {
     height: 60px;

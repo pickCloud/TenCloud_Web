@@ -1,3 +1,5 @@
+import DownloadJS from 'downloadjs'
+import Tool from '../../Tool.js'
 import Poppers from '../Poppers.js'
 import Selects from '../Selects.js'
 import CreateNewVue from '../popx/CreateNewFile.vue'
@@ -13,6 +15,11 @@ export default {
     file_dir: [],
     listts: []
   }),
+  filters: {
+    'fsize' (d) {
+      return Tool.filesize(d)
+    }
+  },
   watch: {
     // 如果路由有变化，会再次执行该方法
     '$route' () {
@@ -58,17 +65,15 @@ export default {
         let downlist = this.getAttrById(delids, 'url')
         let namelist = this.getAttrById(delids, 'filename')
         downlist.forEach((v, i) => {
-          let downa = document.createElement('a')
-          downa.download = namelist[i]
-          downa.href = v
-          downa.click()
+          let ajax = new XMLHttpRequest()
+          ajax.open('GET', v, true)
+          ajax.responseType = 'blob'
+          ajax.withCredentials = true
+          ajax.onload = function (e) {
+            DownloadJS(e.target.response, namelist[i])
+          }
+          ajax.send()
         })
-        // this.$Global.async('file_download', true).getData({
-        //   file_ids: delids
-        // }).then(d => {
-        //   this.selects = []
-        //   console.log(d)
-        // })
       }
     },
     getApiData () {
@@ -150,6 +155,15 @@ export default {
           })
         }
         this.$Task.addTask(temp)
+      }
+    },
+    filePathChange (d, i) {
+      this.file_dir.splice(i)
+      this.$router.push({name: 'FileHubIn', params: {id: d[0], filename: d[1]}})
+    },
+    trClick (d) {
+      if (d.type === 1) {
+        this.$router.push({name: 'FileHubIn', params: {id: d.id, filename: d.filename}})
       }
     }
   },

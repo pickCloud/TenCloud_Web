@@ -20,7 +20,7 @@
         </m-row>
         <m-row class="popx-preview-info-item">
           <m-col class="xs-5">所有者</m-col>
-          <m-col class="xs-7">{{popxdata.owner}}</m-col>
+          <m-col class="xs-7">{{popxdata.name}}</m-col>
         </m-row>
       </div>
     </div>

@@ -1,4 +1,4 @@
-export default function ({method, url, data, progress = null, overrideMimeType = null, withCredentials = false}) {
+export default function ({method, url, data, progress = null, overrideMimeType = null, withCredentials = false, isJson = true}) {
   return new Promise((resolve, reject) => {
     let xhr = new XMLHttpRequest()
     xhr.open(method, url)
@@ -14,7 +14,7 @@ export default function ({method, url, data, progress = null, overrideMimeType =
     }, false)
     xhr.onreadystatechange = function (response) {
       if (xhr.readyState === 4 && xhr.status === 200 && xhr.responseText !== '') {
-        let blkRet = JSON.parse(xhr.responseText)
+        let blkRet = isJson ? JSON.parse(xhr.responseText) : xhr.responseText
         resolve(blkRet)
       } else if (xhr.status !== 200 && xhr.responseText) {
         reject()

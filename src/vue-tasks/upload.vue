@@ -10,6 +10,7 @@
 </template>
 
 <script>
+  import Tool from '../Tool.js'
   import {upload} from '../Qiniu.js'
 
   export default {
@@ -36,20 +37,25 @@
             }
           ]
         }).then(d => {
-          temppost.file_id = d.data[0].file_id
-          let formata = new FormData()
-          formata.append('file', this.data.file)
-          formata.append('token', d.data[0].token)
-          upload(this.data.file, d.data[0].token, null, (progress) => {
-            this.uping = Math.ceil(progress.loaded * 100 / progress.total)
-          }).then(res => {
-            this.upok = true
-            temppost.filename = res.filename
-            temppost.size = res.size
-            temppost.mime = res.type
-            temppost.qiniu_id = res.key
-            this.update(temppost)
-          })
+          if (d.data[0].file_status === 1) {
+            this.removeTask()
+            if (this.data.cb) this.data.cb(d)
+          } else {
+            temppost.file_id = d.data[0].file_id
+            let formata = new FormData()
+            formata.append('file', this.data.file)
+            formata.append('token', d.data[0].token)
+            upload(this.data.file, d.data[0].token, null, (progress) => {
+              this.uping = Math.ceil(progress.loaded * 100 / progress.total)
+            }).then(res => {
+              this.upok = true
+              temppost.filename = res.filename
+              temppost.size = res.size
+              temppost.mime = res.type
+              temppost.qiniu_id = res.key
+              this.update(temppost)
+            })
+          }
         })
       },
       update (p) {
@@ -66,19 +72,7 @@
         return this.data.file.name
       },
       filesize () {
-        let result = this.data.file.size
-        let suffix = 'B'
-        if (result > 1000000000) {
-          result = result / 1024 / 1024 / 1024
-          suffix = 'G'
-        } else if (result > 1000000) {
-          result = result / 1024 / 102
-          suffix = 'M'
-        } else if (result > 1000) {
-          result = result / 1024
-          suffix = 'KB'
-        }
-        return Math.ceil(result * 100) / 100 + suffix
+        return Tool.filesize(this.data.file.size)
       }
     },
     mounted () {
