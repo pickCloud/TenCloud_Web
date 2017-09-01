@@ -22,7 +22,7 @@ export default {
       let temp = []
       while (++i < this.listts.length) {
         let v = this.listts[i]
-        if (ids.indexOf(v.id + '') !== -1) temp.push(v[key])
+        if (ids.indexOf(v.id + '') !== -1 || ids.indexOf(v.id) !== -1) temp.push(v[key])
       }
       return temp
     }

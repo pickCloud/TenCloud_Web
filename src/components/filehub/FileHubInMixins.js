@@ -46,12 +46,17 @@ export default {
         this.popperDelete('您确定要删除文件' + this.getAttrById(delids, 'filename').join(',') + '吗？', _ => {
           this.$Global.async('file_del', true).getData({
             file_ids: delids
-          }).then(d => {
+          }, '', false).then(d => {
             if (d.status === 0) {
               this.selects = []
               this.getApiData()
             }
             this.$toast(d.message, 'cc')
+          }, e => {
+            let errorids = e.response.data.data.file_ids
+            let errornames = this.getAttrById(errorids, 'filename').join(',')
+            this.$toast('删除' + errornames + '失败', 'cc')
+            this.getApiData()
           })
         })
       }
@@ -77,6 +82,7 @@ export default {
       }
     },
     getApiData () {
+      this.selects = []
       this.$Global.async('file_list', true).getData({
         file_id: this.pid,
         now_page: this.now_page,
