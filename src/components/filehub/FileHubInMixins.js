@@ -55,7 +55,7 @@ export default {
           }, e => {
             let errorids = e.response.data.data.file_ids
             let errornames = this.getAttrById(errorids, 'filename').join(',')
-            this.$toast('删除' + errornames + '失败', 'cc')
+            this.$toast('您不是【' + errornames + '】的所有者，不能删除', 'cc')
             this.getApiData()
           })
         })
