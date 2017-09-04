@@ -38,7 +38,9 @@
           ]
         }).then(d => {
           if (d.data[0].file_status === 1) {
-            this.removeTask()
+//            this.removeTask()
+            this.upok = true
+            this.uping = 100
             if (this.data.cb) this.data.cb(d)
           } else {
             temppost.file_id = d.data[0].file_id
@@ -49,6 +51,7 @@
               this.uping = Math.ceil(progress.loaded * 100 / progress.total)
             }).then(res => {
               this.upok = true
+              this.uping = 100
               temppost.filename = res.filename
               temppost.size = res.size
               temppost.mime = res.type

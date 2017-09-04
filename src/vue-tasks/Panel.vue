@@ -1,7 +1,8 @@
 <template>
-  <div class="task-panel" :class="{'mini':isMini}" v-if="tasks.length > 0">
+  <div class="task-panel" :class="{'mini':isMini}" v-if="tasks.length > 0 || isShow">
     <div class="task-panel-title" @click="miniAction">
       <span class="vam">任务列表</span>
+      <i class="icon icon-close right" @click="isShow = false"></i>
       <i class="icon right mini-btn" :class="[miniClass]"></i>
     </div>
     <div class="task-panel-body">
@@ -21,6 +22,7 @@
   export default {
     data: () => ({
       isMini: false,
+      isShow: false,
       showInfo: true,
       tasks: [],
       hashs: []
@@ -33,10 +35,10 @@
         if (v.type === 'upload') {
           MD5(v.file, (e, m) => {
             v.hash = m
-            if (this.hashs.indexOf(m) === -1) {
-              this.tasks.push(v)
-              this.hashs.push(m)
-            }
+//            if (this.hashs.indexOf(m) === -1) {
+            this.tasks.push(v)
+            this.hashs.push(m)
+//            }
           })
         }
       },
@@ -53,6 +55,7 @@
         return this.isMini ? 'icon-fangda' : 'icon-jianshao'
       },
       infotip () {
+        if (this.tasks.length > 0) this.isShow = true
         return `您有${this.tasks.length}个任务处理中`
       }
     },
