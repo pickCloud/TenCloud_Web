@@ -20,7 +20,7 @@
             <label for="a5wpj6gl9zab" class="file-label browser_button">上传文件</label>
           </div>
           <m-btn class="primary_bg no-radius grey-dark_txt m-r8" @click.native="createNew">新建文件夹</m-btn>
-          <m-btn class="primary_bg no-radius grey-dark_txt" @click.native="downFile(-1)">下载</m-btn>
+          <!--<m-btn class="primary_bg no-radius grey-dark_txt" @click.native="downFile(-1)">下载</m-btn>-->
           <m-btn class="pink_bg no-radius grey-dark_txt" @click.native="delFile(-1)">删除</m-btn>
         </div>
       </div>

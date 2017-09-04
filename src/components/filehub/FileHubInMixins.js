@@ -146,6 +146,7 @@ export default {
       }
     },
     fileChange (e) {
+      console.log(e.target.files)
       if (e.target.files.length > 0) {
         let len = e.target.files.length
         let i = -1
@@ -161,6 +162,7 @@ export default {
           })
         }
         this.$Task.addTask(temp)
+        e.target.value = ''
       }
     },
     filePathChange (d, i) {
