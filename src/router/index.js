@@ -114,7 +114,7 @@ const router = new Router({
           component: Verlist
         },
         {
-          path: '/vernotes/:id',
+          path: '/vernotes/:v',
           name: 'VerNotes',
           meta: {level: 2},
           component: VerNotes

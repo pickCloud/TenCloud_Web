@@ -139,7 +139,7 @@
               <tr v-for="item in verLimit">
                 <td>{{item.version}}</td>
                 <td>{{item.update_time}}</td>
-                <td><m-btn :href="{name:'VerNotes', params: {id:item.id}}" class="primary_txt" @click.native="">日志</m-btn></td>
+                <td><m-btn :href="{name:'VerNotes', params: {v:item.version, pname: base.name}}" class="primary_txt" @click.native="">日志</m-btn></td>
               </tr>
               </tbody>
             </table>

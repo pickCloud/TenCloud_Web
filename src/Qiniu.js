@@ -7,7 +7,7 @@ export function upload (f, token, key, ing = null) {
   formData.append('file', f)
   return XHR({
     method: 'POST',
-    url: 'http://up-z2.qiniu.com',
+    url: 'https://up-z2.qiniu.com',
     data: formData,
     progress: ing
   })
