@@ -73,7 +73,12 @@ export default {
           let alink = document.createElement('a')
           alink.href = v
           alink.download = namelist[i]
+          document.body.appendChild(alink)
           alink.click()
+          let tempto = setTimeout(_ => {
+            clearTimeout(tempto)
+            document.body.removeChild(alink)
+          }, 10)
           // let ajax = new XMLHttpRequest()
           // ajax.open('GET', v, true)
           // ajax.responseType = 'blob'
