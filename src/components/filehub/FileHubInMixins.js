@@ -68,11 +68,11 @@ export default {
         this.$toast('请选择要下载的文件', 'cc')
       } else {
         let downlist = this.getAttrById(delids, 'url')
-        // let namelist = this.getAttrById(delids, 'filename')
+        let namelist = this.getAttrById(delids, 'filename')
         downlist.forEach((v, i) => {
           let alink = document.createElement('a')
           alink.href = v
-          alink.download = true
+          alink.download = namelist[i]
           alink.click()
           // let ajax = new XMLHttpRequest()
           // ajax.open('GET', v, true)
