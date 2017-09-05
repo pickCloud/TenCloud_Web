@@ -6,22 +6,26 @@
         <img :src="popxdata.url" alt="">
       </div>
       <div class="popx-preview-content-right">
-        <m-row class="popx-preview-info-item">
-          <m-col class="xs-5">文件名称</m-col>
-          <m-col class="xs-7">{{popxdata.filename}}</m-col>
-        </m-row>
-        <m-row class="popx-preview-info-item">
-          <m-col class="xs-5">文件尺寸</m-col>
-          <m-col class="xs-7">{{popxdata.size}}</m-col>
-        </m-row>
-        <m-row class="popx-preview-info-item">
-          <m-col class="xs-5">更新时间</m-col>
-          <m-col class="xs-7">{{popxdata.update_time}}</m-col>
-        </m-row>
-        <m-row class="popx-preview-info-item">
-          <m-col class="xs-5">所有者</m-col>
-          <m-col class="xs-7">{{popxdata.name}}</m-col>
-        </m-row>
+        <h6 class="m-b16">图片信息</h6>
+        <div class="popx-preview-flex-box">
+          <div class="popx-preview-flex-item">文件名称</div>
+          <div class="popx-preview-flex-item">{{popxdata.filename}}</div>
+        </div>
+
+        <div class="popx-preview-flex-box">
+          <div class="popx-preview-flex-item">文件尺寸</div>
+          <div class="popx-preview-flex-item">{{popxdata.size}}</div>
+        </div>
+
+        <div class="popx-preview-flex-box">
+          <div class="popx-preview-flex-item">更新时间</div>
+          <div class="popx-preview-flex-item">{{popxdata.update_time}}</div>
+        </div>
+
+        <div class="popx-preview-flex-box">
+          <div class="popx-preview-flex-item">所有者</div>
+          <div class="popx-preview-flex-item">{{popxdata.name}}</div>
+        </div>
       </div>
     </div>
     <div class="popx-preview-close" @click="close"><span class="close"></span></div>
@@ -66,7 +70,7 @@
     height: 90%;
     left: 5%;
     top: 5%;
-    background-color: #2f3543;
+    background-color: #3f4656;
   }
   .popx-preview-content-left {
     position: absolute;
@@ -86,7 +90,21 @@
     right: 0;top: 0;bottom: 0;
     width: 250px;
     padding: 16px;
-    background-color: #3f4656;
+    background-color: #2f3543;
+  }
+  .popx-preview-flex-box {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  .popx-preview-flex-item {
+    min-height: 24px;
+    line-height: 24px;
+    text-align: left;
+    width: 135px;
+    &:first-child {
+      width: 79px;
+    }
   }
   .popx-preview-info-item {
     margin: 16px 0;
