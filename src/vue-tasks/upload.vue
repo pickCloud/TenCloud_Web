@@ -52,10 +52,14 @@
             }).then(res => {
               this.upok = true
               this.uping = 100
+              temppost.status = 0
               temppost.filename = res.filename
               temppost.size = res.size
               temppost.mime = res.type
               temppost.qiniu_id = res.key
+              this.update(temppost)
+            }, e => {
+              temppost.status = 1
               this.update(temppost)
             })
           }

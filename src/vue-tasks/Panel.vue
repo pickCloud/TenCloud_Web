@@ -17,7 +17,7 @@
 
 <script>
   import MD5 from 'browser-md5-file'
-  import upload from './upload.vue'
+  import upload from './Upload.vue'
 
   export default {
     data: () => ({

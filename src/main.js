@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import Jimu from 'jimu'
 import Vuepopx from './vue-popx'
+import Vueswiper from './vue-swiper'
 import Vuetask from './vue-tasks'
 import Vuepages from './vue-pages'
 import VueQiniu from './vue-qiniu'
@@ -12,9 +13,9 @@ import Global from './global'
 // 引入自定义指令
 import Clipboard from './vue-clipboard'
 // 引入样式
+import Piece from './components/piece'
 import 'jimu/dist/jimu.base.min.css'
 import './scss/app.scss'
-import Piece from './components/piece'
 
 Vue.config.productionTip = false
 Vue.prototype.$Global = Global
@@ -24,6 +25,7 @@ Vue.use(Vuepages)
 Vue.use(VueQiniu)
 Vue.use(Jimu)
 Vue.use(Piece)
+Vue.use(Vueswiper)
 Vue.directive('clipboard', Clipboard)
 
 window.Date.prototype.Format = function (fmt) {
