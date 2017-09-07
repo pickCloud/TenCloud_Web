@@ -31,7 +31,7 @@
             <td>{{item.provider}}</td>
             <td>{{item.address}}</td>
             <td>{{item.public_ip}}</td>
-            <td><span class="plate" :class="item.machine_status | mclass">{{item.machine_status | mstatus}}</span></td>
+            <td><span class="plate">{{item.machine_status}}</span></td>
             <td v-if="!isDeploy">
               <m-btn :href="{name:'MachineDetail', params:{id:item.id}}" class="primary_txt">详情</m-btn>
               <m-btn class="pink_txt" @click.native="delMachine(item.id)">删除</m-btn>

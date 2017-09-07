@@ -1,19 +1,11 @@
 import Poppers from './Poppers.js'
 import Selects from './Selects.js'
-import StatusCode from './StatusCode.js'
+// import StatusCode from './StatusCode.js'
 export default {
   mixins: [Poppers, Selects],
   data: () => ({
     isDeploy: false
   }),
-  filters: {
-    'mstatus' (v) {
-      return StatusCode.machine[v][0]
-    },
-    'mclass' (v) {
-      return StatusCode.machine[v][1]
-    }
-  },
   methods: {
     delMachine (id) {
       let delids = this.selects

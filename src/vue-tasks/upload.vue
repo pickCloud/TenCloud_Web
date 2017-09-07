@@ -32,6 +32,7 @@
         this.$Global.async('file_upload', true).getData({
           file_infos: [
             {
+              filename: this.data.file.name,
               hash: this.data.hash,
               pid: this.data.pid
             }
@@ -53,7 +54,7 @@
               this.upok = true
               this.uping = 100
               temppost.status = 0
-              temppost.filename = res.filename
+//              temppost.filename = res.filename
               temppost.size = res.size
               temppost.mime = res.type
               temppost.qiniu_id = res.key
