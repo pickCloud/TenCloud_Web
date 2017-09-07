@@ -4,54 +4,43 @@
     <div class="popx-preview-content">
       <div class="popx-preview-content-left">
         <div class="popx-preview-imgbox">
-          <img :src="popxdata.url" alt="">
-          <div class="popx-preview-img-prev"></div>
-          <div class="popx-preview-img-next"></div>
+          <img :src="prevdata.url" alt="">
+          <div class="popx-preview-img-prev" @click="previewChange(-1)"></div>
+          <div class="popx-preview-img-next" @click="previewChange(1)"></div>
           <div class="popx-preview-ctrls">
-            <m-btn>复制URL</m-btn>
-            <m-btn>下载</m-btn>
-            <m-btn>删除</m-btn>
+            <m-btn class="primary_txt" :data-text="prevdata.url" :data-params="prevdata.id" v-clipboard="clipboard">复制URL</m-btn>
+            <m-btn class="primary_txt" @click.native="downFile(prevdata.id)">下载</m-btn>
+            <m-btn class="pink_txt" @click.native="delFile(prevdata.id)">删除</m-btn>
           </div>
         </div>
-        <swiper class="popx-preview-thumbs" :options="swiperOption">
-          <swiper-slide>I'm Slide 1</swiper-slide>
-          <swiper-slide>I'm Slide 2</swiper-slide>
-          <swiper-slide>I'm Slide 3</swiper-slide>
-          <swiper-slide>I'm Slide 4</swiper-slide>
-          <swiper-slide>I'm Slide 5</swiper-slide>
-          <swiper-slide>I'm Slide 6</swiper-slide>
-          <swiper-slide>I'm Slide 7</swiper-slide>
-          <swiper-slide>I'm Slide 7</swiper-slide>
-          <swiper-slide>I'm Slide 7</swiper-slide>
-          <swiper-slide>I'm Slide 7</swiper-slide>
-          <swiper-slide>I'm Slide 7</swiper-slide>
-          <swiper-slide>I'm Slide 7</swiper-slide>
-          <swiper-slide>I'm Slide 7</swiper-slide>
-          <swiper-slide>I'm Slide 7</swiper-slide>
+        <swiper class="popx-preview-thumbs" :options="swiperOption" name="popx-preview">
+          <swiper-slide v-for="(item,key) in popxdata.data" :key="key" :class="{'active':key === popxdata.idx}" @click.native="thumbSelect(key)">
+            <img :src="item.thumb" alt="">
+          </swiper-slide>
         </swiper>
-        <div class="popx-swiper-btn popx-swiper-prev"></div>
-        <div class="popx-swiper-btn popx-swiper-next"></div>
+        <div class="popx-swiper-btn popx-swiper-prev" @click="swiperChange(-1)"></div>
+        <div class="popx-swiper-btn popx-swiper-next" @click="swiperChange(1)"></div>
       </div>
       <div class="popx-preview-content-right">
         <div class="m-b16">图片信息</div>
         <div class="popx-preview-flex-box">
           <div class="popx-preview-flex-item">文件名称</div>
-          <div class="popx-preview-flex-item">{{popxdata.filename}}</div>
+          <div class="popx-preview-flex-item">{{prevdata.filename}}</div>
         </div>
 
         <div class="popx-preview-flex-box">
           <div class="popx-preview-flex-item">文件尺寸</div>
-          <div class="popx-preview-flex-item">{{popxdata.size}}</div>
+          <div class="popx-preview-flex-item">{{prevdata.size}}</div>
         </div>
 
         <div class="popx-preview-flex-box">
           <div class="popx-preview-flex-item">更新时间</div>
-          <div class="popx-preview-flex-item">{{popxdata.update_time}}</div>
+          <div class="popx-preview-flex-item">{{prevdata.update_time}}</div>
         </div>
 
         <div class="popx-preview-flex-box">
           <div class="popx-preview-flex-item">所有者</div>
-          <div class="popx-preview-flex-item">{{popxdata.name}}</div>
+          <div class="popx-preview-flex-item">{{prevdata.name}}</div>
         </div>
       </div>
     </div>
@@ -60,28 +49,89 @@
 </template>
 
 <script>
+  import Poppers from '../Poppers.js'
   export default {
+    mixins: [Poppers],
     data: () => ({
       popxdata: {
-        filename: '',
-        size: '',
-        update_time: '',
-        owner: ''
+        idx: 0,
+        data: [
+          {
+            filename: '',
+            size: '',
+            update_time: '',
+            owner: ''
+          }
+        ]
       },
-      notNextTick: true,
       swiperOption: {
         slidesPerView: 'auto',
-        spaceBetween: 16,
-        nextButton: '.popx-swiper-next',
-        prevButton: '.popx-swiper-prev'
+        spaceBetween: 16
       }
     }),
+    computed: {
+      prevdata () {
+        return this.popxdata.idx > -1 ? this.popxdata.data[this.popxdata.idx] : {}
+      }
+    },
     methods: {
       close () {
         this.$emit('close')
       },
       swiperChange (p) {
-        console.log(this.swiperSlides)
+        let swiper = this.swipers['popx-preview']
+        if (p === 1) swiper.slideNext()
+        if (p === -1) swiper.slidePrev()
+      },
+      previewChange (p) {
+        let temp = this.popxdata.idx
+        temp += p
+        if (temp < 0) temp = 0
+        if (temp >= this.popxdata.data.length) temp = this.popxdata.data.length - 1
+        if (this.popxdata.idx !== temp) this.popxdata.idx = temp
+      },
+      clipboard (d) {
+        if (d.action === 'copy') {
+          this.$toast('复制成功', 'cc')
+        }
+      },
+      downFile () {
+        let alink = document.createElement('a')
+        alink.href = this.prevdata.url
+        alink.download = this.prevdata.filename
+        document.body.appendChild(alink)
+        alink.click()
+        let tempto = setTimeout(_ => {
+          clearTimeout(tempto)
+          document.body.removeChild(alink)
+        }, 10)
+      },
+      delFile (id) {
+        this.popperDelete('您确定要删除文件' + this.prevdata.filename + '吗？', _ => {
+          this.$Global.async('file_del', true).getData({
+            file_ids: [id]
+          }, '', false).then(d => {
+            if (d.status === 0) {
+              this.changeDataArr()
+            }
+            this.$toast(d.message, 'cc')
+          }, e => {
+            let errornames = this.prevdata.filename
+            this.$toast('您不是【' + errornames + '】的所有者，不能删除', 'cc')
+          })
+        })
+      },
+      changeDataArr () {
+        let temp = this.popxdata.idx
+        this.popxdata.data.splice(temp, 1)
+        if (this.popxdata.data.length === 0) {
+          this.$emit('close', 'delete')
+          this.popxdata.idx = -1
+        }
+        if (temp >= this.popxdata.data.length) this.popxdata.idx = this.popxdata.data.length - 1
+      },
+      thumbSelect (idx) {
+        this.popxdata.idx = idx
       }
     }
   }
@@ -94,7 +144,7 @@
     top: 0;
     width: 100%;
     height: 100%;
-    z-index: 9999;
+    z-index: 99;
   }
   .popx-preview-overfllow {
     position: absolute;
@@ -107,7 +157,7 @@
     height: 90%;
     left: 5%;
     top: 5%;
-    background-color: #3f4656;
+    background-color: #2F3543;
   }
   .popx-preview-imgbox {
     position: absolute;
@@ -148,10 +198,22 @@
     left:56px;right: 56px;bottom: 0;
     height: 110px;
     .swiper-slide {
-      background-color: #262A35;
       height: 72px;
       width: 72px;
       align-self: center;
+      border: 1px solid transparent;
+      padding: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      &.active {
+        border-color: #3F4656;
+      }
+      img {
+        min-width: 100%;
+        min-height: 100%;
+        display: block;
+        margin: 0 auto;
+      }
     }
   }
   .popx-swiper-btn {
@@ -178,7 +240,7 @@
     right: 0;top: 0;bottom: 0;
     width: 250px;
     padding: 16px;
-    background-color: #2f3543;
+    background-color: #262A35;
   }
   .popx-preview-flex-box {
     display: flex;

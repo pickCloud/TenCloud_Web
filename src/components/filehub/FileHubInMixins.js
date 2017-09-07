@@ -135,19 +135,26 @@ export default {
     preview (d) {
       this.$Popx({
         popper: Preview,
-        data: d
+        data: this.packPreviewData(d),
+        callback: ({payload, next}) => {
+          next()
+          if (payload) this.getApiData()
+        }
       })
     },
-    copyUrl (p) {
-      return new Promise((resolve, reject) => {
-        this.$Global.async('file_download', true).getData({
-          file_ids: [p]
-        }).then(d => {
-          resolve(d.data.urls[0])
-        }, e => {
-          reject(e)
-        })
-      })
+    packPreviewData (d) {
+      let i = -1
+      let result = 0
+      while (++i < this.imgPreViewData.length) {
+        if (this.imgPreViewData[i].id === d.id) {
+          result = i
+          break
+        }
+      }
+      return {
+        idx: result,
+        data: this.imgPreViewData
+      }
     },
     clipboard (d) {
       if (d.action === 'copy') {
@@ -182,6 +189,13 @@ export default {
       if (d.type === 1) {
         this.$router.push({name: 'FileHubIn', params: {id: d.id, filename: d.filename}})
       }
+    }
+  },
+  computed: {
+    imgPreViewData () {
+      return this.listts.filter((v, i) => {
+        if (v.mime.indexOf('image') !== -1) return v
+      })
     }
   },
   created () {

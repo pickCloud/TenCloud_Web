@@ -13,6 +13,9 @@
       options: {
         type: Object,
         required: true
+      },
+      name: {
+        type: String
       }
     },
     mounted () {
@@ -20,10 +23,15 @@
       this.$nextTick(_ => {
         this.swiper.update()
       })
+      if (this.name) {
+        if (!this.$parent.swipers) this.$parent.swipers = {}
+        this.$parent.swipers[this.name] = this.swiper
+      }
     },
     beforeDestroy () {
       if (this.swiper) {
         this.swiper.destroy()
+        if (this.$parent.swipers) delete this.$parent.swipers[this.name]
         delete this.swiper
       }
     }

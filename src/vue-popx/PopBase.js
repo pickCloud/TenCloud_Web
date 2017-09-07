@@ -32,7 +32,11 @@ export default class {
   initEvent () {
     this._pvm.$on('close', d => {
       if (this._opts.callback) {
-        this._opts.callback('close', d, this._destroy.bind(this))
+        this._opts.callback({
+          type: 'close',
+          payload: d,
+          next: this._destroy.bind(this)
+        })
       } else {
         this._destroy()
       }
