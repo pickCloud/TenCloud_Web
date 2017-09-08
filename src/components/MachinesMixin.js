@@ -50,10 +50,20 @@ export default {
         params.machineids = delids
         this.$router.replace({name: 'Deploy', params: params})
       }
+    },
+    loopGetData () {
+      this.sitv = setInterval(_ => {
+        clearTimeout(this.sitv)
+        this.getApiData()
+      }, 1000 * 60 * 30)
     }
+  },
+  beforeDestroy () {
+    clearInterval(this.sitv)
   },
   created () {
     this.getApiData()
+    this.loopGetData()
     this.isDeploy = this.$route.params.type && this.$route.params.type === 'deploy'
     if (this.$route.params.machineids) this.selects = this.$route.params.machineids
   }

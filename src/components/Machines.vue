@@ -48,19 +48,19 @@
             <td>
               <div>{{JSON.parse(item.cpu_content).percent}}%</div>
               <div class="percent-box">
-                <div class="percent-box-bar" :class="{warning: JSON.parse(item.cpu_content).percent > 50}" :style="{width: JSON.parse(item.cpu_content).percent + '%'}"></div>
+                <div class="percent-box-bar" :class="{warning: JSON.parse(item.cpu_content).percent > 80}" :style="{width: JSON.parse(item.cpu_content).percent + '%'}"></div>
               </div>
             </td>
             <td>
               <div>{{JSON.parse(item.memory_content).percent}}%</div>
               <div class="percent-box">
-                <div class="percent-box-bar" :class="{warning: JSON.parse(item.memory_content).percent > 50}" :style="{width: JSON.parse(item.memory_content).percent + '%'}"></div>
+                <div class="percent-box-bar" :class="{warning: JSON.parse(item.memory_content).percent > 80}" :style="{width: JSON.parse(item.memory_content).percent + '%'}"></div>
               </div>
             </td>
             <td>
               <div>{{JSON.parse(item.disk_content).percent}}%</div>
               <div class="percent-box">
-                <div class="percent-box-bar" :class="{warning: JSON.parse(item.disk_content).percent > 50}" :style="{width: JSON.parse(item.disk_content).percent + '%'}"></div>
+                <div class="percent-box-bar" :class="{warning: JSON.parse(item.disk_content).percent > 80}" :style="{width: JSON.parse(item.disk_content).percent + '%'}"></div>
               </div>
             </td>
             <td>{{JSON.parse(item.net_content).input + '／' + JSON.parse(item.net_content).output}}</td>
