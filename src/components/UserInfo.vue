@@ -36,7 +36,7 @@
         <m-btn class="right primary_bg grey-dark_txt m-t04 m-r8" v-if="isEditor2" @click.native="sureHandle(1)">保存</m-btn>
       </div>
       <m-row class="p-16" :gutter="16">
-        <m-col class="xs-12 md-4 text-center m-b16">
+        <m-col class="xs-12 md-3 text-center m-b16">
           <div class="info-head m-b16">
             <img :src="infos.image_url" alt="" v-if="infos.image_url">
           </div>
@@ -49,7 +49,7 @@
           </div>
           <p><i class="icon icon-xinxi-yin m-r8"></i>仅支持JPG、PNG格式，文件小于1M（方形图）</p>
         </m-col>
-        <m-col class="xs-12 md-8">
+        <m-col class="xs-12 md-9">
           <div class="lay-left-right">
             <div class="lay-left">姓名</div>
             <div class="lay-right lay-border-bottom">
@@ -239,7 +239,8 @@
     background-color: #1d212a;
     overflow: hidden;
     img {
-      width: 100%;
+      max-width: 100%;
+      max-height:100%;
     }
   }
 </style>
