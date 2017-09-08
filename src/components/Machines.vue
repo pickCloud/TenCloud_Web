@@ -25,7 +25,7 @@
             <th>CPU</th>
             <th>内存</th>
             <th>磁盘</th>
-            <th>网络(入/出 kbps)</th>
+            <th>网络(入/出 KB/S)</th>
             <th v-if="!isDeploy">操作</th>
           </tr>
           </thead>
