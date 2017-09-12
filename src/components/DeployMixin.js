@@ -87,6 +87,12 @@ export default {
       this.image_name = this.$route.params.image_name || ''
       this.container_name = this.$route.params.container_name || ''
       this.getVerList()
+      this.$store.commit('sitepath/SET_PATH', [
+        {name: 'Main', cn: '主页'},
+        {name: 'Projects', cn: '项目列表'},
+        {name: 'ProjectDetail', cn: this.$route.params.name, params: {id: this.$route.params.id}},
+        {cn: '项目部署'}
+      ])
     }
   }
 }

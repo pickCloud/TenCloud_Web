@@ -108,7 +108,7 @@ const router = new Router({
           component: Deploy
         },
         {
-          path: '/verlist',
+          path: '/verlist/:id',
           name: 'Verlist',
           meta: {level: 2},
           component: Verlist

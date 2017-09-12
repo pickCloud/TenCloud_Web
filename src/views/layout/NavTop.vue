@@ -5,7 +5,7 @@
       <!--<span class="_cndesc vam right hide-mini">控制台</span>-->
     </aside>
     <div class="lay-body" v-if="!$parent.TD">
-      <m-btn @click.native="back" v-if="hasBack"><i class="icon icon-return"></i></m-btn>
+      <!--<m-btn @click.native="back" v-if="hasBack"><i class="icon icon-return"></i></m-btn>-->
       <m-tip class="user-box" has-arrow popperMouse>
         <div slot="label" class="user-box_label"><i class="icon icon-user vam"></i> <span class="vam">{{userinfo.mobile}}</span></div>
         <ul slot="popper">
@@ -41,9 +41,9 @@
       miniClass () {
         return this.$parent.isMini ? 'lay-mini' : ''
       },
-      hasBack () {
-        return true
-      },
+//      hasBack () {
+//        return true
+//      },
       userinfo () {
         return this.$root.userinfo
       }

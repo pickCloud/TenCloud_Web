@@ -35,5 +35,9 @@ export default {
   },
   created () {
     this.getApiData()
+    this.$store.commit('sitepath/SET_PATH', [
+      {name: 'Main', cn: '主页'},
+      {cn: '项目列表'}
+    ])
   }
 }

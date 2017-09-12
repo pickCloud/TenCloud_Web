@@ -43,6 +43,12 @@
         this.$router.replace({name: 'Main'})
       } else {
         this.lists = this.$route.params.verlist
+        this.$store.commit('sitepath/SET_PATH', [
+          {name: 'Main', cn: '主页'},
+          {name: 'Projects', cn: '项目列表'},
+          {name: 'ProjectDetail', cn: this.$route.params.name, params: {id: this.$route.params.id}},
+          {cn: '版本列表'}
+        ])
       }
     }
   }

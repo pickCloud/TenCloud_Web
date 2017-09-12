@@ -206,5 +206,9 @@ export default {
       this.getPagesNumber()
       this.getApiData()
     }
+    this.$store.commit('sitepath/SET_PATH', [
+      {name: 'Main', cn: '主页'},
+      {cn: '文件列表'}
+    ])
   }
 }

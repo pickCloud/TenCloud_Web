@@ -21,6 +21,11 @@ export default {
           this.base = d.data[0]
           this.getVerList()
           this.getContainerList()
+          this.$store.commit('sitepath/SET_PATH', [
+            {name: 'Main', cn: '主页'},
+            {name: 'Projects', cn: '项目列表'},
+            {cn: this.base.name}
+          ])
         }
       })
     },
@@ -47,7 +52,7 @@ export default {
     },
     gotVerListMore () {
       // console.log(this.vers)
-      this.$router.push({name: 'Verlist', params: {verlist: this.vers}})
+      this.$router.push({name: 'Verlist', params: {verlist: this.vers, id: this.$route.params.id, name: this.base.name}})
     },
     getContainerList () {
       if (!this.base.deploy_ips || this.base.deploy_ips.length === 0 || this.base.deploy_ips === '') return

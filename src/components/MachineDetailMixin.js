@@ -41,6 +41,12 @@ export default {
           // console.log(d.data)
           // console.log(this.baseInfo.machine_status)
           if (this.baseInfo.machine_status === 'Starting' || this.baseInfo.machine_status === 'Stopping') this.loopGetStatus(this.machineStatus[3])
+
+          this.$store.commit('sitepath/SET_PATH', [
+            {name: 'Main', cn: '主页'},
+            {name: 'Machines', cn: '机器列表'},
+            {cn: this.baseInfo.name}
+          ])
         }
       })
       this.$Global.async('server_containers', true).getData(null, this.machineid).then(d => {

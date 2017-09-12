@@ -1,11 +1,16 @@
 <template>
   <div class="page-pad page-machines">
-    <panel :title="!isDeploy?'':'机器列表'">
-      <div class="panel-title" slot="title" v-if="!isDeploy">
-        <m-btn :href="{name:'MachineAdd', params:{id:1}}" class="primary_bg no-radius grey-dark_txt">添加已有主机</m-btn>
-        <m-btn class="pink_bg no-radius grey-dark_txt" @click.native="delMachine(-1)">删除</m-btn>
-      </div>
+    <panel title="机器列表">
+      <!--<div class="panel-title" slot="title" v-if="!isDeploy">-->
+        <!--<m-btn :href="{name:'MachineAdd', params:{id:1}}" class="primary_bg no-radius grey-dark_txt">添加已有主机</m-btn>-->
+        <!--<m-btn class="pink_bg no-radius grey-dark_txt" @click.native="delMachine(-1)">删除</m-btn>-->
+      <!--</div>-->
       <div class="panel-body p-b16">
+        <div class="btn-group text-right m-t16 m-b16">
+          <m-btn :href="{name:'MachineAdd', params:{id:1}}" class="primary_bg no-radius grey-dark_txt">添加已有主机</m-btn>
+          <m-btn class="primary_bg no-radius grey-dark_txt" @click.native="refresh">刷新</m-btn>
+          <m-btn class="pink_bg no-radius grey-dark_txt" @click.native="delMachine(-1)">删除</m-btn>
+        </div>
         <m-table class="hover striped machines-table m-b16">
           <col width="55px">
           <col :width="!isDeploy?'15%':'20%'">

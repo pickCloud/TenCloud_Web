@@ -56,6 +56,9 @@ export default {
         clearTimeout(this.sitv)
         this.getApiData()
       }, 1000 * 60 * 30)
+    },
+    refresh () {
+      this.getApiData()
     }
   },
   beforeDestroy () {
@@ -66,5 +69,9 @@ export default {
     this.loopGetData()
     this.isDeploy = this.$route.params.type && this.$route.params.type === 'deploy'
     if (this.$route.params.machineids) this.selects = this.$route.params.machineids
+    this.$store.commit('sitepath/SET_PATH', [
+      {name: 'Main', cn: '主页'},
+      {cn: '机器列表'}
+    ])
   }
 }

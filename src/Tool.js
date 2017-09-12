@@ -13,5 +13,10 @@ export default {
       suffix = 'KB'
     }
     return Math.ceil(result * 100) / 100 + suffix
+  },
+  loopObj2Arr (obj, key, vkey) {
+    let temp = obj[key]
+    if (temp.hasOwnProperty(key)) temp = this.loopObj2Arr(temp, key, vkey)
+    return temp.vkey
   }
 }

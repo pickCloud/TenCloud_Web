@@ -35,6 +35,13 @@ export default {
           this.name = d.data.name.substr(1)
           this.timedata = (new Date(d.data.created)).Format('yyyy/MM/dd hh:mm:ss')
           this.isOpen = this.status.toLowerCase() === 'running'
+
+          this.$store.commit('sitepath/SET_PATH', [
+            {name: 'Main', cn: '主页'},
+            {name: 'Machines', cn: '机器列表'},
+            {name: 'MachineDetail', cn: this.runtime.hostname, params: {id: this.$route.params.mid}},
+            {cn: this.name}
+          ])
         }
       }, e => {
         console.log(e)

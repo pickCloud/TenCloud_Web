@@ -4,6 +4,7 @@
     <div class="app-body clearfix" :class="[miniClass]">
       <navleft></navleft>
       <div class="lay-body left">
+        <site-path></site-path>
         <!--<transition :name="transitionName" appear>-->
         <router-view class="routerViewBox"></router-view>
         <!--</transition>-->
@@ -15,6 +16,8 @@
 <script>
   import Navtop from './NavTop.vue'
   import Navleft from './NavLeft.vue'
+  import SitePath from './SitePath.vue'
+
   export default {
     data: () => ({
       isMini: false
@@ -24,6 +27,6 @@
         return this.isMini ? 'lay-mini' : ''
       }
     },
-    components: {Navtop, Navleft}
+    components: {Navtop, Navleft, SitePath}
   }
 </script>
