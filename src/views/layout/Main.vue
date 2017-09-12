@@ -24,11 +24,6 @@
         return this.isMini ? 'lay-mini' : ''
       }
     },
-    components: {Navtop, Navleft},
-    mounted () {
-      this.$store.dispatch('LOAD_DATA', {
-        a: 'b'
-      })
-    }
+    components: {Navtop, Navleft}
   }
 </script>
