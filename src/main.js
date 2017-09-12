@@ -10,6 +10,7 @@ import VueQiniu from './vue-qiniu'
 import App from './App'
 import router from './router'
 import Global from './global'
+import store from './store'
 // 引入自定义指令
 import Clipboard from './vue-clipboard'
 // 引入样式
@@ -52,6 +53,7 @@ window.ROOT_DATA = {
 new Vue({
   el: '#app',
   router,
+  store,
   data: window.ROOT_DATA,
   template: '<App/>',
   components: { App }
