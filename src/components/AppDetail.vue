@@ -11,7 +11,7 @@
                 <m-btn>24小时</m-btn>
                 <m-btn>1周</m-btn>
               </m-btn-group>
-              <m-btn class="panel-bg_bg">查看历史</m-btn>
+              <m-btn class="panel-bg_bg" @click.native="lookHistory">查看历史</m-btn>
             </div>
             <!--<small>2017-06-26</small>-->
           </div>

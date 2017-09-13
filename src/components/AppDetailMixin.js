@@ -100,6 +100,9 @@ export default {
           console.log(typeof e)
         })
       })
+    },
+    lookHistory () {
+      this.$router.push({name: 'ChartHistory', params: {id: 1}})
     }
   },
   computed: {
