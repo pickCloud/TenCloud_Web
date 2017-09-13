@@ -25,7 +25,8 @@ export default {
     isDisabled: false,
     updateApi: 'server_update',
     performance: 'server_performance',
-    performanceData: {}
+    performanceData: {},
+    btnidx: 0
   }),
   methods: {
     getApiData () {
@@ -110,6 +111,24 @@ export default {
           this.$toast(d.message, 'cc')
         })
       })
+    },
+    btnChange (type) {
+      let timeNum = 0
+      switch (type) {
+        case 0:
+          timeNum = 60
+          break
+        case 1:
+          timeNum = 60 * 24
+          break
+        case 2:
+          timeNum = 60 * 24 * 7
+          break
+        case 3:
+          timeNum = 60 * 24 * 7 * 30
+          break
+      }
+      this.getPerformance(timeNum, true)
     }
   },
   computed: {

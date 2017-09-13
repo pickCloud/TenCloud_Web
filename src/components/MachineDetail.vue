@@ -6,6 +6,15 @@
           <div class="panel-title" slot="title">
             <span class="bold m-r8">监控</span>
             <!--<small>2017-06-26</small>-->
+            <div class="right" style="margin-top: -5px">
+              <m-btn-group :idx="btnidx" class="m-r8 clearfix" @change="btnChange">
+                <m-btn>1个小时</m-btn>
+                <m-btn>24小时</m-btn>
+                <m-btn>1周</m-btn>
+                <m-btn>1个月</m-btn>
+              </m-btn-group>
+              <m-btn class="panel-bg_bg">查看历史</m-btn>
+            </div>
           </div>
           <m-row :gutter="16" class="mdc-chart">
             <m-col class="xs-12 lg-6">

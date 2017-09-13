@@ -85,16 +85,32 @@ export default {
     toG (v) {
       return (v / 1024 / 1024 / 1024).toFixed(2)
     },
-    getPerformance (n = 1) {
+    getPerformance (n = 1, isClearData = false) {
       const nowdate = new Date()
       const olddate = new Date(nowdate.getTime() - 1000 * 60 * n)
 
       this.performanceData.start_time = Date.parse(olddate) / 1000
       this.performanceData.end_time = Date.parse(nowdate) / 1000
-
+      this.performanceData.type = 0
       this.$Global.async(this.performance, true).getData(this.performanceData).then(d => {
         if (d.status === 0) {
           // console.log(d)
+          if (isClearData) {
+            let that = this
+            console.log(that)
+            if (this.cpu[0] && this.cpu[0].data) {
+              that.cpu[0].data.splice(0, that.cpu[0].data.length)
+            }
+            if (this.memory[0] && this.memory[0].data) {
+              that.memory[0].data.splice(0, that.memory[0].data.length)
+            }
+            if (this.nets[0] && this.nets[0].data) {
+              that.nets[0].data.splice(0, that.nets[0].data.length)
+            }
+            if (this.disk[0] && this.disk[0].data) {
+              that.disk[0].data.splice(0, that.disk[0].data.length)
+            }
+          }
           let tempData = d.data
           if (tempData.cpu) this.chartData('cpu', this.formatDate(tempData.cpu))
           if (tempData.memory) this.chartData('memory', this.formatDate(tempData.memory))
@@ -108,6 +124,7 @@ export default {
             this.getPerformance(AJAX_TWO_TIME)
             clearTimeout(this.temptimeout)
           }, AJAX_LOOP_TIME * 1000 * 60)
+          // console.log(AJAX_LOOP_TIME, AJAX_TWO_TIME)
         }
       })
     },
