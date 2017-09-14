@@ -13,7 +13,7 @@
                 <m-btn>1周</m-btn>
                 <m-btn>1个月</m-btn>
               </m-btn-group>
-              <m-btn class="panel-bg_bg">查看历史</m-btn>
+              <m-btn class="panel-bg_bg" @click.native="getHistory">查看历史</m-btn>
             </div>
           </div>
           <m-row :gutter="16" class="mdc-chart">

@@ -97,7 +97,6 @@ export default {
           // console.log(d)
           if (isClearData) {
             let that = this
-            console.log(that)
             if (this.cpu[0] && this.cpu[0].data) {
               that.cpu[0].data.splice(0, that.cpu[0].data.length)
             }

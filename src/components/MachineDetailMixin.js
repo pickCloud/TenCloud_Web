@@ -129,6 +129,10 @@ export default {
           break
       }
       this.getPerformance(timeNum, true)
+    },
+    getHistory () {
+      console.log('进入')
+      this.$router.push({name: 'ChartHistory', params: {id: this.$route.params.id}})
     }
   },
   computed: {

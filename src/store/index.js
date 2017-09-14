@@ -5,6 +5,7 @@ import user from './modules/User'
 import sitepath from './modules/SitePath'
 import mutations from './Mutations'
 import actions from './Actions'
+import scroll from './modules/scroll'
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
@@ -14,7 +15,8 @@ export default new Vuex.Store({
   actions,
   modules: {
     user,
-    sitepath
+    sitepath,
+    scroll
   },
   strict: debug,
   plugins: debug ? [createLogger()] : []
