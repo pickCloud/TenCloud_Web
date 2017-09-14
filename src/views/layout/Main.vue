@@ -29,10 +29,7 @@
     },
     methods: {
       scroll (e) {
-        if (e.target.clientHeight + e.target.scrollTop === e.target.scrollHeight) {
-          console.log('到底部')
-          this.$store.commit('scroll/IS_BOTTOM', true)
-        }
+        this.$store.commit('scroll/IS_BOTTOM', e.target.clientHeight + e.target.scrollTop === e.target.scrollHeight)
       }
     },
     components: {Navtop, Navleft, SitePath}

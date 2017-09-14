@@ -397,23 +397,29 @@
       },
       timeType: 1,
       now_page: 1,
-      page_number: 10
+      page_number: 20
     }),
     created () {
       this.$store.commit('sitepath/SPLICE', [3, 1, {cn: '历史记录'}])
+      console.log(this.$store.state)
     },
     methods: {
-      getPerformance (startTime, endTime) {
-        let that = this
+      getPerformance (startTime, endTime, isContinue = false) {
         this.performanceData.start_time = Date.parse(startTime) / 1000
         this.performanceData.end_time = Date.parse(endTime) / 1000
         this.performanceData.type = this.timeType
         this.performanceData.id = this.$route.params.id
-        this.performanceData.now_page = that.now_page
-        this.performanceData.page_number = that.page_number
+        if (isContinue) {
+          this.now_page++
+        }
+        this.performanceData.now_page = this.now_page
+        this.performanceData.page_number = this.page_number
           //  this.performance api地址
         this.$Global.async(this.performance, true).getData(this.performanceData).then(d => {
-          console.log(d.toString())
+          if (!isContinue) {
+            this.serverList.splice(0, this.serverList.length)
+          }
+          this.serverList.push(d.server_list)
         })
       },
       tiemTypeChange (index) {
@@ -422,8 +428,11 @@
       }
     },
     watch: {
-      '$store.state.scroll.IS_BOTTOM' (n, o) {
-        console.log(n.mutation.payload)
+      '$store.state.scroll.isBottom' (n, o) {
+        if (n) {
+          // pass
+          this.getPerformance(this.startTime, this.endTime, true)
+        }
       }
     }
   }

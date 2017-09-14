@@ -1,4 +1,4 @@
-const AJAX_ONE_TIME = 60 // 分钟
+// const AJAX_ONE_TIME = 60 // 分钟
 const AJAX_TWO_TIME = 1 // 分钟
 const AJAX_LOOP_TIME = 1 // 分钟
 
@@ -152,7 +152,7 @@ export default {
     }
   },
   mounted () {
-    this.getPerformance(AJAX_ONE_TIME)
+    // this.getPerformance(AJAX_ONE_TIME)
   },
   beforeDestroy () {
     if (this.temptimeout) clearTimeout(this.temptimeout)
