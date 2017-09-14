@@ -105,7 +105,7 @@ export default {
             }
             if (this.nets[0] && this.nets[0].data && this.nets[1] && this.nets[1].data) {
               that.nets[0].data.splice(0, that.nets[0].data.length)
-              that.nets[1].data.splice(0, that.nets[0].data.length)
+              that.nets[1].data.splice(0, that.nets[1].data.length)
             }
             if (this.disk[0] && this.disk[0].data) {
               that.disk[0].data.splice(0, that.disk[0].data.length)
