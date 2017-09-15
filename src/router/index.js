@@ -133,7 +133,7 @@ const router = new Router({
           component: FileHubIn
         },
         {
-          path: '/charthistory/:id',
+          path: '/:name/charthistory/:id',
           name: 'ChartHistory',
           meta: {level: 2},
           component: ChartHistory

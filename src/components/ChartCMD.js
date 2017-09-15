@@ -14,7 +14,7 @@ export default {
     block: [],
     disk: [],
     nets: [],
-    maxChartNum: 5
+    maxChartNum: 8
   }),
   methods: {
     formatDate (p) {

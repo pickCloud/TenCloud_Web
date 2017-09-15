@@ -131,8 +131,7 @@ export default {
       this.getPerformance(timeNum, true)
     },
     getHistory () {
-      console.log('进入')
-      this.$router.push({name: 'ChartHistory', params: {id: this.$route.params.id}})
+      this.$router.push({name: 'ChartHistory', params: {id: this.$route.params.id, name: this.baseInfo.name}})
     }
   },
   computed: {

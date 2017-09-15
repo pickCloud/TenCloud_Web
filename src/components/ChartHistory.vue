@@ -24,7 +24,7 @@
             <date-picker :date="endTime" :option="option" :limit="limit"></date-picker>
             <span class="input-flex-icon"></span>
           </div>
-          <m-btn @click.native="getPerformance(startTime.time,endTime.time)">查询</m-btn>
+          <m-btn @click.native="getPerformance">查询</m-btn>
         </div>
         <m-table class="hover striped machines-table m-b16">
           <col width="20%">
@@ -43,31 +43,31 @@
           </thead>
           <tbody v-for="item in serverList">
           <td>
-            {{item.report_time}}
+            {{item.created_time}}
           </td>
 
           <!--<td>{{item.address}}</td>-->
           <!--<td>{{item.public_ip}}</td>-->
 
           <td>
-            <div>{{JSON.parse(item.cpu_content).percent}}%</div>
+            <div>{{item.cpu.percent}}%</div>
             <div class="percent-box">
-              <div class="percent-box-bar" :class="{warning: JSON.parse(item.cpu_content).percent > 80}" :style="{width: JSON.parse(item.cpu_content).percent + '%'}"></div>
+              <div class="percent-box-bar" :class="{warning: item.cpu.percent > 80}" :style="{width: item.cpu.percent + '%'}"></div>
             </div>
           </td>
           <td>
-            <div>{{JSON.parse(item.memory_content).percent}}%</div>
+            <div>{{item.memory.percent}}%</div>
             <div class="percent-box">
-              <div class="percent-box-bar" :class="{warning: JSON.parse(item.memory_content).percent > 80}" :style="{width: JSON.parse(item.memory_content).percent + '%'}"></div>
+              <div class="percent-box-bar" :class="{warning: item.memory.percent > 80}" :style="{width: item.memory.percent + '%'}"></div>
             </div>
           </td>
           <td>
-            <div>{{JSON.parse(item.disk_content).percent}}%</div>
+            <div>{{item.disk.percent}}%</div>
             <div class="percent-box">
-              <div class="percent-box-bar" :class="{warning: JSON.parse(item.disk_content).percent > 80}" :style="{width: JSON.parse(item.disk_content).percent + '%'}"></div>
+              <div class="percent-box-bar" :class="{warning: item.disk.percent > 80}" :style="{width: item.disk.percent + '%'}"></div>
             </div>
           </td>
-          <td>{{JSON.parse(item.net_content).input + '／' + JSON.parse(item.net_content).output}}</td>
+          <td>{{item.net.input + '／' + item.net.output}}</td>
 
           </tbody>
         </m-table>
@@ -85,7 +85,7 @@
       'date-picker': myDatepicker
     },
     data: () => ({
-      performance: 'app_performance',
+      performance: 'server_performance',
       startTime: {
         time: ''
       },
@@ -123,270 +123,10 @@
         available: [1, 2, 3, 4, 5]
       }, {
         type: 'fromto',
-        from: '',
+        from: new Date().getTime() - 30 * 24 * 60 * 60 * 1000,
         to: new Date().getTime()
       }],
-      serverList: [{
-        address: '亚太地区（东京）',
-        cpu_content: '{"percent": 1.5}',
-        disk_content: '{"free": 28663349248, "total": 33240739840, "percent": 13.71}',
-        id: 30,
-        instance_name: '',
-        machine_status: '运行中',
-        memory_content: '{"free": 3870736384, "total": 8369954816, "percent": 7.32, "available": 7756763136}',
-        name: '教育',
-        net_content: '{"input": 0, "output": 0}',
-        provider: '亚马逊晕',
-        public_ip: '54.250.151.32',
-        report_time: '1505296072'
-      }, {
-        address: '亚太地区（东京）',
-        cpu_content: '{"percent": 1.5}',
-        disk_content: '{"free": 28663349248, "total": 33240739840, "percent": 13.71}',
-        id: 30,
-        instance_name: '',
-        machine_status: '运行中',
-        memory_content: '{"free": 3870736384, "total": 8369954816, "percent": 7.32, "available": 7756763136}',
-        name: '教育',
-        net_content: '{"input": 0, "output": 0}',
-        provider: '亚马逊晕',
-        public_ip: '54.250.151.32',
-        report_time: '1505296072'
-      }, {
-        address: '亚太地区（东京）',
-        cpu_content: '{"percent": 1.5}',
-        disk_content: '{"free": 28663349248, "total": 33240739840, "percent": 13.71}',
-        id: 30,
-        instance_name: '',
-        machine_status: '运行中',
-        memory_content: '{"free": 3870736384, "total": 8369954816, "percent": 7.32, "available": 7756763136}',
-        name: '教育',
-        net_content: '{"input": 0, "output": 0}',
-        provider: '亚马逊晕',
-        public_ip: '54.250.151.32',
-        report_time: '1505296072'
-      }, {
-        address: '亚太地区（东京）',
-        cpu_content: '{"percent": 1.5}',
-        disk_content: '{"free": 28663349248, "total": 33240739840, "percent": 13.71}',
-        id: 30,
-        instance_name: '',
-        machine_status: '运行中',
-        memory_content: '{"free": 3870736384, "total": 8369954816, "percent": 7.32, "available": 7756763136}',
-        name: '教育',
-        net_content: '{"input": 0, "output": 0}',
-        provider: '亚马逊晕',
-        public_ip: '54.250.151.32',
-        report_time: '1505296072'
-      }, {
-        address: '亚太地区（东京）',
-        cpu_content: '{"percent": 1.5}',
-        disk_content: '{"free": 28663349248, "total": 33240739840, "percent": 13.71}',
-        id: 30,
-        instance_name: '',
-        machine_status: '运行中',
-        memory_content: '{"free": 3870736384, "total": 8369954816, "percent": 7.32, "available": 7756763136}',
-        name: '教育',
-        net_content: '{"input": 0, "output": 0}',
-        provider: '亚马逊晕',
-        public_ip: '54.250.151.32',
-        report_time: '1505296072'
-      }, {
-        address: '亚太地区（东京）',
-        cpu_content: '{"percent": 1.5}',
-        disk_content: '{"free": 28663349248, "total": 33240739840, "percent": 13.71}',
-        id: 30,
-        instance_name: '',
-        machine_status: '运行中',
-        memory_content: '{"free": 3870736384, "total": 8369954816, "percent": 7.32, "available": 7756763136}',
-        name: '教育',
-        net_content: '{"input": 0, "output": 0}',
-        provider: '亚马逊晕',
-        public_ip: '54.250.151.32',
-        report_time: '1505296072'
-      }, {
-        address: '亚太地区（东京）',
-        cpu_content: '{"percent": 1.5}',
-        disk_content: '{"free": 28663349248, "total": 33240739840, "percent": 13.71}',
-        id: 30,
-        instance_name: '',
-        machine_status: '运行中',
-        memory_content: '{"free": 3870736384, "total": 8369954816, "percent": 7.32, "available": 7756763136}',
-        name: '教育',
-        net_content: '{"input": 0, "output": 0}',
-        provider: '亚马逊晕',
-        public_ip: '54.250.151.32',
-        report_time: '1505296072'
-      }, {
-        address: '亚太地区（东京）',
-        cpu_content: '{"percent": 1.5}',
-        disk_content: '{"free": 28663349248, "total": 33240739840, "percent": 13.71}',
-        id: 30,
-        instance_name: '',
-        machine_status: '运行中',
-        memory_content: '{"free": 3870736384, "total": 8369954816, "percent": 7.32, "available": 7756763136}',
-        name: '教育',
-        net_content: '{"input": 0, "output": 0}',
-        provider: '亚马逊晕',
-        public_ip: '54.250.151.32',
-        report_time: '1505296072'
-      }, {
-        address: '亚太地区（东京）',
-        cpu_content: '{"percent": 1.5}',
-        disk_content: '{"free": 28663349248, "total": 33240739840, "percent": 13.71}',
-        id: 30,
-        instance_name: '',
-        machine_status: '运行中',
-        memory_content: '{"free": 3870736384, "total": 8369954816, "percent": 7.32, "available": 7756763136}',
-        name: '教育',
-        net_content: '{"input": 0, "output": 0}',
-        provider: '亚马逊晕',
-        public_ip: '54.250.151.32',
-        report_time: '1505296072'
-      }, {
-        address: '亚太地区（东京）',
-        cpu_content: '{"percent": 1.5}',
-        disk_content: '{"free": 28663349248, "total": 33240739840, "percent": 13.71}',
-        id: 30,
-        instance_name: '',
-        machine_status: '运行中',
-        memory_content: '{"free": 3870736384, "total": 8369954816, "percent": 7.32, "available": 7756763136}',
-        name: '教育',
-        net_content: '{"input": 0, "output": 0}',
-        provider: '亚马逊晕',
-        public_ip: '54.250.151.32',
-        report_time: '1505296072'
-      }, {
-        address: '亚太地区（东京）',
-        cpu_content: '{"percent": 1.5}',
-        disk_content: '{"free": 28663349248, "total": 33240739840, "percent": 13.71}',
-        id: 30,
-        instance_name: '',
-        machine_status: '运行中',
-        memory_content: '{"free": 3870736384, "total": 8369954816, "percent": 7.32, "available": 7756763136}',
-        name: '教育',
-        net_content: '{"input": 0, "output": 0}',
-        provider: '亚马逊晕',
-        public_ip: '54.250.151.32',
-        report_time: '1505296072'
-      }, {
-        address: '亚太地区（东京）',
-        cpu_content: '{"percent": 1.5}',
-        disk_content: '{"free": 28663349248, "total": 33240739840, "percent": 13.71}',
-        id: 30,
-        instance_name: '',
-        machine_status: '运行中',
-        memory_content: '{"free": 3870736384, "total": 8369954816, "percent": 7.32, "available": 7756763136}',
-        name: '教育',
-        net_content: '{"input": 0, "output": 0}',
-        provider: '亚马逊晕',
-        public_ip: '54.250.151.32',
-        report_time: '1505296072'
-      }, {
-        address: '亚太地区（东京）',
-        cpu_content: '{"percent": 1.5}',
-        disk_content: '{"free": 28663349248, "total": 33240739840, "percent": 13.71}',
-        id: 30,
-        instance_name: '',
-        machine_status: '运行中',
-        memory_content: '{"free": 3870736384, "total": 8369954816, "percent": 7.32, "available": 7756763136}',
-        name: '教育',
-        net_content: '{"input": 0, "output": 0}',
-        provider: '亚马逊晕',
-        public_ip: '54.250.151.32',
-        report_time: '1505296072'
-      }, {
-        address: '亚太地区（东京）',
-        cpu_content: '{"percent": 1.5}',
-        disk_content: '{"free": 28663349248, "total": 33240739840, "percent": 13.71}',
-        id: 30,
-        instance_name: '',
-        machine_status: '运行中',
-        memory_content: '{"free": 3870736384, "total": 8369954816, "percent": 7.32, "available": 7756763136}',
-        name: '教育',
-        net_content: '{"input": 0, "output": 0}',
-        provider: '亚马逊晕',
-        public_ip: '54.250.151.32',
-        report_time: '1505296072'
-      }, {
-        address: '亚太地区（东京）',
-        cpu_content: '{"percent": 1.5}',
-        disk_content: '{"free": 28663349248, "total": 33240739840, "percent": 13.71}',
-        id: 30,
-        instance_name: '',
-        machine_status: '运行中',
-        memory_content: '{"free": 3870736384, "total": 8369954816, "percent": 7.32, "available": 7756763136}',
-        name: '教育',
-        net_content: '{"input": 0, "output": 0}',
-        provider: '亚马逊晕',
-        public_ip: '54.250.151.32',
-        report_time: '1505296072'
-      }, {
-        address: '亚太地区（东京）',
-        cpu_content: '{"percent": 1.5}',
-        disk_content: '{"free": 28663349248, "total": 33240739840, "percent": 13.71}',
-        id: 30,
-        instance_name: '',
-        machine_status: '运行中',
-        memory_content: '{"free": 3870736384, "total": 8369954816, "percent": 7.32, "available": 7756763136}',
-        name: '教育',
-        net_content: '{"input": 0, "output": 0}',
-        provider: '亚马逊晕',
-        public_ip: '54.250.151.32',
-        report_time: '1505296072'
-      }, {
-        address: '亚太地区（东京）',
-        cpu_content: '{"percent": 1.5}',
-        disk_content: '{"free": 28663349248, "total": 33240739840, "percent": 13.71}',
-        id: 30,
-        instance_name: '',
-        machine_status: '运行中',
-        memory_content: '{"free": 3870736384, "total": 8369954816, "percent": 7.32, "available": 7756763136}',
-        name: '教育',
-        net_content: '{"input": 0, "output": 0}',
-        provider: '亚马逊晕',
-        public_ip: '54.250.151.32',
-        report_time: '1505296072'
-      }, {
-        address: '亚太地区（东京）',
-        cpu_content: '{"percent": 1.5}',
-        disk_content: '{"free": 28663349248, "total": 33240739840, "percent": 13.71}',
-        id: 30,
-        instance_name: '',
-        machine_status: '运行中',
-        memory_content: '{"free": 3870736384, "total": 8369954816, "percent": 7.32, "available": 7756763136}',
-        name: '教育',
-        net_content: '{"input": 0, "output": 0}',
-        provider: '亚马逊晕',
-        public_ip: '54.250.151.32',
-        report_time: '1505296072'
-      }, {
-        address: '亚太地区（东京）',
-        cpu_content: '{"percent": 1.5}',
-        disk_content: '{"free": 28663349248, "total": 33240739840, "percent": 13.71}',
-        id: 30,
-        instance_name: '',
-        machine_status: '运行中',
-        memory_content: '{"free": 3870736384, "total": 8369954816, "percent": 7.32, "available": 7756763136}',
-        name: '教育',
-        net_content: '{"input": 0, "output": 0}',
-        provider: '亚马逊晕',
-        public_ip: '54.250.151.32',
-        report_time: '1505296072'
-      }, {
-        address: '亚太地区（东京）',
-        cpu_content: '{"percent": 1.5}',
-        disk_content: '{"free": 28663349248, "total": 33240739840, "percent": 13.71}',
-        id: 30,
-        instance_name: '',
-        machine_status: '运行中',
-        memory_content: '{"free": 3870736384, "total": 8369954816, "percent": 7.32, "available": 7756763136}',
-        name: '教育',
-        net_content: '{"input": 0, "output": 0}',
-        provider: '亚马逊晕',
-        public_ip: '54.250.151.32',
-        report_time: '1505296072'
-      }],
+      serverList: [],
       performanceData: {
         type: 1,
         start_time: 0,
@@ -400,13 +140,14 @@
       page_number: 20
     }),
     created () {
-      this.$store.commit('sitepath/SPLICE', [3, 1, {cn: '历史记录'}])
-      console.log(this.$store.state)
+      this.$store.commit('sitepath/SPLICE', [2, 1, {name: 'MachineDetail', params: {id: this.$route.params.id}, cn: this.$route.params.name}, {cn: '历史记录'}])
     },
     methods: {
-      getPerformance (startTime, endTime, isContinue = false) {
-        this.performanceData.start_time = Date.parse(startTime) / 1000
-        this.performanceData.end_time = Date.parse(endTime) / 1000
+      getPerformance (isContinue = false) {
+        if (this.startTime.time && this.endTime.time) {
+          this.performanceData.start_time = Date.parse(this.startTime.time) / 1000
+          this.performanceData.end_time = Date.parse(this.endTime.time) / 1000
+        }
         this.performanceData.type = this.timeType
         this.performanceData.id = this.$route.params.id
         if (isContinue) {
@@ -417,21 +158,33 @@
           //  this.performance api地址
         this.$Global.async(this.performance, true).getData(this.performanceData).then(d => {
           if (!isContinue) {
+            this.now_page = 1
             this.serverList.splice(0, this.serverList.length)
           }
-          this.serverList.push(d.server_list)
+          for (let i = 0; i < d.data.length; i++) {
+            let date = new Date(d.data[i].created_time * 1000)
+            let Y = date.getFullYear() + '-'
+            let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
+            let D = date.getDate() + ' '
+            let h = date.getHours() + ':'
+            let m = date.getMinutes() + ':'
+            let s = date.getSeconds()
+            d.data[i].created_time = `${Y}${M}${D} ${h}${m}${s}`
+            this.serverList.push(d.data[i])
+          }
+          console.log(this.serverList)
         })
       },
       tiemTypeChange (index) {
         this.timeType = index + 1
-        this.getPerformance(this.startTime, this.endTime)
+        this.getPerformance()
       }
     },
     watch: {
       '$store.state.scroll.isBottom' (n, o) {
         if (n) {
           // pass
-          this.getPerformance(this.startTime, this.endTime, true)
+          this.getPerformance(true)
         }
       }
     }
