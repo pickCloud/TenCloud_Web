@@ -117,7 +117,8 @@ export default {
         data: {
           title: '新建文件夹'
         },
-        callback: (type, payload, next) => {
+        // callback: (type, payload, next)
+        callback: ({type, payload, next}) => {
           if (payload.type === 'sure') {
             this.$Global.async('file_create_dir', true).getData({
               pid: this.pid,
