@@ -24,7 +24,7 @@
             <date-picker :date="endTime" :option="option" :limit="limit"></date-picker>
             <span class="input-flex-icon"></span>
           </div>
-          <m-btn @click.native="getPerformance">查询</m-btn>
+          <m-btn @click.native="getPerformance(false)">查询</m-btn>
         </div>
         <m-table class="hover striped machines-table m-b16">
           <col width="20%">
@@ -143,7 +143,7 @@
       this.$store.commit('sitepath/SPLICE', [2, 1, {name: 'MachineDetail', params: {id: this.$route.params.id}, cn: this.$route.params.name}, {cn: '历史记录'}])
     },
     methods: {
-      getPerformance (isContinue = false) {
+      getPerformance (event, isContinue = false) {
         if (this.startTime.time && this.endTime.time) {
           this.performanceData.start_time = Date.parse(this.startTime.time) / 1000
           this.performanceData.end_time = Date.parse(this.endTime.time) / 1000
@@ -153,6 +153,7 @@
         if (isContinue) {
           this.now_page++
         }
+        console.log(typeof isContinue)
         this.performanceData.now_page = this.now_page
         this.performanceData.page_number = this.page_number
           //  this.performance api地址
