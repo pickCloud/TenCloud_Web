@@ -6,8 +6,8 @@
     transition: all 0.2s;
     padding: 0 $gutter*2;
     &.active,&:hover {
-      background-color: $color-page-select-bg;
-      color: $color-font-base;
+      background-color: $color-page-select-bg-addStyle1;
+      color: $color-font-base-addStyle1;
     }
     .jmtree-label-icon {
       margin-right: $gutter;
@@ -171,3 +171,6 @@
 //  text-anchor: middle;
 //  //dominant-baseline: middle;
 //}
+/*
+
+*/

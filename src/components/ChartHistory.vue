@@ -24,7 +24,7 @@
             <date-picker :date="endTime" :option="option" :limit="limit"></date-picker>
             <span class="input-flex-icon"></span>
           </div>
-          <m-btn @click.native="getPerformance(false)">查询</m-btn>
+          <m-btn @click.native="getPerformance(false, true)">查询</m-btn>
         </div>
         <m-table class="hover striped machines-table m-b16">
           <col width="20%">
@@ -129,21 +129,33 @@
       serverList: [],
       performanceData: {
         type: 1,
-        start_time: 0,
-        end_time: 0,
+        start_time: new Date().getTime() - 7 * 24 * 60 * 60 * 1000,
+        end_time: new Date().getTime(),
         id: 0,
         now_page: 1,
         page_number: 10
       },
       timeType: 1,
       now_page: 1,
-      page_number: 20
+      page_number: 20,
+      isHaveData: true
     }),
     created () {
       this.$store.commit('sitepath/SPLICE', [2, 1, {name: 'MachineDetail', params: {id: this.$route.params.id}, cn: this.$route.params.name}, {cn: '历史记录'}])
+      let dateStart = new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000)
+      this.startTime.time = this.timeFormat(dateStart)
+      let dateEnd = new Date(new Date().getTime())
+      this.endTime.time = this.timeFormat(dateEnd)
     },
     methods: {
-      getPerformance (event, isContinue = false) {
+      getPerformance (isContinue = false, isSetHaveDate = false) {
+        if (isSetHaveDate) {
+          this.isHaveData = isSetHaveDate
+        }
+        if (!isContinue) {
+          this.now_page = 1
+          this.serverList.splice(0, this.serverList.length)
+        }
         if (this.startTime.time && this.endTime.time) {
           this.performanceData.start_time = Date.parse(this.startTime.time) / 1000
           this.performanceData.end_time = Date.parse(this.endTime.time) / 1000
@@ -153,39 +165,56 @@
         if (isContinue) {
           this.now_page++
         }
-        console.log(typeof isContinue)
         this.performanceData.now_page = this.now_page
         this.performanceData.page_number = this.page_number
           //  this.performance api地址
         this.$Global.async(this.performance, true).getData(this.performanceData).then(d => {
-          if (!isContinue) {
-            this.now_page = 1
-            this.serverList.splice(0, this.serverList.length)
-          }
           for (let i = 0; i < d.data.length; i++) {
             let date = new Date(d.data[i].created_time * 1000)
-            let Y = date.getFullYear() + '-'
-            let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
-            let D = date.getDate() + ' '
-            let h = date.getHours() + ':'
-            let m = date.getMinutes() + ':'
-            let s = date.getSeconds()
-            d.data[i].created_time = `${Y}${M}${D} ${h}${m}${s}`
+            let restr = this.timeFormat(date)
+            d.data[i].created_time = restr
             this.serverList.push(d.data[i])
           }
-          console.log(this.serverList)
+          if (d.data.length < 20) {
+            this.isHaveData = false
+            return false
+          }
         })
       },
       tiemTypeChange (index) {
         this.timeType = index + 1
-        this.getPerformance()
+        this.isHaveData = true
+        this.getPerformance(false, true)
+      },
+      timeFormat (date) {
+        let Y = date.getFullYear() + '-'
+        let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
+        let D = date.getDate() + ' '
+        let h = date.getHours() + ':'
+        let m = date.getMinutes() + ':'
+        let s = date.getSeconds()
+        if (h.length === 2) {
+          h = '0' + h
+        }
+        if (m.length === 2) {
+          m = '0' + m
+        }
+        s = s + ''
+        if (s.length === 1) {
+          s = '0' + s
+        }
+        return `${Y}${M}${D} ${h}${m}${s}`
       }
     },
     watch: {
       '$store.state.scroll.isBottom' (n, o) {
         if (n) {
           // pass
-          this.getPerformance(true)
+          if (this.isHaveData) {
+            this.getPerformance(true)
+          } else {
+            console.log('暂无数据')
+          }
         }
       }
     }
