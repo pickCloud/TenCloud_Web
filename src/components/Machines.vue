@@ -14,7 +14,7 @@
         <m-table class="hover striped machines-table m-b16">
           <col width="55px">
           <col :width="!isDeploy?'15%':'20%'">
-          <col :width="!isDeploy?'10%':'20%'">
+          <col :width="!isDeploy?'15%':'20%'">
           <col :width="!isDeploy?'10%':'20%'">
           <col width="10%">
           <col width="10%">
@@ -40,16 +40,20 @@
             <td>{{item.name}}</td>
             <td>
               <m-tip class="server-tip" has-arrow>
-                <span slot="label">{{item.provider}}</span>
+                <span slot="label">
+                  <i class="iconfont" :class="getBusiness(item.provider)" style="margin-right: 5px;color: #48BBC0"></i>
+                  <span >{{item.public_ip}}</span>
+                </span>
                 <div slot="popper" class="white_txt server-tip-popper">
                   <p>地址:{{item.address}}</p>
-                  <p>IP:{{item.public_ip}}</p>
+                  <!--<p>服务商:{{item.provider}}</p>-->
                 </div>
               </m-tip>
             </td>
             <!--<td>{{item.address}}</td>-->
             <!--<td>{{item.public_ip}}</td>-->
-            <td>{{item.machine_status}}</td>
+            <!--额外添加span标签样式整改 2017、9、19-->
+            <td><span class="add machine_status" :class="choose(item.machine_status)">{{item.machine_status}}</span></td>
             <td>
               <div>{{JSON.parse(item.cpu_content).percent}}%</div>
               <div class="percent-box">
@@ -117,6 +121,23 @@
     width: 10%;
     &.warning {
       background-color: #F25630;
+    }
+  }
+  .add.machine_status{
+    padding: 4px;
+    border-radius: 4px;
+    border:1px solid #48BBC0;
+    color:#48BBC0;
+    display: block;
+    width: 74px;
+    text-align: center;
+    &.restart{
+      border: 1px solid #A5D6A7;
+      color:#A5D6A7;
+    }
+    &.stop{
+      border: 1px solid #FF8A80;
+      color:#FF8A80;
     }
   }
 </style>

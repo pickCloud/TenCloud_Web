@@ -1,7 +1,7 @@
 <template>
   <aside class="lay-aside left">
     <div class="mini-ctrl text-center" @click="$parent.isMini = !$parent.isMini">
-      <i class="icon icon-category"></i>
+      <i class="iconfont icon-shensuo"></i>
     </div>
     <m-tree :model="navData" :sizeh="50" @change="navChange"></m-tree>
   </aside>
@@ -14,17 +14,17 @@
         {
           label: '机器',
           link: {name: 'Machines'},
-          icon: 'icon icon-jiqun'
+          icon: 'iconfont icon-jiqi'
         },
         {
           label: '项目',
           link: {name: 'Projects'},
-          icon: 'icon icon-xiangmu1'
+          icon: 'iconfont icon-xiangmu'
         },
         {
           label: '文件',
           link: {name: 'FileHubIn', params: {id: 0}},
-          icon: 'icon icon-wenjiancunchu'
+          icon: 'iconfont icon-wenjian'
         }
       ]
     }),

@@ -125,7 +125,7 @@ export default {
           timeNum = 60 * 24 * 7
           break
         case 3:
-          timeNum = 60 * 24 * 7 * 30
+          timeNum = 60 * 24 * 30
           break
       }
       this.getPerformance(timeNum, true)

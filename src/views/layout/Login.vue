@@ -5,11 +5,11 @@
       <div class="login-form m-b32">
         <div class="login-form_title m-b32">登录</div>
         <div class="login-tip m-b16" :class="tip.type" v-if="tip.info">
-          <i class="icon icon-xinxi-yin vam"></i> <span class="vam">{{tip.info}}</span>
+          <i class="iconfont icon-xinxi-yin vam"></i> <span class="vam">{{tip.info}}</span>
         </div>
         <div class="login-form_inp m-b16">
           <input type="text" placeholder="请输入电话号码" v-model="loginData.mobile">
-          <i class="icon icon-seeuser"></i>
+          <i class="iconfont icon-touxiang"></i>
         </div>
         <div class="login-form_inp m-b32">
           <input type="text" placeholder="请输入验证码" v-model="loginData.auth_code">

@@ -56,7 +56,7 @@
           <div class="panel-title clearfix" slot="title">
             <span class="bold">基本信息</span>
             <span class="right editor-btn-group">
-              <span v-if="!isInfoEditor" @click="editorBegin"><m-btn :sizeh="-1"><span class="vam">修改</span> <i class="icon icon-editor vam"></i></m-btn></span>
+              <span v-if="!isInfoEditor" @click="editorBegin"><m-btn :sizeh="-1"><span class="vam">修改</span> <i class="iconfont icon-xiugai vam"></i></m-btn></span>
               <span v-if="isInfoEditor" @click="editorSure"><m-btn :sizeh="-1">确定</m-btn></span>
               <span v-if="isInfoEditor" @click="editorCancel"><m-btn :sizeh="-1">取消</m-btn></span>
             </span>
@@ -74,7 +74,7 @@
               <!--<m-btn>迁移 <i class="icon-quan"></i></m-btn>-->
             <!--</div>-->
             <div class="mcd-ctrl-item">
-              <m-btn @click.native="deleteMachine" :sizeh="-1"><span class="vam">删除</span> <i class="icon icon-delete vam"></i></m-btn>
+              <m-btn @click.native="deleteMachine" :sizeh="-1"><span class="vam">删除</span> <i class="iconfont icon-shanchu vam"></i></m-btn>
             </div>
             <span class="justify_fix"></span>
           </div>

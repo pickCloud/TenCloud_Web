@@ -37,9 +37,11 @@
       </div>
       <m-row class="p-16" :gutter="16">
         <m-col class="xs-12 md-3 text-center m-b16">
-          <div class="info-head m-b16">
+          <div class="info-head m-b16" style="line-height: 139px">
             <img :src="infos.image_url" alt="" v-if="infos.image_url">
+            <i v-else="" class="iconfont icon-touxiang1" style="font-size: 139px;"></i>
           </div>
+
           <div class="text-center m-b16">
             <div class="formbylabel file theme-dft" style="height: 32px; line-height: 32px;">
               <input type="file" id="a5wpj6gl9z" name="file" @change="fileChange">

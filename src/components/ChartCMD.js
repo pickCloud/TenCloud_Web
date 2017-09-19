@@ -86,11 +86,11 @@ export default {
       return (v / 1024 / 1024 / 1024).toFixed(2)
     },
     getPerformance (n = 1, isClearData = false) {
-      const nowdate = new Date()
-      const olddate = new Date(nowdate.getTime() - 1000 * 60 * n)
+      let nowdate = new Date().getTime()
+      let olddate = nowdate - 1000 * 60 * n
 
-      this.performanceData.start_time = Date.parse(olddate) / 1000
-      this.performanceData.end_time = Date.parse(nowdate) / 1000
+      this.performanceData.start_time = Math.floor(olddate / 1000)
+      this.performanceData.end_time = Math.floor(nowdate / 1000)
       this.performanceData.type = 0
       this.$Global.async(this.performance, true).getData(this.performanceData).then(d => {
         if (d.status === 0) {

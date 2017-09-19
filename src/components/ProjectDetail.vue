@@ -9,7 +9,7 @@
             <div class="right" style="margin-top: -5px">
               <m-btn class="primary_bg grey-dark_txt" @click.native="build">版本构建</m-btn>
               <m-btn class="primary_bg grey-dark_txt m-r16" @click.native="deploy">项目部署</m-btn>
-              <m-btn class="primary_bg grey-dark_txt" @click.native="editorHandle"><span class="vam">修改</span> <i class="icon icon-editor vam"></i></m-btn>
+              <m-btn class="primary_bg grey-dark_txt" @click.native="editorHandle"><span class="vam">修改</span> <i class="iconfont icon-xiugai vam"></i></m-btn>
             </div>
           </div>
           <table class="list-table">

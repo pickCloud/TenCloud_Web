@@ -59,6 +59,24 @@ export default {
     },
     refresh () {
       this.getApiData()
+    },
+    choose (str) {
+      if (str === '运行中') {
+        return ''
+      } else if (str === '重启') {
+        return 'restart'
+      } else if (str === '停止') {
+        return 'stop'
+      }
+    },
+    getBusiness (str) {
+      if (str === '阿里云') {
+        return 'icon-aliyun'
+      } else if (str === '亚马逊云') {
+        return 'icon-yamaxun'
+      } else if (str === '腾讯云') {
+        return 'icon-tengxunyun'
+      }
     }
   },
   beforeDestroy () {
