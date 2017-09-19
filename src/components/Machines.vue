@@ -124,7 +124,7 @@
     }
   }
   .add.machine_status{
-    padding: 4px;
+    padding: 1px 4px;
     border-radius: 4px;
     border:1px solid #48BBC0;
     color:#48BBC0;
@@ -139,5 +139,10 @@
       border: 1px solid #FF8A80;
       color:#FF8A80;
     }
+  }
+  //2017.9.19修改input checkbox大小
+  .theme-dft.label-inp-group .__icon{
+    width: 12px;
+    height:12px;
   }
 </style>
