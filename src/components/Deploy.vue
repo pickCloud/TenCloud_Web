@@ -41,7 +41,7 @@
                   <td>阿里云</td>
                   <td>{{item.address}}</td>
                   <td>{{item.public_ip}}</td>
-                  <td><span class="plate" :class="item.machine_status | mclass">{{item.machine_status | mstatus}}</span></td>
+                  <td><span class="plate" >{{item.machine_status}}</span></td>
                 </tr>
                 </tbody>
               </table>

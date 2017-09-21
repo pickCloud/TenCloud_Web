@@ -9,7 +9,7 @@
         </div>
         <div class="login-form_inp m-b16">
           <input type="text" placeholder="请输入电话号码" v-model="loginData.mobile">
-          <i class="iconfont icon-touxiang"></i>
+          <i class="iconfont icon-touxiang1"></i>
         </div>
         <div class="login-form_inp m-b32">
           <input type="text" placeholder="请输入验证码" v-model="loginData.auth_code">
@@ -139,7 +139,7 @@
       background-color: #262a35;
       padding: 4px 8px;
     }
-    .icon {
+    .iconfont {
       font-size: 1rem;
       position: absolute;
       right: 16px;
@@ -162,7 +162,7 @@
     height: 50px;
     line-height: 50px;
     border: 1px solid transparent;
-    .icon {
+    .iconfont {
       font-size: 1rem;
     }
     &.error {
