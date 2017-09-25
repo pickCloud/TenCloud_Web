@@ -1,6 +1,6 @@
 export default {
   data: () => ({
-    listts: [],
+    // listts: [], 当前页面选择数组
     selects: [],
     isSelectAll: false
   }),

@@ -112,24 +112,6 @@ export default {
         })
       })
     },
-    btnChange (type) {
-      let timeNum = 0
-      switch (type) {
-        case 0:
-          timeNum = 60
-          break
-        case 1:
-          timeNum = 60 * 24
-          break
-        case 2:
-          timeNum = 60 * 24 * 7
-          break
-        case 3:
-          timeNum = 60 * 24 * 30
-          break
-      }
-      this.getPerformance(timeNum, true)
-    },
     getHistory () {
       this.$router.push({name: 'ChartHistory', params: {id: this.$route.params.id, name: this.baseInfo.name}})
     }

@@ -1,12 +1,19 @@
 import Poppers from './Poppers.js'
 import Selects from './Selects.js'
 // import StatusCode from './StatusCode.js'
+import {mapGetters, mapMutations} from 'vuex'
 export default {
   mixins: [Poppers, Selects],
   data: () => ({
     isDeploy: false
   }),
+  computed: {
+    ...mapGetters('pubstate', [
+      'listts'
+    ])
+  },
   methods: {
+    ...mapMutations('pubstate', ['setListts']),
     delMachine (id) {
       let delids = this.selects
       if (id !== -1) delids = [id + '']
@@ -26,9 +33,10 @@ export default {
       }
     },
     getApiData () {
+      if (this.listts.length > 0) return false
       const cid = this.clusterid = 1
       this.$Global.async('cluster_detail', true).getData(null, cid).then(d => {
-        this.listts = d.data.server_list
+        this.setListts(d.data.server_list)
       })
     },
     getMdataByIds (ids) {
@@ -76,6 +84,8 @@ export default {
         return 'icon-yamaxun'
       } else if (str === '腾讯云') {
         return 'icon-tengxunyun'
+      } else if (str === '微软云') {
+        return 'icon-weiruanyun'
       }
     }
   },

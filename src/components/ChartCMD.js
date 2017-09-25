@@ -120,13 +120,33 @@ export default {
           // put
           // console.log(tempData.net)
           // 定期抓取
-          this.temptimeout = setTimeout(_ => {
-            this.getPerformance(AJAX_TWO_TIME)
-            clearTimeout(this.temptimeout)
-          }, AJAX_LOOP_TIME * 1000 * 60)
+          if (n === 60) {
+            this.temptimeout = setTimeout(_ => {
+              this.getPerformance(AJAX_TWO_TIME)
+              clearTimeout(this.temptimeout)
+            }, AJAX_LOOP_TIME * 1000 * 60)
+          }
           // console.log(AJAX_LOOP_TIME, AJAX_TWO_TIME)
         }
       })
+    },
+    btnChange (type) {
+      let timeNum = 0
+      switch (type) {
+        case 0:
+          timeNum = 60
+          break
+        case 1:
+          timeNum = 60 * 24
+          break
+        case 2:
+          timeNum = 60 * 24 * 7
+          break
+        case 3:
+          timeNum = 60 * 24 * 30
+          break
+      }
+      this.getPerformance(timeNum, true)
     },
     chartData (k, d) {
       d.forEach((v, i) => {

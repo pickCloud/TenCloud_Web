@@ -6,9 +6,9 @@ import sitepath from './modules/SitePath'
 import mutations from './Mutations'
 import actions from './Actions'
 import scroll from './modules/scroll'
-import pubState from './modules/pub_state'
+import pubstate from './modules/pubState'
+import projectsState from './modules/projectsState'
 Vue.use(Vuex)
-
 const debug = process.env.NODE_ENV !== 'production'
 
 export default new Vuex.Store({
@@ -18,7 +18,8 @@ export default new Vuex.Store({
     user,
     sitepath,
     scroll,
-    pubState
+    pubstate,
+    projectsState
   },
   strict: debug,
   plugins: debug ? [createLogger()] : []

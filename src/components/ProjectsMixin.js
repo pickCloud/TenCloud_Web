@@ -1,12 +1,18 @@
 import Selects from './Selects.js'
 import Poppers from './Poppers.js'
-
+import {mapGetters, mapMutations} from 'vuex'
 export default {
   mixins: [Poppers, Selects],
   data: () => ({
     modelCn: ['普通项目', '基础服务', '应用组件']
   }),
+  computed: {
+    ...mapGetters('projectsState', [
+      'listts'
+    ])
+  },
   methods: {
+    ...mapMutations('projectsState', ['setListts']),
     delProject (id) {
       let delids = this.selects
       if (id !== -1) delids = [id + '']
@@ -27,9 +33,10 @@ export default {
     },
     getApiData () {
       // const cid = this.clusterid = 1
+      if (this.listts.length > 0) return false
       this.$Global.async('projects', true).getData(null).then(d => {
         // console.log(d.data)
-        this.listts = d.data
+        this.setListts(d.data)
       })
     }
   },

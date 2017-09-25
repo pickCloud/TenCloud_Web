@@ -6,7 +6,7 @@
           <div class="panel-title" slot="title">
             <span class="bold m-r8">监控</span>
             <div class="right" style="margin-top: -5px">
-              <m-btn-group :idx="0" class="m-r8 clearfix">
+              <m-btn-group :idx="0" class="m-r8 clearfix" @change="btnChange">
                 <m-btn>实时</m-btn>
                 <m-btn>24小时</m-btn>
                 <m-btn>1周</m-btn>

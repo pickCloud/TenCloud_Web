@@ -6,7 +6,7 @@
         <panel class="m-b16">
           <div class="panel-title" slot="title">
             <span>基本信息</span>
-            <div class="right" style="margin-top: -5px">
+            <div class="right" style="margin-top: -5px" v-if="">
               <m-btn class="primary_bg grey-dark_txt" @click.native="build">版本构建</m-btn>
               <m-btn class="primary_bg grey-dark_txt m-r16" @click.native="deploy">项目部署</m-btn>
               <m-btn class="primary_bg grey-dark_txt" @click.native="editorHandle"><span class="vam">修改</span> <i class="iconfont icon-xiugai vam"></i></m-btn>
