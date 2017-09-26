@@ -29,7 +29,7 @@ export default {
         return
       }
       if (this.formdata.public_ip === '') {
-        this.$toast('public_ip不能为空', 'cc')
+        this.$toast('ip不能为空', 'cc')
         return
       }
       this.socket.send(JSON.stringify(this.formdata))

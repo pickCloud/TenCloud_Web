@@ -48,7 +48,13 @@
         if (this.checkCode()) return false
         Global.login(loginData, (d) => {
 //          console.log(d)
-          this.$router.replace({name: 'Main'})
+          if (window.nextUrl) {
+//            this.$router.replace({name: 'Main'})
+            window.location.href = window.location.origin + '/' + window.nextUrl
+            delete window.nextUrl
+          } else {
+            this.$router.replace({name: 'Main'})
+          }
         }, e => {
           this.tip.type = 'error'
           this.tip.info = e.response.data.message

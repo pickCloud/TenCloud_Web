@@ -153,6 +153,9 @@ router.beforeEach((to, from, next) => {
   // console.log(to)
   // console.log(from)
   // console.log(Global.isLogin)
+  if (to.name === 'Login' && to.query.next) {
+    window.nextUrl = to.query.next
+  }
   if (Global.isLogin === null) {
     Global.async('user_info', true).getData(null).then(d => {
       Global.isLogin = true
