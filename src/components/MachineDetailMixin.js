@@ -122,7 +122,31 @@ export default {
       return temp || []
     },
     machineStatus () {
-      const temp = StatusCode.machine[this.baseInfo.machine_status]
+      let temp = ''
+      if (this.baseInfo.machine_status) {
+        switch (this.baseInfo.machine_status) {
+          case '准备中':
+            temp = ['Pending', 'primary_bg alpha-black_txt', 'run']
+            break
+          case '已停止':
+            temp = ['Stopped', 'pink_bg alpha-black_txt', 'stop']
+            break
+          case '启动中':
+            temp = ['Starting', 'primary_bg alpha-black_txt', 'run', 'server_start']
+            break
+          case '运行中':
+            temp = ['Running', 'primary_bg alpha-black_txt', 'run']
+            break
+          case '停止中':
+            temp = ['Stopping', 'pink_bg alpha-black_txt', 'stop', 'server_stop']
+            break
+          case '已释放':
+            temp = ['Deleted', 'pink_bg alpha-black_txt', 'stop']
+            break
+        }
+      }
+      // const temp = StatusCode.machine[this.baseInfo.machine_status]
+
       return temp || []
     }
   },

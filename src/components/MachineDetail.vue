@@ -101,7 +101,11 @@
           </m-row>
           <m-row class="panel-list">
             <m-col class="xs-4">状态</m-col>
-            <m-col class="xs-8"><span class="plate" :class="machineStatus[1]">{{machineStatus[0]}}</span></m-col>
+            <m-col class="xs-8"><span class="plate" :class="machineStatus[1]">{{baseInfo.machine_status}}</span></m-col>
+          </m-row>
+          <m-row class="panel-list">
+            <m-col class="xs-4">添加时间</m-col>
+            <m-col class="xs-8"><span class="plate" >{{businessInfo.created_time}}</span></m-col>
           </m-row>
         </panel>
         <!-- 基本信息END -->
