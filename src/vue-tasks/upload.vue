@@ -48,7 +48,9 @@
             let formata = new FormData()
             formata.append('file', this.data.file)
             formata.append('token', d.data[0].token)
-            upload(this.data.file, d.data[0].token, this.data.file.name, (progress) => {
+            let splitName = this.data.file.name.split('.')
+            splitName = splitName[0] + '-' + this.data.hash.substring(-1, 7) + '.' + splitName[1]
+            upload(this.data.file, d.data[0].token, splitName, (progress) => {
               this.uping = Math.ceil(progress.loaded * 100 / progress.total)
             }).then(res => {
               this.upok = true

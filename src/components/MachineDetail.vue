@@ -105,7 +105,7 @@
           </m-row>
           <m-row class="panel-list">
             <m-col class="xs-4">添加时间</m-col>
-            <m-col class="xs-8"><span class="plate" >{{businessInfo.created_time}}</span></m-col>
+            <m-col class="xs-8"><span class="plate" >{{baseInfo.created_time}}</span></m-col>
           </m-row>
         </panel>
         <!-- 基本信息END -->
