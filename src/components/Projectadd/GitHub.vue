@@ -41,6 +41,10 @@
           } else {
             this.$toast(d.message, 'cc')
           }
+        }).catch(error => {
+          if (error && error.response.data.data.url) {
+            window.location.href = error.response.data.data.url
+          }
         })
         return {}
       },
