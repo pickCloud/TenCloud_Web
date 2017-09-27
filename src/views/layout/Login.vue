@@ -49,7 +49,7 @@
         Global.login(loginData, (d) => {
 //          console.log(d)
           if (window.nextUrl) {
-//            this.$router.replace({name: 'Main'})
+            this.$router.replace({name: 'Main'})
             window.location.href = window.location.origin + window.nextUrl
             delete window.nextUrl
           } else {
