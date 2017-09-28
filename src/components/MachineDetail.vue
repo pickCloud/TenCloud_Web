@@ -49,6 +49,7 @@
             </m-col>
           </m-row>
         </panel>
+
       </m-col>
       <m-col class="xs-12 lg-4">
         <!-- 基本信息-->
@@ -134,6 +135,7 @@
             <m-col class="xs-4"></m-col>
             <m-col class="xs-8"></m-col>
           </m-row>
+
           <!--<m-row class="panel-list">-->
           <!--<m-col class="xs-4">网络</m-col>-->
           <!--<m-col class="xs-8">2M</m-col>-->
@@ -174,7 +176,37 @@
               </tbody>
             </m-table>
           </div>
+
         </panel>
+        <!--日志-->
+        <panel class="m-b16">
+          <div class="panel-title" slot="title">日志</div>
+          <div class="panel-body">
+            <table class="table hover striped theme-dft pad-table">
+              <col width="25%">
+              <col width="25%">
+              <col width="25%">
+              <col width="25%">
+              <thead>
+              <tr>
+                <th>时间</th>
+                <th>行为</th>
+                <th>状态</th>
+                <th>操作人</th>
+              </tr>
+              </thead>
+              <tbody >
+              <tr v-for="item in operations">
+                <td>{{item.created_time}}</td>
+                <td>{{item.operation==0?'开机':item.operation==1?'关机':'重启'}}</td>
+                <td>{{item.machine_status}}</td>
+                <td>{{item.user}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </panel>
+        <!--日志 end-->
       </m-col>
     </m-row>
   </div>

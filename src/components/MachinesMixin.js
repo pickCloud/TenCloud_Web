@@ -8,12 +8,12 @@ export default {
     isDeploy: false
   }),
   computed: {
-    ...mapGetters('pubstate', [
+    ...mapGetters('machines', [
       'listts'
     ])
   },
   methods: {
-    ...mapMutations('pubstate', ['setListts']),
+    ...mapMutations('machines', ['setListts']),
     delMachine (id) {
       let delids = this.selects
       if (id !== -1) delids = [id + '']

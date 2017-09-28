@@ -29,7 +29,7 @@ const APIS = {
   project_del: {u: '/api/project/del', m: 'post'},
   project_add: {u: '/api/project/new', m: 'post'},
   project_update: {u: '/api/project/update', m: 'post'},
-  project_repos: {u: '/api/repos', m: 'get'},
+  project_repos: {u: '/api/repos', m: 'post'},
   project_detail: {u: '/api/project/', m: 'get'},
   project_vers: {u: '/api/project/', m: 'get'},
   project_image: {u: '/api/project/', m: 'get'},

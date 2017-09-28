@@ -31,7 +31,9 @@
     }),
     methods: {
       getGitHub (callback) {
-        this.$Global.async('project_repos', true).getData().then(d => {
+        let getUrl = window.location.href
+        let getp = {url: getUrl}
+        this.$Global.async('project_repos', true).getData(getp, '', false).then(d => {
           if (d.status === 0) {
             this.githubs = d.data
             this.repos_idx = '0'
