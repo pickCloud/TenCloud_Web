@@ -8,6 +8,7 @@ import actions from './Actions'
 import scroll from './modules/scroll'
 import pubstate from './modules/pubState'
 import projectsState from './modules/projectsState'
+import machines from './modules/machines'
 Vue.use(Vuex)
 const debug = process.env.NODE_ENV !== 'production'
 
@@ -19,7 +20,8 @@ export default new Vuex.Store({
     sitepath,
     scroll,
     pubstate,
-    projectsState
+    projectsState,
+    machines
   },
   strict: debug,
   plugins: debug ? [createLogger()] : []

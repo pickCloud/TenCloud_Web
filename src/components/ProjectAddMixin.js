@@ -20,7 +20,8 @@ export default {
     },
     isEditor: false,
     imageMode: 'github',
-    propData: {}
+    propData: {},
+    isHaveLocal: false
   }),
   watch: {
     'formdata.mode' (n, o) {
@@ -78,11 +79,22 @@ export default {
           }, 10)
         }
       })
+    },
+    getLocalStorage (key) {
+      return window.localStorage.getItem(key)
+    },
+    setLocalStorage (key, item) {
+      window.localStorage.setItem(key, item)
+    },
+    getLocaltion (data) {
+      this.formdata = data
     }
   },
   created () {
     this.isEditor = this.$route.params.id !== undefined
     if (this.isEditor) this.editorMode()
+    this.isHaveLocal = this.getLocalStorage('isHaveLocal')
+    if (this.isHaveLocal) this.getLocaltion(this.getLocalStorage('formdata'))
   },
   components: {
     'github': GitHub,
