@@ -199,7 +199,7 @@
               <tr v-for="item in operations">
                 <td>{{item.created_time}}</td>
                 <td>{{item.operation==0?'开机':item.operation==1?'关机':'重启'}}</td>
-                <td>{{item.machine_status}}</td>
+                <td>{{item.operation_status}}</td>
                 <td>{{item.user}}</td>
               </tr>
               </tbody>

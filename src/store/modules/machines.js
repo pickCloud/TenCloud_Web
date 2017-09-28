@@ -1,3 +1,4 @@
+// import axios from '../request/axios'
 export default {
   namespaced: true,
   state: {
@@ -24,7 +25,7 @@ export default {
     listts: state => state.listts
   },
   actions: {
-    getActionsNum (state) {
+    getActionsNum (ctx) {
       console.log(1)
     }
   }
