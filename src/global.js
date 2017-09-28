@@ -26,6 +26,7 @@ const APIS = {
   server_start: {u: '/api/server/start/', m: 'get'},
   server_reboot: {u: '/api/server/reboot/', m: 'get'},
   server_stop: {u: '/api/server/stop/', m: 'get'},
+  server_operation: {u: '/api/server/', m: 'get'},
   app_performance: {u: '/api/server/container/performance', m: 'post'},
   server_status: {u: '/api/server/', m: 'get'}, // {region_id}/{instance_id}/status
   container_start: {u: '/api/server/container/start', m: 'post'},
@@ -36,7 +37,7 @@ const APIS = {
   project_del: {u: '/api/project/del', m: 'post'},
   project_add: {u: '/api/project/new', m: 'post'},
   project_update: {u: '/api/project/update', m: 'post'},
-  project_repos: {u: '/api/repos', m: 'get'},
+  project_repos: {u: '/api/repos', m: 'post'},
   project_detail: {u: '/api/project/', m: 'get'},
   project_vers: {u: '/api/project/', m: 'get'},
   project_image: {u: '/api/project/', m: 'get'},

@@ -26,7 +26,8 @@ export default {
     updateApi: 'server_update',
     performance: 'server_performance',
     performanceData: {},
-    btnidx: 0
+    btnidx: 0,
+    operations: []
   }),
   methods: {
     getApiData () {
@@ -53,6 +54,12 @@ export default {
       this.$Global.async('server_containers', true).getData(null, this.machineid).then(d => {
         if (d.status === 0) {
           this.applists = d.data
+        }
+      })
+      this.$Global.async('server_operation', true).getData(null, this.machineid + '/operation').then(d => {
+        if (d.status === 0) {
+          console.log(d.data)
+          this.operations = d.data
         }
       })
     },
