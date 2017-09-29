@@ -4,20 +4,15 @@ import LocalImage from './Projectadd/LocalImage.vue'
 import CloudImage from './Projectadd/CloudImage.vue'
 import Btngroup from './Projectadd/BtnGroup.vue'
 import Event from './Events'
-
+import {mapGetters, mapMutations} from 'vuex'
 const IMG_IDX = ['github', 'limage', 'cimage']
 
 export default {
   mixins: [Popper],
+  computed: {
+    ...mapGetters('projectAdd', ['formdata', 'getNum'])
+  },
   data: () => ({
-    formdata: {
-      name: '',
-      // repos_name: '',
-      // repos_url: '',
-      image_name: '',
-      description: '',
-      mode: '0'
-    },
     isEditor: false,
     imageMode: 'github',
     propData: {},
@@ -29,6 +24,21 @@ export default {
     }
   },
   methods: {
+    ...mapMutations('projectAdd', [
+      'setFormdata'
+    ]),
+    updataName (value) {
+      this.setFormdata('name', value)
+    },
+    updataImage_name (value) {
+      this.setFormdata('image_name', value)
+    },
+    updataDescription (value) {
+      this.setFormdata('description', value)
+    },
+    updataMode (value) {
+      this.setFormdata('mode', value)
+    },
     addProject () {
       const tempdata = this.$refs.proSource.getData()
       if (!tempdata) return
@@ -47,7 +57,6 @@ export default {
       // merge data
       let pdata = Object.assign({}, this.formdata, tempdata)
       pdata.image_source = IMG_IDX.indexOf(this.imageMode)
-      console.log(pdata)
       this.$Global.async(this.isEditor ? 'project_update' : 'project_add', true).getData(pdata).then(d => {
         if (d.status === 0) {
           if (!this.isEditor) this.$router.push({name: 'Projects'})
@@ -68,10 +77,16 @@ export default {
       this.$Global.async('project_detail', true).getData(null, this.$route.params.id).then(d => {
         if (d.status === 0) {
           let temp = this.propData = d.data[0]
-          this.formdata.name = temp.name
-          this.formdata.description = temp.description
-          this.formdata.mode = temp.mode + ''
-          this.formdata.image_name = temp.image_name
+          // this.formdata.name = temp.name
+          // this.formdata.description = temp.description
+          // this.formdata.mode = temp.mode + ''
+          // this.formdata.image_name = temp.image_name
+          console.log(this.getNum)
+          console.log(this.formdata)
+          this.setFormdata('name', temp.name)
+          this.setFormdata('description', temp.description)
+          this.setFormdata('mode', temp.mode)
+          this.setFormdata('image_name', temp.image_name)
           this.imageMode = IMG_IDX[temp.image_source]
           const tout = setTimeout(_ => {
             Event.$emit('pullGitHub', true)
@@ -87,7 +102,7 @@ export default {
       window.localStorage.setItem(key, item)
     },
     getLocaltion (data) {
-      this.formdata = data
+      this.setFormdata(false, data)
     }
   },
   created () {

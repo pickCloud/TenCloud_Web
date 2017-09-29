@@ -68,6 +68,12 @@
     },
     created () {
       Event.$on('pullGitHub', this.getGitHub)
+      if (this.$route.params && this.$route.query.token) {
+        this.getGitHub(_ => {
+          this.gittip = '重新绑定GitHub代码仓库'
+          this.hasGit = true
+        })
+      }
     }
   }
 </script>
