@@ -24,7 +24,7 @@ export default {
       })
     },
     getBranch () {
-      this.$Global.async('project_branch', true).getData(null, this.$route.params.repos_name).then(d => {
+      this.$Global.async('project_branch', true).getData({repos_name: this.$route.params.repos_name}, '').then(d => {
         if (d.status === 0) {
           this.branchs = d.data
           this.branch = this.branchs[0].branch_name

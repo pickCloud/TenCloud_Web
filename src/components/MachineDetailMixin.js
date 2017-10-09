@@ -2,22 +2,10 @@ import StatusCode from './StatusCode.js'
 import InfoEditor from './InfoEditor.js'
 import ChartCMD from './ChartCMD.js'
 import Popper from './Poppers.js'
-
+import {mapGetters, mapMutations, mapActions} from 'vuex'
 export default {
   mixins: [ChartCMD, InfoEditor, Popper],
   data: () => ({
-    baseInfo: {
-      cluster_id: -1,
-      cluster_name: ''
-    },
-    businessInfo: {
-      contract: {},
-      provider: ''
-    },
-    sysInfo: {
-      config: {}
-    },
-    applists: [],
     machineid: -1,
     isWaiting: false,
     waitingTip: '',
@@ -25,14 +13,15 @@ export default {
     isDisabled: false,
     updateApi: 'server_update',
     performance: 'server_performance',
-    performanceData: {},
     btnidx: 0,
-    operations: []
+    performanceData: {}
   }),
   methods: {
+    ...mapMutations('mechineDetail', ['setBaseInfo', 'setBusinessInfo', 'setSysInfo', 'setApplists', 'setOperations']),
+    ...mapActions('mechineDetail', ['getServerDetail']),
     getApiData () {
       this.performanceData.id = this.machineid = this.$route.params.id
-      this.$Global.async('server_detail', true).getData(null, this.machineid).then(d => {
+      this.getServerDetail(this.machineid).then(d => {
         if (d.status === 0) {
           this.baseInfo = d.data.basic_info
           this.businessInfo = d.data.business_info
@@ -124,6 +113,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('mechineDetail', ['baseInfo', 'businessInfo', 'sysInfo', 'applists', 'operations']),
     businessStatus () {
       const temp = StatusCode.business[this.baseInfo.business_status]
       return temp || []

@@ -10,6 +10,7 @@ import pubstate from './modules/pubState'
 import projectsState from './modules/projectsState'
 import machines from './modules/machines'
 import projectAdd from './modules/projectAdd'
+import mechineDetail from './modules/mechineDetail'
 Vue.use(Vuex)
 const debug = process.env.NODE_ENV !== 'production'
 
@@ -23,7 +24,8 @@ export default new Vuex.Store({
     pubstate,
     projectsState,
     machines,
-    projectAdd
+    projectAdd,
+    mechineDetail
   },
   strict: debug,
   plugins: debug ? [createLogger()] : []
