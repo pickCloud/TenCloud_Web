@@ -8,14 +8,14 @@ const options = {
       if (api[url].m) {
         method = api[url].m
       }
-      this.URL = api[url] + urlAdd
+      this.URL = api.baseURL + api[url].u + urlAdd
       switch (method) {
         case 'get':
           return axios.get(this.URL, params).then(response => {
             if (response.status === 200) {
-              resolve(response)
+              resolve(response.data)
             } else {
-              reject(response)
+              reject(response.data)
             }
           }).catch(error => {
             reject(error)
@@ -23,9 +23,9 @@ const options = {
         case 'post':
           return axios.post(this.URL, params).then(response => {
             if (response.status === 200) {
-              resolve(response)
+              resolve(response.data)
             } else {
-              reject(response)
+              reject(response.data)
             }
           }).catch(error => {
             reject(error)

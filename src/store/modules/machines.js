@@ -1,4 +1,4 @@
-// import axios from '../request/axios'
+import axios from '../request/axios'
 export default {
   namespaced: true,
   state: {
@@ -9,6 +9,7 @@ export default {
       state.num = data
     },
     'setListts' (state, list) {
+      console.log(list)
       list.forEach(function (item) {
         state.listts.push(item)
       })
@@ -25,8 +26,15 @@ export default {
     listts: state => state.listts
   },
   actions: {
-    getActionsNum (ctx) {
-      console.log(1)
+    getApiData (store) {
+      if (store.getters.listts.length > 0) return false
+      let cid = this.clusterid = 1
+      axios.http('cluster_detail', '', 'get', cid).then(d => {
+        store.commit('setListts', d.data.server_list)
+      })
+    },
+    deleteAsyn (store, delids) {
+      return axios.http('server_del', {id: delids})
     }
   }
 }

@@ -1,7 +1,7 @@
 import Poppers from './Poppers.js'
 import Selects from './Selects.js'
 // import StatusCode from './StatusCode.js'
-import {mapGetters, mapMutations} from 'vuex'
+import {mapGetters, mapMutations, mapActions} from 'vuex'
 export default {
   mixins: [Poppers, Selects],
   data: () => ({
@@ -14,6 +14,7 @@ export default {
   },
   methods: {
     ...mapMutations('machines', ['setListts']),
+    ...mapActions('machines', ['getApiData', 'deleteAsyn']),
     delMachine (id) {
       let delids = this.selects
       if (id !== -1) delids = [id + '']
@@ -21,24 +22,30 @@ export default {
         this.$toast('请选择要删除的主机', 'cc')
       } else {
         this.popperDelete('您确定要删除主机' + this.getAttrById(delids).join(',') + '吗？', _ => {
-          this.$Global.async('server_del', true).getData({
-            id: delids
-          }).then(d => {
+          this.deleteAsyn(delids).then(d => {
             if (d.status === 0) {
               this.getApiData()
             }
             this.$toast(d.message, 'cc')
           })
+          // this.$Global.async('server_del', true).getData({
+          //   id: delids
+          // }).then(d => {
+          //   if (d.status === 0) {
+          //     this.getApiData()
+          //   }
+          //   this.$toast(d.message, 'cc')
+          // })
         })
       }
     },
-    getApiData () {
-      if (this.listts.length > 0) return false
-      const cid = this.clusterid = 1
-      this.$Global.async('cluster_detail', true).getData(null, cid).then(d => {
-        this.setListts(d.data.server_list)
-      })
-    },
+    // getApiData () {
+    //   if (this.listts.length > 0) return false
+    //   const cid = this.clusterid = 1
+    //   this.$Global.async('cluster_detail', true).getData(null, cid).then(d => {
+    //     this.setListts(d.data.server_list)
+    //   })
+    // },
     getMdataByIds (ids) {
       let i = -1
       let temp = []

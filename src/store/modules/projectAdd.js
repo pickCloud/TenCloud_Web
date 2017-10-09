@@ -12,11 +12,11 @@ export default {
     }
   },
   mutations: {
-    'setFormdata' (state, key, value) {
-      if (key === false) {
-        state.formdata = value
+    'setFormdata' (state, obj) {
+      if (obj.name === false) {
+        state.formdata = obj.value
       } else {
-        state.formdata[key] = value
+        state.formdata[obj.name] = obj.value
       }
     }
   },

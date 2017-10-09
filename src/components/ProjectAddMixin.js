@@ -27,17 +27,17 @@ export default {
     ...mapMutations('projectAdd', [
       'setFormdata'
     ]),
-    updataName (value) {
-      this.setFormdata('name', value)
+    updataName (e) {
+      this.setFormdata({name: 'name', value: e.target.value})
     },
-    updataImage_name (value) {
-      this.setFormdata('image_name', value)
+    updataImage_name (e) {
+      this.setFormdata({name: 'image_name', value: e.target.value})
     },
-    updataDescription (value) {
-      this.setFormdata('description', value)
+    updataDescription (e) {
+      this.setFormdata({name: 'description', value: e.target.value})
     },
-    updataMode (value) {
-      this.setFormdata('mode', value)
+    updataMode (e) {
+      this.setFormdata({name: 'mode', value: e.target.value})
     },
     addProject () {
       const tempdata = this.$refs.proSource.getData()
@@ -57,6 +57,7 @@ export default {
       // merge data
       let pdata = Object.assign({}, this.formdata, tempdata)
       pdata.image_source = IMG_IDX.indexOf(this.imageMode)
+      console.log(pdata)
       this.$Global.async(this.isEditor ? 'project_update' : 'project_add', true).getData(pdata).then(d => {
         if (d.status === 0) {
           if (!this.isEditor) this.$router.push({name: 'Projects'})
