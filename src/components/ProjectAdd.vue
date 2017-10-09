@@ -7,18 +7,18 @@
         <tbody>
           <tr>
             <td class="text-center">名称</td>
-            <td><input type="text" v-model="formdata.name"></td>
+            <td><input type="text" @input="updataName" :value="formdata.name"></td>
           </tr>
           <tr>
             <td class="text-center">镜像名称</td>
             <td style="position: relative;">
-              <input type="text" v-model="formdata.image_name" placeholder="请输入小写字母">
+              <input type="text"  @input="updataImage_name" :value="formdata.image_name" placeholder="请输入小写字母">
               <p class="deploy-name_tip">项目部署后以容器的形式运行：容器名称仅允许英文小写字母</p>
             </td>
           </tr>
           <tr>
             <td class="text-center">项目描述</td>
-            <td><input type="text" v-model="formdata.description"></td>
+            <td><input type="text" @input="updataDescription" :value="formdata.description"></td>
           </tr>
           <tr>
             <td class="text-center">选择类别</td>
@@ -31,7 +31,7 @@
           <tr>
             <td class="text-center">项目来源</td>
             <td class="p-lr-16">
-              <bgroup v-model="imageMode" :mode="formdata.mode"></bgroup>
+              <bgroup v-model="imageMode" @input="updataMode" :value="formdata.mode"></bgroup>
               <keep-alive>
                 <component :is="imageMode" ref="proSource" :data="propData"></component>
               </keep-alive>
