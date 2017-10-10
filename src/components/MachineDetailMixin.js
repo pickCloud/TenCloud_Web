@@ -14,11 +14,22 @@ export default {
     updateApi: 'server_update',
     performance: 'server_performance',
     btnidx: 0,
-    performanceData: {}
+    performanceData: {},
+    baseInfo: {
+      cluster_id: -1,
+      cluster_name: ''
+    },
+    businessInfo: {
+      contract: {},
+      provider: ''
+    },
+    sysInfo: {
+      config: {}
+    }
   }),
   methods: {
-    ...mapMutations('mechineDetail', ['setBaseInfo', 'setBusinessInfo', 'setSysInfo', 'setApplists', 'setOperations']),
-    ...mapActions('mechineDetail', ['getServerDetail']),
+    ...mapMutations('mechineDetail', ['setApplists', 'setOperations']),
+    ...mapActions('mechineDetail', ['getServerDetail', 'getServerContainers', 'getServerOperation']),
     getApiData () {
       this.performanceData.id = this.machineid = this.$route.params.id
       this.getServerDetail(this.machineid).then(d => {
@@ -40,17 +51,19 @@ export default {
           ])
         }
       })
-      this.$Global.async('server_containers', true).getData(null, this.machineid).then(d => {
-        if (d.status === 0) {
-          this.applists = d.data
-        }
-      })
-      this.$Global.async('server_operation', true).getData(null, this.machineid + '/operation').then(d => {
-        if (d.status === 0) {
-          console.log(d.data)
-          this.operations = d.data
-        }
-      })
+      // this.$Global.async('server_containers', true).getData(null, this.machineid).then(d => {
+      //   if (d.status === 0) {
+      //     this.applists = d.data
+      //   }
+      // })
+      // this.$Global.async('server_operation', true).getData(null, this.machineid + '/operation').then(d => {
+      //   if (d.status === 0) {
+      //     console.log(d.data)
+      //     this.operations = d.data
+      //   }
+      // })
+      this.getServerContainers(this.machineid)
+      this.getServerOperation(this.machineid + '/operation')
     },
     machineChange () {
       this.isDisabled = true
@@ -113,7 +126,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('mechineDetail', ['baseInfo', 'businessInfo', 'sysInfo', 'applists', 'operations']),
+    ...mapGetters('mechineDetail', ['applists', 'operations']),
     businessStatus () {
       const temp = StatusCode.business[this.baseInfo.business_status]
       return temp || []
