@@ -6,8 +6,7 @@ import sitepath from './modules/SitePath'
 import mutations from './Mutations'
 import actions from './Actions'
 import scroll from './modules/scroll'
-import pubstate from './modules/pubState'
-import projectsState from './modules/projectsState'
+import projects from './modules/projects'
 import machines from './modules/machines'
 import projectAdd from './modules/projectAdd'
 import mechineDetail from './modules/mechineDetail'
@@ -21,8 +20,7 @@ export default new Vuex.Store({
     user,
     sitepath,
     scroll,
-    pubstate,
-    projectsState,
+    projects,
     machines,
     projectAdd,
     mechineDetail

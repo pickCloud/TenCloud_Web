@@ -9,20 +9,12 @@ export default {
       state.num = data
     },
     'setListts' (state, list) {
-      console.log(list)
       list.forEach(function (item) {
         state.listts.push(item)
       })
     }
   },
   getters: {
-    'getNum': (state, a, c, d) => {
-      if (state.num === 1) {
-        return 2
-        // this.action.getData()
-      }
-      return 3
-    },
     listts: state => state.listts
   },
   actions: {
