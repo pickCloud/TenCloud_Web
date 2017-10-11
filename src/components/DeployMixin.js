@@ -50,29 +50,61 @@ export default {
         this.$toast('容器名称仅允许英文小写字母', 'cc')
         return false
       }
+      if (this.image_name === '') {
+        this.$toast('容器名称不能为空', 'cc')
+        return
+      }
       let pdata = {
         image_name: this.$route.params.image_name + ':' + this.version.value,
         container_name: this.container_name,
         project_id: this.$route.params.id,
         ips: this.getMachineIps()
       }
-      if (this.image_name === '') {
-        this.$toast('容器名称不能为空', 'cc')
-        return
-      }
       if (!pdata.ips.length === 0) {
         this.$toast('请选择机器', 'cc')
         return
       }
       this.isDoing = true
-      this.$Global.async('project_deployment', true).getData(pdata).then(d => {
-        if (d.status === 0) {
-          this.notes = d.data
-          // this.$router.replace({name: 'ProjectDetail', params: {id: this.$route.params.id}})
+      // this.$Global.async('project_deployment', true).getData(pdata).then(d => {
+      //   if (d.status === 0) {
+      //     this.notes = d.data
+      //     // this.$router.replace({name: 'ProjectDetail', params: {id: this.$route.params.id}})
+      //   }
+      //   this.$toast(d.message, 'cc')
+      //   this.isDoing = false
+      // })
+      this.initSocket('', pdata)
+    },
+    initSocket (cb = null, pdata) {
+      this.socket = new WebSocket(this.$Global.apis.wsURL + this.$Global.apis.project_deployment.u)
+      this.socket.onopen = (event) => {
+        if (cb) cb()
+        // 链接开始发送参数
+        this.socket.send(JSON.stringify(pdata))
+      }
+      this.socket.onmessage = (event) => {
+        if (event.data === 'success') {
+          this.notes = event.data.data
+        } else {
+          if (event.data !== 'open') {
+            this.$toast(event.data, 'cc')
+          }
         }
-        this.$toast(d.message, 'cc')
-        this.isDoing = false
-      })
+      }
+      // 监听Socket的关闭
+      this.socket.onclose = (event) => {
+        if (this.timeoutajax) clearTimeout(this.timeoutajax)
+        this.socket = null
+        console.log('socket has closed')
+        // console.log('Client notified socket has closed', event)
+      }
+      if (this.timeoutajax) clearTimeout(this.timeoutajax)
+      this.timeoutajax = setTimeout(_ => {
+        this.status = 'error'
+        this.$toast('异常，请联系客服', 'cc')
+        this.socket.close()
+        clearTimeout(this.timeoutajax)
+      }, 10 * 60 * 1000)
     }
   },
   computed: {

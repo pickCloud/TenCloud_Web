@@ -140,9 +140,4 @@
       color:#FF8A80;
     }
   }
-  //2017.9.19修改input checkbox大小
-  .theme-dft.label-inp-group .__icon{
-    width: 12px;
-    height:12px;
-  }
 </style>

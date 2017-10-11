@@ -23,8 +23,9 @@ export default {
         this.popperDelete('您确定要删除项目' + this.getAttrById(delids).join(',') + '吗？', _ => {
           this.getProjectDetail(delids).then(d => {
             if (d.status === 0) {
-              this.getApiData()
-              this.deleteItem(delids[0])
+              // this.getApiData()
+              // this.deleteItem(delids[0])
+              this.getProjects()
             }
             this.$toast(d.message, 'cc')
           })
@@ -33,12 +34,12 @@ export default {
     },
     getApiData () {
       // const cid = this.clusterid = 1
-      // if (this.listts.length > 0) return false
       this.getProjects()
     }
   },
   created () {
-    this.getApiData()
+    // this.getApiData()
+    this.getProjects()
     this.$store.commit('sitepath/SET_PATH', [
       {name: 'Main', cn: '主页'},
       {cn: '项目列表'}

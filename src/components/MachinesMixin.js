@@ -92,7 +92,7 @@ export default {
       } else if (str === '腾讯云') {
         return 'icon-tengxunyun'
       } else if (str === '微软云') {
-        return 'icon-weiruanyun'
+        return 'icon-azure'
       }
     }
   },

@@ -1,9 +1,10 @@
 import axios from 'axios'
 import api from './api'
-
+import Vue from 'vue'
+import router from '../../router'
 const options = {
   URL: '',
-  http: function (url = '', params = null, method = 'get', urlAdd = '', isForce = false) {
+  http: function (url = '', params = null, method = 'get', urlAdd = '', canTip = false, isForce = false) {
     return new Promise((resolve, reject) => {
       if (api[url].m) {
         method = api[url].m
@@ -18,6 +19,10 @@ const options = {
               reject(response.data)
             }
           }).catch(error => {
+            if (canTip && error.response.status !== 403) Vue.prototype.$toast(error.response.data.message, 'cc')
+            if (error.response.status === 403) {
+              router.replace({name: 'Login'})
+            }
             reject(error)
           })
         case 'post':
@@ -28,6 +33,10 @@ const options = {
               reject(response.data)
             }
           }).catch(error => {
+            if (canTip && error.response.status !== 403) Vue.prototype.$toast(error.response.data.message, 'cc')
+            if (error.response.status === 403) {
+              router.replace({name: 'Login'})
+            }
             reject(error)
           })
       }
