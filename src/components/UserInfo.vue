@@ -10,7 +10,7 @@
       <div class="p-16">
         <!--<div class="lay-left-right">-->
           <!--<div class="lay-left">账号</div>-->
-          <!--<div class="lay-right lay-border-bottom">-->
+          <!--<div clasFs="lay-right lay-border-bottom">-->
             <!--<input type="text" class="inp-editor" :class="{'editor':isEditor}" v-model="infos.name">-->
           <!--</div>-->
         <!--</div>-->
