@@ -12,7 +12,7 @@ export default {
     verdata: [],
     version: {},
     container_name: '',
-    notes: {},
+    notes: [],
     isDoing: false
   }),
   methods: {
@@ -83,18 +83,18 @@ export default {
         this.socket.send(JSON.stringify(pdata))
       }
       this.socket.onmessage = (event) => {
-        if (event.data === 'success') {
-          this.notes = event.data.data
+        console.log(event)
+        if (event.data === 'open') {
+          this.notes.push('start')
         } else {
-          if (event.data !== 'open') {
-            this.$toast(event.data, 'cc')
-          }
+          this.notes.push(event.data)
         }
       }
       // 监听Socket的关闭
       this.socket.onclose = (event) => {
         if (this.timeoutajax) clearTimeout(this.timeoutajax)
         this.socket = null
+        this.isDoing = false
         console.log('socket has closed')
         // console.log('Client notified socket has closed', event)
       }
