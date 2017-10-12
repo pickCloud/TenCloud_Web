@@ -66,7 +66,7 @@
       </div>
     </panel>
     <panel title="构建过程" class="build-note">
-      <div class="p-16" style="overflow-y: auto;max-height: 300px;">
+      <div class="p-16" style="overflow-y: auto;max-height: 300px;" id="scroll">
         <p v-for="item in notes">{{item}}</p>
       </div>
     </panel>

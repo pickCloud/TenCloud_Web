@@ -12,6 +12,9 @@ export default {
     }
   }),
   methods: {
+    scroll (e) {
+      console.log(e)
+    },
     openIntro () {
       this.isOpen = !this.isOpen
     },
@@ -63,18 +66,18 @@ export default {
         this.socket.send(JSON.stringify(pdata))
       }
       this.socket.onmessage = (event) => {
-        if (event.data === 'success') {
-          this.notes = event.data.data
+        if (event.data === 'open') {
+          this.notes.push('start')
         } else {
-          if (event.data !== 'open') {
-            this.$toast(event.data, 'cc')
-          }
+          this.notes.push(event.data)
         }
+        // document.getElementById('scroll').scrollTop = document.getElementById('scroll').scrollHeight
       }
       // 监听Socket的关闭
       this.socket.onclose = (event) => {
         if (this.timeoutajax) clearTimeout(this.timeoutajax)
         this.socket = null
+        this.isDoing = !this.isDoing
         console.log('socket has closed')
         // console.log('Client notified socket has closed', event)
       }
@@ -100,6 +103,9 @@ export default {
         {cn: '项目构建'}
       ])
     }
+  },
+  destroy () {
+    this.socket.onclose()
   },
   components: {
     dlist
