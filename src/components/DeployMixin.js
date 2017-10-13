@@ -90,8 +90,10 @@ export default {
           this.notes.push('start')
         } else if (event.data === 'success') {
           this.popperInfo('部署成功')
+          this.isDoing = false
         } else if (event.data === 'failure') {
           this.popperInfo('部署失败')
+          this.isDoing = false
         } else {
           this.notes.push(event.data)
         }
