@@ -18,7 +18,7 @@
             <th><m-checkbox class="list-check" :data="{label: '全选'}" v-model="isSelectAll" hideLabel></m-checkbox></th>
             <th>名称</th>
             <th>类别</th>
-            <th>仓库名</th>
+            <th>状态</th>
             <th>仓库地址</th>
             <th>更新时间</th>
             <td>操作</td>

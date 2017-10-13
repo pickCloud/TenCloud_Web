@@ -1,5 +1,7 @@
 import StatusCode from './StatusCode.js'
+import Poppers from './Poppers.js'
 export default {
+  mixins: [Poppers],
   filters: {
     'mstatus' (v) {
       return StatusCode.machine[v][0]
@@ -86,6 +88,10 @@ export default {
         console.log(event)
         if (event.data === 'open') {
           this.notes.push('start')
+        } else if (event.data === 'success') {
+          this.popperInfo('部署成功')
+        } else if (event.data === 'failure') {
+          this.popperInfo('部署失败')
         } else {
           this.notes.push(event.data)
         }

@@ -1,5 +1,7 @@
 import dlist from './piece/datalist/Main.vue'
+import Poppers from './Poppers.js'
 export default {
+  mixin: [Poppers],
   data: () => ({
     verdata: [],
     branchs: [],
@@ -68,6 +70,10 @@ export default {
       this.socket.onmessage = (event) => {
         if (event.data === 'open') {
           this.notes.push('start')
+        } else if (event.data === 'success') {
+          this.popperInfo('构建成功')
+        } else if (event.data === 'failure') {
+          this.popperInfo('构建失败')
         } else {
           this.notes.push(event.data)
         }
