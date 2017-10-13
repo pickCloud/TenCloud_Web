@@ -1,7 +1,7 @@
 import dlist from './piece/datalist/Main.vue'
 import Poppers from './Poppers.js'
 export default {
-  mixin: [Poppers],
+  mixins: [Poppers],
   data: () => ({
     verdata: [],
     branchs: [],
@@ -72,8 +72,10 @@ export default {
           this.notes.push('start')
         } else if (event.data === 'success') {
           this.popperInfo('构建成功')
+          this.isDoing = false
         } else if (event.data === 'failure') {
           this.popperInfo('构建失败')
+          this.isDoing = false
         } else {
           this.notes.push(event.data)
         }
@@ -83,7 +85,7 @@ export default {
       this.socket.onclose = (event) => {
         if (this.timeoutajax) clearTimeout(this.timeoutajax)
         this.socket = null
-        this.isDoing = !this.isDoing
+        this.isDoing = false
         console.log('socket has closed')
         // console.log('Client notified socket has closed', event)
       }
