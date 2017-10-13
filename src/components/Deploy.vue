@@ -57,7 +57,7 @@
     </panel>
     <panel title="部署日志" class="deploy-note">
       <div class="p-16">
-        <div class="panel" v-for="item in notes">
+        <div class="panel">
           <!--<div class="panel-title">{{key}}</div>-->
           <p v-for="item in notes">{{item}}</p>
         </div>
