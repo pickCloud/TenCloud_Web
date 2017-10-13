@@ -62,6 +62,7 @@ export default {
     },
     initSocket (cb = null, pdata) {
       this.socket = new WebSocket(this.$Global.apis.wsURL + this.$Global.apis.project_create.u)
+      let scrolldiv = document.getElementById('scroll')
       this.socket.onopen = (event) => {
         if (cb) cb()
         // 链接开始发送参数
@@ -78,8 +79,8 @@ export default {
           this.isDoing = false
         } else {
           this.notes.push(event.data)
+          scrolldiv.scrollTop = scrolldiv.scrollHeight
         }
-        // document.getElementById('scroll').scrollTop = document.getElementById('scroll').scrollHeight
       }
       // 监听Socket的关闭
       this.socket.onclose = (event) => {
