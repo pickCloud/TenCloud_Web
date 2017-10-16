@@ -3,7 +3,7 @@ import GitHub from './Projectadd/GitHub.vue'
 import LocalImage from './Projectadd/LocalImage.vue'
 import CloudImage from './Projectadd/CloudImage.vue'
 import Btngroup from './Projectadd/BtnGroup.vue'
-import Event from './Events'
+// import Event from './Events'
 import {mapGetters, mapMutations} from 'vuex'
 const IMG_IDX = ['github', 'limage', 'cimage']
 
@@ -55,7 +55,7 @@ export default {
         return
       }
       this.setLocalStorage('formdata', this.formdata)
-      this.isHaveLocal = true
+      this.setLocalStorage('isHaveLocal', true)
       // merge data
       let pdata = Object.assign({}, this.formdata, tempdata)
       pdata.image_source = IMG_IDX.indexOf(this.imageMode)
@@ -88,8 +88,9 @@ export default {
           this.setFormdata('mode', temp.mode)
           this.setFormdata('image_name', temp.image_name)
           this.imageMode = IMG_IDX[temp.image_source]
+          let that = this
           const tout = setTimeout(_ => {
-            Event.$emit('pullGitHub', true)
+            that.$emit('pullGitHub', true)
             clearTimeout(tout)
           }, 10)
         }
@@ -99,9 +100,11 @@ export default {
       return window.localStorage.getItem(key)
     },
     setLocalStorage (key, item) {
+      item = JSON.stringify(item)
       window.localStorage.setItem(key, item)
     },
     getLocaltion (data) {
+      data = JSON.parse(data)
       this.setFormdata({name: false, value: data})
     }
   },
@@ -111,7 +114,6 @@ export default {
     this.isHaveLocal = this.getLocalStorage('isHaveLocal')
     if (this.isHaveLocal) {
       this.getLocaltion(this.getLocalStorage('formdata'))
-      this.isHaveLocal = false
     }
   },
   components: {

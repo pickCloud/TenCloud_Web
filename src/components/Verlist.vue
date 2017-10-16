@@ -1,23 +1,26 @@
 <template>
   <div class="page-pad page-verlist">
-    <panel title="版本列表">
+    <panel>
+      <div slot="title" class="panel-title">【{{lists[0].image_name}}】版本列表</div>
       <div class="panel-body p-b16">
         <m-table class="hover striped machines-table m-b16">
-          <col width="25%">
-          <col width="25%">
-          <col width="25%">
-          <col width="25%">
+          <col width="20%">
+          <col width="20%">
+          <col width="20%">
+          <col width="20%">
+          <col width="20%">
           <thead>
           <tr>
-            <th>镜像名称</th>
             <th>版本号</th>
+            <th>镜像来源</th>
+            <th>项目名称</th>
             <th>更新时间</th>
             <th>操作</th>
           </tr>
           </thead>
           <tbody>
           <tr v-for="item in lists">
-            <td>{{item.image_name}}</td>
+            <!--<td>{{item.image_name}}</td>-->
             <td>{{item.version}}</td>
             <td>{{item.update_time}}</td>
             <td>

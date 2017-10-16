@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import Event from '../Events'
+//  import Event from '../Events'
   export default {
     props: {
       mode: {
@@ -45,7 +45,9 @@
         if (this.value === p) {
           if (p === 'github') {
             this.gittip = '<img class="vam" src="./static/img/spin.gif"></img> <span class="vam">数据加载中</span>'
-            Event.$emit('pullGitHub', _ => {
+            console.log(this)
+            this.$emit('pullGitHub', _ => {
+              console.log('進入')
               this.gittip = '重新绑定GitHub代码仓库'
               this.hasGit = true
             })
@@ -54,6 +56,8 @@
           this.$emit('input', p)
         }
       }
+    },
+    created () {
     }
   }
 </script>

@@ -18,7 +18,7 @@
 </template>
 
 <script>
-  import Event from '../Events.js'
+//  import Event from '../Events.js'
   export default {
     props: {
       data: {
@@ -67,7 +67,8 @@
       }
     },
     created () {
-      Event.$on('pullGitHub', this.getGitHub)
+      console.log(this)
+      this.$on('pullGitHub', this.getGitHub)
       if (this.$route.params && this.$route.query.token) {
         this.getGitHub(_ => {
           this.gittip = '重新绑定GitHub代码仓库'
