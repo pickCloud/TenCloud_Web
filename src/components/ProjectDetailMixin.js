@@ -52,7 +52,7 @@ export default {
     },
     gotVerListMore () {
       // console.log(this.vers)
-      this.$router.push({name: 'Verlist', params: {verlist: this.vers, id: this.$route.params.id, name: this.base.name}})
+      this.$router.push({name: 'Verlist', params: {verlist: this.vers, id: this.$route.params.id, name: this.base.name, itemName: this.base.name}})
     },
     getContainerList () {
       if (!this.base.deploy_ips || this.base.deploy_ips.length === 0 || this.base.deploy_ips === '') return

@@ -1,19 +1,19 @@
 <template>
   <div class="page-pad page-verlist">
     <panel>
-      <div slot="title" class="panel-title">【{{lists[0].image_name}}】版本列表</div>
+      <div slot="title" class="panel-title">【{{itemName}}】版本列表</div>
       <div class="panel-body p-b16">
         <m-table class="hover striped machines-table m-b16">
           <col width="20%">
           <col width="20%">
           <col width="20%">
           <col width="20%">
-          <col width="20%">
+          <!--<col width="20%">-->
           <thead>
           <tr>
             <th>版本号</th>
             <th>镜像来源</th>
-            <th>项目名称</th>
+            <!--<th>项目名称</th>-->
             <th>更新时间</th>
             <th>操作</th>
           </tr>
@@ -22,6 +22,7 @@
           <tr v-for="item in lists">
             <!--<td>{{item.image_name}}</td>-->
             <td>{{item.version}}</td>
+            <td>{{source(item.image_source)}}</td>
             <td>{{item.update_time}}</td>
             <td>
               <m-btn class="primary_txt">日志</m-btn>
@@ -39,7 +40,8 @@
 <script>
   export default {
     data: () => ({
-      lists: []
+      lists: [],
+      itemName: ''
     }),
     created () {
       if (!this.$route.params.verlist) {
@@ -52,6 +54,19 @@
           {name: 'ProjectDetail', cn: this.$route.params.name, params: {id: this.$route.params.id}},
           {cn: '版本列表'}
         ])
+        this.itemName = this.$route.params.itemName
+      }
+    },
+    methods: {
+      source (source) {
+        switch (source) {
+          case '0':
+            return '项目构建'
+          case '1':
+            return '本地上传'
+          case '2':
+            return '云端下载'
+        }
       }
     }
   }

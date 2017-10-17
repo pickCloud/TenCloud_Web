@@ -7,7 +7,8 @@
 </template>
 
 <script>
-//  import Event from '../Events'
+  import Event from '../Events'
+  import {mapState, mapMutations, mapActions} from 'vuex'
   export default {
     props: {
       mode: {
@@ -23,37 +24,41 @@
       }
     },
     data: () => ({
-      gittip: '绑定GitHub代码仓库',
-      hasGit: false
+//      gittip: '绑定GitHub代码仓库',
+//      hasGit: false
     }),
     computed: {
+      ...mapState('github', ['gittip', 'hasGit']),
       loadClass () {
-        return this.gittip.indexOf('<img') !== -1 ? 'loading' : ''
+        console.log(this.gittip)
+        let str = this.gittip
+        return str.indexOf('<img') !== -1 ? 'loading' : ''
       }
     },
     watch: {
       value (n, o) {
         if (n !== 'github') {
-          this.gittip = 'GitHub代码仓库'
+          this.setGittip('GitHub代码仓库')
         } else {
-          this.gittip = this.hasGit ? '重新绑定GitHub代码仓库' : '绑定GitHub代码仓库'
+          if (this.hasGit) {
+            this.setGittip('重新绑定GitHub代码仓库')
+          } else {
+            this.setGittip('绑定GitHub代码仓库')
+          }
         }
       }
     },
     methods: {
+      ...mapActions('github', ['getGitHub']),
+      ...mapMutations('github', ['setGittip']),
       change (p) {
         if (this.value === p) {
           if (p === 'github') {
-            this.gittip = '<img class="vam" src="./static/img/spin.gif"></img> <span class="vam">数据加载中</span>'
-            console.log(this)
-            this.$emit('pullGitHub', _ => {
-              console.log('進入')
-              this.gittip = '重新绑定GitHub代码仓库'
-              this.hasGit = true
-            })
+            this.setGittip('<img class="vam" src="./static/img/spin.gif"></img> <span class="vam">数据加载中</span>')
+            this.getGitHub({gittip: '重新绑定GitHub代码仓库', 'hasGit': true})
           }
         } else {
-          this.$emit('input', p)
+          Event.$emit('input', p)
         }
       }
     },

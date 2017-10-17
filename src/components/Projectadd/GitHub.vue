@@ -19,6 +19,7 @@
 
 <script>
 //  import Event from '../Events.js'
+  import {mapState, mapMutations, mapActions} from 'vuex'
   export default {
     props: {
       data: {
@@ -26,55 +27,56 @@
       }
     },
     data: () => ({
-      repos_idx: '0',
-      githubs: []
+//      repos_idx: '0',
+//      githubs: []
     }),
     methods: {
-      getGitHub (callback) {
-        let getUrl = window.location.href
-        let getp = {url: getUrl}
-        this.$Global.async('project_repos', true).getData(getp, '', false).then(d => {
-          if (d.status === 0) {
-            this.githubs = d.data
-            this.repos_idx = '0'
-//            console.log(typeof callback)
-            if (callback && (typeof callback).toLowerCase() === 'function') callback()
-            if (callback && (typeof callback).toLowerCase() === 'boolean') this.initReposIdx()
-          } else {
-            this.$toast(d.message, 'cc')
-          }
-        }).catch(error => {
-          if (error && error.response.data.data.url) {
-            window.location.href = error.response.data.data.url
-          }
-        })
-        return {}
-      },
-      initReposIdx () {
-        let i = -1
-        while (++i < this.githubs.length) {
-          let v = this.githubs[i]
-          if (v.repos_name === this.data.repos_name && v.repos_url === this.data.repos_url) {
-            this.repos_idx = i + ''
-            break
-          }
-        }
-      },
+      ...mapMutations('github', ['setGittip', 'setHasGit']),
+      ...mapActions('github', ['getGitHub']),
+//      getGitHub (callback) {
+//        let getUrl = window.location.href
+//        let getp = {url: getUrl}
+//        this.$Global.async('project_repos', true).getData(getp, '', false).then(d => {
+//          if (d.status === 0) {
+//            this.githubs = d.data
+//            this.repos_idx = '0'
+//
+//            if (callback && (typeof callback).toLowerCase() === 'function') callback()
+//            if (callback && (typeof callback).toLowerCase() === 'boolean') this.initReposIdx()
+//          } else {
+//            this.$toast(d.message, 'cc')
+//          }
+//        }).catch(error => {
+//          if (error && error.response.data.data.url) {
+//            window.location.href = error.response.data.data.url
+//          }
+//        })
+//        return {}
+//      },
+//      initReposIdx () {
+//        let i = -1
+//        while (++i < this.githubs.length) {
+//          let v = this.githubs[i]
+//          if (v.repos_name === this.data.repos_name && v.repos_url === this.data.repos_url) {
+//            this.repos_idx = i + ''
+//            break
+//          }
+//        }
+//      },
       getData () {
+        console.log(this.repos_idx)
         const temp = this.githubs[this.repos_idx]
         if (!temp) this.$toast('请先拉取来源', 'cc')
         return temp
       }
     },
     created () {
-      console.log(this)
-      this.$on('pullGitHub', this.getGitHub)
       if (this.$route.params && this.$route.query.token) {
-        this.getGitHub(_ => {
-          this.gittip = '重新绑定GitHub代码仓库'
-          this.hasGit = true
-        })
+        this.getGitHub({gittip: '重新绑定GitHub代码仓库', hasGit: true})
       }
+    },
+    computed: {
+      ...mapState('github', ['gittip', 'hasGit', 'githubs', 'repos_idx'])
     }
   }
 </script>

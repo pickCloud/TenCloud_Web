@@ -29,7 +29,7 @@ export default {
       })
     },
     getBranch () {
-      this.$Global.async('project_branch', true).getData({repos_name: this.$route.params.repos_name}, '').then(d => {
+      this.$Global.async('project_branch', true).getData({repos_name: this.$route.params.repos_name, url: window.location.href}, '').then(d => {
         if (d.status === 0) {
           this.branchs = d.data
           this.branch = this.branchs[0].branch_name
@@ -72,7 +72,9 @@ export default {
         if (event.data === 'open') {
           this.notes.push('start')
         } else if (event.data === 'success') {
-          this.popperInfo('构建成功')
+          this.popperInfo('构建成功，你可以进行项目部署了', function () {
+            this.$router.replace({name: 'ProjectDetail', params: {id: this.$route.params.id}})
+          })
           this.isDoing = false
         } else if (event.data === 'failure') {
           this.popperInfo('构建失败')
