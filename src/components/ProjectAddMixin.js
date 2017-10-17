@@ -3,7 +3,7 @@ import GitHub from './Projectadd/GitHub.vue'
 import LocalImage from './Projectadd/LocalImage.vue'
 import CloudImage from './Projectadd/CloudImage.vue'
 import Btngroup from './Projectadd/BtnGroup.vue'
-// import Event from './Events'
+import Event from './Events'
 import {mapGetters, mapMutations} from 'vuex'
 const IMG_IDX = ['github', 'limage', 'cimage']
 
@@ -90,7 +90,7 @@ export default {
           this.imageMode = IMG_IDX[temp.image_source]
           let that = this
           const tout = setTimeout(_ => {
-            that.$emit('pullGitHub', true)
+            Event.$emit('pullGitHub', true)
             clearTimeout(tout)
           }, 10)
         }
