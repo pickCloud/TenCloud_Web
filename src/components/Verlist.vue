@@ -25,7 +25,7 @@
             <td>{{source(item.image_source)}}</td>
             <td>{{item.update_time}}</td>
             <td>
-              <m-btn class="primary_txt">日志</m-btn>
+              <m-btn :href="{name:'VerNotes', params: {v:item.version, pname: baseName}}" class="primary_txt">日志</m-btn>
               <m-btn class="pink_txt">删除</m-btn>
             </td>
           </tr>
@@ -41,7 +41,8 @@
   export default {
     data: () => ({
       lists: [],
-      itemName: ''
+      itemName: '',
+      baseName: ''
     }),
     created () {
       if (!this.$route.params.verlist) {
@@ -54,7 +55,8 @@
           {name: 'ProjectDetail', cn: this.$route.params.name, params: {id: this.$route.params.id}},
           {cn: '版本列表'}
         ])
-        this.itemName = this.$route.params.itemName
+        this.itemName = this.$route.params.image_name
+        this.baseName = this.$route.params.name
       }
     },
     methods: {

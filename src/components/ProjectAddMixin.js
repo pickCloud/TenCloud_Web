@@ -66,6 +66,14 @@ export default {
           else this.$router.push({name: 'ProjectDetail', params: {id: this.$route.params.id}})
         }
         this.$toast(this.isEditor ? '修改成功' : '添加成功', 'cc')
+        this.setLocalStorage('isHaveLocal', '')
+        this.setFormdata({name: false,
+          value: {
+            name: '',
+            image_name: '',
+            description: '',
+            mode: '0'}})
+        console.log(this.formdata)
         // console.log(d)
       }, e => {})
     },
@@ -100,11 +108,16 @@ export default {
       return window.localStorage.getItem(key)
     },
     setLocalStorage (key, item) {
-      item = JSON.stringify(item)
+      console.log(typeof item)
+      if (typeof item === 'object') {
+        item = JSON.stringify(item)
+      }
       window.localStorage.setItem(key, item)
     },
     getLocaltion (data) {
-      data = JSON.parse(data)
+      if (typeof item === 'object') {
+        data = JSON.parse(data)
+      }
       this.setFormdata({name: false, value: data})
     }
   },

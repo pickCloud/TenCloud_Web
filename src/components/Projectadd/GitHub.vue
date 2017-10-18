@@ -67,7 +67,6 @@
 //        }
 //      },
       getData () {
-        console.log(this.repos_idx)
         const temp = this.githubs[this.repos_idx]
         if (!temp) this.$toast('请先拉取来源', 'cc')
         return temp

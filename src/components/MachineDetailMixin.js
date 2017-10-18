@@ -111,6 +111,10 @@ export default {
     },
     deleteMachine () {
       this.popperDelete(this.baseInfo.name, _ => {
+        if (this.isOpen) {
+          this.popperInfo('请关机后再删除')
+          return false
+        }
         this.$Global.async('server_del', true).getData({
           id: [this.$route.params.id]
         }).then(d => {

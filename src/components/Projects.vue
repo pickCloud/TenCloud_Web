@@ -29,7 +29,7 @@
             <td><m-checkbox class="list-check" v-model="selects" :data="{label:(item.id+'')}" hide-label></m-checkbox></td>
             <td>{{item.name}}</td>
             <td>{{modelCn[item.mode]}}</td>
-            <td>{{item.repos_name}}</td>
+            <td>{{STATUS[item.status][0]}}</td>
             <td><m-btn class="primary_txt" :href="item.http_url" :sizeh="-1" target="_blank">{{item.repos_url}}</m-btn></td>
             <td>{{item.update_time}}</td>
             <td>
