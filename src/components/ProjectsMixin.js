@@ -4,7 +4,16 @@ import {mapGetters, mapMutations, mapActions} from 'vuex'
 export default {
   mixins: [Poppers, Selects],
   data: () => ({
-    modelCn: ['普通项目', '基础服务', '应用组件']
+    modelCn: ['普通项目', '基础服务', '应用组件'],
+    STATUS: {
+      '0': ['初创建', 'primary_bg alpha-black_txt'],
+      '1': ['构建中', 'primary_bg alpha-black_txt'],
+      '2': ['构建成功', 'primary_bg alpha-black_txt'],
+      '3': ['部署中', 'primary_bg alpha-black_txt'],
+      '4': ['部署成功', 'primary_bg alpha-black_txt'],
+      '-2': ['构建失败', 'pink_bg alpha-black_txt'],
+      '-4': ['部署失败', 'pink_bg alpha-black_txt']
+    }
   }),
   computed: {
     ...mapGetters('projects', [

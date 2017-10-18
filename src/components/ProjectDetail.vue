@@ -29,6 +29,10 @@
                 <td>{{modecn}}</td>
               </tr>
               <tr>
+                <td>容器名称</td>
+                <td>{{base.image_name}}</td>
+              </tr>
+              <tr>
                 <td>项目来源</td>
                 <td>
                   <span class="m-r8">{{imgSource}}</span>

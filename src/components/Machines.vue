@@ -75,7 +75,7 @@
             <td>{{JSON.parse(item.net_content).input + '／' + JSON.parse(item.net_content).output}}</td>
             <td v-if="!isDeploy">
               <m-btn :href="{name:'MachineDetail', params:{id:item.id}}"><img class="vam" src="../assets/info.jpg" alt=""></m-btn>
-              <m-btn @click.native="delMachine(item.id)"><img class="vam" src="../assets/delete.jpg" alt=""></m-btn>
+              <!--<m-btn @click.native="delMachine(item.id)"><img class="vam" src="../assets/delete.jpg" alt=""></m-btn>-->
             </td>
           </tr>
           </tbody>
