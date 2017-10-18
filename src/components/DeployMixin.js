@@ -90,14 +90,20 @@ export default {
         if (event.data === 'open') {
           this.notes.push('start')
         } else if (event.data === 'success') {
-          this.popperInfo('部署成功')
+          let that = this
+          this.popperInfo('部署成功', function () {
+            that.$router.replace({name: 'ProjectDetail', params: {id: that.$route.params.id}})
+          })
           this.isDoing = false
         } else if (event.data === 'failure') {
           this.popperInfo('部署失败')
           this.isDoing = false
         } else {
           this.notes.push(event.data)
-          scrolldiv.scrollTop = scrolldiv.scrollHeight
+          if (scrolldiv && scrolldiv.scrollHeight) {
+            console.log(scrolldiv)
+            scrolldiv.scrollTop = scrolldiv.scrollHeight
+          }
         }
       }
       // 监听Socket的关闭

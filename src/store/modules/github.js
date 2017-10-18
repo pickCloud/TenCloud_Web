@@ -29,16 +29,6 @@ export default {
     },
     'setData' (state, data) {
       state.data = data
-    },
-    initReposIdx (state) {
-      let i = -1
-      while (++i < this.githubs.length) {
-        let v = this.githubs[i]
-        if (v.repos_name === this.data.repos_name && v.repos_url === this.data.repos_url) {
-          state.repos_idx = i + ''
-          break
-        }
-      }
     }
   },
   actions: {
@@ -57,6 +47,16 @@ export default {
             store.commit('setRepos_idx', value.repos_idx)
           }
           store.commit('setGithubs', d.data)
+          if (value.isBoolean) {
+            let i = -1
+            while (++i < store.state.githubs.length) {
+              let v = store.state.githubs[i]
+              if (v.repos_name === this.d.repos_name && v.repos_url === this.d.repos_url) {
+                store.commit('setRepos_idx', i + '')
+                break
+              }
+            }
+          }
         } else {
           Vue.$toast(d.message, 'cc')
         }
