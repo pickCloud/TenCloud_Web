@@ -13,7 +13,7 @@
             <td class="text-center">镜像名称</td>
             <td style="position: relative;">
               <input type="text"  @input="updataImage_name" :value="formdata.image_name" placeholder="请输入小写字母">
-              <p class="deploy-name_tip">项目部署后以容器的形式运行：容器名称仅允许英文小写字母</p>
+              <p class="deploy-name_tip">项目以镜像的形式部署上线，指定镜像名称，用于每次版本构建。仅允许英文小写字母和下划线</p>
             </td>
           </tr>
           <tr>

@@ -15,7 +15,7 @@
           <td class="text-center">容器名称</td>
           <td style="position: relative;">
             <input type="text" v-model="container_name">
-            <p class="deploy-name_tip">项目以镜像的形式部署上线，指定镜像名称，用于每次版本构建。仅允许英文小写字母</p>
+            <p class="deploy-name_tip">项目部署后以容器的形式运行：容器名称仅允许英文小写字母和下划线</p>
           </td>
         </tr>
         <tr>
@@ -57,7 +57,7 @@
     </panel>
     <panel title="部署日志" class="deploy-note">
       <div class="p-16">
-        <div class="panel">
+        <div class="panel" id="scroll">
           <!--<div class="panel-title">{{key}}</div>-->
           <p v-for="item in notes">{{item}}</p>
         </div>

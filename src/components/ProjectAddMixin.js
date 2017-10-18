@@ -3,8 +3,8 @@ import GitHub from './Projectadd/GitHub.vue'
 import LocalImage from './Projectadd/LocalImage.vue'
 import CloudImage from './Projectadd/CloudImage.vue'
 import Btngroup from './Projectadd/BtnGroup.vue'
-import Event from './Events'
-import {mapGetters, mapMutations} from 'vuex'
+// import Event from './Events'
+import {mapGetters, mapMutations, mapActions} from 'vuex'
 const IMG_IDX = ['github', 'limage', 'cimage']
 
 export default {
@@ -27,6 +27,7 @@ export default {
     ...mapMutations('projectAdd', [
       'setFormdata'
     ]),
+    ...mapActions('github', ['getGitHub']),
     updataName (e) {
       this.setFormdata({name: 'name', value: e.target.value})
     },
@@ -88,9 +89,8 @@ export default {
           this.setFormdata('mode', temp.mode)
           this.setFormdata('image_name', temp.image_name)
           this.imageMode = IMG_IDX[temp.image_source]
-          let that = this
           const tout = setTimeout(_ => {
-            Event.$emit('pullGitHub', true)
+            this.getGitHub({isBoolean: true})
             clearTimeout(tout)
           }, 10)
         }

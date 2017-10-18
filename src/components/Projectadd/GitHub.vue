@@ -9,7 +9,10 @@
       </thead>
       <tbody>
       <tr v-for="(item, i) in githubs">
-        <td><m-radio v-model="repos_idx" :data="{label:item.repos_name, value:i+''}"></m-radio></td>
+        <td>
+          <m-radio v-model="watchIdx" :data="{label:item.repos_name, value:i+''}"></m-radio>
+          <!--<input type="radio" v-model="watchIdx" :value="i+''">-->
+        </td>
         <td>{{item.repos_url}}</td>
       </tr>
       </tbody>
@@ -31,7 +34,7 @@
 //      githubs: []
     }),
     methods: {
-      ...mapMutations('github', ['setGittip', 'setHasGit']),
+      ...mapMutations('github', ['setGittip', 'setRepos_idx']),
       ...mapActions('github', ['getGitHub']),
 //      getGitHub (callback) {
 //        let getUrl = window.location.href
@@ -72,11 +75,19 @@
     },
     created () {
       if (this.$route.params && this.$route.query.token) {
-        this.getGitHub({gittip: '重新绑定GitHub代码仓库', hasGit: true})
+        this.getGitHub({gittip: '重新绑定GitHub代码仓库', repos_idx: 0})
       }
     },
     computed: {
-      ...mapState('github', ['gittip', 'hasGit', 'githubs', 'repos_idx'])
+      ...mapState('github', ['githubs', 'repos_idx']),
+      watchIdx: {
+        get () {
+          return this.repos_idx + ''
+        },
+        set (value) {
+          this.setRepos_idx(value)
+        }
+      }
     }
   }
 </script>
