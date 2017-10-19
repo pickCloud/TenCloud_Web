@@ -19,14 +19,14 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-for="item in lists">
+          <tr v-for="(item, index) in lists">
             <!--<td>{{item.image_name}}</td>-->
             <td>{{item.version}}</td>
-            <td>{{source(item.image_source)}}</td>
+            <td>{{selectSource(item.image_source)}}</td>
             <td>{{item.update_time}}</td>
             <td>
               <m-btn :href="{name:'VerNotes', params: {v:item.version, pname: baseName}}" class="primary_txt">日志</m-btn>
-              <m-btn class="pink_txt">删除</m-btn>
+              <m-btn @click.native="deleteItem(baseName,item.version,index)" class="pink_txt">删除</m-btn>
             </td>
           </tr>
           </tbody>
@@ -38,6 +38,7 @@
 </template>
 
 <script>
+  import axios from '../store/request/axios'
   export default {
     data: () => ({
       lists: [],
@@ -60,15 +61,22 @@
       }
     },
     methods: {
-      source (source) {
+      selectSource (source) {
         switch (source) {
-          case '0':
+          case 0:
             return '项目构建'
-          case '1':
+          case 1:
             return '本地上传'
-          case '2':
+          case 2:
             return '云端下载'
         }
+      },
+      deleteItem (prjName, version, index) {
+        axios.http('project_vers', '', 'delete', prjName + '/image' + '/' + version + '/log').then(d => {
+          if (d.status === 0) {
+            this.lists.splice(index, 1)
+          }
+        })
       }
     }
   }
