@@ -29,7 +29,7 @@
                 <td>{{modecn}}</td>
               </tr>
               <tr>
-                <td>容器名称</td>
+                <td>镜像名称</td>
                 <td>{{base.image_name}}</td>
               </tr>
               <tr>
@@ -85,7 +85,7 @@
                 <td>{{item[0]}}</td>
                 <td>{{item[2]}}</td>
                 <td>{{item[3]}}</td>
-                <td><m-btn class="primary_txt" :href="{name:'AppDetail',params:{mid:item[4], name:item[1],cid:item[0]}}">详情</m-btn></td>
+                <td><m-btn class="primary_txt" :href="{name:'AppDetail',params:{mid:item[4], name:item[1],cid:item[0], itemName:base.name}}">详情</m-btn></td>
               </tr>
               </tbody>
             </table>
