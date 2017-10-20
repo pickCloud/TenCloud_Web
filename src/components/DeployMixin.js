@@ -62,7 +62,7 @@ export default {
         project_id: this.$route.params.id,
         ips: this.getMachineIps()
       }
-      if (!pdata.ips.length === 0) {
+      if (pdata.ips.length === 0) {
         this.$toast('请选择机器', 'cc')
         return
       }
@@ -86,7 +86,6 @@ export default {
         this.socket.send(JSON.stringify(pdata))
       }
       this.socket.onmessage = (event) => {
-        console.log(event)
         if (event.data === 'open') {
           this.notes.push('start')
         } else if (event.data === 'success') {
@@ -101,7 +100,6 @@ export default {
         } else {
           this.notes.push(event.data)
           if (scrolldiv && scrolldiv.scrollHeight) {
-            console.log(scrolldiv)
             scrolldiv.scrollTop = scrolldiv.scrollHeight
           }
         }

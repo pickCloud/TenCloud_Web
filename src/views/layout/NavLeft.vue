@@ -3,7 +3,12 @@
     <div class="mini-ctrl text-center" @click="$parent.isMini = !$parent.isMini">
       <i class="iconfont icon-shensuo"></i>
     </div>
-    <m-tree :model="navData" :sizeh="50" @change="navChange"></m-tree>
+    <!--<m-tree :model="navData" :sizeh="50" @change="navChange"></m-tree>-->
+    <ul class="jmtree theme-dft">
+      <router-link :to="item.link" class="jmtree-node" v-for="(item, key) in navData" :key="key"><div class="jmtree-label-wrap" style="height: 50px; line-height: 50px;">
+        <i class="jmtree-label-icon" :class="item.icon"></i> <span class="jmtree-label">{{item.label}}</span> <!----></div> <!---->
+      </router-link>
+    </ul>
   </aside>
 </template>
 
@@ -37,3 +42,11 @@
     }
   }
 </script>
+<style lang="scss">
+.router-link-active{
+  div {
+    color: #fff;
+    background-color: #48bbc0;
+  }
+ }
+</style>

@@ -55,19 +55,19 @@ const router = new Router({
           component: Machines
         },
         {
-          path: '/machinedetail/:id',
+          path: '/machines/detail/:id',
           name: 'MachineDetail',
           meta: {level: 2},
           component: MachineDetail
         },
         {
-          path: '/machineadd/:id',
+          path: '/machines/add/:id',
           name: 'MachineAdd',
           meta: {level: 2},
           component: MachineAdd
         },
         {
-          path: '/appdetail/:mid/:name/:cid',
+          path: '/machines/appdetail/:mid/:name/:cid',
           name: 'AppDetail',
           meta: {level: 2},
           component: AppDetail
@@ -79,43 +79,43 @@ const router = new Router({
           component: Projects
         },
         {
-          path: '/projectadd',
+          path: '/projects/add',
           name: 'ProjectAdd',
           meta: {level: 2},
           component: ProjectAdd
         },
         {
-          path: '/projecteditor/:id',
+          path: '/projects/editor/:id',
           name: 'ProjectEditor',
           meta: {level: 2},
           component: ProjectAdd
         },
         {
-          path: '/projectdetail/:id',
+          path: '/projects/detail/:id',
           name: 'ProjectDetail',
           meta: {level: 2},
           component: ProjectDetail
         },
         {
-          path: '/build/:id',
+          path: '/projects/build/:id',
           name: 'Build',
           meta: {level: 2},
           component: Build
         },
         {
-          path: '/deploy/:id',
+          path: '/projects/deploy/:id',
           name: 'Deploy',
           meta: {level: 2},
           component: Deploy
         },
         {
-          path: '/verlist/:id',
+          path: '/projects/verlist/:id',
           name: 'Verlist',
           meta: {level: 2},
           component: Verlist
         },
         {
-          path: '/vernotes/:v',
+          path: '/projects/vernotes/:v',
           name: 'VerNotes',
           meta: {level: 2},
           component: VerNotes
