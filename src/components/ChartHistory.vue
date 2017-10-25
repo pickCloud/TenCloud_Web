@@ -2,7 +2,7 @@
   <div class="chart-history">
     <panel>
       <div class="panel-title" slot="title">
-        <span>MemData 历史记录</span>
+        <span>{{name}} 历史记录</span>
         <div class="right" style="margin-top: -5px">
           <m-btn-group :idx="0" class="m-r8 clearfix" @change="tiemTypeChange">
             <m-btn >正常</m-btn>
@@ -86,6 +86,7 @@
     },
     data: () => ({
       performance: 'server_performance',
+      performanceDocker: 'server_performance_docker',
       startTime: {
         time: ''
       },
@@ -133,14 +134,18 @@
         end_time: new Date().getTime(),
         id: 0,
         now_page: 1,
-        page_number: 10
+        page_number: 10,
+        container_name: '',
+        server_id: 0
       },
       timeType: 1,
       now_page: 1,
       page_number: 20,
-      isHaveData: true
+      isHaveData: true,
+      name: ''
     }),
     created () {
+      this.name = this.$route.params.name
       this.$store.commit('sitepath/SPLICE', [2, 1, {name: 'MachineDetail', params: {id: this.$route.params.id}, cn: this.$route.params.name}, {cn: '历史记录'}])
       let dateStart = new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000)
       this.startTime.time = this.timeFormat(dateStart)
@@ -168,6 +173,7 @@
         this.performanceData.now_page = this.now_page
         this.performanceData.page_number = this.page_number
           //  this.performance api地址
+          // 添加是否是容器历史
         this.$Global.async(this.performance, true).getData(this.performanceData).then(d => {
           for (let i = 0; i < d.data.length; i++) {
             let date = new Date(d.data[i].created_time * 1000)

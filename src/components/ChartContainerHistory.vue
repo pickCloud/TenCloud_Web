@@ -61,8 +61,8 @@
               <div class="percent-box-bar" :class="{warning: item.memory.percent > 80}" :style="{width: item.memory.percent + '%'}"></div>
             </div>
           </td>
-          <td>{{item.block.input + '／' + item.block.output}}</td>
-          <td>{{item.net.input + '／' + item.net.output}}</td>
+          <td>{{item.block.block_input + '／' + item.block.block_output}}</td>
+          <td>{{item.net.net_input + '／' + item.net.net_output}}</td>
 
           </tbody>
         </m-table>
@@ -140,7 +140,7 @@
     }),
     created () {
       this.name = this.$route.params.container_name
-      this.$store.commit('sitepath/SPLICE', [2, 1, {name: 'MachineDetail', params: {id: this.$route.params.server_id}, cn: this.$route.params.container_name}, {cn: '历史记录'}])
+      this.$store.commit('sitepath/SPLICE', [2, 2, {name: 'ProjectDetail', params: {id: this.$route.params.server_id}, cn: this.$route.params.container_name}, {cn: '历史记录'}])
       let dateStart = new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000)
       this.startTime.time = this.timeFormat(dateStart)
       let dateEnd = new Date(new Date().getTime())
@@ -170,7 +170,7 @@
         // 添加是否是容器历史
         this.performanceData.server_id = this.$route.params.id
         this.performanceData.container_name = this.$route.params.container_name
-        this.$Global.async(this.$route.params.container_name ? this.performanceDocker : this.performance, true).getData(this.performanceData).then(d => {
+        this.$Global.async(this.performanceDocker, true).getData(this.performanceData).then(d => {
           for (let i = 0; i < d.data.length; i++) {
             let date = new Date(d.data[i].created_time * 1000)
             let restr = this.timeFormat(date)

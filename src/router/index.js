@@ -25,6 +25,7 @@ const UserInfo = r => require.ensure([], () => r(require('@/components/UserInfo'
 // const FileHub = r => require.ensure([], () => r(require('@/components/FileHub')), 'filehub')
 const FileHubIn = r => require.ensure([], () => r(require('@/components/filehub/FileHubIn')), 'filehubin')
 const ChartHistory = r => require.ensure([], () => r(require('@/components/ChartHistory')), 'charthistory')
+const ChartContainerHistory = r => require.ensure([], () => r(require('@/components/ChartContainerHistory')), 'chartcontainerhistory')
 // const FileHubOut = r => require.ensure([], () => r(require('@/components/filehub/FileHubOut')), 'filehubout')
 
 Vue.use(Router)
@@ -137,6 +138,12 @@ const router = new Router({
           name: 'ChartHistory',
           meta: {level: 2},
           component: ChartHistory
+        },
+        {
+          path: '/:name/chartcontainerhistory/:id',
+          name: 'ChartContainerHistory',
+          meta: {level: 2},
+          component: ChartContainerHistory
         }
       ]
     },

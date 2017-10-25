@@ -38,7 +38,7 @@
                 <tbody>
                 <tr v-for="(item, i) in machines">
                   <td>{{item.name}}</td>
-                  <td>阿里云</td>
+                  <td>{{item.provider}}</td>
                   <td>{{item.address}}</td>
                   <td>{{item.public_ip}}</td>
                   <td><span class="plate" >{{item.machine_status}}</span></td>

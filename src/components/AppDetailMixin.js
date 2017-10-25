@@ -102,7 +102,7 @@ export default {
       })
     },
     lookHistory () {
-      this.$router.push({name: 'ChartHistory', params: {id: this.$route.params.id, name: this.$route.params.itemName}})
+      this.$router.push({name: 'ChartContainerHistory', params: {id: this.$route.params.mid, container_name: this.$route.params.name}})
     }
   },
   computed: {
