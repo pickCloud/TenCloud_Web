@@ -29,6 +29,19 @@ export default {
     },
     'setData' (state, data) {
       state.data = data
+    },
+    'setLocalStorage' (state, {key, item}) {
+      if (typeof item === 'object') {
+        item = JSON.stringify(item)
+      }
+      window.localStorage.setItem(key, item)
+    },
+    'getLocaltion' (state, data) {
+      let dataObj = {}
+      if (typeof data === 'string') {
+        dataObj = JSON.parse(data)
+      }
+      this.commit('projectAdd/setFormdata', {name: false, value: dataObj}, { root: true })
     }
   },
   actions: {
@@ -66,6 +79,10 @@ export default {
         }
       })
       return {}
+    },
+    deleteToken () {
+      axios.http('user_thumb_token', '', 'delete').then(d => {
+      })
     }
   }
 }

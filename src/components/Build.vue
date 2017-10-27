@@ -41,7 +41,7 @@
             <div class="__txt">以上，仍然不知道Dockerfile如何写的，可以联系我们的工程师，@洪炯腾 @洪国安</div>
             <div class="__icon"></div>
           </li>
-          <li class="build-intro__open-btn" @click="openIntro"><i class="iconfont icon-menudown"></i></li>
+          <li class="build-intro__open-btn" @click="openIntro"><i class="iconfont icon-xiala"></i></li>
         </ul>
         <div class="build-form">
           <div class="build-form__select-ver clearfix m-b16">

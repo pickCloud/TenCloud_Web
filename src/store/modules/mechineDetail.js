@@ -34,15 +34,15 @@ export default {
     //   state.sysInfo = data
     // },
     'setApplists' (state, list) {
-      if (list === null) return false
       state.applists.splice(0, state.applists.length)
+      if (list === null) return false
       list.forEach(function (item) {
         state.applists.push(item)
       })
     },
     'setOperations' (state, list) {
-      if (list === null) return false
       state.operations.splice(0, state.operations.length)
+      if (list === null) return false
       list.forEach(function (item) {
         state.operations.push(item)
       })

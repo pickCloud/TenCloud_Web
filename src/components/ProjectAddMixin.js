@@ -24,9 +24,8 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('projectAdd', [
-      'setFormdata'
-    ]),
+    ...mapMutations('projectAdd', ['setFormdata']),
+    ...mapMutations('github', ['getLocaltion', 'setLocalStorage']),
     ...mapActions('github', ['getGitHub']),
     updataName (e) {
       this.setFormdata({name: 'name', value: e.target.value})
@@ -55,8 +54,6 @@ export default {
         this.$toast('描述不能为空', 'cc')
         return
       }
-      this.setLocalStorage('formdata', this.formdata)
-      this.setLocalStorage('isHaveLocal', true)
       // merge data
       let pdata = Object.assign({}, this.formdata, tempdata)
       pdata.image_source = IMG_IDX.indexOf(this.imageMode)
@@ -66,14 +63,13 @@ export default {
           else this.$router.push({name: 'ProjectDetail', params: {id: this.$route.params.id}})
         }
         this.$toast(this.isEditor ? '修改成功' : '添加成功', 'cc')
-        this.setLocalStorage('isHaveLocal', '')
+        this.setLocalStorage({key: 'isHaveLocal', item: ''})
         this.setFormdata({name: false,
           value: {
             name: '',
             image_name: '',
             description: '',
             mode: '0'}})
-        console.log(this.formdata)
         // console.log(d)
       }, e => {})
     },
@@ -92,10 +88,10 @@ export default {
           // this.formdata.description = temp.description
           // this.formdata.mode = temp.mode + ''
           // this.formdata.image_name = temp.image_name
-          this.setFormdata('name', temp.name)
-          this.setFormdata('description', temp.description)
-          this.setFormdata('mode', temp.mode)
-          this.setFormdata('image_name', temp.image_name)
+          this.setFormdata({name: 'name', value: temp.name})
+          this.setFormdata({name: 'description', value: temp.description})
+          this.setFormdata({name: 'mode', value: temp.mode})
+          this.setFormdata({name: 'image_name', value: temp.image_name})
           this.imageMode = IMG_IDX[temp.image_source]
           const tout = setTimeout(_ => {
             this.getGitHub({isBoolean: true})
@@ -103,30 +99,14 @@ export default {
           }, 10)
         }
       })
-    },
-    getLocalStorage (key) {
-      return window.localStorage.getItem(key)
-    },
-    setLocalStorage (key, item) {
-      console.log(typeof item)
-      if (typeof item === 'object') {
-        item = JSON.stringify(item)
-      }
-      window.localStorage.setItem(key, item)
-    },
-    getLocaltion (data) {
-      if (typeof item === 'object') {
-        data = JSON.parse(data)
-      }
-      this.setFormdata({name: false, value: data})
     }
   },
   created () {
     this.isEditor = this.$route.params.id !== undefined
     if (this.isEditor) this.editorMode()
-    this.isHaveLocal = this.getLocalStorage('isHaveLocal')
+    this.isHaveLocal = window.localStorage.getItem('isHaveLocal')
     if (this.isHaveLocal) {
-      this.getLocaltion(this.getLocalStorage('formdata'))
+      this.getLocaltion(window.localStorage.getItem('formdata'))
     }
   },
   components: {
