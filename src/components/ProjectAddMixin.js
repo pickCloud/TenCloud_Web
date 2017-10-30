@@ -10,7 +10,15 @@ const IMG_IDX = ['github', 'limage', 'cimage']
 export default {
   mixins: [Popper],
   computed: {
-    ...mapGetters('projectAdd', ['formdata'])
+    ...mapGetters('projectAdd', ['formdata']),
+    watchMode: {
+      get () {
+        return this.formdata.mode + ''
+      },
+      set (value) {
+        this.setFormdata({name: 'mode', value: value})
+      }
+    }
   },
   data: () => ({
     isEditor: false,
@@ -84,14 +92,11 @@ export default {
       this.$Global.async('project_detail', true).getData(null, this.$route.params.id).then(d => {
         if (d.status === 0) {
           let temp = this.propData = d.data[0]
-          // this.formdata.name = temp.name
-          // this.formdata.description = temp.description
-          // this.formdata.mode = temp.mode + ''
-          // this.formdata.image_name = temp.image_name
-          this.setFormdata({name: 'name', value: temp.name})
-          this.setFormdata({name: 'description', value: temp.description})
-          this.setFormdata({name: 'mode', value: temp.mode})
-          this.setFormdata({name: 'image_name', value: temp.image_name})
+          // this.setFormdata({name: 'name', value: temp.name})
+          // this.setFormdata({name: 'description', value: temp.description})
+          // this.setFormdata({name: 'mode', value: temp.mode})
+          // this.setFormdata({name: 'image_name', value: temp.image_name})
+          this.setFormdata({name: false, value: temp})
           this.imageMode = IMG_IDX[temp.image_source]
           const tout = setTimeout(_ => {
             this.getGitHub({isBoolean: true})
@@ -103,6 +108,7 @@ export default {
   },
   created () {
     this.isEditor = this.$route.params.id !== undefined
+    this.setFormdata({name: 'id', value: this.$route.params.id})
     if (this.isEditor) this.editorMode()
     this.isHaveLocal = window.localStorage.getItem('isHaveLocal')
     if (this.isHaveLocal) {

@@ -4,6 +4,10 @@
     <div class="login-box">
       <div class="login-form m-b32">
         <div class="login-form_title m-b32">登录</div>
+        <!--<ul class="login-select_content m-b32">-->
+          <!--<li class="btn theme-dft">密码登录</li>-->
+          <!--<li class="btn theme-dft">验证码登录</li>-->
+        <!--</ul>-->
         <div class="login-tip m-b16" :class="tip.type" v-if="tip.info">
           <i class="iconfont icon-xinxi-yin vam"></i> <span class="vam">{{tip.info}}</span>
         </div>
@@ -111,14 +115,13 @@
   }
   .login-box {
     position: absolute;
-    width: 600px;
+    width: 500px;
+    height:677px;
     left: 50%;top: 50%;
-    margin-left: -300px;
-    margin-top: -280px;
-
+    -webkit-transform: translate(-50%,-50%);
   }
   .login-form {
-    padding: 50px;
+    padding: 46px 32px;
     background-color: #2f3543;
   }
   .login-form_title {
@@ -175,6 +178,15 @@
       color: #f15532;
       background-color: #feeeeb;
       border-color: currentColor;
+    }
+  }
+  .login-select_content {
+    line-height:60px;
+    border-bottom: #464E5C 1px solid;
+    box-sizing: border-box;
+    vertical-align: middle;
+    li{
+      display: inline-block;
     }
   }
 </style>

@@ -8,7 +8,8 @@ export default {
       // repos_url: '',
       image_name: '',
       description: '',
-      mode: '0'
+      mode: '0',
+      id: ''
     }
   },
   mutations: {

@@ -3,7 +3,7 @@ import Vue from 'vue'
 export default {
   namespaced: true,
   state: {
-    repos_idx: 0,
+    repos_idx: '0',
     githubs: [],
     gittip: '绑定GitHub代码仓库',
     hasGit: '',
@@ -57,7 +57,7 @@ export default {
           }
           store.commit('setRepos_idx', 0)
           if (value.repos_idx) {
-            store.commit('setRepos_idx', value.repos_idx)
+            store.commit('setRepos_idx', value.repos_idx + '')
           }
           store.commit('setGithubs', d.data)
           if (value.isBoolean) {
@@ -74,7 +74,7 @@ export default {
           Vue.$toast(d.message, 'cc')
         }
       }).catch(error => {
-        if (error && error.response.data.data.url) {
+        if (error && error.response && error.response.data && error.response.data.data.url) {
           window.location.href = error.response.data.data.url
         }
       })

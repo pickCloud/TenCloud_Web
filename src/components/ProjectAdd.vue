@@ -22,10 +22,10 @@
           </tr>
           <tr>
             <td class="text-center">选择类别</td>
-            <td class="p-lr-16">
-              <m-radio v-model="formdata.mode" :data="{label: '普通项目', value: '0'}" class="m-r8"></m-radio>
-              <m-radio v-model="formdata.mode" :data="{label: '基础服务', value: '1'}" class="m-r8"></m-radio>
-              <m-radio v-model="formdata.mode" :data="{label: '应用组件', value: '2'}"></m-radio>
+            <td class="p-lr-16"  @input="updataMode">
+              <m-radio v-model="watchMode" :data="{label: '普通项目', value: '0'}" class="m-r8"></m-radio>
+              <m-radio v-model="watchMode" :data="{label: '基础服务', value: '1'}" class="m-r8"></m-radio>
+              <m-radio v-model="watchMode" :data="{label: '应用组件', value: '2'}" ></m-radio>
             </td>
           </tr>
           <tr>
