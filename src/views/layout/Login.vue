@@ -3,24 +3,40 @@
     <navtop></navtop>
     <div class="login-box">
       <div class="login-form m-b32">
-        <div class="login-form_title m-b32">登录</div>
-        <!--<ul class="login-select_content m-b32">-->
-          <!--<li class="btn theme-dft">密码登录</li>-->
-          <!--<li class="btn theme-dft">验证码登录</li>-->
-        <!--</ul>-->
+        <!--<div class="login-form_title m-b32">登录</div>-->
+        <div class="login-select_content m-b32">
+          <m-btn class="btn theme-dft" @click.native="selectType(0)" :class="type==0?'select-active':''">密码登录</m-btn>
+          <m-btn class="btn theme-dft" @click.native="selectType(1)" :class="type==1?'select-active':''">验证码登录</m-btn>
+        </div>
         <div class="login-tip m-b16" :class="tip.type" v-if="tip.info">
           <i class="iconfont icon-xinxi-yin vam"></i> <span class="vam">{{tip.info}}</span>
         </div>
+        <!--<div class="login-form_inp m-b16">-->
+          <!--<div>{{tip.}}</div>-->
+        <!--</div>-->
         <div class="login-form_inp m-b16">
           <input type="text" placeholder="请输入电话号码" v-model="loginData.mobile">
           <i class="iconfont icon-touxiang1"></i>
         </div>
-        <div class="login-form_inp m-b32">
-          <input type="text" placeholder="请输入验证码" v-model="loginData.auth_code">
-          <m-btn :sizeh="-1" @click.native="getVerifyCode" :disabled="btndis">{{btntip}}</m-btn>
+        <div class="login-form_inp m-b16" v-if="type==0">
+          <input type="password" placeholder="请输入密码" v-model="password" >
+          <i class="iconfont icon-touxiang1"></i>
+        </div>
+        <div v-else>
+          <div class="login-form_inp m-b16" >
+            <input type="text" placeholder="请输入验证码" v-model="loginData.auth_code">
+            <m-btn :sizeh="-1" @click.native="getVerifyCode" :disabled="btndis">{{btntip}}</m-btn>
+          </div>
+          <div id="captcha" class="m-b16">
+            <div id="wait">载入中……</div>
+          </div>
         </div>
         <m-btn class="login-form_sure m-b16" :sizeh="50" @click.native="login">登录</m-btn>
-        <div class="text-right"><m-btn>注册</m-btn></div>
+        <div class="flex-space-between">
+         <span class="">还没有账号？<m-btn class="primary_txt" @click.native="resign">免费注册</m-btn></span>
+          <span class=""><m-btn class="primary_txt">忘记密码</m-btn></span>
+        </div>
+
         <!--<div class="login-form_sure">登录</div>-->
       </div>
       <div class="text-center">厦门十全十美网络科技有限公司</div>
@@ -31,6 +47,8 @@
 <script>
   import Navtop from './NavTop.vue'
   import Global from '../../global.js'
+  import axios from '../../store/request/axios'
+  import initGeetest from '../../gt'
   export default {
     data: () => ({
       TD: true,
@@ -43,26 +61,38 @@
         auth_code: ''
       },
       btntip: '获取验证码',
-      btndis: false
+      btndis: false,
+      type: 0,
+      password: ''
     }),
     methods: {
+      resign () {
+        this.$router.push({name: 'Resign'})
+      },
+      selectType (value) {
+        this.type = value
+      },
       login () {
-        let {loginData} = this
-        if (this.checkMobile()) return false
-        if (this.checkCode()) return false
-        Global.login(loginData, (d) => {
-//          console.log(d)
-          if (window.nextUrl) {
-            this.$router.replace({name: 'Main'})
-            window.location.href = window.location.origin + window.nextUrl
-            delete window.nextUrl
-          } else {
-            this.$router.replace({name: 'Main'})
-          }
-        }, e => {
-          this.tip.type = 'error'
-          this.tip.info = e.response.data.message
-        })
+        if (this.type === 1) {
+          let loginData = this.loginData
+          if (this.checkMobile()) return false
+          if (this.checkCode()) return false
+          axios.http('user_captcha_validate', loginData, 'post')
+          Global.login(loginData, (d) => {
+            if (window.nextUrl) {
+              this.$router.replace({name: 'Main'})
+              window.location.href = window.location.origin + window.nextUrl
+              delete window.nextUrl
+            } else {
+              this.$router.replace({name: 'Main'})
+            }
+          }, e => {
+            this.tip.type = 'error'
+            this.tip.info = e.response.data.message
+          })
+        } else {
+          axios.http('user_captcha_validate')
+        }
       },
       checkMobile () {
         let temp = this.loginData.mobile === '' || !(/^1[34578]\d{9}$/.test(this.loginData.mobile))
@@ -96,6 +126,37 @@
         this.btntip = '重新获取'
         this.btndis = false
         clearInterval(this.sit)
+      },
+      getCallBack (captchaObj) {
+        captchaObj.appendTo('#captcha')
+        captchaObj.onReady(function () {
+          console.log(document.getElementById('wait'))
+          document.getElementById('wait').style.display = 'none'
+        })
+        // 更多接口说明请参见：http://docs.geetest.com/install/client/web-front/
+      }
+    },
+    created () {
+    },
+    watch: {
+      type: function () {
+        if (this.type !== 1) return
+        axios.http('user_get_captcha').then(data => {
+          let that = this
+          if (data.status === 0) {
+            initGeetest({
+              // 以下 4 个配置参数为必须，不能缺少
+              gt: data.data.gt,
+              challenge: data.data.challenge,
+              offline: !data.data.success, // 表示用户后台检测极验服务器是否宕机
+              new_captcha: data.data.new_captcha, // 用于宕机时表示是新验证码的宕机
+              product: 'float', // 产品形式，包括：float，popup
+              width: '100%',
+              bg_color: '#262a35'
+              // 更多配置参数说明请参见：http://docs.geetest.com/install/client/web-front/
+            }, that.getCallBack)
+          }
+        })
       }
     },
     destroyed () {
@@ -115,8 +176,8 @@
   }
   .login-box {
     position: absolute;
-    width: 500px;
-    height:677px;
+    width: 437px;
+    /*height:677px;*/
     left: 50%;top: 50%;
     -webkit-transform: translate(-50%,-50%);
   }
@@ -180,13 +241,31 @@
       border-color: currentColor;
     }
   }
+  //1030
   .login-select_content {
-    line-height:60px;
+    /*line-height:60px;*/
     border-bottom: #464E5C 1px solid;
     box-sizing: border-box;
     vertical-align: middle;
     li{
       display: inline-block;
+    }
+  }
+  .select-active{
+    color:#48bbc0 ;
+    box-sizing: border-box;
+    border-bottom: #48bbc0 1px solid;
+  }
+  .flex-space-between{
+    display: flex;
+    justify-content: space-between;
+  }
+  @media not (max-width: 414px) {
+    .login-box {
+      width: 280px;
+    }
+    .login-form {
+      padding: 16px 15px;
     }
   }
 </style>

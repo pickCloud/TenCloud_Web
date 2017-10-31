@@ -47,6 +47,8 @@ const APIS = {
   user_logout: {u: '/api/user/logout', m: 'post'},
   user_info: {u: '/api/user', m: 'get'},
   user_thumb_token: {u: '/api/user/token', m: 'get'},
+  user_get_captcha: {u: '/api/user/captcha', m: 'get'},
+  user_captcha_validate: {u: '/api/user/captcha/validate', m: 'get'},
   file_list: {u: '/api/file/list', m: 'post'},
   file_pages: {u: '/api/file/', m: 'get'},
   file_create_dir: {u: '/api/file/dir/create', m: 'post'},
@@ -54,6 +56,7 @@ const APIS = {
   file_update: {u: '/api/file/update', m: 'post'},
   file_download: {u: '/api/file/download', m: 'post'},
   file_del: {u: '/api/file/delete', m: 'post'},
+
   islocal: islocal
 }
 export default APIS

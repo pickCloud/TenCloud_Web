@@ -6,10 +6,10 @@ const options = {
   URL: '',
   http: function (url = '', params = null, method = 'get', urlAdd = '', canTip = false, isForce = false) {
     return new Promise((resolve, reject) => {
+      this.URL = api.baseURL + api[url].u + urlAdd
       if (api[url].m && method === 'get') {
         method = api[url].m
       }
-      this.URL = api.baseURL + api[url].u + urlAdd
       axios[method](this.URL, params).then(response => {
         if (response.status === 200) {
           resolve(response.data)
