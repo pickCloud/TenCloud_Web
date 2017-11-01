@@ -19,7 +19,7 @@
           <i class="iconfont icon-touxiang1"></i>
         </div>
         <div class="login-form_inp m-b16" v-if="type==0">
-          <input type="password" placeholder="请输入密码" v-model="password" >
+          <input type="password" placeholder="请输入密码" v-model="loginData.password" >
           <i class="iconfont icon-touxiang1"></i>
         </div>
         <div v-else>
@@ -46,7 +46,7 @@
 
 <script>
   import Navtop from './NavTop.vue'
-  import Global from '../../global.js'
+//  import Global from '../../global.js'
   import axios from '../../store/request/axios'
   import initGeetest from '../../gt'
   export default {
@@ -58,12 +58,16 @@
       },
       loginData: {
         mobile: '',
-        auth_code: ''
+        auth_code: '',
+        geetest_challenge: '',
+        geetest_validate: '',
+        geetest_seccode: '',
+        password: ''
       },
       btntip: '获取验证码',
       btndis: false,
       type: 0,
-      password: ''
+      result: ''
     }),
     methods: {
       resign () {
@@ -73,12 +77,17 @@
         this.type = value
       },
       login () {
+        let loginData = this.loginData
         if (this.type === 1) {
-          let loginData = this.loginData
+          console.log(this.result)
           if (this.checkMobile()) return false
           if (this.checkCode()) return false
-          axios.http('user_captcha_validate', loginData, 'post')
-          Global.login(loginData, (d) => {
+          if (!(this.resignData.geetest_challenge && this.resignData.geetest_seccode && this.resignData.geetest_validate)) {
+            this.tip.type = 'error'
+            this.tip.info = '点击上方按钮进行验证'
+            return false
+          }
+          axios.http('user_login', loginData, 'post').then(d => {
             if (window.nextUrl) {
               this.$router.replace({name: 'Main'})
               window.location.href = window.location.origin + window.nextUrl
@@ -86,22 +95,51 @@
             } else {
               this.$router.replace({name: 'Main'})
             }
-          }, e => {
+          }).catch(e => {
             this.tip.type = 'error'
             this.tip.info = e.response.data.message
           })
+//          Global.login(loginData, (d) => {
+//            if (window.nextUrl) {
+//              this.$router.replace({name: 'Main'})
+//              window.location.href = window.location.origin + window.nextUrl
+//              delete window.nextUrl
+//            } else {
+//              this.$router.replace({name: 'Main'})
+//            }
+//          }, e => {
+//            this.tip.type = 'error'
+//            this.tip.info = e.response.data.message
+//          })
         } else {
-          axios.http('user_captcha_validate')
+          axios.http('user_login_password', loginData, 'post').then(d => {
+            if (window.nextUrl) {
+              this.$router.replace({name: 'Main'})
+              window.location.href = window.location.origin + window.nextUrl
+              delete window.nextUrl
+            } else {
+              this.$router.replace({name: 'Main'})
+            }
+          }).catch(e => {
+            this.tip.type = 'error'
+            this.tip.info = e.response.data.message
+          })
         }
       },
       checkMobile () {
         let temp = this.loginData.mobile === '' || !(/^1[34578]\d{9}$/.test(this.loginData.mobile))
-        if (temp) this.$toast('手机格式有误', 'cc')
+        if (temp) {
+          this.tip.type = 'error'
+          this.tip.info = '手机格式有误'
+        }
         return temp
       },
       checkCode () {
         let temp = this.loginData.auth_code === ''
-        if (temp) this.$toast('验证码不能为空', 'cc')
+        if (temp) {
+          this.tip.type = 'error'
+          this.tip.info = '验证码不能为空'
+        }
         return temp
       },
       getVerifyCode () {
@@ -129,9 +167,15 @@
       },
       getCallBack (captchaObj) {
         captchaObj.appendTo('#captcha')
+
         captchaObj.onReady(function () {
-          console.log(document.getElementById('wait'))
           document.getElementById('wait').style.display = 'none'
+        })
+        captchaObj.onSuccess(() => {
+          let result = captchaObj.getValidate()
+          this.loginData['geetest_challenge'] = result.geetest_challenge
+          this.loginData['geetest_validate'] = result.geetest_validate
+          this.loginData['geetest_seccode'] = result.geetest_seccode
         })
         // 更多接口说明请参见：http://docs.geetest.com/install/client/web-front/
       }
@@ -262,7 +306,7 @@
   }
   @media not (max-width: 414px) {
     .login-box {
-      width: 280px;
+      width: 300px;
     }
     .login-form {
       padding: 16px 15px;
