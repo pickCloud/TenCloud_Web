@@ -4,7 +4,7 @@
     <div class="resign-box">
       <div class="resign-form m-b32">
         <!--<div class="resign-form_title m-b32">登录</div>-->
-        <h4 class="m-b32" style="text-align: center ">欢迎注册Conselo</h4>
+        <h4 class="m-b32" style="text-align: center ">欢迎注册Console</h4>
         <div class="resign-tip m-b16" :class="tip.type" v-if="tip.info">
           <i class="iconfont icon-touxiang1 vam"></i> <span class="vam">{{tip.info}}</span>
         </div>

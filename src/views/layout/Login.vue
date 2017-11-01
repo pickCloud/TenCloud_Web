@@ -79,10 +79,9 @@
       login () {
         let loginData = this.loginData
         if (this.type === 1) {
-          console.log(this.result)
           if (this.checkMobile()) return false
           if (this.checkCode()) return false
-          if (!(this.resignData.geetest_challenge && this.resignData.geetest_seccode && this.resignData.geetest_validate)) {
+          if (!(this.loginData.geetest_challenge && this.loginData.geetest_seccode && this.loginData.geetest_validate)) {
             this.tip.type = 'error'
             this.tip.info = '点击上方按钮进行验证'
             return false

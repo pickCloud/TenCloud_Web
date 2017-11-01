@@ -39,7 +39,7 @@
         <m-col class="xs-12 md-3 text-center m-b16">
           <div class="info-head m-b16" style="line-height: 139px">
             <img :src="infos.image_url" alt="" v-if="infos.image_url">
-            <i v-else="" class="iconfont icon-touxiang1" style="font-size: 139px;"></i>
+            <i v-else="" class="iconfont icon-touxiang1 iconHead" style="font-size: 139px;"></i>
           </div>
 
           <div class="text-center m-b16">
@@ -182,6 +182,8 @@
       headHeigth () {
         const headel = this.$el.querySelector('.info-head')
         headel.style.height = headel.clientWidth + 'px'
+        let fontIcon = this.$el.querySelector('.iconHead')
+        fontIcon.style.fontSize = headel.clientWidth + 'px'
       },
       getThumbToken () {
         this.$Global.async('user_thumb_token', true).getData(null).then(d => {
@@ -240,6 +242,8 @@
     border-radius: 50%;
     background-color: #1d212a;
     overflow: hidden;
+    display: flex;
+    align-items: center;
     img {
       max-width: 100%;
       max-height:100%;
