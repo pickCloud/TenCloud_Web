@@ -97,18 +97,24 @@
           <div class="panel-title" slot="title">日志</div>
           <div class="panel-body">
             <table class="table hover striped theme-dft pad-table">
-              <col width="30%">
-              <col width="70%">
+              <col width="25%">
+              <col width="25%">
+              <col width="25%">
+              <col width="25%">
               <thead>
               <tr>
                 <th>时间</th>
                 <th>行为</th>
+                <th>状态</th>
+                <th>操作人</th>
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>2017-06-28</td>
-                <td>项目创建</td>
+              <tr v-for="item in operations">
+                <td>{{item[0]}}</td>
+                <td>{{item[1]}}</td>
+                <td>{{item[2]}}</td>
+                <td>{{item[3]}}</td>
               </tr>
               </tbody>
             </table>

@@ -49,31 +49,25 @@
         <panel title="日志" class="m-b16">
           <div class="panel-body p-b16">
             <m-table class="hover striped machines-table centered">
-              <col width="30%">
-              <col width="70%">
+              <col width="25%">
+              <col width="25%">
+              <col width="25%">
+              <col width="25%">
               <thead>
-                <tr>
-                  <th>时间</th>
-                  <th>行为</th>
-                </tr>
+              <tr>
+                <th>时间</th>
+                <th>行为</th>
+                <th>状态</th>
+                <th>操作人</th>
+              </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>2017.07.06 12:00</td>
-                  <td>创建</td>
-                </tr>
-                <tr>
-                  <td>2017.07.06 12:00</td>
-                  <td>创建</td>
-                </tr>
-                <tr>
-                  <td>2017.07.06 12:00</td>
-                  <td>创建</td>
-                </tr>
-                <tr>
-                  <td>2017.07.06 12:00</td>
-                  <td>创建</td>
-                </tr>
+              <tr v-for="item in operations">
+                <td>{{item[0]}}</td>
+                <td>{{item[1]}}</td>
+                <td>{{item[2]}}</td>
+                <td>{{item[3]}}</td>
+              </tr>
               </tbody>
             </m-table>
           </div>

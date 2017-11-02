@@ -21,6 +21,7 @@ const VerNotes = r => require.ensure([], () => r(require('@/components/VerNotes'
 
 const Login = r => require.ensure([], () => r(require('@/views/layout/Login')), 'login')
 const Resign = r => require.ensure([], () => r(require('@/views/layout/Resign')), 'resign')
+const LostPassWord = r => require.ensure([], () => r(require('@/views/layout/lostPassWord')), 'LostPassWord')
 const UserInfo = r => require.ensure([], () => r(require('@/components/UserInfo')), 'userinfo')
 
 // const FileHub = r => require.ensure([], () => r(require('@/components/FileHub')), 'filehub')
@@ -159,6 +160,12 @@ const router = new Router({
       name: 'Resign',
       meta: {level: 0},
       component: Resign
+    },
+    {
+      path: '/lostPassword',
+      name: 'LostPassword',
+      meta: {level: 0},
+      component: LostPassWord
     }
   ]
 })

@@ -59,8 +59,8 @@ export default {
         }
       })
     },
-    getServerOperation (ctx, id) {
-      axios.http('server_operation', '', 'get', id).then(d => {
+    getServerOperation (ctx, p) {
+      axios.http('server_operation', p, 'post').then(d => {
         if (d.status === 0) {
           ctx.commit('setOperations', d.data)
         }

@@ -1,11 +1,10 @@
 import ChartCMD from './ChartCMD.js'
 import Popper from './Poppers.js'
-
+import {mapState, mapActions} from 'vuex'
 const STATUS_MAP = {
   container_stop: ['停止容器'],
   container_start: ['启动容器']
 }
-
 export default {
   data: () => ({
     isOpen: true,
@@ -23,6 +22,7 @@ export default {
   }),
   mixins: [ChartCMD, Popper],
   methods: {
+    ...mapActions('mechineDetail', ['getServerOperation']),
     getApiData () {
       this.performanceData.server_id = this.$route.params.mid
       this.performanceData.container_name = this.$route.params.name
@@ -46,7 +46,7 @@ export default {
       }, e => {
         console.log(e)
       })
-      // console.log(this.$route.params)
+      this.getServerOperation({object_type: 1, object_id: this.$route.params.mid})
     },
     containerChange () {
       this.isDisabled = true
@@ -118,7 +118,8 @@ export default {
     },
     volumesfrom () {
       return this.container.volumesfrom ? this.container.volumesfrom.join() : ''
-    }
+    },
+    ...mapState('mechineDetail', ['operations'])
   },
   created () {
     this.getApiData()

@@ -63,7 +63,7 @@ export default {
       //   }
       // })
       this.getServerContainers(this.machineid)
-      this.getServerOperation(this.machineid + '/operation')
+      this.getServerOperation({object_type: 0, object_id: this.machineid})
     },
     machineChange () {
       this.isDisabled = true

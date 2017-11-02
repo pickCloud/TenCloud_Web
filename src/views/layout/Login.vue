@@ -34,7 +34,7 @@
         <m-btn class="login-form_sure m-b16" :sizeh="50" @click.native="login">登录</m-btn>
         <div class="flex-space-between">
          <span class="">还没有账号？<m-btn class="primary_txt" @click.native="resign">免费注册</m-btn></span>
-          <span class=""><m-btn class="primary_txt">忘记密码</m-btn></span>
+          <span class=""><m-btn class="primary_txt" @click.native="lostPassword">忘记密码</m-btn></span>
         </div>
 
         <!--<div class="login-form_sure">登录</div>-->
@@ -46,33 +46,15 @@
 
 <script>
   import Navtop from './NavTop.vue'
-//  import Global from '../../global.js'
   import axios from '../../store/request/axios'
-  import initGeetest from '../../gt'
+  import LoginmoduleMixin from '../../components/LoginModuleMixin.js'
   export default {
+    mixins: [LoginmoduleMixin],
     data: () => ({
       TD: true,
-      tip: {
-        type: 'error',
-        info: ''
-      },
-      loginData: {
-        mobile: '',
-        auth_code: '',
-        geetest_challenge: '',
-        geetest_validate: '',
-        geetest_seccode: '',
-        password: ''
-      },
-      btntip: '获取验证码',
-      btndis: false,
-      type: 0,
-      result: ''
+      type: 0
     }),
     methods: {
-      resign () {
-        this.$router.push({name: 'Resign'})
-      },
       selectType (value) {
         this.type = value
       },
@@ -98,18 +80,6 @@
             this.tip.type = 'error'
             this.tip.info = e.response.data.message
           })
-//          Global.login(loginData, (d) => {
-//            if (window.nextUrl) {
-//              this.$router.replace({name: 'Main'})
-//              window.location.href = window.location.origin + window.nextUrl
-//              delete window.nextUrl
-//            } else {
-//              this.$router.replace({name: 'Main'})
-//            }
-//          }, e => {
-//            this.tip.type = 'error'
-//            this.tip.info = e.response.data.message
-//          })
         } else {
           axios.http('user_login_password', loginData, 'post').then(d => {
             if (window.nextUrl) {
@@ -124,59 +94,6 @@
             this.tip.info = e.response.data.message
           })
         }
-      },
-      checkMobile () {
-        let temp = this.loginData.mobile === '' || !(/^1[34578]\d{9}$/.test(this.loginData.mobile))
-        if (temp) {
-          this.tip.type = 'error'
-          this.tip.info = '手机格式有误'
-        }
-        return temp
-      },
-      checkCode () {
-        let temp = this.loginData.auth_code === ''
-        if (temp) {
-          this.tip.type = 'error'
-          this.tip.info = '验证码不能为空'
-        }
-        return temp
-      },
-      getVerifyCode () {
-        if (this.checkMobile()) return false
-        this.waittip()
-        this.btndis = true
-        this.$Global.async('user_verify', true).getData({}, this.loginData.mobile).then(d => {
-          //
-        }, e => {
-          this.overwati()
-        })
-      },
-      waittip () {
-        let alltime = 60
-        this.btntip = '重新获取(' + alltime + 's)'
-        this.sit = setInterval(_ => {
-          this.btntip = '重新获取(' + (alltime--) + 's)'
-          if (alltime === -1) this.overwati()
-        }, 1000)
-      },
-      overwati () {
-        this.btntip = '重新获取'
-        this.btndis = false
-        clearInterval(this.sit)
-      },
-      getCallBack (captchaObj) {
-        captchaObj.appendTo('#captcha')
-
-        captchaObj.onReady(function () {
-          document.getElementById('wait').style.display = 'none'
-        })
-        captchaObj.onSuccess(() => {
-          let result = captchaObj.getValidate()
-          this.loginData['geetest_challenge'] = result.geetest_challenge
-          this.loginData['geetest_validate'] = result.geetest_validate
-          this.loginData['geetest_seccode'] = result.geetest_seccode
-        })
-        // 更多接口说明请参见：http://docs.geetest.com/install/client/web-front/
       }
     },
     created () {
@@ -184,22 +101,7 @@
     watch: {
       type: function () {
         if (this.type !== 1) return
-        axios.http('user_get_captcha').then(data => {
-          let that = this
-          if (data.status === 0) {
-            initGeetest({
-              // 以下 4 个配置参数为必须，不能缺少
-              gt: data.data.gt,
-              challenge: data.data.challenge,
-              offline: !data.data.success, // 表示用户后台检测极验服务器是否宕机
-              new_captcha: data.data.new_captcha, // 用于宕机时表示是新验证码的宕机
-              product: 'float', // 产品形式，包括：float，popup
-              width: '100%',
-              bg_color: '#262a35'
-              // 更多配置参数说明请参见：http://docs.geetest.com/install/client/web-front/
-            }, that.getCallBack)
-          }
-        })
+        this.initGeet()
       }
     },
     destroyed () {

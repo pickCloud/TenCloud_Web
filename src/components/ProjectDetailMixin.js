@@ -8,6 +8,7 @@ const STATUS = {
   '-4': ['部署失败', 'pink_bg alpha-black_txt']
 }
 const MODE_CN = ['普通项目', '基础服务', '应用组件']
+import {mapState, mapActions} from 'vuex'
 export default {
   data: () => ({
     base: {},
@@ -15,6 +16,7 @@ export default {
     containers: []
   }),
   methods: {
+    ...mapActions('mechineDetail', ['getServerOperation']),
     getApiData () {
       this.$Global.async('project_detail', true).getData(null, this.$route.params.id).then(d => {
         if (d.status === 0) {
@@ -28,6 +30,7 @@ export default {
           ])
         }
       })
+      this.getServerOperation({object_type: 2, object_id: this.$route.params.id})
     },
     getVerList () {
       this.$Global.async('project_vers', true).getData(null, this.base.name + '/versions').then(d => {
@@ -81,7 +84,8 @@ export default {
     },
     verLimit () {
       return this.vers.slice(0, 5)
-    }
+    },
+    ...mapState('mechineDetail', ['operations'])
   },
   created () {
     this.getApiData()

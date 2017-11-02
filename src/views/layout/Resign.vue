@@ -12,15 +12,15 @@
           <!--<div>{{tip.}}</div>-->
         <!--</div>-->
         <div class="resign-form_inp m-b16">
-          <input type="text" placeholder="输入手机号码" v-model="resignData.mobile">
+          <input type="text" placeholder="输入手机号码" v-model="loginData.mobile">
           <i class="iconfont icon-touxiang1"></i>
         </div>
         <div class="resign-form_inp m-b16" >
-            <input type="text" placeholder="验证码" v-model="resignData.auth_code">
+            <input type="text" placeholder="验证码" v-model="loginData.auth_code">
             <m-btn :sizeh="-1" @click.native="getVerifyCode" :disabled="btndis">{{btntip}}</m-btn>
         </div>
         <div class="resign-form_inp m-b16">
-          <input type="password" placeholder="密码最小长度为6位" v-model="resignData.password">
+          <input type="password" placeholder="密码最小长度为6位" v-model="loginData.password">
           <i class="iconfont icon-touxiang1"></i>
         </div>
         <div class="resign-form_inp m-b16">
@@ -43,27 +43,12 @@
 
 <script>
   import Navtop from './NavTop.vue'
-//  import Global from '../../global.js'
   import axios from '../../store/request/axios'
   import initGeetest from '../../gt'
+  import LoginModuleMixin from '../../components/LoginModuleMixin'
   export default {
+    mixins: [LoginModuleMixin],
     data: () => ({
-      TD: true,
-      tip: {
-        type: 'error',
-        info: ''
-      },
-      resignData: {
-        mobile: '',
-        auth_code: '',
-        geetest_challenge: '',
-        geetest_validate: '',
-        geetest_seccode: '',
-        password: ''
-      },
-      btntip: '获取验证码',
-      btndis: false,
-      sure_password: ''
     }),
     methods: {
       selectType (value) {
@@ -76,13 +61,13 @@
         if (this.checkMobile()) return false
         if (this.checkCode()) return false
         if (this.checkPassword()) return false
-        if (!(this.resignData.geetest_challenge && this.resignData.geetest_seccode && this.resignData.geetest_validate)) {
+        if (!(this.loginData.geetest_challenge && this.loginData.geetest_seccode && this.loginData.geetest_validate)) {
           this.tip.type = 'error'
           this.tip.info = '点击上方按钮进行验证'
           return false
         }
-        let resignData = this.resignData
-        axios.http('user_resign', resignData, 'post').then(d => {
+        let loginData = this.loginData
+        axios.http('user_resign', loginData, 'post').then(d => {
           if (window.nextUrl) {
             this.$router.replace({name: 'Main'})
             window.location.href = window.location.origin + window.nextUrl
@@ -94,87 +79,6 @@
           this.tip.type = 'error'
           this.tip.info = e.response.data.message
         })
-//        Global.resign(resignData, (d) => {
-//          if (window.nextUrl) {
-//            this.$router.replace({name: 'Main'})
-//            window.location.href = window.location.origin + window.nextUrl
-//            delete window.nextUrl
-//          } else {
-//            this.$router.replace({name: 'Main'})
-//          }
-//        }, e => {
-//          this.tip.type = 'error'
-//          this.tip.info = e.response.data.message
-//        })
-      },
-      checkMobile () {
-        let temp = this.resignData.mobile === '' || !(/^1[34578]\d{9}$/.test(this.resignData.mobile))
-        if (temp) {
-          this.tip.type = 'error'
-          this.tip.info = '手机格式有误'
-        }
-        return temp
-      },
-      checkCode () {
-        let temp = this.resignData.auth_code === ''
-        if (temp) {
-          this.tip.type = 'error'
-          this.tip.info = '验证码不能为空'
-        }
-        return temp
-      },
-      checkPassword () {
-        let temp = this.resignData.password === ''
-        if (temp) {
-          this.tip.type = 'error'
-          this.tip.info = '请输入密码'
-          temp = true
-        } else if (this.resignData.password.length < 6) {
-          this.tip.type = 'error'
-          this.tip.info = '密码最小长度为6位'
-          temp = true
-        } else if (this.resignData.password !== this.sure_password) {
-          this.tip.type = 'error'
-          this.tip.info = '两次输入密码不一致'
-          temp = true
-        }
-        return temp
-      },
-      getVerifyCode () {
-        if (this.checkMobile()) return false
-        this.waittip()
-        this.btndis = true
-        this.$Global.async('user_verify', true).getData({}, this.resignData.mobile).then(d => {
-          //
-        }, e => {
-          this.overwati()
-        })
-      },
-      waittip () {
-        let alltime = 60
-        this.btntip = '重新获取(' + alltime + 's)'
-        this.sit = setInterval(_ => {
-          this.btntip = '重新获取(' + (alltime--) + 's)'
-          if (alltime === -1) this.overwati()
-        }, 1000)
-      },
-      overwati () {
-        this.btntip = '重新获取'
-        this.btndis = false
-        clearInterval(this.sit)
-      },
-      getCallBack (captchaObj) {
-        captchaObj.appendTo('#captcha')
-        captchaObj.onReady(function () {
-          document.getElementById('wait').style.display = 'none'
-        })
-        captchaObj.onSuccess(() => {
-          let result = captchaObj.getValidate()
-          this.resignData.geetest_challenge = result['geetest_challenge']
-          this.resignData.geetest_validate = result['geetest_validate']
-          this.resignData.geetest_seccode = result['geetest_seccode']
-        })
-        // 更多接口说明请参见：http://docs.geetest.com/install/client/web-front/
       }
     },
     created () {

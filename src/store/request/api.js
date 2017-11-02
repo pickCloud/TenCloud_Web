@@ -19,7 +19,7 @@ const APIS = {
   server_start: {u: '/api/server/start/', m: 'get'},
   server_reboot: {u: '/api/server/reboot/', m: 'get'},
   server_stop: {u: '/api/server/stop/', m: 'get'},
-  server_operation: {u: '/api/server/', m: 'get'},
+  server_operation: {u: '/api/log/operation', m: 'post'},
   app_performance: {u: '/api/server/container/performance', m: 'post'},
   server_status: {u: '/api/server/', m: 'get'}, // {region_id}/{instance_id}/status
   container_start: {u: '/api/server/container/start', m: 'post'},
@@ -50,6 +50,7 @@ const APIS = {
   user_thumb_token: {u: '/api/user/token', m: 'get'},
   user_get_captcha: {u: '/api/user/captcha', m: 'get'},
   user_resign: {u: '/api/user/register', m: 'post'},
+  user_resetPassword: {u: '/api/user/password/reset', m: 'post'},
   file_list: {u: '/api/file/list', m: 'post'},
   file_pages: {u: '/api/file/', m: 'get'},
   file_create_dir: {u: '/api/file/dir/create', m: 'post'},
