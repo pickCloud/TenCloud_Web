@@ -201,10 +201,7 @@
     box-sizing: border-box;
     border-bottom: #48bbc0 1px solid;
   }
-  .flex-space-between{
-    display: flex;
-    justify-content: space-between;
-  }
+
   @media not (max-width: 414px) {
     .login-box {
       width: 300px;

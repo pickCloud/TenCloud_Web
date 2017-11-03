@@ -196,10 +196,6 @@
     box-sizing: border-box;
     border-bottom: #48bbc0 1px solid;
   }
-  .flex-flex-end{
-    display: flex;
-    justify-content: flex-end;
-  }
   @media not (max-width: 414px) {
     .resign-box {
       width: 300px;

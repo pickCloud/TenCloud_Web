@@ -1,33 +1,59 @@
 <template>
   <div class='page-pad page-userinfo'>
-    <panel class='m-b16'>
-      <div class="panel-title" slot="title">
+    <div class="col xs-12 lg-6 userinfo-padding">
+    <panel class=''>
+      <div class="panel-title" slot="title" >
         账号安全
-        <m-btn class="right primary_bg grey-dark_txt m-t04" v-if="!isEditor" @click.native="editorHandle(0)">修改</m-btn>
-        <m-btn class="right primary_bg grey-dark_txt m-t04" v-if="isEditor" @click.native="cancelHandle(0)">取消</m-btn>
-        <m-btn class="right primary_bg grey-dark_txt m-t04 m-r8" v-if="isEditor" @click.native="sureHandle(0)">保存</m-btn>
+        <!--<m-btn class="right primary_bg grey-dark_txt m-t04" v-if="!isEditor" @click.native="editorHandle(0)">修改</m-btn>-->
+        <!--<m-btn class="right primary_bg grey-dark_txt m-t04" v-if="isEditor" @click.native="cancelHandle(0)">取消</m-btn>-->
+        <!--<m-btn class="right primary_bg grey-dark_txt m-t04 m-r8" v-if="isEditor" @click.native="sureHandle(0)">保存</m-btn>-->
       </div>
-      <div class="p-16">
+      <div class="p-16" style="height: 322px;">
         <!--<div class="lay-left-right">-->
           <!--<div class="lay-left">账号</div>-->
-          <!--<div clasFs="lay-right lay-border-bottom">-->
+          <!--<div clasFs="lay-right ">-->
             <!--<input type="text" class="inp-editor" :class="{'editor':isEditor}" v-model="infos.name">-->
           <!--</div>-->
         <!--</div>-->
         <div class="lay-left-right">
-          <div class="lay-left">手机号码</div>
-          <div class="lay-right lay-border-bottom">
-            {{infos.mobile}}
+            <div class="lay-left lay-width-min">手机号码：</div>
+          <div class="lay-right flex-space-between">
+            <div class="lay-left">
+              {{infos.mobile}}
+            </div>
+            <m-btn class="btn grey-dark_txt primary_bg">修改</m-btn>
           </div>
         </div>
         <div class="lay-left-right">
-          <div class="lay-left">邮箱</div>
-          <div class="lay-right lay-border-bottom">
-            <input type="email" class="inp-editor" :disabled="!isEditor" :class="{'editor':isEditor}" v-model="infos.email">
+          <div class="lay-left lay-width-min">注册时间：</div>
+          <div class="lay-right">
+            <div class="lay-left">
+              2017.11.3
+            </div>
+          </div>
+        </div>
+        <div class="lay-left-right">
+          <div class="lay-left lay-width-min">账号安全：</div>
+          <div class="lay-right">
+            <div class="flex-space-between">
+              <div class="flex-space-between">
+             <div class="userInfo-safeLine">
+              <span class="progress-bar progress-bar-high"></span>
+            </div>
+            <div class="userInfo-safe-tip">
+              <span>安全级别:</span><span>低</span>
+            </div>
+              </div>
+              <m-btn class="grey-dark_txt primary_bg btn-border-radius">
+                修改
+              </m-btn>
+            </div>
           </div>
         </div>
       </div>
     </panel>
+    </div>
+    <div class="col xs-12 lg-6 userinfo-padding">
     <panel>
       <div class="panel-title" slot="title">
         基本信息
@@ -53,14 +79,26 @@
         </m-col>
         <m-col class="xs-12 md-9">
           <div class="lay-left-right">
-            <div class="lay-left">姓名</div>
-            <div class="lay-right lay-border-bottom">
+            <div class="lay-left lay-width-min">姓名：</div>
+            <div class="lay-right ">
               <input type="text" class="inp-editor" :disabled="!isEditor2" :class="{'editor':isEditor2}" v-model="infos.name">
             </div>
           </div>
           <div class="lay-left-right">
-            <div class="lay-left">性别</div>
-            <div class="lay-right lay-border-bottom">
+            <div class="lay-left lay-width-min">是否实名：</div>
+            <div class="lay-right ">
+              是
+            </div>
+          </div>
+          <div class="lay-left-right">
+            <div class="lay-left lay-width-min">邮箱：</div>
+            <div class="lay-right ">
+              <input type="email" class="inp-editor" :disabled="!isEditor2" :class="{'editor':isEditor2}" v-model="infos.email">
+            </div>
+          </div>
+          <div class="lay-left-right">
+            <div class="lay-left lay-width-min">性别：</div>
+            <div class="lay-right ">
               <span v-if="!isEditor2">{{sex}}</span>
               <span v-else>
                 <m-radio v-model="xingbie" class="m-r8" :data="{label:'男', value:'1'}"></m-radio>
@@ -68,9 +106,10 @@
               </span>
             </div>
           </div>
+
           <div class="lay-left-right">
-            <div class="lay-left">生日</div>
-            <div class="lay-right lay-border-bottom">
+            <div class="lay-left lay-width-min">生日</div>
+            <div class="lay-right ">
               <span v-if="!isEditor2">{{date.time}}</span>
               <span v-else>
                 <datepicker :date="date" :option="dateop"></datepicker>
@@ -80,6 +119,47 @@
         </m-col>
       </m-row>
     </panel>
+    </div>
+    <div class="col xs-12">
+      <div class="lay-left-right userinfo-padding">
+        <div style="display: flex;justify-content: flex-end">
+        <m-btn class="btn primary_bg grey-dark_txt" style="margin-right: 10px">申请加入已有企业</m-btn>
+        <m-btn class="btn primary_bg grey-dark_txt">添加企业</m-btn>
+        </div>
+      </div>
+    </div>
+    <div class="col xs-12 userinfo-padding">
+      <div class="company-item panel-onlyBg flex-space-between">
+        <div class="" style="flex-grow:4;">
+         <div class="flex-space-around" style="padding-left: 10px">
+          <div class="flex-flex-grow-1">
+            <div class="userinfo-item-up">企业名字</div>
+            <span class="userinfo-item-down">十全十美网络有限公司</span>
+          </div>
+           <div class="flex-flex-grow-1">
+             <div class="userinfo-item-up">申请时间</div>
+             <div class="userinfo-item-down">2017.09.31</div>
+           </div>
+           <div class="flex-flex-grow-1">
+             <div class="userinfo-item-up">审核时间</div>
+             <span class="userinfo-item-down">2017.10.10</span>
+           </div>
+           <div class="flex-flex-grow-1">
+             <div class="userinfo-item-up">状态</div>
+             <span class="userinfo-item-down">审核部通过</span>
+           </div>
+          </div>
+        </div>
+          <div class="flex-flex-end" style="flex-grow:1;padding-right: 10px">
+            <m-btn class="no-radius btn-github">解除绑定</m-btn>
+            <m-btn class="primary_bg grey-dark_txt">进入企业</m-btn>
+          </div>
+      </div>
+    </div>
+    <div class="popx-new">
+      <div class="shadow"></div>
+      <div class=""></div>
+    </div>
   </div>
 </template>
 
@@ -87,8 +167,11 @@
   import moment from 'moment'
   import * as Qiniu from '../Qiniu'
   import DatePickerMixin from './DatePickerMixins'
-
+  import Panel from './piece/panel/Main.vue'
+  import axios from '../store/request/axios'
+  import changePassword from '../components/popx/changePassword.vue'
   export default {
+    components: {Panel, changePassword},
     data: () => ({
       infos: {
         'id': 1,
@@ -108,11 +191,10 @@
     mixins: [DatePickerMixin],
     methods: {
       getApiData () {
-        this.$Global.async('user_info', true).getData(null).then(d => {
+        axios.http('user_info', true).then(d => {
           this.$root.userinfo = this.infos = d.data
           if (this.infos.birthday !== undefined) this.date.time = moment.unix(this.infos.birthday).format('YYYY-MM-DD')
           if (this.infos.gender !== undefined) this.xingbie = this.infos.gender + ''
-//          console.log(moment('2017-8-17', 'YYYY-M-D').unix())
         })
       },
       cancelHandle (p) {
@@ -211,6 +293,8 @@
         })
         this.thumbFile = e.target.files[0]
         this.getThumbToken()
+      },
+      resetmobile () {
       }
     },
     mounted () {
@@ -248,5 +332,47 @@
       max-width: 100%;
       max-height:100%;
     }
+  }
+  .userinfo-padding{
+    padding:8px 8px;
+  }
+  .userInfo-safeLine{
+    border-radius: 5px;
+    margin: 0 5px 0 0;
+    width: 105px;
+    height: 20px;
+    background-color: #171a21;
+    overflow: hidden;
+    .progress-bar{
+      float: left;
+      width: 0%;
+      height: 20px;
+      background-color: #f04134;
+      transition: width 0.6s ease;
+    }
+    .progress-bar-low{
+     width: 33%;
+     background-color: #f04134;
+    }
+    .progress-bar-mid{
+        width: 66%;
+        background-color: #F7B824;
+      }
+    .progress-bar-high{
+      width: 100%;
+      background-color: green;
+    }
+    }
+    .company-item{
+      width:100%;
+      height: 96px;
+    }
+  .userinfo-item-down{
+    color: #899ab6;
+    font-size: 18px;
+  }
+  .userinfo-item-up{
+    color: #556278;
+    font-size: 14px;
   }
 </style>
