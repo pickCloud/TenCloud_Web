@@ -12,11 +12,15 @@ export default {
       geetest_challenge: '',
       geetest_validate: '',
       geetest_seccode: '',
-      password: ''
+      password: '',
+      new_password: '',
+      old_password: ''
     },
     btntip: '获取验证码',
     btndis: false,
-    sure_password: ''
+    sure_password: '',
+    sms_count: 0,
+    isRegisn: true
   }),
   methods: {
     lostPassword () {
@@ -45,10 +49,27 @@ export default {
       if (this.checkMobile()) return false
       this.waittip()
       this.btndis = true
-      this.$Global.async('user_verify', true).getData({}, this.loginData.mobile).then(d => {
+      this.requestCode()
+    },
+    requestCode () {
+      axios.http('user_verify', this.loginData).then(d => {
         //
+
       }, e => {
         this.overwati()
+        if (e.status === 10404) {
+          this.isRegisn = false
+          return false
+        } else if (e.status === 10405) {
+          this.sms_count = e.data.sms_count || 0
+          if (this.sms_count > 3) {
+            this.initGeet()
+          }
+        } else if (e.status === 10406) {
+
+        }
+        this.tip.type = 'error'
+        this.tip.info = e.message
       })
     },
     waittip () {
@@ -81,9 +102,28 @@ export default {
       }
       return temp
     },
+    checkOldNewPassword () {
+      let temp = this.loginData.old_password === ''
+      if (temp) {
+        this.tip.type = 'error'
+        this.tip.info = '请输入原始密码'
+        temp = true
+      } else if (this.loginData.new_password.length < 6) {
+        this.tip.type = 'error'
+        this.tip.info = '密码最小长度为6位'
+        temp = true
+      } else if (this.loginData.new_password !== this.sure_password) {
+        this.tip.type = 'error'
+        this.tip.info = '两次输入密码不一致'
+        temp = true
+      }
+      return temp
+    },
     getCallBack (captchaObj) {
+      if (!document.getElementById('captcha')) {
+        return false
+      }
       captchaObj.appendTo('#captcha')
-
       captchaObj.onReady(function () {
         document.getElementById('wait').style.display = 'none'
       })
@@ -92,6 +132,7 @@ export default {
         this.loginData['geetest_challenge'] = result.geetest_challenge
         this.loginData['geetest_validate'] = result.geetest_validate
         this.loginData['geetest_seccode'] = result.geetest_seccode
+        this.requestCode()
       })
       // 更多接口说明请参见：http://docs.geetest.com/install/client/web-front/
     },

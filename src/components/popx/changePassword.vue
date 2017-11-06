@@ -1,8 +1,9 @@
 <template>
   <div class="lostPassword-box">
     <div class="lostPassword-form">
-      <div class="lostPassword-nav flex-space-between border-bottom-1px">
-        <span>找回密码</span>
+      <div class="lostPassword-nav flex-space-between border-bottom-1px" style="align-items: center">
+        <span>修改密码</span>
+        <div class="close" @click="closePop"></div>
       </div>
       <div class="lostPassword-status flex-space-between">
         <div class="number-content" :class="type==0?'active':''"><div class="num">1</div><div class="num-tip">验证手机</div></div>
@@ -25,28 +26,32 @@
           </div>
 
           <div >
+            <div id="captcha" class="m-b16" v-if="sms_count>3">
+              <div id="wait">载入中……</div>
+            </div>
             <div class="login-form_inp m-b16" >
               <input type="text" placeholder="请输入验证码" v-model="loginData.auth_code">
               <m-btn :sizeh="-1" @click.native="getVerifyCode" :disabled="btndis">{{btntip}}</m-btn>
-            </div>
-            <div id="captcha" class="m-b16">
-              <div id="wait">载入中……</div>
             </div>
           </div>
         </div>
         <div v-else-if="type==1">
           <div class="login-form_inp m-b16" >
-            <input type="password" placeholder="密码最小长度为6位" v-model="loginData.password" >
+            <input type="password" placeholder="请输入原始密码" v-model="loginData.old_password" >
+            <i class="iconfont icon-touxiang1"></i>
+          </div>
+          <div class="login-form_inp m-b16" >
+            <input type="password" placeholder="请输入修改密码，密码最小长度为6位" v-model="loginData.new_password" >
             <i class="iconfont icon-touxiang1"></i>
           </div>
           <div class="login-form_inp m-b16">
-            <input type="password" placeholder="再次输入密码" v-model="sure_password">
+            <input type="password" placeholder="确认密码" v-model="sure_password">
             <i class="iconfont icon-touxiang1"></i>
           </div>
         </div>
         <div v-else class="lostPassword-success-tip">
-          <h3>恭喜您！密码已成功找回</h3>
-          <m-btn><span>返回</span><m-btn class="primary_txt" @click.native="backLogin">登录</m-btn></m-btn>
+          <h3>恭喜您！密码已修改成功</h3>
+          <!--<div><span>返回</span><m-btn class="primary_txt" @click.native="backLogin">登录</m-btn></div>-->
         </div>
         <m-btn v-if="type!==2" class="login-form_sure m-b16" :sizeh="50" @click.native="nextStep">下一步</m-btn>
       </div>
@@ -57,34 +62,48 @@
 <script>
   import axios from '../../store/request/axios'
   import LoginModuleMixin from '../../components/LoginModuleMixin'
+  import {mapMutations} from 'vuex'
   export default {
     mixins: [LoginModuleMixin],
     data: () => ({
       type: 0
     }),
     methods: {
+      ...mapMutations('userInfo', ['setPopState']),
       nextStep () {
         if (this.type === 0) {
           this.type++
         } else if (this.type === 1) {
-          if (this.checkPassword()) return false
+          if (this.checkOldNewPassword()) return false
           axios.http('user_resetPassword', this.loginData).then(d => {
             if (d.status === 0) {
               this.type++
+              this.$toast('修改成功', 'cc')
             }
           }).catch(e => {
+            this.$toast(e.message, 'cc')
             this.type--
           })
-        } else if (this.type === 2) {
-
         }
       },
       backLogin () {
         this.$router.push({name: 'Login'})
+      },
+      closePop () {
+        console.log('关闭')
+        this.setPopState({name: 'pop_changePassword', value: false})
       }
+    },
+    computed: {
     },
     created () {
       this.initGeet()
+    },
+    watch: {
+      type: function () {
+        if (this.type !== 1) return
+        this.initGeet()
+      }
     }
   }
 </script>
@@ -157,7 +176,6 @@
       &:before {
         position: absolute;
         content: ' ';
-        top:21px;
         height: 2px;
         width: 180px;
         background-color:#2b2f3a ;
@@ -180,4 +198,17 @@
     line-height: 50px;
     padding: 50px 0;
   }
+  .lostPassword-box{
+    .close {
+      /*top: 14px;*/
+      /*right: 16px;*/
+      cursor: pointer;
+      transition: all 0.5s;
+      position: relative;
+      &:hover {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
 </style>

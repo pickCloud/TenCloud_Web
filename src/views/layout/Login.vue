@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="page-login">
-    <navtop></navtop>
+    <!--<navtop></navtop>-->
     <div class="login-box">
       <div class="login-form m-b32">
         <!--<div class="login-form_title m-b32">登录</div>-->
@@ -16,19 +16,19 @@
         <!--</div>-->
         <div class="login-form_inp m-b16">
           <input type="text" placeholder="请输入电话号码" v-model="loginData.mobile">
-          <i class="iconfont icon-touxiang1"></i>
+          <i class="iconfont icon-shouji"></i>
         </div>
         <div class="login-form_inp m-b16" v-if="type==0">
           <input type="password" placeholder="请输入密码" v-model="loginData.password" >
-          <i class="iconfont icon-touxiang1"></i>
+          <i class="iconfont icon-mima"></i>
         </div>
         <div v-else>
+          <div id="captcha" class="m-b16" v-if="sms_count>3">
+            <div id="wait">载入中……</div>
+          </div>
           <div class="login-form_inp m-b16" >
             <input type="text" placeholder="请输入验证码" v-model="loginData.auth_code">
             <m-btn :sizeh="-1" @click.native="getVerifyCode" :disabled="btndis">{{btntip}}</m-btn>
-          </div>
-          <div id="captcha" class="m-b16">
-            <div id="wait">载入中……</div>
           </div>
         </div>
         <m-btn class="login-form_sure m-b16" :sizeh="50" @click.native="login">登录</m-btn>
@@ -45,18 +45,19 @@
 </template>
 
 <script>
-  import Navtop from './NavTop.vue'
+//  import Navtop from './NavTop.vue'
   import axios from '../../store/request/axios'
   import LoginmoduleMixin from '../../components/LoginModuleMixin.js'
   export default {
     mixins: [LoginmoduleMixin],
     data: () => ({
-      TD: true,
+//      TD: true,
       type: 0
     }),
     methods: {
       selectType (value) {
         this.type = value
+        this.sms_count = 0
       },
       login () {
         let loginData = this.loginData
@@ -78,7 +79,7 @@
             }
           }).catch(e => {
             this.tip.type = 'error'
-            this.tip.info = e.response.data.message
+            this.tip.info = e.message
           })
         } else {
           axios.http('user_login_password', loginData, 'post').then(d => {
@@ -91,37 +92,31 @@
             }
           }).catch(e => {
             this.tip.type = 'error'
-            this.tip.info = e.response.data.message
+            this.tip.info = e.message
           })
         }
       }
     },
     created () {
     },
-    watch: {
-      type: function () {
-        if (this.type !== 1) return
-        this.initGeet()
-      }
-    },
+//    watch: {
+//      type: function () {
+//        if (this.type !== 1 && this.sms_count > 0) return
+//        this.initGeet()
+//      }
+//    },
     destroyed () {
       clearInterval(this.sit)
-    },
-    components: {Navtop}
+    }
+//    components: {Navtop}
   }
 </script>
 
 <style lang="scss">
-  .page-login {
-    position: fixed;
-    left: 0;top: 0;
-    width: 100%;height: 100%;
-    background: url("../../../static/img/login_bg.jpg") no-repeat;
-    background-size: cover;
-  }
+
   .login-box {
     position: absolute;
-    width: 437px;
+    width: 430px;
     /*height:677px;*/
     left: 50%;top: 50%;
     -webkit-transform: translate(-50%,-50%);
@@ -135,43 +130,8 @@
     font-size: 1rem;
     font-weight: bold;
   }
-  .login-form_inp {
-    position: relative;
-    input {
-      background-color: transparent;
-      border:1px solid #464e5c;
-      color: #6a778d;
-      display: block;
-      height: 50px;
-      width: 100%;
-      line-height: 50px;
-      padding: 0 16px;
-    }
-    .btn {
-      position: absolute;
-      right: 16px;
-      top: 10px;
-      background-color: #262a35;
-      padding: 4px 8px;
-    }
-    .iconfont {
-      font-size: 1rem;
-      position: absolute;
-      right: 16px;
-      top: 14px;
-    }
-  }
-  .login-form_sure {
-    display: block;
-    width: 100%;
-    background-color: #48bbc0;
-    text-align: center;
-    color: #05484b;
-    font-weight: bold;
-    &:hover {
-      color: #fff!important;
-    }
-  }
+
+
   .login-tip {
     padding: 0 16px;
     height: 50px;

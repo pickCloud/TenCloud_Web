@@ -52,7 +52,7 @@ const APIS = {
   project_deployment: {u: '/api/project/deployment', m: 'post'},
   user_update: {u: '/api/user/update', m: 'post'},
   user_login: {u: '/api/user/login', m: 'post'},
-  user_verify: {u: '/api/user/sms/', m: 'post'},
+  user_verify: {u: '/api/user/sms', m: 'post'},
   user_logout: {u: '/api/user/logout', m: 'post'},
   user_info: {u: '/api/user', m: 'get'},
   user_thumb_token: {u: '/api/user/token', m: 'get'},

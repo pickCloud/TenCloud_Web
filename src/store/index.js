@@ -11,6 +11,7 @@ import machines from './modules/machines'
 import projectAdd from './modules/projectAdd'
 import mechineDetail from './modules/mechineDetail'
 import github from './modules/github'
+import userInfo from './modules/userInfo'
 Vue.use(Vuex)
 const debug = process.env.NODE_ENV !== 'production'
 
@@ -25,7 +26,8 @@ export default new Vuex.Store({
     machines,
     projectAdd,
     mechineDetail,
-    github
+    github,
+    userInfo
   },
   strict: debug,
   plugins: debug ? [createLogger()] : []

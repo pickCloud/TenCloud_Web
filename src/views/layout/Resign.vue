@@ -13,7 +13,10 @@
         <!--</div>-->
         <div class="resign-form_inp m-b16">
           <input type="text" placeholder="输入手机号码" v-model="loginData.mobile">
-          <i class="iconfont icon-touxiang1"></i>
+          <i class="iconfont icon-shouji"></i>
+        </div>
+        <div id="captcha" class="m-b16" v-if="sms_count>3">
+          <div id="wait">载入中……</div>
         </div>
         <div class="resign-form_inp m-b16" >
             <input type="text" placeholder="验证码" v-model="loginData.auth_code">
@@ -21,15 +24,13 @@
         </div>
         <div class="resign-form_inp m-b16">
           <input type="password" placeholder="密码最小长度为6位" v-model="loginData.password">
-          <i class="iconfont icon-touxiang1"></i>
+          <i class="iconfont icon-mima"></i>
         </div>
         <div class="resign-form_inp m-b16">
           <input type="password" placeholder="确认密码" v-model="sure_password">
-          <i class="iconfont icon-touxiang1"></i>
+          <i class="iconfont icon-zaicimima"></i>
         </div>
-        <div id="captcha" class="m-b16">
-          <div id="wait">载入中……</div>
-        </div>
+
         <m-btn class="resign-form_sure m-b16" :sizeh="50" @click.native="resign">注册</m-btn>
         <div class="flex-flex-end">
           <span class="">已有账号，<m-btn  class="primary_txt" @click.native="login">马上登录</m-btn></span>
@@ -49,6 +50,7 @@
   export default {
     mixins: [LoginModuleMixin],
     data: () => ({
+      TD: true
     }),
     methods: {
       selectType (value) {
@@ -116,7 +118,7 @@
   }
   .resign-box {
     position: absolute;
-    width: 437px;
+    width: 430px;
     /*height:677px;*/
     left: 50%;top: 50%;
     -webkit-transform: translate(-50%,-50%);

@@ -21,7 +21,7 @@ const options = {
         if (error.response.status === 403) {
           router.replace({name: 'Login'})
         }
-        reject(error)
+        reject(error.response.data)
       })
         // case 'post':
         //   return axios.post(this.URL, params).then(response => {

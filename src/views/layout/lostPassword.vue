@@ -1,8 +1,11 @@
 <template>
+  <div class="">
+    <navtop></navtop>
   <div class="lostPassword-box">
     <div class="lostPassword-form">
-      <div class="lostPassword-nav flex-space-between border-bottom-1px">
+      <div class="lostPassword-nav flex-space-between border-bottom-1px" style="align-items: center;">
         <span>找回密码</span>
+        <m-btn class="btn primary_txt" @click.native="backLogin">返回登陆</m-btn>
       </div>
       <div class="lostPassword-status flex-space-between">
         <div class="number-content" :class="type==0?'active':''"><div class="num">1</div><div class="num-tip">验证手机</div></div>
@@ -21,7 +24,7 @@
         <div v-if="type==0">
         <div class="login-form_inp m-b16">
           <input type="text" placeholder="请输入电话号码" v-model="loginData.mobile">
-          <i class="iconfont icon-touxiang1"></i>
+          <i class="iconfont icon-shouji"></i>
         </div>
 
         <div >
@@ -29,7 +32,7 @@
             <input type="text" placeholder="请输入验证码" v-model="loginData.auth_code">
             <m-btn :sizeh="-1" @click.native="getVerifyCode" :disabled="btndis">{{btntip}}</m-btn>
           </div>
-          <div id="captcha" class="m-b16">
+          <div id="captcha" class="m-b16" v-if="sms_count>3">
             <div id="wait">载入中……</div>
           </div>
         </div>
@@ -37,11 +40,11 @@
         <div v-else-if="type==1">
         <div class="login-form_inp m-b16" >
           <input type="password" placeholder="密码最小长度为6位" v-model="loginData.password" >
-          <i class="iconfont icon-touxiang1"></i>
+          <i class="iconfont icon-mima"></i>
         </div>
         <div class="login-form_inp m-b16">
           <input type="password" placeholder="再次输入密码" v-model="sure_password">
-          <i class="iconfont icon-touxiang1"></i>
+          <i class="iconfont icon-zaicimima"></i>
         </div>
         </div>
         <div v-else class="lostPassword-success-tip">
@@ -52,16 +55,20 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
   import axios from '../../store/request/axios'
   import LoginModuleMixin from '../../components/LoginModuleMixin'
+  import navtop from './navtop'
   export default {
     mixins: [LoginModuleMixin],
     data: () => ({
+      TD: true,
       type: 0
     }),
+    components: {navtop},
     methods: {
       nextStep () {
         if (this.type === 0) {
@@ -71,6 +78,7 @@
           axios.http('user_resetPassword', this.loginData).then(d => {
             if (d.status === 0) {
               this.type++
+              this.$toast('修改密码成功', 'cc')
             }
           }).catch(e => {
             this.type--
@@ -84,7 +92,7 @@
       }
     },
     created () {
-      this.initGeet()
+//      this.initGeet()
     }
   }
 </script>
@@ -157,7 +165,6 @@
       &:before {
         position: absolute;
         content: ' ';
-        top:21px;
         height: 2px;
         width: 180px;
         background-color:#2b2f3a ;

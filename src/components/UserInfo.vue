@@ -44,7 +44,7 @@
               <span>安全级别:</span><span>低</span>
             </div>
               </div>
-              <m-btn class="grey-dark_txt primary_bg btn-border-radius">
+              <m-btn class="grey-dark_txt primary_bg btn-border-radius" @click.native="changePassword">
                 修改
               </m-btn>
             </div>
@@ -62,8 +62,8 @@
         <m-btn class="right primary_bg grey-dark_txt m-t04 m-r8" v-if="isEditor2" @click.native="sureHandle(1)">保存</m-btn>
       </div>
       <m-row class="p-16" :gutter="16">
-        <m-col class="xs-12 md-3 text-center m-b16">
-          <div class="info-head m-b16" style="line-height: 139px">
+        <m-col class="xs-12 md-4 text-center m-b16">
+          <div class="info-head m-b16" style="line-height: 139px;width: 139px;height: 139px">
             <img :src="infos.image_url" alt="" v-if="infos.image_url">
             <i v-else="" class="iconfont icon-touxiang1 iconHead" style="font-size: 139px;"></i>
           </div>
@@ -77,7 +77,7 @@
           </div>
           <p><i class="icon icon-xinxi-yin m-r8"></i>仅支持JPG、PNG格式，文件小于1M（方形图）</p>
         </m-col>
-        <m-col class="xs-12 md-9">
+        <m-col class="xs-12 md-8">
           <div class="lay-left-right">
             <div class="lay-left lay-width-min">姓名：</div>
             <div class="lay-right ">
@@ -156,9 +156,9 @@
           </div>
       </div>
     </div>
-    <div class="popx-new">
+    <div class="pop-window" v-if="pop_changePassword">
       <div class="shadow"></div>
-      <div class=""></div>
+      <changePassword class=""></changePassword>
     </div>
   </div>
 </template>
@@ -170,6 +170,7 @@
   import Panel from './piece/panel/Main.vue'
   import axios from '../store/request/axios'
   import changePassword from '../components/popx/changePassword.vue'
+  import {mapState, mapMutations} from 'vuex'
   export default {
     components: {Panel, changePassword},
     data: () => ({
@@ -190,6 +191,10 @@
     }),
     mixins: [DatePickerMixin],
     methods: {
+      ...mapMutations('userInfo', ['setPopState']),
+      changePassword () {
+        this.setPopState({name: 'pop_changePassword', value: true})
+      },
       getApiData () {
         axios.http('user_info', true).then(d => {
           this.$root.userinfo = this.infos = d.data
@@ -261,12 +266,13 @@
           }
         })
       },
-      headHeigth () {
-        const headel = this.$el.querySelector('.info-head')
-        headel.style.height = headel.clientWidth + 'px'
-        let fontIcon = this.$el.querySelector('.iconHead')
-        fontIcon.style.fontSize = headel.clientWidth + 'px'
-      },
+//      headHeigth () {
+//        const headel = this.$el.querySelector('.info-head')
+//        headel.style.height = headel.clientWidth + 'px'
+//        if (!this.$el.querySelector('.iconHead')) return false
+//        let fontIcon = this.$el.querySelector('.iconHead')
+//        fontIcon.style.fontSize = headel.clientWidth + 'px'
+//      },
       getThumbToken () {
         this.$Global.async('user_thumb_token', true).getData(null).then(d => {
           Qiniu.upload(this.thumbFile, d.data.token).then(d => {
@@ -298,9 +304,10 @@
       }
     },
     mounted () {
-      this.headHeigth()
+//      this.headHeigth()
     },
     computed: {
+      ...mapState('userInfo', ['pop_changePassword']),
       sex () {
         return this.infos.gender === undefined ? '' : parseInt(this.infos.gender) === 1 ? '男' : '女'
       }
@@ -308,20 +315,20 @@
     created () {
       this.getApiData()
       this.resizeFunc = () => {
-        this.headHeigth()
+//        this.headHeigth()
 //        console.log(22)
       }
-      window.addEventListener('resize', this.resizeFunc)
+//      window.addEventListener('resize', this.resizeFunc)
     },
     destroyed () {
-      window.removeEventListener('resize', this.resizeFunc)
+//      window.removeEventListener('resize', this.resizeFunc)
     }
   }
 </script>
 
 <style lang="scss">
   .info-head {
-    width: 50%;
+    width: 139px;
     margin: 0 auto;
     border-radius: 50%;
     background-color: #1d212a;
