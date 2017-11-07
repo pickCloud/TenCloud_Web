@@ -160,4 +160,34 @@
     background: url("../static/img/login_bg.jpg") center;
     background-size: cover;
   }
+  .common-ground_box{
+    position: relative;
+    color: black;
+    line-height:40px;
+    display:flex;
+    color: #478388;
+    &:before{
+      position: absolute;
+      left: 0px;
+      top: 13px;
+      content: ' ';
+      background-color: #478388;
+      border-radius: 50%;
+      color: black;
+      width: 14px;
+      height: 14px;
+    }
+    &.nobefore:before{
+      opacity: 0;
+    }
+    .num{
+      position: relative;
+      width: 14px;
+      text-align: center;
+      color: black;
+    }
+    .num-tip{
+      margin-left: 5px;
+    }
+  }
 </style>

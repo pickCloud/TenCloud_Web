@@ -51,6 +51,7 @@ const APIS = {
   user_get_captcha: {u: '/api/user/captcha', m: 'get'},
   user_resign: {u: '/api/user/register', m: 'post'},
   user_resetPassword: {u: '/api/user/password/reset', m: 'post'},
+  user_setPassword: {u: '/api/user/password/set', m: 'post'},
   user_resetPhone: {u: '/api/user/mobile/reset', m: 'post'},
   file_list: {u: '/api/file/list', m: 'post'},
   file_pages: {u: '/api/file/', m: 'get'},
@@ -59,7 +60,6 @@ const APIS = {
   file_update: {u: '/api/file/update', m: 'post'},
   file_download: {u: '/api/file/download', m: 'post'},
   file_del: {u: '/api/file/delete', m: 'post'},
-
   islocal: islocal
 }
 export default APIS

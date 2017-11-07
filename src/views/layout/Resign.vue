@@ -63,7 +63,7 @@
         if (this.checkMobile()) return false
         if (this.checkCode()) return false
         if (this.checkPassword()) return false
-        if (!(this.loginData.geetest_challenge && this.loginData.geetest_seccode && this.loginData.geetest_validate)) {
+        if (this.sms_count > 3 && !(this.loginData.geetest_challenge && this.loginData.geetest_seccode && this.loginData.geetest_validate)) {
           this.tip.type = 'error'
           this.tip.info = '点击上方按钮进行验证'
           return false

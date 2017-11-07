@@ -337,7 +337,7 @@
     align-items: center;
     img {
       max-width: 100%;
-      max-height:100%;
+      /*max-height:100%;*/
     }
   }
   .userinfo-padding{
