@@ -166,6 +166,7 @@
     line-height:40px;
     display:flex;
     color: #478388;
+    overflow: hidden;
     &:before{
       position: absolute;
       left: 0px;
@@ -189,5 +190,20 @@
     .num-tip{
       margin-left: 5px;
     }
+  }
+  .pad-lr16{
+    padding: 0 16px;
+  }
+  .pad-lr8{
+    padding: 0 8px;
+  }
+  .pad-5{
+    padding: 5px;
+  }
+  .line-14{
+    line-height: 18px;
+  }
+  .over-hidden{
+    overflow: hidden;
   }
 </style>

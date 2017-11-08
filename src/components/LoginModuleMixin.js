@@ -31,6 +31,11 @@ export default {
     },
     checkMobile () {
       let temp = this.loginData.mobile === '' || !(/^1[34578]\d{9}$/.test(this.loginData.mobile))
+      if (this.loginData.mobile === '') {
+        this.tip.type = 'error'
+        this.tip.info = '手机号不能为空'
+        return temp
+      }
       if (temp) {
         this.tip.type = 'error'
         this.tip.info = '手机格式有误'

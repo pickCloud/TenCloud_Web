@@ -174,3 +174,26 @@
 /*
 
 */
+.hover-component{
+  cursor: pointer;
+    .child{
+      display: none;
+      opacity:0;
+      background:$theme-bg_color_default;
+      li{
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+      li:last-child{
+        border-bottom: none;
+      }
+      li:hover{
+        background: $theme-bg_color_select;
+        color: $theme-text_color_select;
+      }
+    }
+    &:hover .child{
+      display: block;
+      opacity: 1;
+    }
+}
+

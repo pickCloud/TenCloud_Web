@@ -1,10 +1,10 @@
 <template>
-  <nav class="app-top" :class="[miniClass]">
+  <nav class="app-top flex-space-between" :class="[miniClass]">
     <aside class="lay-aside left">
-      <span class="_logo vam"><router-link :to="{name:'Main'}"><span class="show-lay-mini">CO</span><span class="hide-lay-mini">Console</span></router-link></span>
+      <span class="_logo vam"><router-link :to="{name:'Main'}"><span class="show-lay-mini">拾·云</span><span class="hide-lay-mini primary_txt"><i class="iconfont icon-shiyun" style="padding-right: 5px"></i>拾·云</span></router-link></span>
       <!--<span class="_cndesc vam right hide-mini">控制台</span>-->
     </aside>
-    <div class="lay-body" v-if="!$parent.TD">
+    <div class="" v-if="!$parent.TD">
       <!--<m-btn @click.native="back" v-if="hasBack"><i class="icon icon-return"></i></m-btn>-->
       <m-tip class="user-box" has-arrow popperMouse>
         <div slot="label" class="user-box_label"><i class="iconfont icon-touxiang1 vam" style="font-size: 1.5rem"></i> <span class="vam">{{userinfo.name?userinfo.name:userinfo.mobile}}</span></div>
@@ -13,6 +13,28 @@
           <li class="text-left"><div class="__btn" @click="logout"><i class="iconfont icon-tuichu vam" style="margin-right: 3px"></i><span class="vam">退出登录</span></div></li>
         </ul>
       </m-tip>
+      <div class="user-box btn hover-component animate-fadeIn" style="right: 140px;text-align: right;">
+        <div class="user-box_label" ><i class="iconfont icon-xiaoxi vam" style="font-size: 1rem"></i> <span class="vam user-box_msg_translate common-ground_box navtop"><div class="num">1</div></span></div>
+        <div style="position: relative;width: 400px;">
+          <ul class="child user-message_tietle theme-bg_default ">
+            <div class="flex-space-between" style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+              <div class="pad-lr16">消息合</div>
+              <m-btn class="pad-lr16 btn">清空</m-btn>
+            </div>
+            <li class="flex-space-between line-50 pad-5 over-hidden">
+              <div class="line-14 text-left"><span>【加入企业】管理员 米建立 邀请你加入 十全十美科技有限公司，</span></div>
+              <div class="line-0 pad-5">
+                <div class="line-20">2017/10/15</div>
+                <div  class="common-ground_box navtop-msg-content line-20">
+                  <div class="num line-20">1</div>
+                </div>
+              </div>
+            </li>
+            <li>1</li>
+            <li>1</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </nav>
 </template>
@@ -96,6 +118,35 @@
     }
     .user-box_label {
       cursor: pointer;
+    }
+    .user-box_msg_translate{
+      transform: translate(-10px, -10px);
+    }
+    .navtop.common-ground_box {
+      &:before {
+        background-color: #48bbc0;
+        width: 20px;
+        height: 20px;
+        top:0;
+      }
+      .num{
+        font-size:14px ;
+        line-height: 20px;
+        width: 20px;
+      }
+    }
+    .navtop-msg-content.common-ground_box {
+      transform: translate(30px,0px);
+      &:before {
+        width: 20px;
+        height: 20px;
+        top:0;
+      }
+      .num{
+        font-size:14px ;
+        line-height: 20px;
+        width: 20px;
+      }
     }
   }
 </style>

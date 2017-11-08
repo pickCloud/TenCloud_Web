@@ -120,6 +120,15 @@
   height: 50px;
   line-height: 50px;
 }
+.line-0{
+  line-height: 0;
+}
+.line-25{
+  line-height: 25px;
+}
+.line-20{
+  line-height: 20px;
+}
 .striped_bg {
   background-color: $color-striped-bg;
 }

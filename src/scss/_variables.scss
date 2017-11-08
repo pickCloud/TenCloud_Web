@@ -53,3 +53,8 @@ $colors:(
   'panel-bg': $color-body-bg,
   'alpha-black': rgba(0, 0, 0, 0.8)
 ) !default;
+//2017/11/8 添加背景css
+$theme-bg_color_default:#262a35;
+$theme-bg_color_select:#91a3c0;
+$theme-text_color_select:#171a21;
+
