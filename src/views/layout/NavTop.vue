@@ -9,7 +9,8 @@
       <m-tip class="user-box" has-arrow popperMouse>
         <div slot="label" class="user-box_label"><i class="iconfont icon-touxiang1 vam" style="font-size: 1.5rem"></i> <span class="vam">{{userinfo.name?userinfo.name:userinfo.mobile}}</span></div>
         <ul slot="popper">
-          <li><router-link :to="{name:'UserInfo'}"><i class="iconfont icon-ziliao vam"></i> <span class="vam">查看资料</span></router-link></li>
+          <li><router-link :to="{name:'FirmData'}"><i class="iconfont icon-ziliao vam"></i> <span class="vam">查看企业资料</span></router-link></li>
+          <li><router-link :to="{name:'UserInfo'}"><i class="iconfont icon-ziliao vam"></i> <span class="vam">查看个人资料</span></router-link></li>
           <li class="text-left"><div class="__btn" @click="logout"><i class="iconfont icon-tuichu vam" style="margin-right: 3px"></i><span class="vam">退出登录</span></div></li>
         </ul>
       </m-tip>

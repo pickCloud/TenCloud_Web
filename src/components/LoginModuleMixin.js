@@ -58,8 +58,6 @@ export default {
     },
     requestCode () {
       axios.http('user_verify', this.loginData).then(d => {
-        //
-
       }, e => {
         this.overwati()
         if (e.status === 10404) {
@@ -67,11 +65,9 @@ export default {
           return false
         } else if (e.status === 10405) {
           this.sms_count = e.data.sms_count || 0
-          if (this.sms_count > 3) {
+          if (this.sms_count > 2) {
             this.initGeet()
           }
-        } else if (e.status === 10406) {
-
         }
         this.tip.type = 'error'
         this.tip.info = e.message
@@ -128,10 +124,6 @@ export default {
       if (!document.getElementById('captcha')) {
         return false
       }
-      captchaObj.appendTo('#captcha')
-      captchaObj.onReady(function () {
-        document.getElementById('wait').style.display = 'none'
-      })
       captchaObj.onSuccess(() => {
         let result = captchaObj.getValidate()
         this.loginData['geetest_challenge'] = result.geetest_challenge
@@ -139,6 +131,16 @@ export default {
         this.loginData['geetest_seccode'] = result.geetest_seccode
         this.requestCode()
       })
+      captchaObj.onReady(function () {
+        document.getElementById('wait').style.display = 'none'
+      })
+      if (document.getElementById('wait').style.display === 'none') {
+        captchaObj.reset()
+        return false
+      } else {
+        captchaObj.appendTo('#captcha')
+      }
+
       // 更多接口说明请参见：http://docs.geetest.com/install/client/web-front/
     },
     initGeet () {

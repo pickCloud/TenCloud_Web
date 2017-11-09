@@ -15,7 +15,7 @@
           <input type="text" placeholder="输入手机号码" v-model="loginData.mobile">
           <i class="iconfont icon-shouji"></i>
         </div>
-        <div id="captcha" class="m-b16" v-if="sms_count>3">
+        <div id="captcha" class="m-b16" v-if="sms_count>2 && sms_count <10">
           <div id="wait">载入中……</div>
         </div>
         <div class="resign-form_inp m-b16" >
@@ -63,7 +63,7 @@
         if (this.checkMobile()) return false
         if (this.checkCode()) return false
         if (this.checkPassword()) return false
-        if (this.sms_count > 3 && !(this.loginData.geetest_challenge && this.loginData.geetest_seccode && this.loginData.geetest_validate)) {
+        if (this.sms_count > 2 && this.sms_count < 10 && !(this.loginData.geetest_challenge && this.loginData.geetest_seccode && this.loginData.geetest_validate)) {
           this.tip.type = 'error'
           this.tip.info = '点击上方按钮进行验证'
           return false
@@ -79,7 +79,7 @@
           }
         }).catch(e => {
           this.tip.type = 'error'
-          this.tip.info = e.response.data.message
+          this.tip.info = e.message
         })
       }
     },

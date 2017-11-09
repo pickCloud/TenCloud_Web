@@ -21,7 +21,7 @@ const VerNotes = r => require.ensure([], () => r(require('@/components/VerNotes'
 
 const Login = r => require.ensure([], () => r(require('@/views/layout/Login')), 'login')
 const Resign = r => require.ensure([], () => r(require('@/views/layout/Resign')), 'resign')
-const LostPassWord = r => require.ensure([], () => r(require('@/views/layout/lostPassWord')), 'LostPassWord')
+const LostPassWord = r => require.ensure([], () => r(require('@/views/layout/lostPassWord')), 'lostPassWord')
 const UserInfo = r => require.ensure([], () => r(require('@/components/UserInfo')), 'userinfo')
 
 // const FileHub = r => require.ensure([], () => r(require('@/components/FileHub')), 'filehub')
@@ -29,7 +29,7 @@ const FileHubIn = r => require.ensure([], () => r(require('@/components/filehub/
 const ChartHistory = r => require.ensure([], () => r(require('@/components/ChartHistory')), 'charthistory')
 const ChartContainerHistory = r => require.ensure([], () => r(require('@/components/ChartContainerHistory')), 'chartcontainerhistory')
 // const FileHubOut = r => require.ensure([], () => r(require('@/components/filehub/FileHubOut')), 'filehubout')
-
+const FirmData = r => require.ensure([], () => r(require('@/components/FirmData')), 'FirmData')
 Vue.use(Router)
 
 const router = new Router({
@@ -134,6 +134,12 @@ const router = new Router({
           name: 'FileHubIn',
           meta: {level: 1},
           component: FileHubIn
+        },
+        {
+          path: '/firmData',
+          name: 'FirmData',
+          meta: {level: 1},
+          component: FirmData
         },
         {
           path: '/:name/charthistory/:id',

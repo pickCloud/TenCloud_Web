@@ -25,7 +25,7 @@
             <i class="iconfont icon-mima"></i>
           </div>
           <div v-else>
-            <div id="captcha" class="m-b16" v-if="sms_count>3">
+            <div id="captcha" class="m-b16" v-if="sms_count>2 && sms_count <10">
               <div id="wait">载入中……</div>
             </div>
             <div class="login-form_inp m-b16" >
@@ -108,7 +108,7 @@
         if (this.type === 1) {
           if (this.checkMobile()) return false
           if (this.checkCode()) return false
-          if (this.sms_count > 3 && !(this.loginData.geetest_challenge && this.loginData.geetest_seccode && this.loginData.geetest_validate)) {
+          if (this.sms_count > 2 && this.sms_count < 10 && !(this.loginData.geetest_challenge && this.loginData.geetest_seccode && this.loginData.geetest_validate)) {
             this.tip.type = 'error'
             this.tip.info = '点击上方按钮进行验证'
             return false

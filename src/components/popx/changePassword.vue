@@ -26,7 +26,7 @@
           </div>
 
           <div >
-            <div id="captcha" class="m-b16" v-if="sms_count>3">
+            <div id="captcha" class="m-b16" v-if="sms_count>2 && sms_count <10">
               <div id="wait">载入中……</div>
             </div>
             <div class="login-form_inp m-b16" >
@@ -81,8 +81,11 @@
               this.$toast('修改成功', 'cc')
             }
           }).catch(e => {
-            this.$toast(e.message, 'cc')
-            this.type--
+            if (e.status === 10411) {
+              this.type--
+            }
+            this.tip.type = 'error'
+            this.tip.info = e.message
           })
         }
       },

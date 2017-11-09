@@ -32,7 +32,7 @@
             <input type="text" placeholder="请输入验证码" v-model="loginData.auth_code">
             <m-btn :sizeh="-1" @click.native="getVerifyCode" :disabled="btndis">{{btntip}}</m-btn>
           </div>
-          <div id="captcha" class="m-b16" v-if="sms_count>3">
+          <div id="captcha" class="m-b16" v-if="sms_count>2 && sms_count <10">
             <div id="wait">载入中……</div>
           </div>
         </div>
@@ -81,10 +81,12 @@
               this.$toast('修改密码成功', 'cc')
             }
           }).catch(e => {
-            this.type--
+            if (e.status === 10412) {
+              this.type--
+            }
+            this.tip.type = 'error'
+            this.tip.info = e.message
           })
-        } else if (this.type === 2) {
-
         }
       },
       backLogin () {

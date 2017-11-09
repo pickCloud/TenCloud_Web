@@ -25,6 +25,10 @@
     justify-content: flex-end;
     align-items: center;
   }
+  .flex-flex{
+    display: flex;
+    align-items: center;
+  }
   .btn-border-radius{
     border-radius: 6px;
   }
