@@ -106,13 +106,7 @@
       login () {
         let loginData = this.loginData
         if (this.type === 1) {
-          if (this.checkMobile()) return false
-          if (this.checkCode()) return false
-          if (this.sms_count > 2 && this.sms_count < 10 && !(this.loginData.geetest_challenge && this.loginData.geetest_seccode && this.loginData.geetest_validate)) {
-            this.tip.type = 'error'
-            this.tip.info = '点击上方按钮进行验证'
-            return false
-          }
+          if (this.checkCodeAndMobile()) return false
           axios.http('user_login', loginData, 'post').then(d => {
             if (window.nextUrl) {
               this.$router.replace({name: 'Main'})
@@ -187,20 +181,6 @@
   }
 
 
-  .login-tip {
-    padding: 0 16px;
-    height: 50px;
-    line-height: 50px;
-    border: 1px solid transparent;
-    .iconfont {
-      font-size: 1rem;
-    }
-    &.error {
-      color: #f15532;
-      background-color: #feeeeb;
-      border-color: currentColor;
-    }
-  }
   //1030
   .login-select_content {
     /*line-height:60px;*/

@@ -23,6 +23,10 @@ export default {
     isRegisn: true
   }),
   methods: {
+    resetInfoTip () {
+      this.tip.type = ''
+      this.tip.info = ''
+    },
     lostPassword () {
       this.$router.push({name: 'LostPassword'})
     },
@@ -34,7 +38,6 @@ export default {
       if (this.loginData.mobile === '') {
         this.tip.type = 'error'
         this.tip.info = '手机号不能为空'
-        return temp
       }
       if (temp) {
         this.tip.type = 'error'
@@ -49,6 +52,15 @@ export default {
         this.tip.info = '验证码不能为空'
       }
       return temp
+    },
+    checkCodeAndMobile () {
+      if (this.checkMobile()) return true
+      if (this.checkCode()) return true
+      if (this.sms_count > 2 && this.sms_count < 10 && !(this.loginData.geetest_challenge && this.loginData.geetest_seccode && this.loginData.geetest_validate)) {
+        this.tip.type = 'error'
+        this.tip.info = '点击上方按钮进行验证'
+        return true
+      }
     },
     getVerifyCode () {
       if (this.checkMobile()) return false
@@ -97,6 +109,23 @@ export default {
         this.tip.info = '密码最小长度为6位'
         temp = true
       } else if (this.loginData.password !== this.sure_password) {
+        this.tip.type = 'error'
+        this.tip.info = '两次输入密码不一致'
+        temp = true
+      }
+      return temp
+    },
+    checkNewPassword () {
+      let temp = this.loginData.new_password === ''
+      if (temp) {
+        this.tip.type = 'error'
+        this.tip.info = '请输入新密码'
+        temp = true
+      } else if (this.loginData.new_password.length < 6) {
+        this.tip.type = 'error'
+        this.tip.info = '密码最小长度为6位'
+        temp = true
+      } else if (this.loginData.new_password !== this.sure_password) {
         this.tip.type = 'error'
         this.tip.info = '两次输入密码不一致'
         temp = true

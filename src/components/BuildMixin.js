@@ -44,7 +44,7 @@ export default {
         version: (this.version.version + '').replace(/(^\s+)|(\s+$)/g, ''),
         branch_name: this.branch,
         repos_url: this.$route.params.repos_url,
-        id: this.$route.params.id
+        project_id: this.$route.params.id
       }
       if (pdata.version === '') {
         this.$toast('请输入版本号', 'cc')

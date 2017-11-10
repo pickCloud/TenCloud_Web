@@ -157,6 +157,20 @@
       color: #fff!important;
     }
   }
+  .login-tip {
+    padding: 0 16px;
+    height: 50px;
+    line-height: 50px;
+    border: 1px solid transparent;
+    .iconfont {
+      font-size: 1rem;
+    }
+    &.error {
+      color: #f15532;
+      background-color: #feeeeb;
+      border-color: currentColor;
+    }
+  }
   .page-login {
     position: fixed;
     left: 0;top: 0;

@@ -30,6 +30,7 @@ const ChartHistory = r => require.ensure([], () => r(require('@/components/Chart
 const ChartContainerHistory = r => require.ensure([], () => r(require('@/components/ChartContainerHistory')), 'chartcontainerhistory')
 // const FileHubOut = r => require.ensure([], () => r(require('@/components/filehub/FileHubOut')), 'filehubout')
 const FirmData = r => require.ensure([], () => r(require('@/components/FirmData')), 'FirmData')
+const FirmAdd = r => require.ensure([], () => r(require('@/components/FirmAdd')), 'FirmAdd')
 Vue.use(Router)
 
 const router = new Router({
@@ -128,6 +129,12 @@ const router = new Router({
           name: 'UserInfo',
           meta: {level: 2},
           component: UserInfo
+        },
+        {
+          path: '/userinfo/firmAdd',
+          name: 'FirmAdd',
+          meta: {level: 3},
+          component: FirmAdd
         },
         {
           path: '/filehub/:id',

@@ -38,20 +38,21 @@
         </div>
         </div>
         <div v-else-if="type==1">
-        <div class="login-form_inp m-b16" >
-          <input type="password" placeholder="密码最小长度为6位" v-model="loginData.password" >
-          <i class="iconfont icon-mima"></i>
-        </div>
-        <div class="login-form_inp m-b16">
-          <input type="password" placeholder="再次输入密码" v-model="sure_password">
-          <i class="iconfont icon-zaicimima"></i>
-        </div>
+          <div class="login-form_inp m-b16" >
+            <input type="password" placeholder="密码最小长度为6位" v-model="loginData.new_password" >
+            <i class="iconfont icon-mima"></i>
+          </div>
+          <div class="login-form_inp m-b16">
+            <input type="password" placeholder="再次输入密码" v-model="sure_password">
+            <i class="iconfont icon-zaicimima"></i>
+          </div>
         </div>
         <div v-else class="lostPassword-success-tip">
           <h3>恭喜您！密码已成功找回</h3>
           <m-btn><span>返回</span><m-btn class="primary_txt" @click.native="backLogin">登录</m-btn></m-btn>
         </div>
         <m-btn v-if="type!==2" class="login-form_sure m-b16" :sizeh="50" @click.native="nextStep">下一步</m-btn>
+        <div class="flex-space-between  primary_txt line-25" v-if="this.type === 1"><div></div> <m-btn class="btn" @click.native="getBack">< 上一步</m-btn></div>
       </div>
     </div>
   </div>
@@ -72,9 +73,12 @@
     methods: {
       nextStep () {
         if (this.type === 0) {
+          console.log(this.checkCodeAndMobile())
+          if (this.checkCodeAndMobile()) return false
           this.type++
+          this.resetInfoTip()
         } else if (this.type === 1) {
-          if (this.checkPassword()) return false
+          if (this.checkNewPassword()) return false
           axios.http('user_resetPassword', this.loginData).then(d => {
             if (d.status === 0) {
               this.type++
@@ -91,6 +95,9 @@
       },
       backLogin () {
         this.$router.push({name: 'Login'})
+      },
+      getBack () {
+        this.type--
       }
     },
     created () {

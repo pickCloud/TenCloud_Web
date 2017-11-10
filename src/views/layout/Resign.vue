@@ -60,14 +60,8 @@
         this.$router.push({name: 'Login'})
       },
       resign () {
-        if (this.checkMobile()) return false
-        if (this.checkCode()) return false
         if (this.checkPassword()) return false
-        if (this.sms_count > 2 && this.sms_count < 10 && !(this.loginData.geetest_challenge && this.loginData.geetest_seccode && this.loginData.geetest_validate)) {
-          this.tip.type = 'error'
-          this.tip.info = '点击上方按钮进行验证'
-          return false
-        }
+        if (this.checkCodeAndMobile()) return false
         let loginData = this.loginData
         axios.http('user_resign', loginData, 'post').then(d => {
           if (window.nextUrl) {

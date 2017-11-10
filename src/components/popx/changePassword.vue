@@ -54,6 +54,7 @@
           <!--<div><span>返回</span><m-btn class="primary_txt" @click.native="backLogin">登录</m-btn></div>-->
         </div>
         <m-btn v-if="type!==2" class="login-form_sure m-b16" :sizeh="50" @click.native="nextStep">下一步</m-btn>
+        <div class="flex-space-between  primary_txt line-25" v-if="this.type === 1"><div></div> <m-btn class="btn" @click.native="getBack">< 上一步</m-btn></div>
       </div>
     </div>
   </div>
@@ -72,6 +73,7 @@
       ...mapMutations('userInfo', ['setPopState']),
       nextStep () {
         if (this.type === 0) {
+          if (this.checkCodeAndMobile()) return false
           this.type++
         } else if (this.type === 1) {
           if (this.checkOldNewPassword()) return false
@@ -95,6 +97,9 @@
       closePop () {
         console.log('关闭')
         this.setPopState({name: 'pop_changePassword', value: false})
+      },
+      getBack () {
+        this.type--
       }
     },
     computed: {
