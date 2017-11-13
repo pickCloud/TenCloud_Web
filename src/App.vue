@@ -28,6 +28,7 @@
   .flex-flex{
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
   }
   .btn-border-radius{
     border-radius: 6px;
@@ -223,5 +224,17 @@
   }
   .over-hidden{
     overflow: hidden;
+  }
+  .flex-table{
+      display: flex;
+    flex-wrap: wrap;
+    .tr{
+      padding: 14px 16px;
+      display: flex;
+      overflow: hidden;
+      .td{
+        display: flex;
+      }
+    }
   }
 </style>

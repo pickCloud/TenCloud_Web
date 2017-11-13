@@ -73,7 +73,6 @@
     methods: {
       nextStep () {
         if (this.type === 0) {
-          console.log(this.checkCodeAndMobile())
           if (this.checkCodeAndMobile()) return false
           this.type++
           this.resetInfoTip()

@@ -124,6 +124,7 @@
             this.tip.info = e.message
           })
         } else {
+          if (this.checkPasswordAndMobile()) return true
           axios.http('user_login_password', loginData, 'post').then(d => {
             if (window.nextUrl) {
               this.$router.replace({name: 'Main'})

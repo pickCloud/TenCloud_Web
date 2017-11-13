@@ -9,7 +9,7 @@
       <m-tip class="user-box" has-arrow popperMouse>
         <div slot="label" class="user-box_label"><i class="iconfont icon-touxiang1 vam" style="font-size: 1.5rem"></i> <span class="vam">{{userinfo.name?userinfo.name:userinfo.mobile}}</span></div>
         <ul slot="popper">
-          <li><router-link :to="{name:'FirmData'}"><i class="iconfont icon-ziliao vam"></i> <span class="vam">查看企业资料</span></router-link></li>
+          <li v-for="item in messages"><router-link :to="{name:'FirmData',params:{id:item.cid}}" @click.native="changeLink(item.company_name)"><i class="iconfont icon-ziliao vam"></i> <span class="vam">{{item.company_name}}</span></router-link></li>
           <li><router-link :to="{name:'UserInfo'}"  @click.native="userInfo"><i class="iconfont icon-ziliao vam"></i> <span class="vam">查看个人资料</span></router-link></li>
           <li><router-link :to="{name:'FirmAdd'}" @click.native="addCompany"><i class="iconfont icon-tianjiaqiye vam"></i> <span class="vam">添加企业</span></router-link></li>
           <li class="text-left"><div class="__btn" @click="logout"><i class="iconfont icon-tuichu vam" style="margin-right: 3px"></i><span class="vam">退出登录</span></div></li>
@@ -41,15 +41,15 @@
 </template>
 
 <script>
-  import axios from '../../store/request/axios'
+//  import axios from '../../store/request/axios'
 //  import Cookies from 'js-cookie'
-
+  import {mapState, mapActions} from 'vuex'
   export default {
     data: () => ({
-      user: {},
-      messages: []
+      user: {}
     }),
     methods: {
+      ...mapActions('navTop', ['getMessages']),
       back () {
         this.$router.back()
       },
@@ -75,13 +75,15 @@
           {cn: '个人资料'}
         ])
       },
-      getMessage () {
-        axios.http('message_get').then(d => {
-          this.messages = d.data
-        })
+      changeLink (name) {
+        this.$store.commit('sitepath/SET_PATH', [
+          {name: 'Main', cn: '主页'},
+          {cn: name}
+        ])
       }
     },
     computed: {
+      ...mapState('navTop', ['messages']),
       miniClass () {
         return this.$parent.isMini ? 'lay-mini' : ''
       },
@@ -94,7 +96,7 @@
     },
     created () {
       if (!this.$parent.TD) {
-        this.getMessage()
+        this.getMessages()
       }
     }
   }

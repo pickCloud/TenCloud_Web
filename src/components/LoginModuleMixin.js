@@ -38,6 +38,7 @@ export default {
       if (this.loginData.mobile === '') {
         this.tip.type = 'error'
         this.tip.info = '手机号不能为空'
+        return temp
       }
       if (temp) {
         this.tip.type = 'error'
@@ -52,6 +53,23 @@ export default {
         this.tip.info = '验证码不能为空'
       }
       return temp
+    },
+    checkHasPassword () {
+      let temp = this.loginData.password === ''
+      if (temp) {
+        this.tip.type = 'error'
+        this.tip.info = '密码不能为空'
+      }
+      if (this.loginData.password.length < 6) {
+        this.tip.type = 'error'
+        this.tip.info = '密码不能小于6位'
+        return true
+      }
+      return temp
+    },
+    checkPasswordAndMobile () {
+      if (this.checkMobile()) return true
+      if (this.checkHasPassword()) return true
     },
     checkCodeAndMobile () {
       if (this.checkMobile()) return true

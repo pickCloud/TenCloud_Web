@@ -143,7 +143,7 @@ const router = new Router({
           component: FileHubIn
         },
         {
-          path: '/firmData',
+          path: '/firmData/:id',
           name: 'FirmData',
           meta: {level: 1},
           component: FirmData

@@ -62,6 +62,9 @@ const APIS = {
   file_del: {u: '/api/file/delete', m: 'post'},
   company_create: {u: '/api/company/new', m: 'psot'},
   company_get: {u: '/api/companies', m: 'get'},
+  company_employe: {u: '/api/company/', m: 'get'},
+  company_detail: {u: '/api/company/', m: 'get'},
+  company_updata: {u: '/api/company/update', m: 'get'},
   message_get: {u: '/api/messages/', m: 'get'},
   islocal: islocal
 }
