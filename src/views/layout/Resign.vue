@@ -60,6 +60,7 @@
         this.$router.push({name: 'Login'})
       },
       resign () {
+        console.log('进入代码')
         if (this.checkPassword()) return false
         if (this.checkCodeAndMobile()) return false
         let loginData = this.loginData

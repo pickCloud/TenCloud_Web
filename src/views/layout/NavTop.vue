@@ -93,7 +93,9 @@
       }
     },
     created () {
-      this.getMessage()
+      if (!this.$parent.TD) {
+        this.getMessage()
+      }
     }
   }
 </script>

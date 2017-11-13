@@ -23,7 +23,7 @@
         <!--</div>-->
         <div v-if="type==0">
         <div class="login-form_inp m-b16">
-          <input type="text" placeholder="请输入电话号码" v-model="loginData.mobile">
+          <input type="text" placeholder="请输入手机号码" v-model="loginData.mobile">
           <i class="iconfont icon-shouji"></i>
         </div>
 
