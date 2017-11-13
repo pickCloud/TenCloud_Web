@@ -10,30 +10,29 @@
         <div slot="label" class="user-box_label"><i class="iconfont icon-touxiang1 vam" style="font-size: 1.5rem"></i> <span class="vam">{{userinfo.name?userinfo.name:userinfo.mobile}}</span></div>
         <ul slot="popper">
           <li><router-link :to="{name:'FirmData'}"><i class="iconfont icon-ziliao vam"></i> <span class="vam">查看企业资料</span></router-link></li>
-          <li><router-link :to="{name:'UserInfo'}"><i class="iconfont icon-ziliao vam"></i> <span class="vam">查看个人资料</span></router-link></li>
-          <li><router-link :to="{name:'FirmAdd'}"><i class="iconfont icon-tianjiaqiye vam"></i> <span class="vam">添加企业</span></router-link></li>
+          <li><router-link :to="{name:'UserInfo'}"  @click.native="userInfo"><i class="iconfont icon-ziliao vam"></i> <span class="vam">查看个人资料</span></router-link></li>
+          <li><router-link :to="{name:'FirmAdd'}" @click.native="addCompany"><i class="iconfont icon-tianjiaqiye vam"></i> <span class="vam">添加企业</span></router-link></li>
           <li class="text-left"><div class="__btn" @click="logout"><i class="iconfont icon-tuichu vam" style="margin-right: 3px"></i><span class="vam">退出登录</span></div></li>
         </ul>
       </m-tip>
       <div class="user-box btn hover-component animate-fadeIn" style="right: 140px;text-align: right;">
         <div class="user-box_label" ><i class="iconfont icon-xiaoxi vam" style="font-size: 1rem"></i> <span class="vam user-box_msg_translate common-ground_box navtop"><div class="num">1</div></span></div>
-        <div style="position: relative;width: 400px;">
-          <ul class="child user-message_tietle theme-bg_default ">
+        <div style="position: relative;width: 400px;background-color: #2f3543" v-if="messages.length===0">
+          <ul class="child user-message_tietle ">
             <div class="flex-space-between" style="border-bottom: 1px solid rgba(255,255,255,0.2);">
               <div class="pad-lr16">消息合</div>
               <m-btn class="pad-lr16 btn">清空</m-btn>
             </div>
-            <li class="flex-space-between line-50 pad-5 over-hidden">
-              <div class="line-14 text-left"><span>【加入企业】管理员 米建立 邀请你加入 十全十美科技有限公司，</span></div>
+            <li class="flex-space-between line-50 pad-5 over-hidden" v-for="item in messages">
+              <div class="line-14 text-left"><span>item.content</span></div>
               <div class="line-0 pad-5">
                 <div class="line-20">2017/10/15</div>
-                <div  class="common-ground_box navtop-msg-content line-20">
-                  <div class="num line-20">1</div>
-                </div>
+                <!--<div  class="common-ground_box navtop-msg-content line-20">-->
+                  <!--<div class="num line-20">1</div>-->
+                <!--</div>-->
               </div>
             </li>
-            <li>1</li>
-            <li>1</li>
+            <div class="line-50 btn text-center theme-dft" style="display: block;">全部消息</div>
           </ul>
         </div>
       </div>
@@ -42,10 +41,13 @@
 </template>
 
 <script>
+  import axios from '../../store/request/axios'
 //  import Cookies from 'js-cookie'
+
   export default {
     data: () => ({
-      user: {}
+      user: {},
+      messages: []
     }),
     methods: {
       back () {
@@ -59,6 +61,24 @@
           }
           this.$toast(d.message, 'cc')
         })
+      },
+      addCompany () {
+        this.$store.commit('sitepath/SET_PATH', [
+          {name: 'Main', cn: '主页'},
+          {name: 'UserInfo', cn: '个人资料'},
+          {cn: '添加企业'}
+        ])
+      },
+      userInfo () {
+        this.$store.commit('sitepath/SET_PATH', [
+          {name: 'Main', cn: '主页'},
+          {cn: '个人资料'}
+        ])
+      },
+      getMessage () {
+        axios.http('message_get').then(d => {
+          this.messages = d.data
+        })
       }
     },
     computed: {
@@ -71,6 +91,9 @@
       userinfo () {
         return this.$root.userinfo
       }
+    },
+    created () {
+      this.getMessage()
     }
   }
 </script>

@@ -18,7 +18,7 @@
         <div class="lay-left-right">
             <div class="lay-left lay-width-min">手机号码：</div>
           <div class="lay-right flex-space-between">
-            <div class="lay-left">
+            <div class="lay-left" style="padding: 0">
               {{infos.mobile}}
             </div>
             <m-btn class="btn grey-dark_txt primary_bg">修改</m-btn>
@@ -27,7 +27,7 @@
         <div class="lay-left-right">
           <div class="lay-left lay-width-min">注册时间：</div>
           <div class="lay-right">
-            <div class="lay-left">
+            <div class="lay-left" style="padding: 0">
               2017.11.3
             </div>
           </div>
@@ -124,35 +124,35 @@
       <div class="lay-left-right userinfo-padding">
         <div style="display: flex;justify-content: flex-end">
         <m-btn class="btn primary_bg grey-dark_txt" style="margin-right: 10px">申请加入已有企业</m-btn>
-        <m-btn class="btn primary_bg grey-dark_txt">添加企业</m-btn>
+        <m-btn class="btn primary_bg grey-dark_txt" @click.native="addCompany">添加企业</m-btn>
         </div>
       </div>
     </div>
-    <div class="col xs-12 userinfo-padding">
+    <div class="col xs-12 userinfo-padding" v-for="item in companyList">
       <div class="company-item panel-onlyBg flex-space-between">
         <div class="" style="flex-grow:4;">
-         <div class="flex-space-around" style="padding-left: 10px">
-          <div class="flex-flex-grow-1">
-            <div class="userinfo-item-up">企业名字</div>
-            <span class="userinfo-item-down">十全十美网络有限公司</span>
-          </div>
-           <div class="flex-flex-grow-1">
-             <div class="userinfo-item-up">申请时间</div>
-             <div class="userinfo-item-down">2017.09.31</div>
-           </div>
-           <div class="flex-flex-grow-1">
-             <div class="userinfo-item-up">审核时间</div>
-             <span class="userinfo-item-down">2017.10.10</span>
-           </div>
-           <div class="flex-flex-grow-1">
-             <div class="userinfo-item-up">状态</div>
-             <span class="userinfo-item-down">审核部通过</span>
-           </div>
+          <div class="flex-space-around" style="padding-left: 10px">
+              <div class="flex-flex-grow-1">
+                <div class="userinfo-item-up">企业名字</div>
+                <span class="userinfo-item-down">{{item.company_name}}</span>
+              </div>
+             <div class="flex-flex-grow-1">
+               <div class="userinfo-item-up">申请时间</div>
+               <div class="userinfo-item-down">{{item.ctime}}</div>
+             </div>
+             <div class="flex-flex-grow-1">
+               <div class="userinfo-item-up">审核时间</div>
+               <span class="userinfo-item-down">{{item.utime}}</span>
+             </div>
+             <div class="flex-flex-grow-1">
+               <div class="userinfo-item-up">状态</div>
+               <span class="userinfo-item-down">{{item.status === 0?"审核中":item.status === 1?"通过":"拒绝"}}</span>
+             </div>
           </div>
         </div>
           <div class="flex-flex-end" style="flex-grow:1;padding-right: 10px">
             <m-btn class="no-radius btn-github">解除绑定</m-btn>
-            <m-btn class="primary_bg grey-dark_txt">进入企业</m-btn>
+            <m-btn class="primary_bg grey-dark_txt" @click.native="">进入企业</m-btn>
           </div>
       </div>
     </div>
@@ -187,15 +187,25 @@
       isEditor2: false,
       updateing: false,
       xingbie: '-1',
-      thumbFile: ''
+      thumbFile: '',
+      companyList: []
     }),
     mixins: [DatePickerMixin],
     methods: {
       ...mapMutations('userInfo', ['setPopState']),
+      addCompany () {
+        this.$store.commit('sitepath/SET_PATH', [
+          {name: 'Main', cn: '主页'},
+          {name: 'UserInfo', cn: '个人资料'},
+          {cn: '添加企业'}
+        ])
+        this.$router.push({name: 'FirmAdd'})
+      },
       changePassword () {
         this.setPopState({name: 'pop_changePassword', value: true})
       },
       getApiData () {
+        this.getCompany()
         axios.http('user_info', true).then(d => {
           this.$root.userinfo = this.infos = d.data
           if (this.infos.birthday !== undefined) this.date.time = moment.unix(this.infos.birthday).format('YYYY-MM-DD')
@@ -301,6 +311,12 @@
         this.getThumbToken()
       },
       resetmobile () {
+      },
+      getCompany () {
+        axios.http('company_get').then(d => {
+          this.companyList = d.data
+        }).catch(e => {
+        })
       }
     },
     mounted () {
@@ -311,6 +327,7 @@
       sex () {
         return this.infos.gender === undefined ? '' : parseInt(this.infos.gender) === 1 ? '男' : '女'
       }
+
     },
     created () {
       this.getApiData()

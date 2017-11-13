@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="login-word_detail">
-          <div class="detail-head"><i class="iconfont icon-xiugai icon-reset-xiugai"></i>自动部署、自动扩容、负载均衡，轻松运维。</div>
+          <div class="detail-head"><i class="iconfont icon-xiugai icon-reset-xiugai"></i>自动扩缩容、负载均衡，轻松运维。</div>
         </div>
         <div class="login-word_detail">
           <div class="detail-head"><i class="iconfont icon-xiugai icon-reset-xiugai"></i>遇异常可跨云无痕切换，保证系统稳定。</div>

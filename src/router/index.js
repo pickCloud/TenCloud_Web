@@ -127,13 +127,13 @@ const router = new Router({
         {
           path: '/userinfo',
           name: 'UserInfo',
-          meta: {level: 2},
+          meta: {level: 1},
           component: UserInfo
         },
         {
           path: '/userinfo/firmAdd',
           name: 'FirmAdd',
-          meta: {level: 3},
+          meta: {level: 2},
           component: FirmAdd
         },
         {

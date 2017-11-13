@@ -111,10 +111,10 @@
               </thead>
               <tbody>
               <tr v-for="item in operations">
-                <td>{{item[0]}}</td>
-                <td>{{item[1]}}</td>
-                <td>{{item[2]}}</td>
-                <td>{{item[3]}}</td>
+                <td>{{item.created_time}}</td>
+                <td>{{item.operation===1?"关机":tem.operation===0?"开机":"重启"}}</td>
+                <td>{{item.operation_status===0?"成功":"失败"}}</td>
+                <td>{{item.user}}</td>i
               </tr>
               </tbody>
             </table>

@@ -61,6 +61,8 @@ const APIS = {
   file_download: {u: '/api/file/download', m: 'post'},
   file_del: {u: '/api/file/delete', m: 'post'},
   company_create: {u: '/api/company/new', m: 'psot'},
+  company_get: {u: '/api/companies', m: 'get'},
+  message_get: {u: '/api/messages/', m: 'get'},
   islocal: islocal
 }
 export default APIS
