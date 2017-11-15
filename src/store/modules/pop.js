@@ -2,7 +2,11 @@
 export default {
   namespaced: true,
   state: {
-    pop_changePassword: false
+    pop_changePassword: false,
+    pop_all: true,
+    pop_params: {
+      cid: ''
+    }
   },
   getters: {
   },

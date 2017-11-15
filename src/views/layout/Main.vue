@@ -10,6 +10,9 @@
         <!--</transition>-->
       </div>
     </div>
+    <transition>
+      <Pop></Pop>
+    </transition>
   </div>
 </template>
 
@@ -17,7 +20,7 @@
   import Navtop from './NavTop.vue'
   import Navleft from './NavLeft.vue'
   import SitePath from './SitePath.vue'
-
+  import Pop from './Pop.vue'
   export default {
     data: () => ({
       isMini: false
@@ -32,7 +35,7 @@
         this.$store.commit('scroll/IS_BOTTOM', e.target.clientHeight + e.target.scrollTop === e.target.scrollHeight)
       }
     },
-    components: {Navtop, Navleft, SitePath}
+    components: {Navtop, Navleft, SitePath, Pop}
   }
 </script>
 <style lang="scss">

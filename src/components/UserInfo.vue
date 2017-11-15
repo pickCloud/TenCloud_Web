@@ -192,7 +192,7 @@
     }),
     mixins: [DatePickerMixin],
     methods: {
-      ...mapMutations('userInfo', ['setPopState']),
+      ...mapMutations('pop', ['setPopState']),
       addCompany () {
         this.$store.commit('sitepath/SET_PATH', [
           {name: 'Main', cn: '主页'},
@@ -323,7 +323,7 @@
 //      this.headHeigth()
     },
     computed: {
-      ...mapState('userInfo', ['pop_changePassword']),
+      ...mapState('pop', ['pop_changePassword']),
       sex () {
         return this.infos.gender === undefined ? '' : parseInt(this.infos.gender) === 1 ? '男' : '女'
       }

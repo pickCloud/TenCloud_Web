@@ -1,18 +1,18 @@
 <template>
-  <div class="lostPassword-box">
-    <div class="lostPassword-form">
-      <div class="lostPassword-nav flex-space-between border-bottom-1px" style="align-items: center">
+  <div class="pop-box">
+    <div class="pop-form">
+      <div class="pop-nav flex-space-between border-bottom-1px p-lr-16" style="align-items: center">
         <span>修改密码</span>
         <div class="close" @click="closePop"></div>
       </div>
-      <div class="lostPassword-status flex-space-between">
+      <div class="pop-status flex-space-between p-16">
         <div class="number-content" :class="type==0?'active':''"><div class="num">1</div><div class="num-tip">验证手机</div></div>
         <div class="number-line long"></div>
         <div class="number-content" :class="type==1?'active':''"><div class="num">2</div><div class="num-tip">重置密码</div></div>
         <div class="number-line long"></div>
         <div class="number-content" :class="type==2?'active':''"><div class="num">3</div><div class="num-tip">完成</div></div>
       </div>
-      <div class="lostPassword-input-box">
+      <div class="pop-input-box p-b16">
         <div class="login-tip m-b16" :class="tip.type" v-if="tip.info">
           <i class="iconfont icon-xinxi-yin vam"></i> <span class="vam">{{tip.info}}</span>
         </div>
@@ -49,7 +49,7 @@
             <i class="iconfont icon-touxiang1"></i>
           </div>
         </div>
-        <div v-else class="lostPassword-success-tip">
+        <div v-else class="pop-success-tip">
           <h3>恭喜您！密码已修改成功</h3>
           <!--<div><span>返回</span><m-btn class="primary_txt" @click.native="backLogin">登录</m-btn></div>-->
         </div>
@@ -70,7 +70,7 @@
       type: 0
     }),
     methods: {
-      ...mapMutations('userInfo', ['setPopState']),
+      ...mapMutations('pop', ['setPopState']),
       nextStep () {
         if (this.type === 0) {
           if (this.checkCodeAndMobile()) return false
@@ -116,107 +116,6 @@
   }
 </script>
 <style lang="scss">
-  .lostPassword-box {
-    position: absolute;
-    width: 820px;
-    /*height:677px;*/
-    left: 50%;top: 50%;
-    -webkit-transform: translate(-50%,-50%);
-  }
-  .lostPassword-form {
-    padding: 16px 36px;
-    background-color: #2f3543;
-    .lostPassword-nav{
-      line-height: 50px;
-    }
-  }
-  .border-bottom-1px{
-    position:relative;
-    &:before{
-      content: " ";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      height: 1px;
-      border-top: 1px solid #464e5c;
-      color: #464e5c;
-      -webkit-transform-origin: 0 0;
-      transform-origin: 0 0;
-      transform: scaleY(0.5);
-    }
-  }
-  .lostPassword-status{
-    width: 100%;
-    line-height: 50px;
-    .number-content {
-      position: relative;
-      line-height: 50px;
-      display: flex;
-      .num{
-        position: relative;
-        width: 45px;
-        text-align: center;
-      }
-      &:before{
-        position: absolute;
-        content: " " ;
-        top:11px;
-        left:9px;
-        width:26px;
-        height: 26px;
-        transform:rotate(45deg);
-        background-color: #2b2f3a;
-        border-radius: 5px;
-      }
-      &.active .num{
-        color: #2b2f3a;
-      }
-      &.active .num-tip{
-        color: #56d1e2;
-      }
-      &.active:before{
-        background-color: #56d1e2;
-      }
-    }
-    .number-line{
-      position: relative;
-      &:before {
-        position: absolute;
-        content: ' ';
-        height: 2px;
-        width: 180px;
-        background-color:#2b2f3a ;
-      }
-      &.long{
-        width: 180px;
-      }
-      &.short{
-        width: 120px;
-      }
-    }
 
-  }
-  .lostPassword-input-box{
-    width: 500px;
-    margin: auto;
-  }
-  .lostPassword-success-tip{
-    text-align: center;
-    line-height: 50px;
-    padding: 50px 0;
-  }
-  .lostPassword-box{
-    .close {
-      /*top: 14px;*/
-      /*right: 16px;*/
-      cursor: pointer;
-      transition: all 0.5s;
-      position: relative;
-      &:hover {
-        transform: rotate(180deg);
-      }
-    }
-  }
 
 </style>

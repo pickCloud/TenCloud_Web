@@ -1,4 +1,5 @@
 import axios from '../store/request/axios'
+import {mapState, mapMutations} from 'vuex'
 export default {
   data: () => ({
     form: {
@@ -12,21 +13,23 @@ export default {
     employees: []
   }),
   methods: {
+    ...mapMutations('pop', ['setPopState']),
     changeData () {
       this.isEditor = !this.isEditor
     },
     saveData () {
       let p = {
-        cid: this.$route.parmas.id,
+        cid: this.$route.params.id,
         mobile: this.form.mobile,
         contact: this.form.name,
         name: ''
       }
 
       axios.http('company_updata', p, 'post').then(d => {
+        this.isEditor = false
         this.$toast('更改成功', 'cc')
       }).catch(e => {
-
+        this.$toast(e.message, 'cc')
       })
     },
     cancel () {
@@ -50,7 +53,14 @@ export default {
       axios.http('company_employe', '', 'get', this.$route.params.id + '/employees').then(d => {
         this.module = d.data
       })
+    },
+    invite () {
+      this.setPopState({name: 'pop_all', value: true})
+      this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id}})
     }
+  },
+  computed: {
+    ...mapState('pop', ['pop_all'])
   },
   created () {
     this.getDataApi()

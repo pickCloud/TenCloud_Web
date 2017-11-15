@@ -11,7 +11,7 @@ import machines from './modules/machines'
 import projectAdd from './modules/projectAdd'
 import mechineDetail from './modules/mechineDetail'
 import github from './modules/github'
-import userInfo from './modules/userInfo'
+import pop from './modules/pop'
 import navTop from './modules/navTop'
 Vue.use(Vuex)
 const debug = process.env.NODE_ENV !== 'production'
@@ -28,7 +28,7 @@ export default new Vuex.Store({
     projectAdd,
     mechineDetail,
     github,
-    userInfo,
+    pop,
     navTop
   },
   strict: debug,

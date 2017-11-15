@@ -60,7 +60,7 @@
           <div class="panel-title flex-space-between" slot="title">
             <div>员工列表</div>
             <div>
-            <m-btn class="btn">邀请员工</m-btn>
+            <m-btn class="btn" @click.native="invite">邀请员工</m-btn>
             <m-btn>设置</m-btn>
             <m-btn>更换管理员</m-btn>
             </div>

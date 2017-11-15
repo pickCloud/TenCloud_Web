@@ -237,4 +237,111 @@
       }
     }
   }
+  //弹框样式
+  .pop-box {
+    position: absolute;
+    width: 820px;
+    /*height:677px;*/
+    left: 50%;top: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    background-color: #262a35;
+    .panel{
+      background-color: #2f3543;
+    }
+  }
+  .pop-form {
+    /*padding: 16px 36px;*/
+    /*background-color: #262a35;*/
+    .pop-nav{
+      line-height: 50px;
+    }
+  }
+  .border-bottom-1px{
+    position:relative;
+    &:before{
+      content: " ";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      height: 1px;
+      border-top: 1px solid #464e5c;
+      color: #464e5c;
+      -webkit-transform-origin: 0 0;
+      transform-origin: 0 0;
+      transform: scaleY(0.5);
+    }
+  }
+  .pop-status{
+    width: 100%;
+    line-height: 50px;
+    .number-content {
+      position: relative;
+      line-height: 50px;
+      display: flex;
+      .num{
+        position: relative;
+        width: 45px;
+        text-align: center;
+      }
+      &:before{
+        position: absolute;
+        content: " " ;
+        top:11px;
+        left:9px;
+        width:26px;
+        height: 26px;
+        transform:rotate(45deg);
+        background-color: #2b2f3a;
+        border-radius: 5px;
+      }
+      &.active .num{
+        color: #2b2f3a;
+      }
+      &.active .num-tip{
+        color: #56d1e2;
+      }
+      &.active:before{
+        background-color: #56d1e2;
+      }
+    }
+    .number-line{
+      position: relative;
+      &:before {
+        position: absolute;
+        content: ' ';
+        height: 2px;
+        width: 180px;
+        background-color:#2b2f3a ;
+      }
+      &.long{
+        width: 180px;
+      }
+      &.short{
+        width: 120px;
+      }
+    }
+
+  }
+  .pop-input-box{
+    width: 500px;
+    margin: auto;
+  }
+  .pop-success-tip{
+    text-align: center;
+    line-height: 50px;
+    padding: 50px 0;
+  }
+  .pop-box{
+    .close {
+      /*top: 14px;*/
+      /*right: 16px;*/
+      cursor: pointer;
+      transition: all 0.5s;
+      position: relative;
+      &:hover {
+        transform: rotate(180deg);
+      }
+    }
+  }
 </style>
