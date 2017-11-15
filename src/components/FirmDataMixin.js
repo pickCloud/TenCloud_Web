@@ -55,7 +55,11 @@ export default {
       })
     },
     invite () {
-      this.setPopState({name: 'pop_all', value: true})
+      this.setPopState({name: 'pop_all', value: 1})
+      this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id}})
+    },
+    inviteCondition () {
+      this.setPopState({name: 'pop_all', value: 2})
       this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id}})
     }
   },

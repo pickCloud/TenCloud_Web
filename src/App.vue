@@ -45,6 +45,10 @@
     justify-content: space-around;
     align-items: center;
   }
+  .flex-direction-row{
+    display: flex;
+    flex-direction: column;
+  }
   .flex-flex-grow-1{
     flex-basis:300px;
   }

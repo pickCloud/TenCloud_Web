@@ -31,6 +31,7 @@ const ChartContainerHistory = r => require.ensure([], () => r(require('@/compone
 // const FileHubOut = r => require.ensure([], () => r(require('@/components/filehub/FileHubOut')), 'filehubout')
 const FirmData = r => require.ensure([], () => r(require('@/components/FirmData')), 'FirmData')
 const FirmAdd = r => require.ensure([], () => r(require('@/components/FirmAdd')), 'FirmAdd')
+const CompleteData = r => require.ensure([], () => r(require('@/components/CompleteData')), 'CompleteData')
 Vue.use(Router)
 
 const router = new Router({
@@ -159,6 +160,12 @@ const router = new Router({
           name: 'ChartContainerHistory',
           meta: {level: 2},
           component: ChartContainerHistory
+        },
+        {
+          path: '/CompleteData',
+          name: 'CompleteData',
+          meta: {level: 0},
+          component: CompleteData
         }
       ]
     },

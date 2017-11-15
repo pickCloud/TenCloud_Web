@@ -3,15 +3,14 @@ import {mapState, mapMutations} from 'vuex'
 
 export default {
   data: () => ({
-    type: 0,
     tietle: {
-      '0': '邀请员工',
       '1': '邀请员工',
-      '2': '邀请员工',
+      '2': '设置员工加入条件',
       '3': '邀请员工',
       '4': '邀请员工',
       '5': '邀请员工',
-      '6': '邀请员工'
+      '6': '邀请员工',
+      '7': '邀请员工'
     }
   }),
   methods: {

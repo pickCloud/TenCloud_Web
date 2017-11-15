@@ -60,9 +60,9 @@
           <div class="panel-title flex-space-between" slot="title">
             <div>员工列表</div>
             <div>
-            <m-btn class="btn" @click.native="invite">邀请员工</m-btn>
-            <m-btn>设置</m-btn>
-            <m-btn>更换管理员</m-btn>
+            <m-btn class="primary_txt" @click.native="invite">邀请员工</m-btn>
+            <m-btn class="primary_txt" @click.native="inviteCondition"  >设置</m-btn>
+            <m-btn class="primary_txt">更换管理员</m-btn>
             </div>
           </div>
           <div class="panel-body p-b16">

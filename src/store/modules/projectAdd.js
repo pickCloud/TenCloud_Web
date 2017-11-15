@@ -28,7 +28,6 @@ export default {
   },
   actions: {
     getActionsNum (ctx) {
-      console.log(1)
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class='page-pad page-userinfo'>
+  <div class='page-pad page-userinfo' style="padding: 0">
     <div class="col xs-12 lg-6 userinfo-padding">
     <panel class=''>
       <div class="panel-title" slot="title" >
@@ -153,6 +153,7 @@
           <div class="flex-flex-end" style="flex-grow:1;padding-right: 10px">
             <m-btn class="no-radius btn-github">解除绑定</m-btn>
             <m-btn class="primary_bg grey-dark_txt" @click.native="">进入企业</m-btn>
+            <m-btn class="primary_bg grey-dark_txt" @click.native="apply">申请加入企业</m-btn>
           </div>
       </div>
     </div>
@@ -203,6 +204,9 @@
       },
       changePassword () {
         this.setPopState({name: 'pop_changePassword', value: true})
+      },
+      apply () {
+        this.$router.push({name: 'CompleteData', params: {id: '1'}})
       },
       getApiData () {
         this.getCompany()

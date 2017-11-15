@@ -66,6 +66,8 @@ const APIS = {
   company_detail: {u: '/api/company/', m: 'get'},
   company_updata: {u: '/api/company/update', m: 'get'},
   company_invite: {u: '/api/company/', m: 'get'},
+  company_setCondition: {u: '/api/company/', m: 'post'},
+  company_apply: {u: '/api/company/application', m: 'get'},
   message_get: {u: '/api/messages/', m: 'get'},
   islocal: islocal
 }

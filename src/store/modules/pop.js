@@ -3,7 +3,7 @@ export default {
   namespaced: true,
   state: {
     pop_changePassword: false,
-    pop_all: true,
+    pop_all: 0,
     pop_params: {
       cid: ''
     }

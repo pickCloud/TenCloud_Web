@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="page-pad page-machine-detail">
+  <div >
+    <div class="page-pad page-machine-detail" >
       <m-row :gutter="16">
         <m-col class="xs-12">
           <panel class="m-b16">
