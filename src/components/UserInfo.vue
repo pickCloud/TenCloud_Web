@@ -153,7 +153,7 @@
           <div class="flex-flex-end" style="flex-grow:1;padding-right: 10px">
             <m-btn class="no-radius btn-github">解除绑定</m-btn>
             <m-btn class="primary_bg grey-dark_txt" @click.native="">进入企业</m-btn>
-            <m-btn class="primary_bg grey-dark_txt" @click.native="apply">申请加入企业</m-btn>
+            <m-btn class="primary_bg grey-dark_txt" @click.native="applyAdd">申请加入企业</m-btn>
           </div>
       </div>
     </div>
@@ -205,7 +205,7 @@
       changePassword () {
         this.setPopState({name: 'pop_changePassword', value: true})
       },
-      apply () {
+      applyAdd () {
         this.$router.push({name: 'CompleteData', params: {id: '1'}})
       },
       getApiData () {

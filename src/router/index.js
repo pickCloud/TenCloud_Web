@@ -162,7 +162,7 @@ const router = new Router({
           component: ChartContainerHistory
         },
         {
-          path: '/CompleteData',
+          path: '/invite',
           name: 'CompleteData',
           meta: {level: 0},
           component: CompleteData

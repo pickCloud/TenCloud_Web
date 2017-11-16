@@ -93,7 +93,8 @@
                 <td>{{item.ctime}}</td>
                 <td>{{item.utime}}</td>
                 <td :class="item.status===0?'pass_tip':''">{{item.status===1?'已通过审核':item.status===0?'待审核':'审核部通过'}}</td>
-                <td><m-btn>拒绝</m-btn><m-btn>允许</m-btn></td>
+                <td v-if="item.status===0"><m-btn @click.native="company_accept(item.id)>拒绝</m-btn><m-btn @click.native="company_accept(item.id)">允许</m-btn></td>
+                <td v-if="item.status===1"><m-btn >权限</m-btn><m-btn v-if="!item.is_admin" @click.native="company_accept(item.id)">解除</m-btn></td>
               </tr>
               </tbody>
             </table>

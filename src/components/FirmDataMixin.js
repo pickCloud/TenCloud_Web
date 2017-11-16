@@ -61,6 +61,11 @@ export default {
     inviteCondition () {
       this.setPopState({name: 'pop_all', value: 2})
       this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id}})
+    },
+    company_accept (id) {
+      axios.http('company_accept', {id: id}, 'post').then(d => {
+        this.$toast('审核成功', 'cc')
+      })
     }
   },
   computed: {
