@@ -34,9 +34,9 @@
     data: () => ({
       data: {
         cid: 2,
-        company_name: '测试企业',
-        contact: '白大侠',
-        setting: 'name,mobile'
+        company_name: '',
+        contact: '',
+        setting: ''
       },
       personData: {
         id_card: '',

@@ -5,8 +5,10 @@
           <m-col class="xs-12">
             <panel class="m-b16">
               <div class="panel-title flex-space-between" slot="title">
-                <span class="bold m-r8">公司名字</span>
-                <div >
+                <div class="p-lr-16">
+                  <input type="text" class="inp-editor input-height" :disabled="!isEditor" :class="{'editor':isEditor}" v-model="form.name">
+                </div>
+                  <div >
                   <m-btn  @click.native="changeData" v-if="!isEditor"><i class="iconfont icon-xiugai"></i> 修改</m-btn>
                   <div v-else>
                   <m-btn  @click.native="saveData">保存</m-btn>
@@ -23,7 +25,7 @@
                   <tbody>
                   <tr >
                     <td class="text-center" style="padding:0 16px">联系人</td>
-                    <td style="padding:0  16px "><input type="text" class="inp-editor input-height" :disabled="!isEditor" :class="{'editor':isEditor}" v-model="form.name"></td>
+                    <td style="padding:0  16px "><input type="text" class="inp-editor input-height" :disabled="!isEditor" :class="{'editor':isEditor}" v-model="form.contact"></td>
                   </tr>
                   <tr>
                     <td class="text-center" style="padding: 0 16px ">联系方式</td>
@@ -93,8 +95,8 @@
                 <td>{{item.ctime}}</td>
                 <td>{{item.utime}}</td>
                 <td :class="item.status===0?'pass_tip':''">{{item.status===1?'已通过审核':item.status===0?'待审核':'审核部通过'}}</td>
-                <td v-if="item.status===0"><m-btn @click.native="company_accept(item.id)>拒绝</m-btn><m-btn @click.native="company_accept(item.id)">允许</m-btn></td>
-                <td v-if="item.status===1"><m-btn >权限</m-btn><m-btn v-if="!item.is_admin" @click.native="company_accept(item.id)">解除</m-btn></td>
+                <td v-if="item.status===0"><m-btn @click.native="company_accept(item.id)">拒绝</m-btn><m-btn @click.native="company_accept(item.id)">允许</m-btn></td>
+                <td v-if="item.status===1"><m-btn >权限</m-btn><m-btn v-if="!item.is_admin" @click.native="company_delete(item.id)">解除</m-btn></td>
               </tr>
               </tbody>
             </table>

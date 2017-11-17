@@ -10,7 +10,8 @@ export default {
     },
     isEditor: false,
     module: [],
-    employees: []
+    employees: [],
+    idType: ''
   }),
   methods: {
     ...mapMutations('pop', ['setPopState']),
@@ -21,10 +22,9 @@ export default {
       let p = {
         cid: this.$route.params.id,
         mobile: this.form.mobile,
-        contact: this.form.name,
-        name: ''
+        contact: this.form.contact,
+        name: this.form.name
       }
-
       axios.http('company_updata', p, 'post').then(d => {
         this.isEditor = false
         this.$toast('更改成功', 'cc')
@@ -75,5 +75,8 @@ export default {
     this.getDataApi()
   },
   beforeDestroy () {
+  },
+  watch: {
+    '$route': 'getDataApi'
   }
 }

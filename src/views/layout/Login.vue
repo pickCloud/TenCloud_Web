@@ -87,17 +87,24 @@
         this.type = value
         this.sms_count = 0
       },
+      isOther () {
+        if (window.nextUrl) {
+          this.$router.replace({name: 'Main'})
+          window.location.href = window.location.origin + window.nextUrl
+          delete window.nextUrl
+        } else if (window.nextinvite) {
+          this.$router.replace({name: 'Main'})
+          window.location.href = window.nextinvite
+          delete window.nextinvite
+        } else {
+          this.$router.replace({name: 'Main'})
+        }
+      },
       codeResign () {
         let loginData = this.loginData
         if (this.checkPassword()) return false
         axios.http('user_setPassword', loginData, 'post').then(d => {
-          if (window.nextUrl) {
-            this.$router.replace({name: 'Main'})
-            window.location.href = window.location.origin + window.nextUrl
-            delete window.nextUrl
-          } else {
-            this.$router.replace({name: 'Main'})
-          }
+          this.isOther()
         }).catch(e => {
           this.tip.type = 'error'
           this.tip.info = e.message
@@ -108,13 +115,7 @@
         if (this.type === 1) {
           if (this.checkCodeAndMobile()) return false
           axios.http('user_login', loginData, 'post').then(d => {
-            if (window.nextUrl) {
-              this.$router.replace({name: 'Main'})
-              window.location.href = window.location.origin + window.nextUrl
-              delete window.nextUrl
-            } else {
-              this.$router.replace({name: 'Main'})
-            }
+            this.isOther()
           }).catch(e => {
             if (e.status === 10404) {
               this.isRegisn = false
@@ -126,13 +127,7 @@
         } else {
           if (this.checkPasswordAndMobile()) return true
           axios.http('user_login_password', loginData, 'post').then(d => {
-            if (window.nextUrl) {
-              this.$router.replace({name: 'Main'})
-              window.location.href = window.location.origin + window.nextUrl
-              delete window.nextUrl
-            } else {
-              this.$router.replace({name: 'Main'})
-            }
+            this.isOther()
           }).catch(e => {
             this.tip.type = 'error'
             this.tip.info = e.message

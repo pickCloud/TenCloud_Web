@@ -24,6 +24,7 @@ export default {
       }
       axios.http('company_create', this.data, 'post').then(d => {
         this.$toast('添加成功', 'cc')
+        this.$router.push({name: 'UserInfo'})
       }).catch(e => {
         this.$toast(e.message, 'cc')
       })

@@ -191,11 +191,11 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  // console.log(to)
-  // console.log(from)
-  // console.log(Global.isLogin)
   if (to.name === 'Login' && to.query.next) {
     window.nextUrl = to.query.next
+  }
+  if (to.name === 'CompleteData' && to.query.code) {
+    window.nextinvite = window.location.href
   }
   if (Global.isLogin === null) {
     Global.async('user_info', true).getData(null).then(d => {
