@@ -9,14 +9,15 @@
             </div>
             <div class="p-16">
               <div class="flex-flex">
-                <span class="primary_txt">{{data.contact }} </span>
+                <span class="primary_txt">{{inviteData.contact }} </span>
                 <span>邀请你加入</span>
-                <span class="primary_txt"> {{ data.company_name}}</span>
+                <span class="primary_txt"> {{ inviteData.company_name}}</span>
               </div>
               <div>请先完善你的资料</div>
             <div class="personContent">
               <div class="m-b16"><input class="" placeholder="姓名" v-model="personData.name"/></div>
               <div class="m-b16"><input class="" placeholder="手机号码" v-model="personData.mobile"/></div>
+              <div class="m-b16" v-if="isId_card('id_card')"><input class="" placeholder="身份证号码" v-model="personData.id_card"/></div>
               <m-btn class="btn primary_bg grey-dark_txt" :hsize="50" @click.native="checkData">提交</m-btn>
             </div>
             </div>
@@ -32,7 +33,7 @@
   import axios from '../store/request/axios'
   export default {
     data: () => ({
-      data: {
+      inviteData: {
         cid: 2,
         company_name: '',
         contact: '',
@@ -62,15 +63,22 @@
         }
         axios.http('company_apply', this.personData, 'post').then(d => {
           this.$toast('申请成功,待审核', 'cc')
+          this.$router.push({name: 'UserInfo'})
         }).catch(e => {
           this.$toast(e.message, 'cc')
         })
+      },
+      isId_card (str) {
+        if (!this.inviteData.setting) return false
+        let s = this.inviteData.setting
+        return s.match(str)
       }
     },
     created () {
+      this.personData.mobile = this.$root.userinfo.mobile
       this.personData.code = this.$route.query.code
       axios.http('company_code', '', 'get', '?code=' + this.$route.query.code).then(d => {
-        this.data = d.data
+        this.inviteData = d.data
       }).catch(e => {
 
       })

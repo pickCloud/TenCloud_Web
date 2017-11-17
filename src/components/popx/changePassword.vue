@@ -95,7 +95,6 @@
         this.$router.push({name: 'Login'})
       },
       closePop () {
-        console.log('关闭')
         this.setPopState({name: 'pop_changePassword', value: false})
       },
       getBack () {

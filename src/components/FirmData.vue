@@ -4,9 +4,9 @@
         <m-row :gutter="8">
           <m-col class="xs-12">
             <panel class="m-b16">
-              <div class="panel-title flex-space-between" slot="title">
+              <div class="panel-title flex-space-between" slot="title" style="padding: 0px 16px">
                 <div class="p-lr-16">
-                  <input type="text" class="inp-editor input-height" :disabled="!isEditor" :class="{'editor':isEditor}" v-model="form.name">
+                  <input type="text" class="inp-editor input-height" style="line-height:30px" :disabled="!isEditor" :class="{'editor':isEditor}" v-model="form.name">
                 </div>
                   <div >
                   <m-btn  @click.native="changeData" v-if="!isEditor"><i class="iconfont icon-xiugai"></i> 修改</m-btn>
@@ -95,8 +95,8 @@
                 <td>{{item.ctime}}</td>
                 <td>{{item.utime}}</td>
                 <td :class="item.status===0?'pass_tip':''">{{item.status===1?'已通过审核':item.status===0?'待审核':'审核部通过'}}</td>
-                <td v-if="item.status===0"><m-btn @click.native="company_accept(item.id)">拒绝</m-btn><m-btn @click.native="company_accept(item.id)">允许</m-btn></td>
-                <td v-if="item.status===1"><m-btn >权限</m-btn><m-btn v-if="!item.is_admin" @click.native="company_delete(item.id)">解除</m-btn></td>
+                <td v-if="item.status===0"><m-btn @click.native="company_reject(item.id)">拒绝</m-btn><m-btn @click.native="company_accept(item.id)">允许</m-btn></td>
+                <td v-if="item.status===1"><m-btn >权限</m-btn><m-btn v-if="!item.is_admin" @click.native="company_dismission(item.id)">解除</m-btn></td>
               </tr>
               </tbody>
             </table>

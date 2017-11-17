@@ -65,6 +65,19 @@ export default {
     company_accept (id) {
       axios.http('company_accept', {id: id}, 'post').then(d => {
         this.$toast('审核成功', 'cc')
+        this.getDataApi()
+      })
+    },
+    company_reject (id) {
+      axios.http('company_reject', {id: id}, 'post').then(d => {
+        this.$toast('已拒绝', 'cc')
+        this.getDataApi()
+      })
+    },
+    company_dismission (id) {
+      axios.http('company_dismission', {id: id}, 'post').then(d => {
+        this.$toast('解除成功', 'cc')
+        this.getDataApi()
       })
     }
   },

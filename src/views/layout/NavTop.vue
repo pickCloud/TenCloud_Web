@@ -15,7 +15,7 @@
           <li class="text-left"><div class="__btn" @click="logout"><i class="iconfont icon-tuichu vam" style="margin-right: 3px"></i><span class="vam">退出登录</span></div></li>
         </ul>
       </m-tip>
-      <div class="user-box btn hover-component animate-fadeIn" style="right: 140px;text-align: right;">
+      <div class="user-box btn hover-component animate-fadeIn" style="right: 160px;text-align: right;">
         <div class="user-box_label" ><i class="iconfont icon-xiaoxi vam" style="font-size: 1rem"></i> <span class="vam user-box_msg_translate common-ground_box navtop" v-if="messages.length>0"><div class="num">{{messages.length}}</div></span></div>
         <div style="position: relative;width: 400px;background-color: #2f3543" v-if="messages.length!==0">
           <ul class="child user-message_tietle ">

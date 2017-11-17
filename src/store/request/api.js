@@ -69,8 +69,9 @@ const APIS = {
   company_setCondition: {u: '/api/company/', m: 'post'},
   company_apply: {u: '/api/company/application', m: 'post'},
   company_accept: {u: '/api/company/application/accept', m: 'post'},
-  company_code: {u: '/api/company/application', m: 'post'},
-
+  company_reject: {u: '/api/company/application/reject', m: 'post'},
+  company_code: {u: '/api/company/application', m: 'get'},
+  company_dismission: {u: '/api/company/application/dismission', m: 'post'},
   message_get: {u: '/api/messages/', m: 'get'},
   islocal: islocal
 }
