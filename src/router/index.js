@@ -32,6 +32,8 @@ const ChartContainerHistory = r => require.ensure([], () => r(require('@/compone
 const FirmData = r => require.ensure([], () => r(require('@/components/FirmData')), 'FirmData')
 const FirmAdd = r => require.ensure([], () => r(require('@/components/FirmAdd')), 'FirmAdd')
 const CompleteData = r => require.ensure([], () => r(require('@/components/CompleteData')), 'CompleteData')
+const LoginInvite = r => require.ensure([], () => r(require('@/views/layout/LoginInvite')), 'LoginInvite')
+
 Vue.use(Router)
 
 const router = new Router({
@@ -174,6 +176,12 @@ const router = new Router({
       name: 'Login',
       meta: {level: 0},
       component: Login
+    },
+    {
+      path: '/loginInvite',
+      name: 'LoginInvite',
+      meta: {level: 0},
+      component: LoginInvite
     },
     {
       path: '/resign',

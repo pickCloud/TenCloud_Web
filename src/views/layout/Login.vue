@@ -158,54 +158,7 @@
     height:100%;
     overflow: hidden;
   }
-  .login-box {
-    position: absolute;
-    width: 430px;
-    /*height:677px;*/
-    right: 0;
-    top: 48%;
-    -webkit-transform: translate(0,-50%);
-  }
-  .login-form {
-    padding: 46px 32px;
-    background-color: #2f3543;
-  }
-  .login-form_title {
-    color: #91a3c0;
-    font-size: 1rem;
-    font-weight: bold;
-  }
 
-
-  //1030
-  .login-select_content {
-    /*line-height:60px;*/
-    border-bottom: #464E5C 1px solid;
-    box-sizing: border-box;
-    vertical-align: middle;
-    li{
-      display: inline-block;
-    }
-  }
-  .select-active{
-    color:#48bbc0 ;
-    box-sizing: border-box;
-    border-bottom: #48bbc0 1px solid;
-  }
-  .login-bottom{
-    position: absolute;
-    bottom: 0;
-    height: 100px;
-    width: 100%;
-    border-top:#2f3543 1px solid;
-    .center{
-      width: 1200px;
-      margin:0 auto;
-      color: #2f3543;
-      height: 100%;
-      font-size: 14px;
-    }
-  }
   @media not (max-width: 414px) {
     .login-box {
       width: 300px;
