@@ -155,7 +155,7 @@
             <m-btn class="no-radius btn-github" @click.native="">解除绑定</m-btn>
             <m-btn v-if="" class="primary_bg grey-dark_txt" @click.native="enterCompany(item.cid)">进入企业</m-btn>
             </div>
-              <m-btn v-else class="primary_bg grey-dark_txt" @click.native="applyAdd">申请加入企业</m-btn>
+              <m-btn v-else class="primary_bg grey-dark_txt" @click.native="applyAdd(item.cid)">申请加入企业</m-btn>
           </div>
       </div>
     </div>
@@ -196,8 +196,9 @@
     mixins: [DatePickerMixin],
     methods: {
       ...mapMutations('pop', ['setPopState']),
-      enterCompany (id) {
-        this.$router.push({name: 'FirmData', id: id})
+      enterCompany (cid) {
+        console.log(cid)
+        this.$router.push({name: 'FirmData', params: {id: cid}})
       },
       addCompany () {
         this.$store.commit('sitepath/SET_PATH', [
