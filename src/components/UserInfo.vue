@@ -134,7 +134,7 @@
           <div class="flex-space-around" style="padding-left: 10px">
               <div class="flex-flex-grow-1">
                 <div class="userinfo-item-up">企业名字</div>
-                <span class="userinfo-item-down">{{item.company_name}}</span>
+                <div class="userinfo-item-down companyName">{{item.company_name}}</div>
               </div>
              <div class="flex-flex-grow-1">
                <div class="userinfo-item-up">申请时间</div>
@@ -404,6 +404,12 @@
   .userinfo-item-down{
     color: #899ab6;
     font-size: 18px;
+    &.companyName{
+      width: 280px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
   .userinfo-item-up{
     color: #556278;
