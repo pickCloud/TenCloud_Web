@@ -203,7 +203,7 @@ router.beforeEach((to, from, next) => {
     window.nextUrl = to.query.next
   }
   if (to.name === 'CompleteData' && to.query.code) {
-    window.nextinvite = window.location.href
+    window.nextInviteCode = to.query.code
   }
   if (Global.isLogin === null) {
     Global.async('user_info', true).getData(null).then(d => {

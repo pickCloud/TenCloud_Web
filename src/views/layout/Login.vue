@@ -89,16 +89,20 @@
       },
       isOther () {
         if (window.nextUrl) {
+          console.log('git认证')
           this.$router.replace({name: 'Main'})
           window.location.href = window.location.origin + window.nextUrl
           delete window.nextUrl
-        } else if (window.nextinvite) {
-          this.$router.replace({name: 'Main'})
-          window.location.href = window.nextinvite
-          delete window.nextinvite
+        } else if (window.nextInviteCode) {
+          console.log('code路由')
+          this.$router.push({name: 'CompleteData', query: {'code': window.nextInviteCode}})
+//          window.location.href = window.nextinvite
+          delete window.nextInviteCode
         } else {
+          console.log('默认')
           this.$router.replace({name: 'Main'})
         }
+        console.log(window.nextInviteCode)
       },
       codeResign () {
         let loginData = this.loginData
