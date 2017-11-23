@@ -132,7 +132,7 @@
               <tr v-for="item in module">
                 <td>{{item[0]}}</td>
                 <td>{{item[1]}}</td>
-                <td><m-btn>修改</m-btn><m-btn>重命名</m-btn><m-btn>删除</m-btn></td>
+                <td><m-btn @click="changeTemp(item.id)">修改</m-btn><m-btn>重命名</m-btn><m-btn>删除</m-btn></td>
               </tr>
               </tbody>
             </m-table>

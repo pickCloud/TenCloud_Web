@@ -11,7 +11,7 @@
       <div class="">
        <Invite v-if="pop_all===1"></Invite>
        <InviteCondition v-else-if="pop_all===2"></InviteCondition>
-       <Permission v-else-if="pop_all===3"></Permission>
+       <Permission v-else-if="pop_all===3 || pop_all===5"></Permission>
        <PermissionChange v-else-if="pop_all===4"></PermissionChange>
       </div>
     </div>

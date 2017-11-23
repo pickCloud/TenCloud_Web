@@ -1,7 +1,7 @@
 const islocal = window.isLoacal = /.+localhost.+/.test(window.location.href)
 const APIS = {
-  // baseURL: islocal ? 'http://10.0.1.9' : 'http://47.94.18.22',
-  baseURL: 'https://c.10.com',
+  baseURL: islocal ? 'http://192.168.199.139:18010' : 'http://47.94.18.22',
+  // baseURL: 'https://c.10.com',
   // baseURL: 'http://192.168.1.122:8010',
   wsURL: islocal ? 'wss://10.0.1.9:8010' : 'wss://c.10.com',
   clusters: {u: '/api/clusters', m: 'get'},
@@ -76,7 +76,11 @@ const APIS = {
   company_adminTransfer: {u: '/api/company/admin/transfer', m: 'post'},
   company_getPermission: {u: '/api/permission/resource/', m: 'get'},
   company_getTemplate: {u: '/api/permission/template/', m: 'get'},
+
   message_get: {u: '/api/messages/', m: 'get'},
+
+  template_add: {u: '/api/permission/template/add', m: 'post'},
+
   islocal: islocal
 }
 export default APIS

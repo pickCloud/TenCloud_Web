@@ -1,11 +1,11 @@
 <template>
   <div>
   <div class="p-16">
-    <div class="flex-flex add-table p-b16">
+    <div class="flex-flex add-table p-b16" v-if="pop_all===3 || pop_all===5">
       <div>新增权限模板名称：</div>
       <div style="width: 400px"><input class="input-placehold" placeholder="请输入权限模板的名称" v-model="name"/></div>
     </div>
-    <div class="p-b16">
+    <div class="p-b16" v-if="pop_all===6">
       <div >
         <m-select :datas="selectData" v-model="selectValue" :sizeh="48" :sizew="300" style="border-radius: 5px;border: 1px solid #b2b2b2;"></m-select>
       </div>
@@ -31,27 +31,31 @@
         <m-btn :sizeh="30"  class="m-l16 " :class="btnDataIndex==1?'select-active':''" @click.native="btnDataIndexChange(1)">项目</m-btn>
         <m-btn :sizeh="30"  class="m-l16 " :class="btnDataIndex==2?'select-active':''" @click.native="btnDataIndexChange(2)">文件服务</m-btn>
       </div>
-      <div>
+      <div v-if="btnDataIndex==0">
         <m-table class="hover striped machines-table">
           <col width="55px" >
           <thead>
           <tr>
-            <th><m-checkbox class="list-check" :data="{label: '全选'}" v-model="isSelectAll"></m-checkbox></th>
+            <th><m-checkbox class="list-check" :data="{label: '全选'}" v-model="isSelectServerAll"></m-checkbox></th>
           </tr>
           </thead>
           <tbody>
           <tr >
-            <td  ><m-checkbox v-for="item in listts" class="list-check" v-model="selects" :data="{label:(item.label+'')}"></m-checkbox></td>
+            <td>
+              <span v-for="item in listts">
+              <m-checkbox  class="list-check" v-model="selects" :data="{label:(item.id+'')}" hide-label></m-checkbox>
+                <span>{{item.label}}</span>
+              </span>
+            </td>
           </tr>
           </tbody>
         </m-table>
       </div>
-      <!--<m-checkbox class="list-check" :data="{label: '全选'}" v-model="isSelectAll"></m-checkbox>-->
     </div>
   </div>
 
   <div class="" style="background-color: #1d212a;height: 70px;display: flex;">
-    <m-btn class="primary_bg grey-dark_txt" :sizeh="48" :sizew="300" style="margin: 11px auto">确认提交</m-btn>
+    <m-btn class="primary_bg grey-dark_txt" :sizeh="48" :sizew="300" style="margin: 11px auto" @click.native="commit">确认提交</m-btn>
   </div>
   </div>
 </template>
@@ -80,7 +84,9 @@
       btnIndex: 0,
       btnDoIndex: 0,
       btnDataIndex: 0,
-      listts: [{label: '1', value: 0}, {label: '2', value: 1}]
+      listts: [{label: '1', id: 111}, {label: '2', id: 2222}, {label: '3', id: 332}, {label: '4', id: 34}],
+      selects: [],
+      isSelectServerAll: false
     }),
     methods: {
       ...mapMutations('pop', ['setPopState']),
@@ -103,13 +109,42 @@
       },
       btnDoIndexChange (index) {
         this.btnDoIndex = index
+      },
+      commit () {
+        let p = {
+          name: this.name,
+          cid: this.cid,
+          permissions: this.permissions,
+          access_servers: this.access_servers,
+          access_projects: this.access_projects,
+          access_filehub: this.access_projects
+        }
+        let method = this.pop_all === 3 ? 'post' : 'put'
+        axios.http('template_add', p, method).then(d => {
+          this.$toast('操作成功', 'cc')
+        }).catch(e => {
+          this.$toast(e.message, 'cc')
+        })
       }
     },
     created () {
       this.getData()
     },
     computed: {
-      ...mapState('pop', ['pop_params'])
+      ...mapState('pop', ['pop_params', 'pop_all'])
+    },
+    watch: {
+      'isSelectServerAll' (n, o) {
+        if (n) {
+          this.listts.forEach((v, i) => {
+            let key = v.id + ''
+            if (this.selects.indexOf(key) === -1) this.selects.push(key)
+            console.log(this.selects)
+          })
+        } else {
+          this.selects = []
+        }
+      }
     }
   }
 </script>

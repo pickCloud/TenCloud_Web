@@ -138,11 +138,11 @@
               </div>
              <div class="flex-flex-grow-1">
                <div class="userinfo-item-up">申请时间</div>
-               <div class="userinfo-item-down">{{item.ctime}}</div>
+               <div class="userinfo-item-down">{{item.create_time}}</div>
              </div>
              <div class="flex-flex-grow-1">
                <div class="userinfo-item-up">审核时间</div>
-               <span class="userinfo-item-down">{{item.utime}}</span>
+               <span class="userinfo-item-down">{{item.updata_time}}</span>
              </div>
              <div class="flex-flex-grow-1">
                <div class="userinfo-item-up">状态</div>
