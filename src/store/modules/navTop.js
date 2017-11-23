@@ -29,7 +29,7 @@ export default {
       })
     },
     getMessages (ctx, id) {
-      axios.http('message_get', '', 'get', id).then(d => {
+      axios.http('message_get', '', 'get', '?' + id).then(d => {
         ctx.commit('setMessages', d.data)
       }).catch(e => {
       })

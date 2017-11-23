@@ -1,5 +1,5 @@
 <template>
-    <div style="margin: 0 auto;width: 300px">
+    <div class="p-16" style="margin: 0 auto;width: 300px;">
       <div class="p-b16 line-50 text-center">勾选你需要个人提供的信息</div>
       <div class="flex-flex">
           <div class="flex-flex m-l16">
@@ -46,6 +46,11 @@
     },
     computed: {
       ...mapState('pop', ['pop_params'])
+    },
+    created () {
+      axios.http('company_setCondition', '', 'get', this.pop_params.cid + '/entry/setting').then(d => {
+        if (d.data && d.data.setting) this.identify = d.data.setting.split(',').length > 2
+      })
     }
   }
 </script>

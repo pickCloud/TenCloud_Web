@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="p-16">
       <div class="p-b16">
       <span>你将邀请同事加入</span><span class="primary_txt">厦门十全十美网络科技有限公司</span>
       </div>

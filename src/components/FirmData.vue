@@ -64,7 +64,7 @@
             <div>
             <m-btn class="primary_txt" @click.native="invite">邀请员工</m-btn>
             <m-btn class="primary_txt" @click.native="inviteCondition"  >设置</m-btn>
-            <m-btn class="primary_txt">更换管理员</m-btn>
+            <m-btn class="primary_txt" @click.native="permissionChange">更换管理员</m-btn>
             </div>
           </div>
           <div class="panel-body p-b16">
@@ -80,7 +80,7 @@
               <tr>
                 <th>姓名</th>
                 <th>手机号码</th>
-                <th>身份证号</th>
+                <!--<th>身份证号</th>-->
                 <th>申请时间</th>
                 <th>加入时间</th>
                 <th>状态</th>
@@ -91,9 +91,9 @@
               <tr v-for="item in employees">
                 <td>{{item.name}}</td>
                 <td>{{item.mobile}}</td>
-                <td>{{item.is_admin}}</td>
-                <td>{{item.ctime}}</td>
-                <td>{{item.utime}}</td>
+                <!--<td>{{item.is_admin}}</td>-->
+                <td>{{item.create_time}}</td>
+                <td>{{item.update_time}}</td>
                 <td :class="item.status===0?'pass_tip':''">{{item.status===1?'已通过审核':item.status===0?'待审核':'审核部通过'}}</td>
                 <td v-if="item.status===0"><m-btn @click.native="company_reject(item.id)">拒绝</m-btn><m-btn @click.native="company_accept(item.id)">允许</m-btn></td>
                 <td v-if="item.status===1"><m-btn >权限</m-btn><m-btn v-if="!item.is_admin" @click.native="company_dismission(item.id)">解除</m-btn></td>
@@ -108,7 +108,7 @@
           <div class="panel-title flex-space-between" slot="title">
               <div>权限模板</div>
               <div>
-                <m-btn>新增权限模板</m-btn>
+                <m-btn @click.native="addTemp">新增权限模板</m-btn>
               </div>
           </div>
           <div class="panel-body">

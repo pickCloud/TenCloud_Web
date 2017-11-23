@@ -300,6 +300,9 @@
     .panel{
       background-color: #2f3543;
     }
+    &.width-plus {
+      width:1000px;
+    }
   }
   .pop-form {
     /*padding: 16px 36px;*/
@@ -393,6 +396,34 @@
       position: relative;
       &:hover {
         transform: rotate(180deg);
+      }
+    }
+  }
+  .head {
+    border-radius: 50%;
+    width: 50px;
+    height:50px;
+  }
+  .ul-li-border-bottom {
+    li{
+    position:relative;
+      &:before{
+        content: " ";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        height: 1px;
+        border-top: 1px solid #464e5c;
+        color: #464e5c;
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+        transform: scaleY(0.5);
+      }
+    }
+    li:nth-last-child(1){
+      &:before{
+        display: none;
       }
     }
   }

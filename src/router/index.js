@@ -33,6 +33,7 @@ const FirmData = r => require.ensure([], () => r(require('@/components/FirmData'
 const FirmAdd = r => require.ensure([], () => r(require('@/components/FirmAdd')), 'FirmAdd')
 const CompleteData = r => require.ensure([], () => r(require('@/components/CompleteData')), 'CompleteData')
 const LoginInvite = r => require.ensure([], () => r(require('@/views/layout/LoginInvite')), 'LoginInvite')
+const Messages = r => require.ensure([], () => r(require('@/components/Messages')), 'Messages')
 
 Vue.use(Router)
 
@@ -168,6 +169,12 @@ const router = new Router({
           name: 'CompleteData',
           meta: {level: 0},
           component: CompleteData
+        },
+        {
+          path: '/messages',
+          name: 'Messages',
+          meta: {level: 0},
+          component: Messages
         }
       ]
     },

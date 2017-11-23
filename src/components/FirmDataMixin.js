@@ -38,6 +38,7 @@ export default {
     getDataApi () {
       this.getBaseData()
       this.getEmployees()
+      this.getModule()
     },
     getBaseData () {
       axios.http('company_detail', '', 'get', this.$route.params.id).then(d => {
@@ -50,9 +51,13 @@ export default {
       })
     },
     getModule () {
-      axios.http('company_employe', '', 'get', this.$route.params.id + '/employees').then(d => {
+      axios.http('company_template', '', 'get', this.$route.params.id).then(d => {
         this.module = d.data
       })
+    },
+    addTemp () {
+      this.setPopState({name: 'pop_all', value: 3})
+      this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id}})
     },
     invite () {
       this.setPopState({name: 'pop_all', value: 1})
@@ -60,6 +65,10 @@ export default {
     },
     inviteCondition () {
       this.setPopState({name: 'pop_all', value: 2})
+      this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id}})
+    },
+    permissionChange () {
+      this.setPopState({name: 'pop_all', value: 4})
       this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id}})
     },
     company_accept (id) {
