@@ -92,6 +92,15 @@ export default {
         this.$toast('解除成功', 'cc')
         this.getDataApi()
       })
+    },
+    deleteTemp (id) {
+      let p = {
+        cid: this.$route.params.id
+      }
+      console.log(p)
+      axios.http('company_getTemplate', p, 'post', this.$route.params.id).then(d => {
+        this.$toast('删除成功', 'cc')
+      })
     }
   },
   computed: {

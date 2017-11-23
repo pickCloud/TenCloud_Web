@@ -17,6 +17,9 @@ import Clipboard from './vue-clipboard'
 import Piece from './components/piece'
 import 'jimu/dist/jimu.base.min.css'
 import './scss/app.scss'
+import TabFirst from './components/vue-permission/TabFirst'
+import TabSecond from './components/vue-permission/TabSecond'
+import TabLabel from './components/vue-permission/TabLabel'
 
 Vue.config.productionTip = false
 Vue.prototype.$Global = Global
@@ -27,6 +30,11 @@ Vue.use(VueQiniu)
 Vue.use(Jimu)
 Vue.use(Piece)
 Vue.use(Vueswiper)
+
+Vue.use(TabFirst)
+Vue.use(TabSecond)
+Vue.use(TabLabel)
+
 Vue.directive('clipboard', Clipboard)
 
 window.Date.prototype.Format = function (fmt) {
