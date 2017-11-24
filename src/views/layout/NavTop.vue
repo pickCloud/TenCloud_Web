@@ -104,14 +104,14 @@
     created () {
       if (!this.$parent.TD) {
         this.getCompany(this.$root.userinfo.id)
-        this.messageTime()
-        if (!this.timer) {
-          this.timer = self.setInterval(this.messageTime, 3000)
-        }
+//        this.messageTime()
+//        if (!this.timer) {
+//          this.timer = self.setInterval(this.messageTime, 3000)
+//        }
       }
     },
     destroyed () {
-      clearInterval(this.timer)
+//      clearInterval(this.timer)
     }
   }
 </script>

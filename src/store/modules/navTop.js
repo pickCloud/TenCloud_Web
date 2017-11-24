@@ -31,11 +31,10 @@ export default {
     getMessages (ctx, id) {
       axios.http('message_get', '', 'get', '?' + id).then(d => {
         ctx.commit('setMessages', d.data)
+        setTimeout(ctx.dispatch('getMessages', {id: id}), 30000)
       }).catch(e => {
+        ctx.dispatch('getMessages', {id: id})
       })
-    },
-    startTimer (ctx, id) {
-      ctx.dispatch('getMessages')
     }
   }
 }
