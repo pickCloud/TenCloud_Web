@@ -33,6 +33,9 @@ export default {
         ctx.commit('setMessages', d.data)
       }).catch(e => {
       })
+    },
+    startTimer (ctx, id) {
+      ctx.dispatch('getMessages')
     }
   }
 }

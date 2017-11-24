@@ -74,8 +74,8 @@ export default {
           Vue.$toast(d.message, 'cc')
         }
       }).catch(error => {
-        if (error && error.response && error.response.data && error.response.data.data.url) {
-          window.location.href = error.response.data.data.url
+        if (error && error.data && error.data.url) {
+          window.location.href = error.data.url
         }
       })
       return {}
