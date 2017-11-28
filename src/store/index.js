@@ -13,6 +13,7 @@ import mechineDetail from './modules/mechineDetail'
 import github from './modules/github'
 import pop from './modules/pop'
 import navTop from './modules/navTop'
+import firmData from './modules/firmData'
 Vue.use(Vuex)
 const debug = process.env.NODE_ENV !== 'production'
 
@@ -29,7 +30,8 @@ export default new Vuex.Store({
     mechineDetail,
     github,
     pop,
-    navTop
+    navTop,
+    firmData
   },
   strict: debug,
   plugins: debug ? [createLogger()] : []

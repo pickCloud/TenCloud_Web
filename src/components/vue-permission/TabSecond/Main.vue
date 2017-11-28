@@ -1,6 +1,6 @@
 <template>
   <div class="flex-flex">
-    <m-btn v-for="(item,index) in list" :sizeh="30" :class="btnIndex==index?'select-active':''" @click.native="btnIndexChange(index)">云服务器</m-btn>
+    <m-btn v-for="(item,index) in dataList" :sizeh="30" :class="btnIndex==index?'select-active':''" @click.native="btnIndexChange(index)">云服务器</m-btn>
   </div>
 </template>
 

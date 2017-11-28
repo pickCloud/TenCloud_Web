@@ -10,6 +10,7 @@ export default {
   mutations: {
     setMessages (state, data) {
       state.messages.splice(0, state.messages.length)
+      if (!Array.isArray(data)) return false
       data.forEach(function (item) {
         state.messages.push(item)
       })
@@ -31,9 +32,13 @@ export default {
     getMessages (ctx, id) {
       axios.http('message_get', '', 'get', '?' + id).then(d => {
         ctx.commit('setMessages', d.data)
-        setTimeout(ctx.dispatch('getMessages', {id: id}), 30000)
+        setTimeout(function () {
+          ctx.dispatch('getMessages', id)
+        }, 30000)
       }).catch(e => {
-        ctx.dispatch('getMessages', {id: id})
+        if (e.data.message === 'timeOut') {
+          ctx.dispatch('getMessages', {id: id})
+        }
       })
     }
   }

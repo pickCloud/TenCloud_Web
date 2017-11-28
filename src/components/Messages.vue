@@ -28,8 +28,8 @@
                 <div class="messages-content line-25">
                   {{item.content}}
                 </div>
-                <div class="m-b16">{{messagesTip(item.tip)}}</div>
-                <div class="btn primary_txt" @click="btn(tip)">{{item.tip+ ' >'}}</div>
+                <!--<div class="m-b16">{{messagesTip(item.sub_mode)}}</div>-->
+                <div class="btn primary_txt" @click="btn(item)">{{messagesBtn(item.sub_mode)+ ' >'}}</div>
               </div>
             </li>
             </ul>
@@ -87,28 +87,43 @@
             return '改变企业信息'
         }
       },
-      messagesTip (tip) {
-        switch (tip) {
-          case '重新提交':
+      messagesTip (code) {
+        switch (code) {
+          case 1:
             return '你可以核对信息后重新提交申请'
-          case '进入企业':
+          case 2:
             return '你可以进入企业了'
-          case '马上查看':
+          case 3:
             return ''
-          case '马上审核':
+          case 0:
             return ''
         }
       },
-      btn (tip) {
-        switch (tip) {
-          case '重新提交':
-            return ''
-          case '进入企业':
-            return '你可以进入企业了'
-          case '马上查看':
-            return ''
-          case '马上审核':
-            return '‘'
+      messagesBtn (code) {
+        switch (code) {
+          case 1:
+            return '重新提交'
+          case 2:
+            return '进入企业'
+          case 3:
+            return '马上查看'
+          case 0:
+            return '马上审核'
+        }
+      },
+      btn (item) {
+        let list = []
+        if (item.tip) list = item.tip.split(':')
+        console.log(list[0])
+        switch (item.sub_mode) {
+          case 1:
+            return this.$router.push({name: 'invite', query: {code: list[1]}})
+          case 2:
+            return this.$router.push({name: 'FirmData', params: {id: list[0]}})
+          case 3:
+            return this.$router.push({name: 'FirmData', params: {id: list[0]}})
+          case 0:
+            return this.$router.push({name: 'FirmData', params: {id: list[0]}})
         }
       }
     },

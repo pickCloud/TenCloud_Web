@@ -4,7 +4,7 @@ import Vue from 'vue'
 import router from '../../router'
 const options = {
   URL: '',
-  http: function (url = '', params = null, method = 'get', urlAdd = '', canTip = false, isForce = false) {
+  http: function (url = '', params = null, method = 'get', urlAdd = '', canTip = true, isForce = false) {
     return new Promise((resolve, reject) => {
       this.URL = api.baseURL + api[url].u + urlAdd
       if (api[url].m && method === 'get') {

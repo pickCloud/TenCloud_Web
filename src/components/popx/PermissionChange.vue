@@ -22,7 +22,7 @@
             </tr>
             </thead>
             <tbody style="height: 700px;overflow: auto">
-            <tr v-for="item in employees">
+            <tr v-for="item in employees" v-if="item.status!==-1">
               <td >
                 <m-radio v-model="watchId" :data="{label: '', value: item.uid}" ></m-radio>
               </td>
@@ -45,7 +45,7 @@
 
 <script>
   import axios from '../../store/request/axios'
-  import {mapState, mapMutations} from 'vuex'
+  import {mapState, mapMutations, mapActions} from 'vuex'
   export default {
     data: () => ({
       employees: [],
@@ -53,6 +53,7 @@
     }),
     methods: {
       ...mapMutations('pop', ['setPopState']),
+      ...mapActions('firmData', ['getEmployees']),
       setCondition () {
         this.setPopState({name: 'pop_all', value: 2})
       },
@@ -70,6 +71,7 @@
         axios.http('company_adminTransfer', {uids: [this.userId], cid: this.pop_params.cid}, 'post').then(d => {
           this.setPopState({name: 'pop_all', value: 0})
           this.$toast('更换成功', 'cc')
+          this.getEmployees(this.pop_params.cid)
         }).catch(e => {
           this.$toast(e.message, 'cc')
         })

@@ -1,5 +1,5 @@
 import axios from '../store/request/axios'
-import {mapState, mapMutations} from 'vuex'
+import {mapState, mapMutations, mapActions} from 'vuex'
 export default {
   data: () => ({
     form: {
@@ -10,11 +10,11 @@ export default {
     },
     isEditor: false,
     module: [],
-    employees: [],
     idType: ''
   }),
   methods: {
     ...mapMutations('pop', ['setPopState']),
+    ...mapActions('firmData', ['getEmployees']),
     changeData () {
       this.isEditor = !this.isEditor
     },
@@ -37,17 +37,12 @@ export default {
     },
     getDataApi () {
       this.getBaseData()
-      this.getEmployees()
+      this.getEmployees(this.$route.params.id)
       this.getModule()
     },
     getBaseData () {
       axios.http('company_detail', '', 'get', this.$route.params.id).then(d => {
         this.form = d.data[0]
-      })
-    },
-    getEmployees () {
-      axios.http('company_employe', '', 'get', this.$route.params.id + '/employees').then(d => {
-        this.employees = d.data
       })
     },
     getModule () {
@@ -65,11 +60,11 @@ export default {
     },
     invite () {
       this.setPopState({name: 'pop_all', value: 1})
-      this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id}})
+      this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id, company_name: this.form.name}})
     },
     inviteCondition () {
       this.setPopState({name: 'pop_all', value: 2})
-      this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id}})
+      this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id, company_name: this.form.name}})
     },
     permissionChange () {
       this.setPopState({name: 'pop_all', value: 4})
@@ -104,7 +99,8 @@ export default {
     }
   },
   computed: {
-    ...mapState('pop', ['pop_all'])
+    ...mapState('pop', ['pop_all']),
+    ...mapState('firmData', ['employees'])
   },
   created () {
     this.getDataApi()

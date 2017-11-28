@@ -75,7 +75,7 @@
             </div>
             <!--<m-btn class="lay-border">修改头像</m-btn>-->
           </div>
-          <p><i class="icon icon-xinxi-yin m-r8"></i>仅支持JPG、PNG格式，文件小于1M（方形图）</p>
+          <p><i class="icon icon-xinxi-yin m-r8"></i>仅支持JPG、PNG格式，文件小于1M</p>
         </m-col>
         <m-col class="xs-12 md-8">
           <div class="lay-left-right">
@@ -142,17 +142,17 @@
              </div>
              <div class="flex-flex-grow-1">
                <div class="userinfo-item-up">审核时间</div>
-               <span class="userinfo-item-down">{{item.updata_time}}</span>
+               <span class="userinfo-item-down">{{item.update_time}}</span>
              </div>
              <div class="flex-flex-grow-1">
                <div class="userinfo-item-up">状态</div>
-               <span class="userinfo-item-down">{{item.status === 0?"审核中":item.status === 1?"通过":"拒绝"}}</span>
+               <span class="userinfo-item-down">{{item.status === 0?"待审核":item.status === 1?"审核通过":"审核不通过"}}</span>
              </div>
           </div>
         </div>
-          <div class="flex-flex-end" style="flex-grow:1;padding-right: 10px">
+          <div class="flex-flex-end" style="width: 200px;padding-right: 10px">
             <div v-if="item.status === 1">
-            <m-btn class="no-radius btn-github" @click.native="">解除绑定</m-btn>
+            <m-btn class="no-radius btn-github" @click.native="deleteCompany(item.cid)">解除绑定</m-btn>
             <m-btn v-if="" class="primary_bg grey-dark_txt" @click.native="enterCompany(item.cid)">进入企业</m-btn>
             </div>
               <m-btn v-else class="primary_bg grey-dark_txt" @click.native="applyAdd(item.cid)">申请加入企业</m-btn>
@@ -197,8 +197,13 @@
     methods: {
       ...mapMutations('pop', ['setPopState']),
       enterCompany (cid) {
-        console.log(cid)
         this.$router.push({name: 'FirmData', params: {id: cid}})
+      },
+      deleteCompany (cid) {
+        axios.http('company_dismission', {id: cid}, 'post').then(d => {
+          this.$toast('解除成功', 'cc')
+          this.getCompany()
+        })
       },
       addCompany () {
         this.$store.commit('sitepath/SET_PATH', [
@@ -286,13 +291,6 @@
           }
         })
       },
-//      headHeigth () {
-//        const headel = this.$el.querySelector('.info-head')
-//        headel.style.height = headel.clientWidth + 'px'
-//        if (!this.$el.querySelector('.iconHead')) return false
-//        let fontIcon = this.$el.querySelector('.iconHead')
-//        fontIcon.style.fontSize = headel.clientWidth + 'px'
-//      },
       getThumbToken () {
         this.$Global.async('user_thumb_token', true).getData(null).then(d => {
           Qiniu.upload(this.thumbFile, d.data.token).then(d => {
@@ -405,7 +403,7 @@
     color: #899ab6;
     font-size: 18px;
     &.companyName{
-      width: 280px;
+      /*width: 280px;*/
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;

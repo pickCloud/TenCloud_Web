@@ -16,7 +16,7 @@
                   </div>
                 </div>
               </div>
-              <div class="flex-flex">
+              <div class="flex-flex" style="flex-wrap: nowrap">
                 <div class=""></div>
               <div class="xs-3">
                 <table class="list-table">
@@ -89,14 +89,14 @@
               </thead>
               <tbody >
               <tr v-for="item in employees">
-                <td>{{item.name}}</td>
+                <td><i v-if="item.is_admin" class="iconfont icon-guanliyuan yellow_txt" style="padding-right: 5px"></i>{{item.name}}</td>
                 <td>{{item.mobile}}</td>
                 <!--<td>{{item.is_admin}}</td>-->
                 <td>{{item.create_time}}</td>
                 <td>{{item.update_time}}</td>
-                <td :class="item.status===0?'pass_tip':''">{{item.status===1?'已通过审核':item.status===0?'待审核':'审核部通过'}}</td>
+                <td :class="item.status===0?'pass_tip':''">{{item.status===1?'已通过审核':item.status===0?'待审核':'审核不通过'}}</td>
                 <td v-if="item.status===0"><m-btn @click.native="company_reject(item.id)">拒绝</m-btn><m-btn @click.native="company_accept(item.id)">允许</m-btn></td>
-                <td v-if="item.status===1"><m-btn >权限</m-btn><m-btn v-if="!item.is_admin" @click.native="company_dismission(item.id)">解除</m-btn></td>
+                <td ><div v-if="item.status===1"><m-btn >权限</m-btn><m-btn v-if="!item.is_admin" @click.native="company_dismission(item.id)">解除</m-btn></div></td>
               </tr>
               </tbody>
             </table>

@@ -21,6 +21,8 @@ import TabFirst from './components/vue-permission/TabFirst'
 import TabSecond from './components/vue-permission/TabSecond'
 import TabLabel from './components/vue-permission/TabLabel'
 
+import Tabs from './components/vue-permission'
+
 Vue.config.productionTip = false
 Vue.prototype.$Global = Global
 Vue.use(Vuepopx)
@@ -34,6 +36,7 @@ Vue.use(Vueswiper)
 Vue.use(TabFirst)
 Vue.use(TabSecond)
 Vue.use(TabLabel)
+Vue.use(Tabs)
 
 Vue.directive('clipboard', Clipboard)
 

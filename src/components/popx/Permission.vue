@@ -17,6 +17,8 @@
         <!--<slot name="TabSecond"></slot>-->
       <!--</tab-first>-->
     </div>
+    <tabs name="tabs" :dataList="dataList">
+    </tabs>
     <div v-if="btnIndex==0">
       <div class="flex-flex">
         <div class="flex-flex">
@@ -249,9 +251,11 @@
   import axios from '../../store/request/axios'
   import {mapState, mapMutations} from 'vuex'
 //  import TabSecond from "../vue-permission/TabSecond/Main.vue";
+//  import TabSecond from "../vue-permission/TabSecond/Main.vue";
 //  import TabFirst from "../vue-permission/TabFirst/Main.vue";
   export default {
 //    components: {TabFirst},
+//    components: {TabSecond},
 //    components: {TabSecond},
     data: () => ({
       tempName: '',
@@ -294,7 +298,68 @@
       select3Permissions: [],
       select4Permissions: [],
       select5Permissions: [],
-      select6Permissions: []
+      select6Permissions: [],
+      dataList: [
+        {name: '功能',
+          child: [
+            {name: '云服务器',
+              child: [
+                {name: '机器',
+                  child: [
+                    {name: '机器', id: 5}]
+                },
+                {name: '项目',
+                  child: [
+                    {name: '添加项目', id: 2},
+                    {name: '删除项目', id: 9}]
+                },
+                {name: '项目3',
+                  child: [
+                    {name: '添加项目', id: 2},
+                    {name: '删除项目', id: 9}]
+                }
+              ]
+            },
+            {name: '项目',
+              child: [
+                {name: '项目子类',
+                  child: [
+                    {name: '机器', id: 5}]
+                },
+                {name: '项目子类2',
+                  child: [
+                    {name: '添加项目', id: 2},
+                    {name: '删除项目', id: 9}]
+                }
+              ]
+            }
+          ]
+        },
+        {name: '数据',
+          child: [
+            {name: '项目',
+              child: [
+                {name: '项目权限',
+                  child: [
+                    {name: 'yeste', id: 135},
+                    {name: 'zybtest', id: 143}]
+                }
+              ]
+            },
+            {name: '文件服务',
+              child: [
+                {name: '类别1',
+                  child: [
+                    {name: '12345', id: 5}]
+                },
+                {name: '类别2不可用',
+                  child: [
+                    {name: 'ten', id: 6},
+                    {name: 'Console', id: 8}]
+                }
+              ]
+            }
+          ]}]
     }),
     methods: {
       ...mapMutations('pop', ['setPopState']),

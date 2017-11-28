@@ -3,7 +3,6 @@
       <div>
         <m-btn v-for="(item,index) in list" :sizeh="30" :sizew="70" :class="btnIndex==index?'primary_bg grey-dark_txt':'panel-bg_bg'" @click.native="btnIndexChange(index)">{{item.name}}</m-btn>
       </div>
-      <tab-second v></tab-second>
     </div>
 </template>
 

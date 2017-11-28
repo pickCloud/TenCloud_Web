@@ -1,7 +1,7 @@
 <template>
   <nav class="app-top flex-space-between" :class="[miniClass]">
     <aside class="lay-aside left">
-      <span class="_logo vam"><router-link :to="{name:'Main'}"><span class="show-lay-mini">拾·云</span><span class="hide-lay-mini primary_txt"><i class="iconfont icon-shiyun" style="padding-right: 5px"></i>拾·云</span></router-link></span>
+      <span class="_logo vam"><router-link :to="{name:'Main'}"><span class="show-lay-mini"><i class="iconfont icon-shiyun primary_txt" style="padding-right: 5px"></i></span><span class="hide-lay-mini primary_txt"><i class="iconfont icon-shiyun" style="padding-right: 5px"></i>拾·云</span></router-link></span>
       <!--<span class="_cndesc vam right hide-mini">控制台</span>-->
     </aside>
     <div class="" v-if="!$parent.TD">
@@ -79,7 +79,7 @@
       changeLink (name) {
         this.$store.commit('sitepath/SET_PATH', [
           {name: 'Main', cn: '主页'},
-          {cn: name}
+          {cn: '企业资料'}
         ])
       },
       messageTime () {
@@ -104,7 +104,7 @@
     created () {
       if (!this.$parent.TD) {
         this.getCompany(this.$root.userinfo.id)
-//        this.messageTime()
+        this.messageTime()
 //        if (!this.timer) {
 //          this.timer = self.setInterval(this.messageTime, 3000)
 //        }

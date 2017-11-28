@@ -1,7 +1,7 @@
 <template>
     <div class="p-16">
       <div class="p-b16">
-      <span>你将邀请同事加入</span><span class="primary_txt">厦门十全十美网络科技有限公司</span>
+      <span>你将邀请同事加入</span><span class="primary_txt">{{this.company_name}}</span>
       </div>
       <div class="p-b16">加入企业需要个人提供<span class="primary_txt">手机、姓名、身份证号，</span>如需要改,请
       <m-btn class="btn green-l_txt" @click.native="setCondition">设置</m-btn>
@@ -33,7 +33,8 @@
         id: '',
         url: '',
         isCopy: false
-      }
+      },
+      company_name: ''
     }),
     methods: {
       ...mapMutations('pop', ['setPopState']),
@@ -54,6 +55,8 @@
     },
     created () {
       this.getShare()
+      console.log(this.pop_params.company_name)
+      this.company_name = this.pop_params.company_name
     },
     computed: {
       ...mapState('pop', ['pop_params'])
