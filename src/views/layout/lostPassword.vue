@@ -5,7 +5,7 @@
     <div class="lostPassword-form">
       <div class="lostPassword-nav flex-space-between border-bottom-1px" style="align-items: center;">
         <span>找回密码</span>
-        <m-btn class="btn primary_txt" @click.native="backLogin">返回登陆</m-btn>
+        <m-btn class="btn primary_txt" @click.native="backLogin" v-if="type!==2">返回登陆</m-btn>
       </div>
       <div class="lostPassword-status flex-space-between">
         <div class="number-content" :class="type==0?'active':''"><div class="num">1</div><div class="num-tip">验证手机</div></div>
@@ -28,12 +28,12 @@
         </div>
 
         <div >
+          <div id="captcha" class="m-b16" v-if="sms_count>2 && sms_count <10">
+            <div id="wait">载入中……</div>
+          </div>
           <div class="login-form_inp m-b16" >
             <input type="text" placeholder="请输入验证码" v-model="loginData.auth_code">
             <m-btn :sizeh="-1" @click.native="getVerifyCode" :disabled="btndis">{{btntip}}</m-btn>
-          </div>
-          <div id="captcha" class="m-b16" v-if="sms_count>2 && sms_count <10">
-            <div id="wait">载入中……</div>
           </div>
         </div>
         </div>

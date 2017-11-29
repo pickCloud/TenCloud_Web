@@ -56,9 +56,11 @@ export default {
     },
     checkHasPassword () {
       let temp = this.loginData.password === ''
+      console.log(temp)
       if (temp) {
         this.tip.type = 'error'
         this.tip.info = '密码不能为空'
+        return true
       }
       if (this.loginData.password.length < 6) {
         this.tip.type = 'error'

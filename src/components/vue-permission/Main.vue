@@ -1,15 +1,15 @@
 <template>
     <div class="">
       <slot name="tabFitst" class="m-t16">
-        <m-btn v-for="(value,key,index) in dataList" :sizeh="30" :sizew="70" class="m-r16" :class="btnIndex==key?'primary_bg grey-dark_txt':'panel-bg_bg'" @click.native="btnIndexChange(key)">{{firstName(value.name)}}</m-btn>
+        <m-btn v-for="(item,index) in dataList" :sizeh="30" :sizew="70" class="m-r16" :class="btnIndex==index?'primary_bg grey-dark_txt':'panel-bg_bg'" @click.native="btnIndexChange(index)">{{item.name}}</m-btn>
       </slot>
       <slot name ='tabSecond'>
         <div class="m-t16">
-          <m-btn v-for="(item,index) in dataList[btnIndex]" :sizeh="30" :class="btnIndexSec==key?'select-active':''" @click.native="btnIndexSecChange(index)">{{item.name}}</m-btn>
+          <m-btn v-for="(item,index) in dataList[btnIndex].child" :sizeh="30" :class="btnIndexSec==index?'select-active':''" @click.native="btnIndexSecChange(index)">{{item.name}}</m-btn>
         </div>
       </slot>
       <slot name="tabLable">
-        <m-table class="hover striped machines-table m-t16" v-for="(item,index) in dataList[btnIndex][btnIndexSec]">
+        <m-table class="hover striped machines-table m-t16" v-for="(item,index) in dataList[btnIndex].child[btnIndexSec].child">
             <col width="55px">
             <thead>
             <tr class="panel">
@@ -37,13 +37,13 @@
       props: ['dataList'],
       data: () => ({
         btnIndex: 0,
-        btnIndexSec: 0
+        btnIndexSec: 0,
+        select: false
       }),
       methods: {
         btnIndexChange (index) {
           this.btnIndex = index
-          this.btnIndexSec = ''
-          console.log(index)
+          this.btnIndexSec = 0
         },
         btnIndexSecChange (index) {
           this.btnIndexSec = index
@@ -55,7 +55,7 @@
       },
       computed: {
         isSelectFilehubAll: function () {
-          return true
+          return this.select
         }
       }
     }
