@@ -25,6 +25,18 @@ export default {
         contact: this.form.contact,
         name: this.form.name
       }
+      if (this.form.name === '') {
+        this.$toast('企业名称不能为空', 'cc')
+        return false
+      }
+      if (this.form.mobile === '') {
+        this.$toast('手机号码不能为空', 'cc')
+        return false
+      }
+      if (this.form.contact === '') {
+        this.$toast('名字不能不能为空', 'cc')
+        return false
+      }
       axios.http('company_updata', p, 'post').then(d => {
         this.isEditor = false
         this.$toast('更改成功', 'cc')

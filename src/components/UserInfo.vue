@@ -274,6 +274,14 @@
         return result
       },
       sureHandle (p) {
+        if (this.infos.name === '') {
+          this.$toast('名字不能为空', 'cc')
+          return false
+        }
+        if (this.infos.email === '') {
+          this.$toast('邮箱地址不能为空', 'cc')
+          return false
+        }
         if ((typeof p).toLowerCase() === 'number') p = null
         let cdata = p || this.checkChangeData()
         if (cdata === null || this.updateing) return
