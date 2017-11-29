@@ -299,67 +299,7 @@
       select4Permissions: [],
       select5Permissions: [],
       select6Permissions: [],
-      dataList: [
-        {name: '功能',
-          child: [
-            {name: '云服务器',
-              child: [
-                {name: '机器',
-                  child: [
-                    {name: '机器', id: 5}]
-                },
-                {name: '项目',
-                  child: [
-                    {name: '添加项目', id: 2},
-                    {name: '删除项目', id: 9}]
-                },
-                {name: '项目3',
-                  child: [
-                    {name: '添加项目', id: 2},
-                    {name: '删除项目', id: 9}]
-                }
-              ]
-            },
-            {name: '项目',
-              child: [
-                {name: '项目子类',
-                  child: [
-                    {name: '机器', id: 5}]
-                },
-                {name: '项目子类2',
-                  child: [
-                    {name: '添加项目', id: 2},
-                    {name: '删除项目', id: 9}]
-                }
-              ]
-            }
-          ]
-        },
-        {name: '数据',
-          child: [
-            {name: '项目',
-              child: [
-                {name: '项目权限',
-                  child: [
-                    {name: 'yeste', id: 135},
-                    {name: 'zybtest', id: 143}]
-                }
-              ]
-            },
-            {name: '文件服务',
-              child: [
-                {name: '类别1',
-                  child: [
-                    {name: '12345', id: 5}]
-                },
-                {name: '类别2不可用',
-                  child: [
-                    {name: 'ten', id: 6},
-                    {name: 'Console', id: 8}]
-                }
-              ]
-            }
-          ]}]
+      dataList: []
     }),
     methods: {
       ...mapMutations('pop', ['setPopState']),
@@ -368,11 +308,9 @@
       },
       getData () {
         axios.http('company_getPermission', '', 'get', this.pop_params.cid).then(d => {
-//          this.access_servers = d.data.access_servers || d.data.servers
-//          this.access_projects = d.data.access_projects || d.data.projects
-//          this.access_filehub = d.data.access_filehub || d.data.files
-//          this.permissions = d.data.permissions || d.data.permissions
-          this.dataList = d.data
+          d.data.forEach(item => {
+            this.dataList.push(item)
+          })
         })
       },
       btnIndexChange (index) {

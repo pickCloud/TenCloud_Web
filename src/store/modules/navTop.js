@@ -47,7 +47,7 @@ export default {
           ctx.dispatch('getMessages', id)
         }, 30000)
       }).catch(e => {
-        if (e.data.message === 'timeOut') {
+        if (e.message === 'timeOut') {
           ctx.dispatch('getMessages', {id: id})
         }
       })

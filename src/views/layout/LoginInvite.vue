@@ -68,8 +68,7 @@
       }
     }),
     created () {
-      let code = window.nextinvite
-      code = code.split('=')[0]
+      let code = window.nextInviteCode
       axios.http('company_code', '', 'get', '?code=' + code).then(d => {
         this.inviteData = d.data
       }).catch(e => {
