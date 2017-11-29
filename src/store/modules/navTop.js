@@ -4,7 +4,8 @@ export default {
   namespaced: true,
   state: {
     messages: [],
-    company: []
+    companyList: [],
+    companyAllList: []
   },
   getters: {},
   mutations: {
@@ -16,16 +17,26 @@ export default {
       })
     },
     setCompany (state, data) {
-      state.company.splice(0, state.company.length)
+      state.companyList.splice(0, state.companyList.length)
       data.forEach(function (item) {
-        state.company.push(item)
+        state.companyList.push(item)
+      })
+    },
+    setAllCompany (state, data) {
+      state.companyAllList.splice(0, state.companyAllList.length)
+      data.forEach(function (item) {
+        state.companyAllList.push(item)
       })
     }
   },
   actions: {
-    getCompany (ctx) {
-      axios.http('company_get').then(d => {
-        ctx.commit('setCompany', d.data)
+    getCompany (ctx, type) {
+      axios.http('company_get', '', 'get', type).then(d => {
+        if (type) {
+          ctx.commit('setCompany', d.data)
+        } else {
+          ctx.commit('setAllCompany', d.data)
+        }
       }).catch(e => {
       })
     },

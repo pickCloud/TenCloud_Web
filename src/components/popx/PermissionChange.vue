@@ -22,7 +22,7 @@
             </tr>
             </thead>
             <tbody style="height: 700px;overflow: auto">
-            <tr v-for="item in employees" v-if="item.status!==-1">
+            <tr v-for="item in employees" v-if="item.status===1">
               <td >
                 <m-radio v-model="watchId" :data="{label: '', value: item.uid}" ></m-radio>
               </td>

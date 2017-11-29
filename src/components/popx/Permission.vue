@@ -11,234 +11,234 @@
       </div>
     </div>
     <div class="flex-flex p-b16" >
-      <m-btn :sizeh="30" :sizew="70" :class="btnIndex==0?'primary_bg grey-dark_txt':'panel-bg_bg'" @click.native="btnIndexChange(0)">功能</m-btn>
-      <m-btn :sizeh="30" :sizew="70" class="m-l16 " :class="btnIndex==1?'primary_bg grey-dark_txt':'panel-bg_bg'" @click.native="btnIndexChange(1)">数据</m-btn>
+      <!--<m-btn :sizeh="30" :sizew="70" :class="btnIndex==0?'primary_bg grey-dark_txt':'panel-bg_bg'" @click.native="btnIndexChange(0)">功能</m-btn>-->
+      <!--<m-btn :sizeh="30" :sizew="70" class="m-l16 " :class="btnIndex==1?'primary_bg grey-dark_txt':'panel-bg_bg'" @click.native="btnIndexChange(1)">数据</m-btn>-->
       <!--<tab-first>-->
         <!--<slot name="TabSecond"></slot>-->
       <!--</tab-first>-->
     </div>
     <tabs name="tabs" :dataList="dataList">
     </tabs>
-    <div v-if="btnIndex==0">
-      <div class="flex-flex">
-        <div class="flex-flex">
-          <m-btn :sizeh="30" :class="btnDoIndex==0?'select-active':''" @click.native="btnDoIndexChange(0)">云服务器</m-btn>
-          <m-btn :sizeh="30"  class="m-l16 " :class="btnDoIndex==1?'select-active':''" @click.native="btnDoIndexChange(1)">项目</m-btn>
-          <m-btn :sizeh="30"  class="m-l16 " :class="btnDoIndex==2?'select-active':''" @click.native="btnDoIndexChange(2)">文件服务</m-btn>
-          <m-btn :sizeh="30"  class="m-l16 " :class="btnDoIndex==3?'select-active':''" @click.native="btnDoIndexChange(3)">企业资料</m-btn>
-          <m-btn :sizeh="30"  class="m-l16 " :class="btnDoIndex==4?'select-active':''" @click.native="btnDoIndexChange(4)">员工管理</m-btn>
-          <m-btn :sizeh="30"  class="m-l16 " :class="btnDoIndex==5?'select-active':''" @click.native="btnDoIndexChange(5)">权限模板管理</m-btn>
-          <m-btn :sizeh="30"  class="m-l16 " :class="btnDoIndex==6?'select-active':''" @click.native="btnDoIndexChange(6)">平台管理</m-btn>
-        </div>
-      </div>
-      <div v-if="btnDoIndex==0">
-        <m-table class="hover striped machines-table m-t16" >
-          <col width="55px" >
-          <thead>
-          <tr class="panel">
-            <th><m-checkbox class="list-check" :data="{label: '全选'}" v-model="is0"></m-checkbox></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>
-              <span v-for="item in permissions[btnDoIndex]">
-              <m-checkbox  class="list-check" v-model="select0Permissions" :data="{label:(item.id+'')}" hide-label></m-checkbox>
-                <span>{{item.name}}</span>
-              </span>
-            </td>
-          </tr>
-          </tbody>
-        </m-table>
-      </div>
-      <div v-if="btnDoIndex==1">
-        <m-table class="hover striped machines-table m-t16" >
-          <col width="55px" >
-          <thead>
-          <tr class="panel">
-            <th><m-checkbox class="list-check" :data="{label: '全选'}" v-model="is1"></m-checkbox></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr >
-            <td>
-              <span v-for="item in permissions[btnDoIndex]">
-              <m-checkbox  class="list-check" v-model="select1Permissions" :data="{label:(item.id+'')}" hide-label></m-checkbox>
-                <span>{{item.name}}</span>
-              </span>
-            </td>
-          </tr>
-          </tbody>
-        </m-table>
-      </div>
-      <div v-if="btnDoIndex==2">
-        <m-table class="hover striped machines-table m-t16" >
-          <col width="55px" >
-          <thead>
-          <tr class="panel">
-            <th><m-checkbox class="list-check" :data="{label: '全选'}" v-model="is2"></m-checkbox></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr class="panel">
-            <td>
-              <span v-for="item in permissions[btnDoIndex]">
-              <m-checkbox  class="list-check" v-model="select2Permissions" :data="{label:(item.id+'')}" hide-label></m-checkbox>
-                <span>{{item.name}}</span>
-              </span>
-            </td>
-          </tr>
-          </tbody>
-        </m-table>
-      </div>
-      <div v-if="btnDoIndex==3">
-        <m-table class="hover striped machines-table m-t16" >
-          <col width="55px" >
-          <thead>
-          <tr class="panel">
-            <th><m-checkbox class="list-check" :data="{label: '全选'}" v-model="is3"></m-checkbox></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>
-              <span v-for="item in permissions[btnDoIndex]">
-              <m-checkbox  class="list-check" v-model="select3Permissions" :data="{label:(item.id+'')}" hide-label></m-checkbox>
-                <span>{{item.name}}</span>
-              </span>
-            </td>
-          </tr>
-          </tbody>
-        </m-table>
-      </div>
-      <div v-if="btnDoIndex==4">
-        <m-table class="hover striped machines-table m-t16" >
-          <col width="55px" >
-          <thead>
-          <tr class="panel">
-            <th><m-checkbox class="list-check" :data="{label: '全选'}" v-model="is4"></m-checkbox></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr >
-            <td>
-              <span v-for="item in permissions[btnDoIndex]">
-              <m-checkbox  class="list-check" v-model="select4Permissions" :data="{label:(item.id+'')}" hide-label></m-checkbox>
-                <span>{{item.name}}</span>
-              </span>
-            </td>
-          </tr>
-          </tbody>
-        </m-table>
-      </div>
-      <div v-if="btnDoIndex==5">
-        <m-table class="hover striped machines-table m-t16" >
-          <col width="55px" >
-          <thead>
-          <tr class="panel">
-            <th><m-checkbox class="list-check" :data="{label: '全选'}" v-model="is5"></m-checkbox></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>
-              <span v-for="item in permissions[btnDoIndex]">
-              <m-checkbox  class="list-check" v-model="select5Permissions" :data="{label:(item.id+'')}" hide-label></m-checkbox>
-                <span>{{item.name}}</span>
-              </span>
-            </td>
-          </tr >
-          </tbody>
-        </m-table>
-      </div>
-      <div v-if="btnDoIndex==6">
-        <m-table class="hover striped machines-table m-t16" >
-          <col width="55px" >
-          <thead>
-          <tr class="panel">
-            <th><m-checkbox class="list-check" :data="{label: '全选'}" v-model="is6"></m-checkbox></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr  >
-            <td >
-              <span v-for="item in permissions[btnDoIndex]">
-              <m-checkbox  class="list-check" v-model="select6Permissions" :data="{label:(item.id+'')}" hide-label></m-checkbox>
-                <span>{{item.name}}</span>
-              </span>
-            </td>
-          </tr>
-          </tbody>
-        </m-table>
-      </div>
-    </div>
-    <div v-else>
-      <div class="flex-flex">
-        <!--<m-btn :sizeh="30" :class="btnDataIndex==0?'select-active':''" @click.native="btnDataIndexChange(0)">云服务器</m-btn>-->
-        <m-btn :sizeh="30"  class="m-l16 " :class="btnDataIndex==1?'select-active':''" @click.native="btnDataIndexChange(1)">项目</m-btn>
-        <m-btn :sizeh="30"  class="m-l16 " :class="btnDataIndex==2?'select-active':''" @click.native="btnDataIndexChange(2)">文件服务</m-btn>
-      </div>
-      <div v-if="btnDataIndex==0">
-        <m-table class="hover striped machines-table m-t16" v-for="itemOut in access_servers">
-          <col width="55px" >
-          <thead>
-          <tr class="panel">
-            <th><m-checkbox class="list-check" :data="{label: itemOut.name}" v-model="isSelectServerAll"></m-checkbox></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>
-              <span >
-              <m-checkbox  class="list-check" v-model="selectServers" :data="{label:(item.id+'')}" hide-label></m-checkbox>
-                <span>{{item.name}}</span>
-              </span>
-            </td>
-          </tr>
-          </tbody>
-        </m-table>
-      </div>
-      <div v-if="btnDataIndex==1">
-        <m-table class="hover striped machines-table m-t16">
-          <col width="55px" >
-          <thead>
-          <tr class="panel">
-            <th><m-checkbox class="list-check" :data="{label: '全选'}" v-model="isSelectProjectsAll"></m-checkbox></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr >
-            <td>
-              <span v-for="item in access_projects">
-              <m-checkbox  class="list-check" v-model="selectProjects" :data="{label:(item.id+'')}" hide-label></m-checkbox>
-                <span>{{item.name}}</span>
-              </span>
-            </td>
-          </tr>
-          </tbody>
-        </m-table>
-      </div>
-        <div v-if="btnDataIndex==2">
-          <m-table class="hover striped machines-table m-t16">
-            <col width="55px">
-            <thead>
-            <tr class="panel">
-              <th><m-checkbox class="list-check" :data="{label: '全选'}" v-model="isSelectFilehubAll"></m-checkbox></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr >
-              <td>
-              <span v-for="item in access_filehub">
-              <m-checkbox  class="list-check" v-model="selectFilehub" :data="{label:(item.id+'')}" hide-label></m-checkbox>
-                <span>{{item.filename}}</span>
-              </span>
-              </td>
-            </tr>
-            </tbody>
-          </m-table>
-        </div>
-      </div>
+    <!--<div v-if="btnIndex==0">-->
+      <!--<div class="flex-flex">-->
+        <!--<div class="flex-flex">-->
+          <!--<m-btn :sizeh="30" :class="btnDoIndex==0?'select-active':''" @click.native="btnDoIndexChange(0)">云服务器</m-btn>-->
+          <!--<m-btn :sizeh="30"  class="m-l16 " :class="btnDoIndex==1?'select-active':''" @click.native="btnDoIndexChange(1)">项目</m-btn>-->
+          <!--<m-btn :sizeh="30"  class="m-l16 " :class="btnDoIndex==2?'select-active':''" @click.native="btnDoIndexChange(2)">文件服务</m-btn>-->
+          <!--<m-btn :sizeh="30"  class="m-l16 " :class="btnDoIndex==3?'select-active':''" @click.native="btnDoIndexChange(3)">企业资料</m-btn>-->
+          <!--<m-btn :sizeh="30"  class="m-l16 " :class="btnDoIndex==4?'select-active':''" @click.native="btnDoIndexChange(4)">员工管理</m-btn>-->
+          <!--<m-btn :sizeh="30"  class="m-l16 " :class="btnDoIndex==5?'select-active':''" @click.native="btnDoIndexChange(5)">权限模板管理</m-btn>-->
+          <!--<m-btn :sizeh="30"  class="m-l16 " :class="btnDoIndex==6?'select-active':''" @click.native="btnDoIndexChange(6)">平台管理</m-btn>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div v-if="btnDoIndex==0">-->
+        <!--<m-table class="hover striped machines-table m-t16" >-->
+          <!--<col width="55px" >-->
+          <!--<thead>-->
+          <!--<tr class="panel">-->
+            <!--<th><m-checkbox class="list-check" :data="{label: '全选'}" v-model="is0"></m-checkbox></th>-->
+          <!--</tr>-->
+          <!--</thead>-->
+          <!--<tbody>-->
+          <!--<tr>-->
+            <!--<td>-->
+              <!--<span v-for="item in permissions[btnDoIndex]">-->
+              <!--<m-checkbox  class="list-check" v-model="select0Permissions" :data="{label:(item.id+'')}" hide-label></m-checkbox>-->
+                <!--<span>{{item.name}}</span>-->
+              <!--</span>-->
+            <!--</td>-->
+          <!--</tr>-->
+          <!--</tbody>-->
+        <!--</m-table>-->
+      <!--</div>-->
+      <!--<div v-if="btnDoIndex==1">-->
+        <!--<m-table class="hover striped machines-table m-t16" >-->
+          <!--<col width="55px" >-->
+          <!--<thead>-->
+          <!--<tr class="panel">-->
+            <!--<th><m-checkbox class="list-check" :data="{label: '全选'}" v-model="is1"></m-checkbox></th>-->
+          <!--</tr>-->
+          <!--</thead>-->
+          <!--<tbody>-->
+          <!--<tr >-->
+            <!--<td>-->
+              <!--<span v-for="item in permissions[btnDoIndex]">-->
+              <!--<m-checkbox  class="list-check" v-model="select1Permissions" :data="{label:(item.id+'')}" hide-label></m-checkbox>-->
+                <!--<span>{{item.name}}</span>-->
+              <!--</span>-->
+            <!--</td>-->
+          <!--</tr>-->
+          <!--</tbody>-->
+        <!--</m-table>-->
+      <!--</div>-->
+      <!--<div v-if="btnDoIndex==2">-->
+        <!--<m-table class="hover striped machines-table m-t16" >-->
+          <!--<col width="55px" >-->
+          <!--<thead>-->
+          <!--<tr class="panel">-->
+            <!--<th><m-checkbox class="list-check" :data="{label: '全选'}" v-model="is2"></m-checkbox></th>-->
+          <!--</tr>-->
+          <!--</thead>-->
+          <!--<tbody>-->
+          <!--<tr class="panel">-->
+            <!--<td>-->
+              <!--<span v-for="item in permissions[btnDoIndex]">-->
+              <!--<m-checkbox  class="list-check" v-model="select2Permissions" :data="{label:(item.id+'')}" hide-label></m-checkbox>-->
+                <!--<span>{{item.name}}</span>-->
+              <!--</span>-->
+            <!--</td>-->
+          <!--</tr>-->
+          <!--</tbody>-->
+        <!--</m-table>-->
+      <!--</div>-->
+      <!--<div v-if="btnDoIndex==3">-->
+        <!--<m-table class="hover striped machines-table m-t16" >-->
+          <!--<col width="55px" >-->
+          <!--<thead>-->
+          <!--<tr class="panel">-->
+            <!--<th><m-checkbox class="list-check" :data="{label: '全选'}" v-model="is3"></m-checkbox></th>-->
+          <!--</tr>-->
+          <!--</thead>-->
+          <!--<tbody>-->
+          <!--<tr>-->
+            <!--<td>-->
+              <!--<span v-for="item in permissions[btnDoIndex]">-->
+              <!--<m-checkbox  class="list-check" v-model="select3Permissions" :data="{label:(item.id+'')}" hide-label></m-checkbox>-->
+                <!--<span>{{item.name}}</span>-->
+              <!--</span>-->
+            <!--</td>-->
+          <!--</tr>-->
+          <!--</tbody>-->
+        <!--</m-table>-->
+      <!--</div>-->
+      <!--<div v-if="btnDoIndex==4">-->
+        <!--<m-table class="hover striped machines-table m-t16" >-->
+          <!--<col width="55px" >-->
+          <!--<thead>-->
+          <!--<tr class="panel">-->
+            <!--<th><m-checkbox class="list-check" :data="{label: '全选'}" v-model="is4"></m-checkbox></th>-->
+          <!--</tr>-->
+          <!--</thead>-->
+          <!--<tbody>-->
+          <!--<tr >-->
+            <!--<td>-->
+              <!--<span v-for="item in permissions[btnDoIndex]">-->
+              <!--<m-checkbox  class="list-check" v-model="select4Permissions" :data="{label:(item.id+'')}" hide-label></m-checkbox>-->
+                <!--<span>{{item.name}}</span>-->
+              <!--</span>-->
+            <!--</td>-->
+          <!--</tr>-->
+          <!--</tbody>-->
+        <!--</m-table>-->
+      <!--</div>-->
+      <!--<div v-if="btnDoIndex==5">-->
+        <!--<m-table class="hover striped machines-table m-t16" >-->
+          <!--<col width="55px" >-->
+          <!--<thead>-->
+          <!--<tr class="panel">-->
+            <!--<th><m-checkbox class="list-check" :data="{label: '全选'}" v-model="is5"></m-checkbox></th>-->
+          <!--</tr>-->
+          <!--</thead>-->
+          <!--<tbody>-->
+          <!--<tr>-->
+            <!--<td>-->
+              <!--<span v-for="item in permissions[btnDoIndex]">-->
+              <!--<m-checkbox  class="list-check" v-model="select5Permissions" :data="{label:(item.id+'')}" hide-label></m-checkbox>-->
+                <!--<span>{{item.name}}</span>-->
+              <!--</span>-->
+            <!--</td>-->
+          <!--</tr >-->
+          <!--</tbody>-->
+        <!--</m-table>-->
+      <!--</div>-->
+      <!--<div v-if="btnDoIndex==6">-->
+        <!--<m-table class="hover striped machines-table m-t16" >-->
+          <!--<col width="55px" >-->
+          <!--<thead>-->
+          <!--<tr class="panel">-->
+            <!--<th><m-checkbox class="list-check" :data="{label: '全选'}" v-model="is6"></m-checkbox></th>-->
+          <!--</tr>-->
+          <!--</thead>-->
+          <!--<tbody>-->
+          <!--<tr  >-->
+            <!--<td >-->
+              <!--<span v-for="item in permissions[btnDoIndex]">-->
+              <!--<m-checkbox  class="list-check" v-model="select6Permissions" :data="{label:(item.id+'')}" hide-label></m-checkbox>-->
+                <!--<span>{{item.name}}</span>-->
+              <!--</span>-->
+            <!--</td>-->
+          <!--</tr>-->
+          <!--</tbody>-->
+        <!--</m-table>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div v-else>-->
+      <!--<div class="flex-flex">-->
+        <!--&lt;!&ndash;<m-btn :sizeh="30" :class="btnDataIndex==0?'select-active':''" @click.native="btnDataIndexChange(0)">云服务器</m-btn>&ndash;&gt;-->
+        <!--<m-btn :sizeh="30"  class="m-l16 " :class="btnDataIndex==1?'select-active':''" @click.native="btnDataIndexChange(1)">项目</m-btn>-->
+        <!--<m-btn :sizeh="30"  class="m-l16 " :class="btnDataIndex==2?'select-active':''" @click.native="btnDataIndexChange(2)">文件服务</m-btn>-->
+      <!--</div>-->
+      <!--<div v-if="btnDataIndex==0">-->
+        <!--<m-table class="hover striped machines-table m-t16" v-for="itemOut in access_servers">-->
+          <!--<col width="55px" >-->
+          <!--<thead>-->
+          <!--<tr class="panel">-->
+            <!--<th><m-checkbox class="list-check" :data="{label: itemOut.name}" v-model="isSelectServerAll"></m-checkbox></th>-->
+          <!--</tr>-->
+          <!--</thead>-->
+          <!--<tbody>-->
+          <!--<tr>-->
+            <!--<td>-->
+              <!--<span >-->
+              <!--<m-checkbox  class="list-check" v-model="selectServers" :data="{label:(item.id+'')}" hide-label></m-checkbox>-->
+                <!--<span>{{item.name}}</span>-->
+              <!--</span>-->
+            <!--</td>-->
+          <!--</tr>-->
+          <!--</tbody>-->
+        <!--</m-table>-->
+      <!--</div>-->
+      <!--<div v-if="btnDataIndex==1">-->
+        <!--<m-table class="hover striped machines-table m-t16">-->
+          <!--<col width="55px" >-->
+          <!--<thead>-->
+          <!--<tr class="panel">-->
+            <!--<th><m-checkbox class="list-check" :data="{label: '全选'}" v-model="isSelectProjectsAll"></m-checkbox></th>-->
+          <!--</tr>-->
+          <!--</thead>-->
+          <!--<tbody>-->
+          <!--<tr >-->
+            <!--<td>-->
+              <!--<span v-for="item in access_projects">-->
+              <!--<m-checkbox  class="list-check" v-model="selectProjects" :data="{label:(item.id+'')}" hide-label></m-checkbox>-->
+                <!--<span>{{item.name}}</span>-->
+              <!--</span>-->
+            <!--</td>-->
+          <!--</tr>-->
+          <!--</tbody>-->
+        <!--</m-table>-->
+      <!--</div>-->
+        <!--<div v-if="btnDataIndex==2">-->
+          <!--<m-table class="hover striped machines-table m-t16">-->
+            <!--<col width="55px">-->
+            <!--<thead>-->
+            <!--<tr class="panel">-->
+              <!--<th><m-checkbox class="list-check" :data="{label: '全选'}" v-model="isSelectFilehubAll"></m-checkbox></th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+            <!--<tr >-->
+              <!--<td>-->
+              <!--<span v-for="item in access_filehub">-->
+              <!--<m-checkbox  class="list-check" v-model="selectFilehub" :data="{label:(item.id+'')}" hide-label></m-checkbox>-->
+                <!--<span>{{item.filename}}</span>-->
+              <!--</span>-->
+              <!--</td>-->
+            <!--</tr>-->
+            <!--</tbody>-->
+          <!--</m-table>-->
+        <!--</div>-->
+      <!--</div>-->
     </div>
 
   <div class="" style="background-color: #1d212a;height: 70px;display: flex;">
@@ -368,10 +368,11 @@
       },
       getData () {
         axios.http('company_getPermission', '', 'get', this.pop_params.cid).then(d => {
-          this.access_servers = d.data.access_servers || d.data.servers
-          this.access_projects = d.data.access_projects || d.data.projects
-          this.access_filehub = d.data.access_filehub || d.data.files
-          this.permissions = d.data.permissions || d.data.permissions
+//          this.access_servers = d.data.access_servers || d.data.servers
+//          this.access_projects = d.data.access_projects || d.data.projects
+//          this.access_filehub = d.data.access_filehub || d.data.files
+//          this.permissions = d.data.permissions || d.data.permissions
+          this.dataList = d.data
         })
       },
       btnIndexChange (index) {

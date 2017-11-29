@@ -3,7 +3,7 @@
     <div class="page-pad page-machine-detail" >
       <m-row :gutter="16">
         <m-col class="xs-12">
-          <panel class="m-b16">
+          <panel class="m-b16" >
             <div class="panel-title flex-space-between" slot="title">
               <span class="bold m-r8">新建企业</span>
             </div>

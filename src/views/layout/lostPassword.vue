@@ -77,6 +77,7 @@
           this.type++
           this.resetInfoTip()
         } else if (this.type === 1) {
+          this.resetInfoTip()
           if (this.checkNewPassword()) return false
           axios.http('user_resetPassword', this.loginData).then(d => {
             if (d.status === 0) {

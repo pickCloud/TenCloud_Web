@@ -128,7 +128,7 @@
         </div>
       </div>
     </div>
-    <div class="col xs-12 userinfo-padding" v-for="item in companyList">
+    <div class="col xs-12 userinfo-padding" v-for="item in companyAllList">
       <div class="company-item panel-onlyBg flex-space-between">
         <div class="" style="flex-grow:4;">
           <div class="flex-space-around" style="padding-left: 10px">
@@ -155,7 +155,7 @@
             <m-btn class="no-radius btn-github" @click.native="deleteCompany(item.cid)">解除绑定</m-btn>
             <m-btn v-if="" class="primary_bg grey-dark_txt" @click.native="enterCompany(item.cid)">进入企业</m-btn>
             </div>
-              <m-btn v-else class="primary_bg grey-dark_txt" @click.native="applyAdd(item.cid)">申请加入企业</m-btn>
+              <m-btn v-else-if="item.status === -1" class="primary_bg grey-dark_txt" @click.native="applyAdd(item.cid)">重新申请</m-btn>
           </div>
       </div>
     </div>
@@ -173,7 +173,7 @@
   import Panel from './piece/panel/Main.vue'
   import axios from '../store/request/axios'
   import changePassword from '../components/popx/changePassword.vue'
-  import {mapState, mapMutations} from 'vuex'
+  import {mapState, mapMutations, mapActions} from 'vuex'
   export default {
     components: {Panel, changePassword},
     data: () => ({
@@ -190,19 +190,19 @@
       isEditor2: false,
       updateing: false,
       xingbie: '-1',
-      thumbFile: '',
-      companyList: []
+      thumbFile: ''
     }),
     mixins: [DatePickerMixin],
     methods: {
       ...mapMutations('pop', ['setPopState']),
+      ...mapActions('navTop', ['getCompany']),
       enterCompany (cid) {
         this.$router.push({name: 'FirmData', params: {id: cid}})
       },
       deleteCompany (cid) {
         axios.http('company_dismission', {id: cid}, 'post').then(d => {
           this.$toast('解除成功', 'cc')
-          this.getCompany()
+          this.getCompany(0)
         })
       },
       addCompany () {
@@ -217,10 +217,10 @@
         this.setPopState({name: 'pop_changePassword', value: true})
       },
       applyAdd () {
-        this.$router.push({name: 'CompleteData', params: {id: '1'}})
+        this.$router.push({name: 'CompleteData', params: {id: this.infos.id}})
       },
       getApiData () {
-        this.getCompany()
+        this.getCompany(0)
         axios.http('user_info', true).then(d => {
           this.$root.userinfo = this.infos = d.data
           if (this.infos.birthday !== undefined) this.date.time = moment.unix(this.infos.birthday).format('YYYY-MM-DD')
@@ -319,19 +319,13 @@
         this.getThumbToken()
       },
       resetmobile () {
-      },
-      getCompany () {
-        axios.http('company_get').then(d => {
-          this.companyList = d.data
-        }).catch(e => {
-        })
       }
     },
     mounted () {
-//      this.headHeigth()
     },
     computed: {
       ...mapState('pop', ['pop_changePassword']),
+      ...mapState('navTop', ['companyAllList']),
       sex () {
         return this.infos.gender === undefined ? '' : parseInt(this.infos.gender) === 1 ? '男' : '女'
       }

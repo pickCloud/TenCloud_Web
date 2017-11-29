@@ -61,7 +61,7 @@ const APIS = {
   file_download: {u: '/api/file/download', m: 'post'},
   file_del: {u: '/api/file/delete', m: 'post'},
   company_create: {u: '/api/company/new', m: 'psot'},
-  company_get: {u: '/api/companies', m: 'get'},
+  company_get: {u: '/api/companies/list/', m: 'get'},
   company_employe: {u: '/api/company/', m: 'get'},
   company_template: {u: '/api/permission/template/list/', m: 'get'},
   company_detail: {u: '/api/company/', m: 'get'},

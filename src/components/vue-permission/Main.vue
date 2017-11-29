@@ -1,15 +1,15 @@
 <template>
     <div class="">
       <slot name="tabFitst" class="m-t16">
-        <m-btn v-for="(item,index) in dataList" :sizeh="30" :sizew="70" class="m-r16" :class="btnIndex==index?'primary_bg grey-dark_txt':'panel-bg_bg'" @click.native="btnIndexChange(index)">{{item.name}}</m-btn>
+        <m-btn v-for="(value,key,index) in dataList" :sizeh="30" :sizew="70" class="m-r16" :class="btnIndex==key?'primary_bg grey-dark_txt':'panel-bg_bg'" @click.native="btnIndexChange(key)">{{firstName(value.name)}}</m-btn>
       </slot>
       <slot name ='tabSecond'>
         <div class="m-t16">
-          <m-btn v-for="(item,index) in dataList[btnIndex].child" :sizeh="30" :class="btnIndexSec==index?'select-active':''" @click.native="btnIndexSecChange(index)">{{item.name}}</m-btn>
+          <m-btn v-for="(item,index) in dataList[btnIndex]" :sizeh="30" :class="btnIndexSec==key?'select-active':''" @click.native="btnIndexSecChange(index)">{{item.name}}</m-btn>
         </div>
       </slot>
       <slot name="tabLable">
-        <m-table class="hover striped machines-table m-t16" v-for="(item,index) in dataList[btnIndex].child[btnIndexSec].child">
+        <m-table class="hover striped machines-table m-t16" v-for="(item,index) in dataList[btnIndex][btnIndexSec]">
             <col width="55px">
             <thead>
             <tr class="panel">
@@ -20,7 +20,7 @@
             <tr >
               <td>
               <span v-for="items in item.child">
-              <m-checkbox  class="list-check" v-model="selectFilehub" :data="{label:(items.id+'')}" hide-label></m-checkbox>
+              <m-checkbox  class="list-check" v-model="isSelectFilehubAll" :data="{label:(items.id+'')}" hide-label></m-checkbox>
                 <span>{{items.filename||items.name}}</span>
               </span>
               </td>
@@ -34,7 +34,7 @@
 <script>
     export default {
       name: 'tabs',
-      props: ['dataList', 'dataListsec', 'dataListLabel'],
+      props: ['dataList'],
       data: () => ({
         btnIndex: 0,
         btnIndexSec: 0
@@ -42,10 +42,15 @@
       methods: {
         btnIndexChange (index) {
           this.btnIndex = index
-          this.btnIndexSec = 0
+          this.btnIndexSec = ''
+          console.log(index)
         },
         btnIndexSecChange (index) {
           this.btnIndexSec = index
+        },
+        firstName (s) {
+          if (s === 'functions') return '功能'
+          else if (s === 'data') return '数据'
         }
       },
       computed: {

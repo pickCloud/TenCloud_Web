@@ -9,7 +9,7 @@
       <m-tip class="user-box" has-arrow popperMouse>
         <div slot="label" class="user-box_label"><i class="iconfont icon-touxiang1 vam" style="font-size: 1.5rem"></i> <span class="vam userName">{{userinfo.name?userinfo.name:userinfo.mobile}}</span></div>
         <ul slot="popper">
-          <li v-for="item in company"><router-link :to="{name:'FirmData',params:{id:item.cid}}" @click.native="changeLink(item.company_name)"><i class="iconfont icon-ziliao vam"></i> <span class="vam">{{item.company_name}}</span></router-link></li>
+          <li v-for="item in companyList"><router-link :to="{name:'FirmData',params:{id:item.cid}}" @click.native="changeLink(item.company_name)"><i class="iconfont icon-ziliao vam"></i> <span class="vam">{{item.company_name}}</span></router-link></li>
           <li><router-link :to="{name:'UserInfo'}"  @click.native="userInfo"><i class="iconfont icon-ziliao vam"></i> <span class="vam">查看个人资料</span></router-link></li>
           <li><router-link :to="{name:'FirmAdd'}" @click.native="addCompany"><i class="iconfont icon-tianjiaqiye vam"></i> <span class="vam">添加企业</span></router-link></li>
           <li class="text-left"><div class="__btn" @click="logout"><i class="iconfont icon-tuichu vam" style="margin-right: 3px"></i><span class="vam">退出登录</span></div></li>
@@ -90,7 +90,7 @@
       }
     },
     computed: {
-      ...mapState('navTop', ['company', 'messages']),
+      ...mapState('navTop', ['companyList', 'messages']),
       miniClass () {
         return this.$parent.isMini ? 'lay-mini' : ''
       },
@@ -103,7 +103,7 @@
     },
     created () {
       if (!this.$parent.TD) {
-        this.getCompany(this.$root.userinfo.id)
+        this.getCompany(1)
         this.messageTime()
 //        if (!this.timer) {
 //          this.timer = self.setInterval(this.messageTime, 3000)
