@@ -27,7 +27,7 @@
       getApiData () {
         this.ver = this.$route.params.v
         this.pn = this.$route.params.pname
-        this.$Global.async('project_vlog', true).getData(null, this.pn + '/image/' + this.ver + '/log').then(d => {
+        this.$axios.http('project_vlog', '', 'get', this.pn + '/image/' + this.ver + '/log').then(d => {
           this.data = d.data
         })
       }

@@ -14,6 +14,7 @@ import github from './modules/github'
 import pop from './modules/pop'
 import navTop from './modules/navTop'
 import firmData from './modules/firmData'
+import permission from './modules/permission'
 Vue.use(Vuex)
 const debug = process.env.NODE_ENV !== 'production'
 
@@ -31,7 +32,8 @@ export default new Vuex.Store({
     github,
     pop,
     navTop,
-    firmData
+    firmData,
+    permission
   },
   strict: debug,
   plugins: debug ? [createLogger()] : []

@@ -170,7 +170,7 @@
         // 添加是否是容器历史
         this.performanceData.server_id = this.$route.params.id
         this.performanceData.container_name = this.$route.params.container_name
-        this.$Global.async(this.performanceDocker, true).getData(this.performanceData).then(d => {
+        this.$axios.http(this.performanceDocker, this.performanceData, 'post').then(d => {
           for (let i = 0; i < d.data.length; i++) {
             let date = new Date(d.data[i].created_time * 1000)
             let restr = this.timeFormat(date)

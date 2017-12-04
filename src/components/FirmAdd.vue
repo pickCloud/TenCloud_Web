@@ -13,7 +13,6 @@
               <div class="m-b16"><input class="" placeholder="手机号码" v-model="data.mobile"/></div>
               <m-btn class="btn primary_bg grey-dark_txt" :hsize="50" @click.native="checkData">提交</m-btn>
             </div>
-
           </panel>
         </m-col>
 

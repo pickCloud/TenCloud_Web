@@ -80,7 +80,7 @@ export default {
       })
     },
     machineCtr (t) {
-      this.$Global.async(t, true).getData(null, this.machineid).then(d => {
+      this.$axios.http(t, '', 'get', this.machineid).then(d => {
         if (d.status === 0) {
           this.loopGetStatus(t)
         } else {
@@ -97,7 +97,7 @@ export default {
       this.baseInfo.machine_status = temp[1]
       this.yqvalue = temp[2]
       this.loopIV = setInterval(_ => {
-        this.$Global.async('server_status', true).getData(null, this.statusApiSuf).then(d => {
+        this.$axios.http('server_status', '', 'get', this.statusApiSuf).then(d => {
           if (d.status === 0) {
             this.baseInfo.machine_status = d.data
             if (d.data === this.yqvalue) {

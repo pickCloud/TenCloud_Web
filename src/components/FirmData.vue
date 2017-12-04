@@ -61,6 +61,7 @@
         <panel class="m-b16">
           <div class="panel-title flex-space-between" slot="title">
             <div>员工列表</div>
+            <div v-if="isAdmin">离开公司</div>
             <div>
             <m-btn class="primary_txt" @click.native="invite">邀请员工</m-btn>
             <m-btn class="primary_txt" @click.native="inviteCondition"  >设置</m-btn>
@@ -137,7 +138,6 @@
               </tbody>
             </m-table>
           </div>
-
         </panel>
       </m-col>
       </m-row>

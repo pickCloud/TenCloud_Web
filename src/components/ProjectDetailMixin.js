@@ -18,7 +18,7 @@ export default {
   methods: {
     ...mapActions('mechineDetail', ['getServerOperation']),
     getApiData () {
-      this.$Global.async('project_detail', true).getData(null, this.$route.params.id).then(d => {
+      this.$axios.http('project_detail', '', 'get', this.$route.params.id).then(d => {
         if (d.status === 0) {
           this.base = d.data[0]
           this.getVerList()
@@ -33,7 +33,7 @@ export default {
       this.getServerOperation({object_type: 2, object_id: this.$route.params.id})
     },
     getVerList () {
-      this.$Global.async('project_vers', true).getData(null, this.base.name + '/versions').then(d => {
+      this.$axios.http('project_vers', '', 'get', this.base.name + '/versions').then(d => {
         if (d.status === 0) {
           this.vers = d.data
           // console.log(d.data)
@@ -59,10 +59,10 @@ export default {
     },
     getContainerList () {
       if (!this.base.deploy_ips || this.base.deploy_ips.length === 0 || this.base.deploy_ips === '') return
-      this.$Global.async('project_container_list', true).getData({
+      this.$axios.http('project_container_list', {
         container_list: this.base.deploy_ips,
         container_name: this.base.container_name
-      }).then(d => {
+      }, 'post').then(d => {
         if (d.status === 0) {
           this.containers = d.data
         }

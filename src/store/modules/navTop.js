@@ -5,7 +5,8 @@ export default {
   state: {
     messages: [],
     companyList: [],
-    companyAllList: []
+    companyAllList: [],
+    timer: ''
   },
   getters: {},
   mutations: {
@@ -27,6 +28,12 @@ export default {
       data.forEach(function (item) {
         state.companyAllList.push(item)
       })
+    },
+    setTimer (state, timer) {
+      state.timer = timer
+    },
+    clearTimer (state) {
+      clearTimeout(state.timer)
     }
   },
   actions: {
@@ -40,15 +47,15 @@ export default {
       }).catch(e => {
       })
     },
-    getMessages (ctx, id) {
-      axios.http('message_get', '', 'get', '?' + id).then(d => {
+    getMessages (ctx, type = 0) {
+      axios.http('message_get', '', 'get', type).then(d => {
         ctx.commit('setMessages', d.data)
-        setTimeout(function () {
-          ctx.dispatch('getMessages', id)
-        }, 30000)
+        ctx.commit('setTimer', setTimeout(function () {
+          ctx.dispatch('getMessages', type)
+        }, 30000))
       }).catch(e => {
         if (e.message === 'timeOut') {
-          ctx.dispatch('getMessages', {id: id})
+          ctx.dispatch('getMessages', {type: type})
         }
       })
     }

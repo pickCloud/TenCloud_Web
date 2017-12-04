@@ -114,7 +114,7 @@
         let loginData = this.loginData
         if (this.type === 1) {
           if (this.checkCodeAndMobile()) return false
-          axios.http('user_login', loginData, 'post').then(d => {
+          this.$axios.http('user_login', loginData, 'post').then(d => {
             this.isOther()
           }).catch(e => {
             if (e.status === 10404) {

@@ -20,7 +20,7 @@ export default {
   methods: {
     getVerList () {
       const reload = this.$route.params.machines === undefined
-      this.$Global.async('project_image', reload).getData(null, this.$route.params.name + '/versions').then(d => {
+      this.$axios.http('project_image', '', 'get', this.$route.params.name + '/versions').then(d => {
         if (d.status === 0) {
           this.verdata = d.data.map((v, i) => {
             return {

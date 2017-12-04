@@ -65,7 +65,7 @@ export default {
       // merge data
       let pdata = Object.assign({}, this.formdata, tempdata)
       pdata.image_source = IMG_IDX.indexOf(this.imageMode)
-      this.$Global.async(this.isEditor ? 'project_update' : 'project_add', true).getData(pdata).then(d => {
+      this.$axios.http(this.isEditor ? 'project_update' : 'project_add', pdata, 'post').then(d => {
         if (d.status === 0) {
           if (!this.isEditor) this.$router.push({name: 'Projects'})
           else this.$router.push({name: 'ProjectDetail', params: {id: this.$route.params.id}})
@@ -89,7 +89,7 @@ export default {
       this.btnIdx = 0
     },
     editorMode () {
-      this.$Global.async('project_detail', true).getData(null, this.$route.params.id).then(d => {
+      this.$axios.http('project_detail', '', 'get', this.$route.params.id).then(d => {
         if (d.status === 0) {
           let temp = this.propData = d.data[0]
           // this.setFormdata({name: 'name', value: temp.name})

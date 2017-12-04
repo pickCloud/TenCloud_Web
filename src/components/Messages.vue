@@ -114,7 +114,6 @@
       btn (item) {
         let list = []
         if (item.tip) list = item.tip.split(':')
-        console.log(list[0])
         switch (item.sub_mode) {
           case 1:
             return this.$router.push({name: 'invite', query: {code: list[1]}})

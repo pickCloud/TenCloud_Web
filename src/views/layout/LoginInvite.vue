@@ -57,7 +57,7 @@
 </template>
 
 <script>
-  import axios from '../../store/request/axios'
+//  import this.$axios from '../../store/request/this.$axios'
   import LoginmoduleMixin from '../../components/LoginModuleMixin.js'
   export default {
     mixins: [LoginmoduleMixin],
@@ -69,7 +69,7 @@
     }),
     created () {
       let code = window.nextInviteCode
-      axios.http('company_code', '', 'get', '?code=' + code).then(d => {
+      this.$axios.http('company_code', '', 'get', '?code=' + code).then(d => {
         this.inviteData = d.data
       }).catch(e => {
 

@@ -17,8 +17,9 @@
         <!--<slot name="TabSecond"></slot>-->
       <!--</tab-first>-->
     </div>
-    <tabs name="tabs" :dataList="dataList">
-    </tabs>
+    <!--<tabs name="tabs" :dataList="dataList">-->
+    <!--</tabs>-->
+    <tab-tree :model="dataList"></tab-tree>
     <!--<div v-if="btnIndex==0">-->
       <!--<div class="flex-flex">-->
         <!--<div class="flex-flex">-->
@@ -316,11 +317,15 @@
       btnIndexChange (index) {
         this.btnIndex = index
       },
-      btnDataIndexChange (index) {
-        this.btnDataIndex = index
+      changeType (data) {
+        data.data.forEach(item => {
+          if (item.name === '功能') {
+            this.setDataType()
+          }
+        })
+        return data
       },
-      btnDoIndexChange (index) {
-        this.btnDoIndex = index
+      setDataType (data, type) {
       },
       commit () {
         if (!this.tempName) {

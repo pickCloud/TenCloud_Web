@@ -152,7 +152,7 @@
         </div>
           <div class="flex-flex-end" style="width: 200px;padding-right: 10px">
             <div v-if="item.status === 1">
-            <m-btn class="no-radius btn-github" @click.native="deleteCompany(item.cid)">解除绑定</m-btn>
+            <!--<m-btn class="no-radius btn-github" @click.native="deleteCompany(item.cid)">解除绑定</m-btn>-->
             <m-btn v-if="" class="primary_bg grey-dark_txt" @click.native="enterCompany(item.cid)">进入企业</m-btn>
             </div>
               <m-btn v-else-if="item.status === -1" class="primary_bg grey-dark_txt" @click.native="applyAdd(item.cid)">重新申请</m-btn>
@@ -300,7 +300,7 @@
         })
       },
       getThumbToken () {
-        this.$Global.async('user_thumb_token', true).getData(null).then(d => {
+        this.$axios.http('user_thumb_token').then(d => {
           Qiniu.upload(this.thumbFile, d.data.token).then(d => {
             this.sureHandle({image_url: d.key})
           })

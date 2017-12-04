@@ -26,7 +26,7 @@ export default {
     getApiData () {
       this.performanceData.server_id = this.$route.params.mid
       this.performanceData.container_name = this.$route.params.name
-      this.$Global.async('container_detail', true).getData(null, this.$route.params.mid + '/container/' + this.$route.params.cid).then(d => {
+      this.$axios('container_detail', '', 'get', this.$route.params.mid + '/container/' + this.$route.params.cid).then(d => {
         if (d.status === 0) {
           this.runtime = d.data.runtime
           this.network = d.data.network
@@ -87,10 +87,10 @@ export default {
         //   deltip.actionPopper()
         //   clearTimeout(ttt)
         // }, 1000)
-        this.$Global.async('container_del', true).getData({
+        this.$axios('container_del', {
           server_id: this.$route.params.mid,
           container_id: this.$route.params.cid
-        }).then(d => {
+        }, 'post').then(d => {
           if (d.status === 0) {
             deltip.actionPopper()
             this.$router.back()

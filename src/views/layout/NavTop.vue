@@ -55,9 +55,10 @@
         this.$router.back()
       },
       logout () {
-        this.$Global.async('user_logout', true).getData({}).then(d => {
+        this.$axios.http('user_logout').then(d => {
           if (d.status === 0) {
-            this.$Global.logout()
+            this.$axios.isLogin = false
+            this.getMessages('closed')
             this.$router.replace({name: 'Login'})
           }
           this.$toast(d.message, 'cc')
@@ -83,7 +84,7 @@
         ])
       },
       messageTime () {
-        this.getMessages(this.$root.userinfo.id)
+        this.getMessages(0)
       },
       goMessages () {
         this.$router.push({name: 'Messages'})

@@ -9,7 +9,7 @@ import Vuepages from './vue-pages'
 import VueQiniu from './vue-qiniu'
 import App from './App'
 import router from './router'
-import Global from './global'
+import axios from './store/request/axios'
 import store from './store'
 // 引入自定义指令
 import Clipboard from './vue-clipboard'
@@ -22,9 +22,11 @@ import TabSecond from './components/vue-permission/TabSecond'
 import TabLabel from './components/vue-permission/TabLabel'
 
 import Tabs from './components/vue-permission'
+import TabTree from './components/vue-permission/TabTree'
+import TabTr from './components/vue-permission/TabTr'
 
 Vue.config.productionTip = false
-Vue.prototype.$Global = Global
+Vue.prototype.$axios = axios
 Vue.use(Vuepopx)
 Vue.use(Vuetask)
 Vue.use(Vuepages)
@@ -37,6 +39,8 @@ Vue.use(TabFirst)
 Vue.use(TabSecond)
 Vue.use(TabLabel)
 Vue.use(Tabs)
+Vue.use(TabTree)
+Vue.use(TabTr)
 
 Vue.directive('clipboard', Clipboard)
 

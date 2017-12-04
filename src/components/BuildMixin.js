@@ -1,6 +1,5 @@
 import dlist from './piece/datalist/Main.vue'
 import Poppers from './Poppers.js'
-import axios from '../store/request/axios'
 export default {
   mixins: [Poppers],
   data: () => ({
@@ -22,7 +21,7 @@ export default {
       this.isOpen = !this.isOpen
     },
     getVerList () {
-      this.$Global.async('project_vers', true).getData(null, this.$route.params.name + '/versions').then(d => {
+      this.$axios('project_vers', '', 'get', this.$route.params.name + '/versions').then(d => {
         if (d.status === 0) {
           this.verdata = d.data
           // console.log(d)
@@ -30,7 +29,7 @@ export default {
       })
     },
     getBranch () {
-      axios.http('project_branch', {repos_name: this.$route.params.repos_name, url: window.location.href}).then(d => {
+      this.$axios.http('project_branch', {repos_name: this.$route.params.repos_name, url: window.location.href}).then(d => {
         if (d.status === 0) {
           this.branchs = d.data
           this.branch = this.branchs[0].branch_name

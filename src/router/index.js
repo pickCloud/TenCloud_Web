@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Global from '../global.js'
+import axios from '../store/request/axios'
 
 const LayMain = r => require.ensure([], () => r(require('@/views/layout/Main')), 'laymain')
 const Main = r => require.ensure([], () => r(require('@/components/Main')), 'main')
@@ -212,15 +212,17 @@ router.beforeEach((to, from, next) => {
   if (to.name === 'CompleteData' && to.query.code) {
     window.nextInviteCode = to.query.code
   }
-  if (Global.isLogin === null) {
-    Global.async('user_info', true).getData(null).then(d => {
-      Global.isLogin = true
+  console.log(axios)
+  console.log(axios.isLogin)
+  if (axios.isLogin === null) {
+    axios.http('user_info').then(d => {
+      axios.isLogin = true
       if (to.name === 'Login') router.replace({name: 'Main'})
       else next()
       window.ROOT_DATA.userinfo = d.data
     })
   } else {
-    if (Global.isLogin && to.name === 'Login' && from.name === null) router.replace({name: 'Main'})
+    if (axios.isLogin && to.name === 'Login' && from.name === null) router.replace({name: 'Main'})
     else next()
   }
 })

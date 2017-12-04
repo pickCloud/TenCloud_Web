@@ -8,19 +8,19 @@
           <m-btn v-for="(item,index) in dataList[btnIndex]['categories']" :sizeh="30" :class="btnIndexSec==index?'select-active':''" @click.native="btnIndexSecChange(index)">{{item.name}}</m-btn>
         </div>
       </slot>
-      <slot name="tabLable">
+        <slot name="tabLable">
         <m-table class="hover striped machines-table m-t16" v-for="(item,index) in dataList[btnIndex]['categories'][btnIndexSec]['data']">
             <col width="55px">
             <thead>
             <tr class="panel">
-              <th><m-checkbox class="list-check" :data="{label: item.name}"  ></m-checkbox></th>
+              <th><m-checkbox class="list-check" :data="{label: item.name}" v-model="isSelectAll[btnIndex][btnIndexSec]" @change="selectsAllItem(item.name)" ></m-checkbox></th>
             </tr>
             </thead>
             <tbody>
             <tr >
               <td>
               <span v-for="items in item.data">
-              <m-checkbox  class="list-check" v-model="WatchId" :data="{label:(items.id+'')}" hide-label></m-checkbox>
+              <m-checkbox  class="list-check" v-model="selects" :data="{label:(items.id||items.sid+'')}" hide-label></m-checkbox>
                 <span>{{items.filename||items.name}}</span>
               </span>
               </td>
@@ -38,11 +38,12 @@
       data: () => ({
         btnIndex: 0,
         btnIndexSec: 0,
-        select: false,
+        isSelectAll: [[], []],
         permissions: [],
         access_servers: [],
         access_projects: [],
-        access_filehub: []
+        access_filehub: [],
+        selects: []
       }),
       methods: {
         btnIndexChange (index) {
@@ -52,16 +53,25 @@
         btnIndexSecChange (index) {
           this.btnIndexSec = index
         },
-        selectIdAll (ids) {
-          if (this.btnIndex === 0) {
-
-          } else if (this.btnIndex === 1) {
-
-          }
-          return true
+        selectsAllItem (name) {
+          let items = this.dataList[this.btnIndex].categories[this.btnIndexSec].data
+          console.log(name)
+          console.log(items)
+          items.forEach(item => {
+            if (item.name === name) {
+              item.data.forEach(i => {
+                if (this.isSelectAll[this.btnIndex][this.btnIndexSec]) {
+                  if (this.selects.indexOf(i.id || i.sid) === -1) this.selects.push(i.id || i.sid)
+                  console.log(this.selects)
+                } else {
+                  if (this.selects.indexOf(i.id || i.sid) !== -1) this.selects.splice(this.selects.indexOf(i.id || i.sid), 1)
+                  console.log(this.selects)
+                }
+              })
+            }
+          })
         },
         SelectId: function (id) {
-//          let items = this.dataList[this.btnIndex]['categories'][this.btnIndexSec]['data']
           if (this.btnIndex === 0) {
             return this.permissions.indexOf(id) !== -1 && this.permissions.push(id)
           } else {
@@ -73,6 +83,23 @@
               return this.access_servers.indexOf(id) !== -1 && this.access_servers.push(id)
             }
           }
+        },
+        idArray () {
+          return this.permissions
+//          if (this.btnIndex === 0) {
+//            return 'permissions'
+//          } else {
+//            if (this.btnIndexSec === 0) {
+//              console.log(1)
+//              return 'access_filehub'
+//            } else if (this.btnIndexSec === 1) {
+//              console.log(2)
+//              return 'access_projects'
+//            } else if (this.btnIndexSec === 2) {
+//              console.log(3)
+//              return 'access_servers'
+//            }
+//          }
         }
       },
       computed: {
@@ -94,27 +121,25 @@
       created () {
       },
       watch: {
-        selects (n, o) {
-          if (n) {
-            this.dataList[this.btnIndex].categories[this.btnIndexSec].data.forEach((v, i) => {
-              let key = v.id + ''
-              if (this.selects.indexOf(key) === -1) this.selects.push(key)
-            })
-          } else {
-            this.selects = []
+//        selects (n, o) {
+//          console.log('真心的')
+//          if (n) {
+//            this.dataList[this.btnIndex].categories[this.btnIndexSec].data.forEach((v, i) => {
+//              let key = v.id + ''
+//              if (this.selects.indexOf(key) === -1) this.selects.push(key)
+//            })
+//          } else {
+//            this.selects = []
+//          }
+//        },
+        btnIndex () {
+          if (this.isSelectAll[this.btnIndex][this.btnIndexSec] === undefined) {
+            this.isSelectAll[this.btnIndex][this.btnIndexSec] = false
           }
         },
-        WatchId () {
-          if (this.btnIndex === 0) {
-            return this.permissions
-          } else {
-            if (this.btnIndexSec === 0) {
-              return this.access_filehub
-            } else if (this.btnIndexSec === 1) {
-              return this.access_projects
-            } else if (this.btnIndexSec === 2) {
-              return this.access_servers
-            }
+        btnIndexSec () {
+          if (this.isSelectAll[this.btnIndex][this.btnIndexSec] === undefined) {
+            this.isSelectAll[this.btnIndex][this.btnIndexSec] = false
           }
         }
       }
