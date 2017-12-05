@@ -47,7 +47,7 @@ export default {
   actions: {
     getGitHub (store, value) {
       let getp = {url: window.location.href}
-      axios.http('project_repos', getp).then(d => {
+      axios.http('project_repos', getp, 'post').then(d => {
         if (d.status === 0) {
           if (value.gittip) {
             store.commit('setGittip', value.gittip)

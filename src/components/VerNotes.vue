@@ -21,7 +21,12 @@
     data: () => ({
       ver: '',
       pn: '',
-      data: {}
+      data: {
+        log: {
+          err: [],
+          out: []
+        }
+      }
     }),
     methods: {
       getApiData () {

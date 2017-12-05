@@ -8,7 +8,6 @@ export default {
     setListts (state, list) {
       state.listts.splice(0, state.listts.length)
       list.forEach(function (item) {
-        console.log(item)
         state.listts.push(item)
       })
     },

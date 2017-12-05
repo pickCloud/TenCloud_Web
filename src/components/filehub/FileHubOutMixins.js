@@ -22,9 +22,9 @@ export default {
         this.$toast('请选择要删除的主机', 'cc')
       } else {
         this.popperDelete('您确定要删除主机' + this.getAttrById(delids).join(',') + '吗？', _ => {
-          this.$Global.async('server_del', true).getData({
+          this.$axios.http('server_del', {
             id: delids
-          }).then(d => {
+          }, 'post').then(d => {
             if (d.status === 0) {
               this.getApiData()
             }

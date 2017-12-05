@@ -174,7 +174,7 @@
         this.performanceData.page_number = this.page_number
           //  this.performance api地址
           // 添加是否是容器历史
-        this.$Global.async(this.performance, true).getData(this.performanceData).then(d => {
+        this.$axios.http(this.performance, this.performanceData, 'post').then(d => {
           for (let i = 0; i < d.data.length; i++) {
             let date = new Date(d.data[i].created_time * 1000)
             let restr = this.timeFormat(date)

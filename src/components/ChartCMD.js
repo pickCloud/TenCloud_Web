@@ -92,7 +92,7 @@ export default {
       this.performanceData.start_time = Math.floor(olddate / 1000)
       this.performanceData.end_time = Math.floor(nowdate / 1000)
       this.performanceData.type = 0
-      this.$Global.async(this.performance, true).getData(this.performanceData).then(d => {
+      this.$axios.http(this.performance, this.performanceData, 'post').then(d => {
         if (d.status === 0) {
           // console.log(d)
           if (isClearData) {

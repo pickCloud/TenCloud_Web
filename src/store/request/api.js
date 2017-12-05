@@ -1,6 +1,6 @@
 const islocal = window.isLoacal = /.+localhost.+/.test(window.location.href)
 const APIS = {
-  baseURL: islocal ? 'https://c.10.com' : 'http://47.94.18.22',
+  baseURL: islocal ? 'https://c.10.com' : 'https://c.10.com',
   // baseURL: 'https://c.10.com',
   // baseURL: 'http://192.168.1.122:8010',
   wsURL: islocal ? 'wss://10.0.1.9:8010' : 'wss://c.10.com',

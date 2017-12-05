@@ -59,10 +59,10 @@
       <m-col class="col xs-12 lg-8">
         <!--日志-->
         <panel class="m-b16">
-          <div class="panel-title flex-space-between" slot="title">
+          <div class="panel-title flex-space-between btn-group" slot="title">
             <div>员工列表</div>
-            <div v-if="isAdmin">离开公司</div>
-            <div>
+            <m-btn v-if="isAdmin" class="btn primary_txt" @click.native="leaveCompany">离开企业</m-btn>
+            <div v-else>
             <m-btn class="primary_txt" @click.native="invite">邀请员工</m-btn>
             <m-btn class="primary_txt" @click.native="inviteCondition"  >设置</m-btn>
             <m-btn class="primary_txt" @click.native="permissionChange">更换管理员</m-btn>
@@ -97,7 +97,7 @@
                 <td>{{item.update_time}}</td>
                 <td :class="item.status===0?'pass_tip':''">{{item.status===1?'已通过审核':item.status===0?'待审核':'审核不通过'}}</td>
                 <td v-if="item.status===0"><m-btn @click.native="company_reject(item.id)">拒绝</m-btn><m-btn @click.native="company_accept(item.id)">允许</m-btn></td>
-                <td ><div v-if="item.status===1"><m-btn >权限</m-btn><m-btn v-if="!item.is_admin" @click.native="company_dismission(item.id)">解除</m-btn></div></td>
+                <td ><div v-if="item.status===1"><m-btn >权限</m-btn><m-btn v-if="!isAdmin" @click.native="company_dismission(item.id)">解除</m-btn></div></td>
               </tr>
               </tbody>
             </table>

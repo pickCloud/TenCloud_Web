@@ -81,6 +81,9 @@ export default {
       this.setPopState({name: 'pop_all', value: 1})
       this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id, company_name: this.form.name}})
     },
+    leaveCompany () {
+      this.$router.push({name: 'UserInfo'})
+    },
     inviteCondition () {
       this.setPopState({name: 'pop_all', value: 2})
       this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id, company_name: this.form.name}})

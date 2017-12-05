@@ -21,7 +21,7 @@ export default {
       this.isOpen = !this.isOpen
     },
     getVerList () {
-      this.$axios('project_vers', '', 'get', this.$route.params.name + '/versions').then(d => {
+      this.$axios.http('project_vers', '', 'get', this.$route.params.name + '/versions').then(d => {
         if (d.status === 0) {
           this.verdata = d.data
           // console.log(d)
@@ -29,13 +29,15 @@ export default {
       })
     },
     getBranch () {
-      this.$axios.http('project_branch', {repos_name: this.$route.params.repos_name, url: window.location.href}).then(d => {
+      this.$axios.http('project_branch', {repos_name: this.$route.params.repos_name, url: window.location.href}, 'post').then(d => {
         if (d.status === 0) {
           this.branchs = d.data
           this.branch = this.branchs[0].branch_name
         }
       }).catch(e => {
-        window.location.href = e.data.url
+        if (e && e.data) {
+          window.location.href = e.data.url
+        }
       })
     },
     startBuild () {

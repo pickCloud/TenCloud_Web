@@ -41,6 +41,10 @@ export default {
         })
       }
     },
+    clearLocal () {
+      window.localStorage.setItem('isHaveLocal', 'false')
+      window.localStorage.setItem('formdata', '')
+    },
     getApiData () {
       // const cid = this.clusterid = 1
       this.getProjects()

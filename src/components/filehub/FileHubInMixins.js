@@ -44,9 +44,9 @@ export default {
         this.$toast('请选择要删除的文件', 'cc')
       } else {
         this.popperDelete('您确定要删除文件' + this.getAttrById(delids, 'filename').join(',') + '吗？', _ => {
-          this.$Global.async('file_del', true).getData({
+          this.$axios.http('file_del', {
             file_ids: delids
-          }, '', false).then(d => {
+          }, 'post').then(d => {
             if (d.status === 0) {
               this.selects = []
               this.getApiData()
@@ -92,17 +92,17 @@ export default {
     },
     getApiData () {
       this.selects = []
-      this.$Global.async('file_list', true).getData({
+      this.$axios.http('file_list', {
         file_id: this.pid,
         now_page: this.now_page,
         page_number: this.page_number
-      }).then(d => {
+      }, 'post').then(d => {
         this.listts = d.data
         // console.log(d.data.files)
       })
     },
     getPagesNumber () {
-      this.$Global.async('file_pages').getData(null, this.pid + '/pages').then(d => {
+      this.$axios.http('file_pages', '', 'get', this.pid + '/pages').then(d => {
         // console.log(d)
         this.total_page = Math.ceil(d.data / this.page_number)
       })
@@ -120,10 +120,10 @@ export default {
         // callback: (type, payload, next)
         callback: ({type, payload, next}) => {
           if (payload.type === 'sure') {
-            this.$Global.async('file_create_dir', true).getData({
+            this.$axios.http('file_create_dir', {
               pid: this.pid,
               dir_name: payload.filename
-            }).then(d => {
+            }, 'post').then(d => {
               this.listts.push(d.data[0])
               next()
             })
