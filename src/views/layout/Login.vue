@@ -137,12 +137,13 @@
     },
     created () {
     },
-//    watch: {
-//      type: function () {
-//        if (this.type !== 1 && this.sms_count > 0) return
-//        this.initGeet()
-//      }
-//    },
+    watch: {
+      'loginData.mobile' () {
+        if (this.loginData.mobile.length === 11 && this.type === 1) {
+          this.getCount()
+        }
+      }
+    },
     destroyed () {
       clearInterval(this.sit)
     },

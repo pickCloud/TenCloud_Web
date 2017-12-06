@@ -14,20 +14,25 @@ const options = {
       }
       if (this.token === null && this.getToekn()) {
         this.token = this.getToekn()
-        axios.default.headers.common['Authorization'] = this.getToekn().token
+        // console.log(this.token.token)
+        // axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Content-Type, Access-Control-Allow-Headers, Authorization'
+        axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
+        // axios.defaults.headers.common['Access-Control-Allow-Methods'] = 'POST, GET'
+        axios.defaults.headers.common['Authorization'] = this.token.token
+        // axios.defaults.auth = {'Authorization': this.token.token}
       }
       axios[method](this.URL, params).then(response => {
         if (response.status === 200) {
           resolve(response.data)
-          if (this.URL === 'user_login_password' || this.URL === 'user_login') {
+          if (url === 'user_login_password' || url === 'user_login') {
             this.setToken(response.data.data)
           }
         } else {
           reject(response.data)
         }
       }).catch(error => {
-        if (canTip && error.response.status !== 403) Vue.prototype.$toast(error.response.data.message, 'cc')
-        if (error.response.status === 403) {
+        if (canTip && error.response && error.response.status !== 403) Vue.prototype.$toast(error.response.data.message, 'cc')
+        if (error.response && error.response.status === 403) {
           options.isLogin = false
           router.replace({name: 'Login'})
         }

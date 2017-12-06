@@ -223,10 +223,5 @@ export default {
   created () {
   },
   watch: {
-    'loginData.mobile' () {
-      if (this.loginData.mobile.length === 11) {
-        this.getCount(this.loginData.mobile)
-      }
-    }
   }
 }

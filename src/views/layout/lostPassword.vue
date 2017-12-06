@@ -102,6 +102,13 @@
     },
     created () {
 //      this.initGeet()
+    },
+    watch: {
+      'loginData.mobile' () {
+        if (this.loginData.mobile.length === 11 && this.type === 1) {
+          this.getCount()
+        }
+      }
     }
   }
 </script>

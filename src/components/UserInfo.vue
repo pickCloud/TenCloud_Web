@@ -409,11 +409,14 @@
     font-size: 18px;
     &.companyName{
       /*width: 280px;*/
-      overflow: hidden;
+      /*overflow: hidden;*/
       text-overflow: ellipsis;
       white-space: nowrap;
       .position {
-
+        font-size: 14px;
+        padding:2px 3px;
+        border-radius: 3px;
+        border: 1px solid #4c5c77;
       }
     }
 
