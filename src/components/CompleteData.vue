@@ -61,6 +61,10 @@
           this.$toast('请填写联系人', 'cc')
           return false
         }
+        if (!this.personData.id_card && this.isId_card()) {
+          this.$toast('请填写身份证', 'cc')
+          return false
+        }
         axios.http('company_apply', this.personData, 'post').then(d => {
           this.$toast('申请成功,待审核', 'cc')
           this.$router.push({name: 'UserInfo'})
@@ -68,7 +72,7 @@
           this.$toast(e.message, 'cc')
         })
       },
-      isId_card (str) {
+      isId_card (str = 'id_card') {
         if (!this.inviteData.setting) return false
         let s = this.inviteData.setting
         return s.match(str)

@@ -134,7 +134,10 @@
           <div class="flex-space-around" style="padding-left: 10px">
               <div class="flex-flex-grow-1">
                 <div class="userinfo-item-up">企业名字</div>
-                <div class="userinfo-item-down companyName">{{item.company_name}}</div>
+                <div class="userinfo-item-down companyName">
+                  <span>{{item.company_name}}</span>
+                  <span class="position">管理员</span>
+                  </div>
               </div>
              <div class="flex-flex-grow-1">
                <div class="userinfo-item-up">申请时间</div>
@@ -146,7 +149,7 @@
              </div>
              <div class="flex-flex-grow-1">
                <div class="userinfo-item-up">状态</div>
-               <span class="userinfo-item-down">{{item.status === 0?"待审核":item.status === 1?"审核通过":"审核不通过"}}</span>
+               <span class="userinfo-item-down">{{item.status === 0?"待审核":item.status === 1?"审核通过":item.status === 2?"创建者":"审核不通过"}}</span>
              </div>
           </div>
         </div>
@@ -409,7 +412,11 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      .position {
+
+      }
     }
+
   }
   .userinfo-item-up{
     color: #556278;

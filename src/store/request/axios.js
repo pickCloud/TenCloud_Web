@@ -14,7 +14,7 @@ const options = {
       }
       if (this.token === null && this.getToekn()) {
         this.token = this.getToekn()
-        axios.default.headers.post['token'] = this.getToekn().token
+        axios.default.headers.common['Authorization'] = this.getToekn().token
       }
       axios[method](this.URL, params).then(response => {
         if (response.status === 200) {

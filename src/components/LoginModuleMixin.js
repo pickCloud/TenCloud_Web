@@ -23,6 +23,15 @@ export default {
     isRegisn: true
   }),
   methods: {
+    getCount () {
+      axios.http('user_sms_count', '', 'get', this.loginData.mobile + '/count').then(d => {
+        this.sms_count = d.sms_count
+        if (this.sms_count > 2) {
+          this.initGeet()
+        }
+      }).catch(e => {
+      })
+    },
     resetInfoTip () {
       this.tip.type = ''
       this.tip.info = ''
@@ -96,10 +105,10 @@ export default {
           this.isRegisn = false
           return false
         } else if (e.status === 10405) {
-          this.sms_count = e.data.sms_count || 0
-          if (this.sms_count > 2) {
-            this.initGeet()
-          }
+          // this.sms_count = e.data.sms_count || 0
+          // if (this.sms_count > 2) {
+          //   this.initGeet()
+          // }
         }
         this.tip.type = 'error'
         this.tip.info = e.message
@@ -212,5 +221,12 @@ export default {
     }
   },
   created () {
+  },
+  watch: {
+    'loginData.mobile' () {
+      if (this.loginData.mobile.length === 11) {
+        this.getCount(this.loginData.mobile)
+      }
+    }
   }
 }

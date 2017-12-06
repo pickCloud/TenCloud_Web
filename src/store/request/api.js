@@ -1,6 +1,6 @@
 const islocal = window.isLoacal = /.+localhost.+/.test(window.location.href)
 const APIS = {
-  baseURL: islocal ? 'https://c.10.com' : 'https://c.10.com',
+  baseURL: islocal ? 'http://192.168.199.140:18010' : 'https://c.10.com',
   // baseURL: 'https://c.10.com',
   // baseURL: 'http://192.168.1.122:8010',
   wsURL: islocal ? 'wss://10.0.1.9:8010' : 'wss://c.10.com',
@@ -44,6 +44,7 @@ const APIS = {
   user_update: {u: '/api/user/update', m: 'post'},
   user_login: {u: '/api/user/login', m: 'post'},
   user_login_password: {u: '/api/user/login/password', m: 'post'},
+  user_sms_count: {u: '/api/user/login/sms/', m: 'get'},
   user_verify: {u: '/api/user/sms', m: 'post'},
   user_logout: {u: '/api/user/logout', m: 'post'},
   user_info: {u: '/api/user', m: 'get'},
