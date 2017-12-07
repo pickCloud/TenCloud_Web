@@ -31,10 +31,9 @@
 //        } else {
 //          tempIdx !== -1 && this.$parent.child_selected.splice(tempIdx, 1)
 //        }
-        this.$on('change', function (v) {
-          console.log(v)
-//          this.child_selected.push(v)
-        })
+//        this.$on('change', function (v) {
+//          console.log(v)
+//        })
       }
     },
     methods: {
