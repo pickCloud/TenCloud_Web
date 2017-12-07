@@ -63,9 +63,8 @@
       </div>
       <m-row class="p-16" :gutter="16">
         <m-col class="xs-12 md-4 text-center m-b16">
-          <div class="info-head m-b16" style="line-height: 139px;width: 139px;height: 139px">
-            <img :src="infos.image_url" alt="" v-if="infos.image_url">
-            <i v-else="" class="iconfont icon-touxiang1 iconHead" style="font-size: 139px;"></i>
+          <div class="info-head m-b16" :style="{backgroundImage:'url('+ infos.image_url+')'}">
+            <i v-if="!infos.image_url" class="iconfont icon-touxiang1 iconHead" style="font-size: 139px;"></i>
           </div>
 
           <div class="text-center m-b16">
@@ -290,7 +289,7 @@
         if (cdata === null || this.updateing) return
 
         this.updateing = true
-        this.$Global.async('user_update', true).getData(cdata).then(d => {
+        this.$axios.http('user_update', cdata, 'post').then(d => {
           this.$toast(d.message, 'cc')
           this.isEditor = false
           this.isEditor2 = false
@@ -365,6 +364,9 @@
     overflow: hidden;
     display: flex;
     align-items: center;
+    line-height: 139px;width: 139px;height: 139px;
+    background-size: cover;
+    background-position: center;
     img {
       max-width: 100%;
       /*max-height:100%;*/

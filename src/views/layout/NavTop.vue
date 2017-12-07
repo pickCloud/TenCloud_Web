@@ -7,7 +7,10 @@
     <div class="" v-if="!$parent.TD">
       <!--<m-btn @click.native="back" v-if="hasBack"><i class="icon icon-return"></i></m-btn>-->
       <m-tip class="user-box" has-arrow popperMouse>
-        <div slot="label" class="user-box_label"><i class="iconfont icon-touxiang1 vam" style="font-size: 1.5rem"></i> <span class="vam userName">{{userinfo.name?userinfo.name:userinfo.mobile}}</span></div>
+        <div slot="label" class="user-box_label">
+          <i class="iconfont icon-touxiang1 vam" style="font-size: 1.5rem" v-if="!userinfo.image_url"></i>
+          <div class="head" :style="{backgroundImage:'url('+ userinfo.image_url+')'}" v-else></div>
+          <span class="vam userName">{{userinfo.name?userinfo.name:userinfo.mobile}}</span></div>
         <ul slot="popper">
           <li v-for="item in companyList"><router-link :to="{name:'FirmData',params:{id:item.cid}}" @click.native="changeLink(item.company_name)"><i class="iconfont icon-ziliao vam"></i> <span class="vam">{{item.company_name}}</span></router-link></li>
           <li><router-link :to="{name:'UserInfo'}"  @click.native="userInfo"><i class="iconfont icon-ziliao vam"></i> <span class="vam">查看个人资料</span></router-link></li>
@@ -15,8 +18,10 @@
           <li class="text-left"><div class="__btn" @click="logout"><i class="iconfont icon-tuichu vam" style="margin-right: 3px"></i><span class="vam">退出登录</span></div></li>
         </ul>
       </m-tip>
-      <div class="user-box btn hover-component animate-fadeIn" style="right: 160px;text-align: right;">
-        <div class="user-box_label" @click="goMessages"><i class="iconfont icon-xiaoxi vam" style="font-size: 1rem"></i> <span class="vam user-box_msg_translate common-ground_box navtop" v-show="messages.length>0"><div class="num">{{messages.length}}</div></span></div>
+      <div class="user-box btn hover-component animate-fadeIn" style="right: 190px;text-align: right;">
+        <div class="user-box_label" @click="goMessages">
+          <i class="iconfont icon-xiaoxi vam" style="font-size: 1rem"></i>
+          <span class="vam user-box_msg_translate common-ground_box navtop" v-show="messages.length>0"><div class="num">{{messages.length}}</div></span></div>
         <div style="position: relative;width: 400px;background-color: #2f3543" v-if="false">
           <ul class="child user-message_tietle ">
             <div class="flex-space-between" style="border-bottom: 1px solid rgba(255,255,255,0.2);">
@@ -164,7 +169,18 @@
       cursor: pointer;
       .userName {
         width: 110px;
+        word-wrap: break-word;
+        overflow: hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis
       }
+      .head{
+        line-height: 50px;
+        display: inline-block;
+        vertical-align: middle;
+        background-size: cover;
+        background-position: center;
+    }
     }
     .user-box_msg_translate{
       transform: translate(-10px, -10px);

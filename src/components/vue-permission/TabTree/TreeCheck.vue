@@ -1,39 +1,47 @@
 <template>
   <div class="node-tree" :class="['node-tree-' + idx, {'panel':idx === 0}]">
     <div class="node-label">
-      <m-checkbox class="list-check" v-model="child_selected" v-on:change="updateValue(checkValue)" :value="checkValue" :data="{label:model.name, value:checkValue}"></m-checkbox>
+      <input type="checkbox" v-model="checkModel" :value="checkValue"> <lable>{{model.name}}</lable>
+      <!--<m-checkbox class="list-check" v-model="checkModel" :data="{label:model.name, value:checkValue}"></m-checkbox>-->
     </div>
-    <tree-check v-for="(item,key) in model.data" :idx="nodeIndex" :model="item" :key="key"></tree-check>
+    <tree-check v-for="(item,key) in model.data" v-model="child_selected" :idx="nodeIndex" :model="item" :key="key"></tree-check>
   </div>
 </template>
 
 <script>
   export default {
     name: 'TreeCheck',
-    model: {
-      prop: 'checked',
-      event: 'change'
-    },
-    props: ['model', 'idx'],
+    props: ['model', 'idx', 'value'],
     data: () => ({
       selected: false,
       child_selected: [],
-      childs_selected: [],
+//      childs_selected: [],
       select_all_temp: null
     }),
     watch: {
       'child_selected' (n, o) {
-        this.$emit('change', n)
-        console.log(this.child_selected)
-//        let tempIdx = this.$parent.child_selected.indexOf(this.checkValue)
+//        this.$emit('change', n)
+        console.log(this.idx + ':' + this.child_selected)
+//        let tempValue = this.value.concat()
+//        let tempIdx = tempValue.indexOf(this.checkValue)
 //        if (n.length && n.length === this.model.data.length) {
-//          if (tempIdx === -1) this.$parent.child_selected.push(this.checkValue)
+//          if (tempIdx === -1) tempValue.push(this.checkValue)
 //        } else {
-//          tempIdx !== -1 && this.$parent.child_selected.splice(tempIdx, 1)
+//          tempIdx !== -1 && tempValue.splice(tempIdx, 1)
 //        }
-//        this.$on('change', function (v) {
-//          console.log(v)
-//        })
+        this.$emit('input', n)
+      },
+      'value' (n, o) {
+        console.log(n)
+//        if (n.indexOf(this.checkValue) !== -1) {
+//          let tempSelected = []
+//          this.model.data.forEach((v1, i) => {
+//            tempSelected.push(v1.id || v1.name)
+//          })
+//          this.child_selected = tempSelected
+//        } else {
+//          this.child_selected = []
+//        }
       }
     },
     methods: {
@@ -42,6 +50,14 @@
       }
     },
     computed: {
+      checkModel: {
+        get () {
+          return this.value || this.selected
+        },
+        set (v) {
+          this.$emit('input', v)
+        }
+      },
       nodeIndex () {
         return this.idx + 1
       },

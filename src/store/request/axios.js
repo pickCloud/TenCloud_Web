@@ -12,14 +12,14 @@ const options = {
       if (api[url].m && method === 'get') {
         method = api[url].m
       }
-      if (this.token === null && this.getToekn()) {
-        this.token = this.getToekn()
-        // console.log(this.token.token)
-        // axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Content-Type, Access-Control-Allow-Headers, Authorization'
+      if (this.token === null && this.getToken()) {
+        this.token = this.getToken()
         axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
-        // axios.defaults.headers.common['Access-Control-Allow-Methods'] = 'POST, GET'
         axios.defaults.headers.common['Authorization'] = this.token.token
-        // axios.defaults.auth = {'Authorization': this.token.token}
+      } else if (this.getToken() && this.token.token !== this.getToken().token) {
+        this.token = this.getToken()
+        axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
+        axios.defaults.headers.common['Authorization'] = this.token.token
       }
       axios[method](this.URL, params).then(response => {
         if (response.status === 200) {
@@ -43,7 +43,7 @@ const options = {
   setToken (data) {
     window.localStorage.setItem('loginToken', JSON.stringify(data))
   },
-  getToekn (data) {
+  getToken (data) {
     let loginToken = window.localStorage.getItem('loginToken')
     return JSON.parse(loginToken) || ''
   }

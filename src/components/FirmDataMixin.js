@@ -10,7 +10,8 @@ export default {
     },
     isEditor: false,
     module: [],
-    idType: ''
+    idType: '',
+    isAdmin: false
   }),
   methods: {
     ...mapMutations('pop', ['setPopState']),
@@ -70,13 +71,6 @@ export default {
       this.setPopState({name: 'pop_all', value: 5})
       this.setPopState({name: 'pop_params', value: {cid: id}})
     },
-    isAdmin () {
-      this.employees.forEach(item => {
-        if (item.name === this.$root.userInfo.name) {
-          return item.is_admin
-        }
-      })
-    },
     invite () {
       this.setPopState({name: 'pop_all', value: 1})
       this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id, company_name: this.form.name}})
@@ -130,6 +124,13 @@ export default {
   beforeDestroy () {
   },
   watch: {
-    '$route': 'getDataApi'
+    '$route': 'getDataApi',
+    'employees': function () {
+      this.employees.forEach(item => {
+        if (item.mobile === this.$root.userinfo.mobile) {
+          this.isAdmin = item.is_admin
+        }
+      })
+    }
   }
 }
