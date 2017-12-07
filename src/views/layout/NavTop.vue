@@ -175,11 +175,13 @@
         text-overflow:ellipsis
       }
       .head{
-        line-height: 50px;
+        /*line-height: 50px;*/
         display: inline-block;
         vertical-align: middle;
         background-size: cover;
         background-position: center;
+        width:30px;
+        height:30px;
     }
     }
     .user-box_msg_translate{

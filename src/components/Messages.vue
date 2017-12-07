@@ -116,7 +116,7 @@
         if (item.tip) list = item.tip.split(':')
         switch (item.sub_mode) {
           case 1:
-            return this.$router.push({name: 'invite', query: {code: list[1]}})
+            return this.$router.push({name: 'CompleteData', query: {code: list[1]}})
           case 2:
             return this.$router.push({name: 'FirmData', params: {id: list[0]}})
           case 3:
