@@ -10,11 +10,11 @@
         <div slot="label" class="user-box_label">
           <i class="iconfont icon-touxiang1 vam" style="font-size: 1.5rem" v-if="!userinfo.image_url"></i>
           <div class="head" :style="{backgroundImage:'url('+ userinfo.image_url+')'}" v-else></div>
-          <span class="vam userName">{{userinfo.name?userinfo.name:userinfo.mobile}}</span></div>
+          <span class="vam userName">{{currentUser.name||currentUser.company_name}}</span></div>
         <ul slot="popper">
-          <li v-for="item in companyList"><router-link :to="{name:'FirmData',params:{id:item.cid}}" @click.native="changeLink(item.company_name)"><i class="iconfont icon-ziliao vam"></i> <span class="vam">{{item.company_name}}</span></router-link></li>
-          <li><router-link :to="{name:'UserInfo'}"  @click.native="userInfo"><i class="iconfont icon-ziliao vam"></i> <span class="vam">查看个人资料</span></router-link></li>
+          <li v-for="item in companyList"><router-link :to="{name:'FirmData',params:{id:item.cid}}" @click.native="changeLink(item)"><i class="iconfont icon-qiye vam"></i> <span class="vam">{{item.company_name}}</span></router-link></li>
           <li><router-link :to="{name:'FirmAdd'}" @click.native="addCompany"><i class="iconfont icon-tianjiaqiye vam"></i> <span class="vam">添加企业</span></router-link></li>
+          <li><router-link :to="{name:'UserInfo'}"  @click.native="userInfo"><i class="iconfont icon-geren vam"></i> <span class="vam">个人中心</span></router-link></li>
           <li class="text-left"><div class="__btn" @click="logout"><i class="iconfont icon-tuichu vam" style="margin-right: 3px"></i><span class="vam">退出登录</span></div></li>
         </ul>
       </m-tip>
@@ -48,7 +48,7 @@
 <script>
 //  import axios from '../../store/request/axios'
 //  import Cookies from 'js-cookie'
-  import {mapState, mapActions} from 'vuex'
+  import {mapState, mapMutations, mapActions} from 'vuex'
   export default {
     data: () => ({
       user: {},
@@ -56,17 +56,22 @@
     }),
     methods: {
       ...mapActions('navTop', ['getCompany', 'getMessages']),
+      ...mapMutations('user', ['UPDATE']),
       back () {
         this.$router.back()
       },
-      logout () {
-        this.$axios.http('user_logout').then(d => {
+      logout (id) {
+        let paramsId = ''
+        if (this.currentUser.cid) {
+          paramsId = this.currentUser.id
+        }
+        this.$axios.http('user_logout', {cid: paramsId}, 'post').then(d => {
           if (d.status === 0) {
             this.$axios.isLogin = false
             this.getMessages('closed')
             this.$router.replace({name: 'Login'})
           }
-          this.$toast(d.message, 'cc')
+//          this.$toast(d.message, 'cc')
         })
       },
       addCompany () {
@@ -82,21 +87,33 @@
           {cn: '个人资料'}
         ])
       },
-      changeLink (name) {
+      changeLink (item) {
         this.$store.commit('sitepath/SET_PATH', [
           {name: 'Main', cn: '主页'},
           {cn: '企业资料'}
         ])
+        this.UPDATE(item)
       },
       messageTime () {
         this.getMessages(0)
       },
       goMessages () {
         this.$router.push({name: 'Messages'})
+      },
+      getCurrentUser () {
+        console.log(this.$axios.token.cid)
+        if (this.$axios.token.cid) {
+          this.$axios.http('company_detail', '', 'get', this.$axios.token.cid).then(d => {
+            this.UPDATE(d.data)
+          })
+        } else {
+          this.UPDATE(this.$root.userinfo)
+        }
       }
     },
     computed: {
       ...mapState('navTop', ['companyList', 'messages']),
+      ...mapState('user', ['currentUser']),
       miniClass () {
         return this.$parent.isMini ? 'lay-mini' : ''
       },
@@ -111,9 +128,8 @@
       if (!this.$parent.TD) {
         this.getCompany(1)
         this.messageTime()
-//        if (!this.timer) {
-//          this.timer = self.setInterval(this.messageTime, 3000)
-//        }
+        this.getCurrentUser()
+        console.log(1)
       }
     },
     destroyed () {

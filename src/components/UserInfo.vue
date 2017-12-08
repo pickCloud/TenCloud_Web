@@ -86,7 +86,7 @@
           <div class="lay-left-right">
             <div class="lay-left lay-width-min">是否实名：</div>
             <div class="lay-right ">
-              是
+              否
             </div>
           </div>
           <div class="lay-left-right">
@@ -135,7 +135,7 @@
                 <div class="userinfo-item-up">企业名字</div>
                 <div class="userinfo-item-down companyName">
                   <span>{{item.company_name}}</span>
-                  <span class="position">管理员</span>
+                  <span class="position" v-if="item.is_admin">管理员</span>
                   </div>
               </div>
              <div class="flex-flex-grow-1">
@@ -148,7 +148,7 @@
              </div>
              <div class="flex-flex-grow-1">
                <div class="userinfo-item-up">状态</div>
-               <span class="userinfo-item-down">{{item.status === 0?"待审核":item.status === 1?"审核通过":item.status === 2?"创建者":"审核不通过"}}</span>
+               <span class="userinfo-item-down">{{item.status === 0?"待审核":item.status === 1?"审核通过":item.status === 2?"初创建":"审核不通过"}}</span>
              </div>
           </div>
         </div>
@@ -337,7 +337,7 @@
       ...mapState('pop', ['pop_changePassword']),
       ...mapState('navTop', ['companyAllList']),
       sex () {
-        return this.infos.gender === undefined ? '' : parseInt(this.infos.gender) === 1 ? '男' : '女'
+        return this.infos.gender === undefined ? '' : parseInt(this.infos.gender) === 1 ? '男' : parseInt(this.infos.gender) === 2 ? '女' : ''
       }
 
     },

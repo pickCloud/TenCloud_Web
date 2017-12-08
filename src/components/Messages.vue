@@ -17,9 +17,9 @@
             </div>
             <ul class="ul-li-border-bottom" v-if="messages.length>0" style="overflow: auto;height: 800px" @scroll="iscroll">
             <li class="flex-flex m-l16 p-b16 m-t16" v-for="item in messages" >
-              <div>
-                <img src="/static/img/spin.gif" class="head"/>
-              </div>
+              <!--<div>-->
+                <!--<img src="/static/img/spin.gif" class="head"/>-->
+              <!--</div>-->
               <div class="m-l16">
                 <div class="messages-type m-b16">
                   <span>{{messagesType(item.mode)}}</span>

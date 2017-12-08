@@ -1,7 +1,7 @@
 <template>
   <div class="node-tree" :class="['node-tree-' + idx, {'panel':idx === 0}]">
     <div class="node-label">
-      <input type="checkbox" v-model="checkModel" :value="checkValue"> <lable>{{model.name}}</lable>
+      <input type="checkbox" v-model="child_selected" :checked="checked" :value="checkValue">{{model.name}}
       <!--<m-checkbox class="list-check" v-model="checkModel" :data="{label:model.name, value:checkValue}"></m-checkbox>-->
     </div>
     <tree-check v-for="(item,key) in model.data" v-model="child_selected" :idx="nodeIndex" :model="item" :key="key"></tree-check>
@@ -11,15 +11,16 @@
 <script>
   export default {
     name: 'TreeCheck',
-    props: ['model', 'idx', 'value'],
+    props: ['model', 'idx'],
     data: () => ({
       selected: false,
+      checked: 'checked',
       child_selected: [],
 //      childs_selected: [],
       select_all_temp: null
     }),
     watch: {
-      'child_selected' (n, o) {
+      'checked' (n, o) {
 //        this.$emit('change', n)
         console.log(this.idx + ':' + this.child_selected)
 //        let tempValue = this.value.concat()
@@ -29,10 +30,15 @@
 //        } else {
 //          tempIdx !== -1 && tempValue.splice(tempIdx, 1)
 //        }
-        this.$emit('input', n)
+        console.log(this.checked)
+        if (this.checked) {
+          this.$parent.child_selected && this.$parent.child_selected.push(this.checkValue)
+        } else {
+          this.$parent.child_selected && (this.$parent.child_selected = this.$parent.child_selected.splice(this.checkValue))
+        }
       },
       'value' (n, o) {
-        console.log(n)
+//        console.log(n)
 //        if (n.indexOf(this.checkValue) !== -1) {
 //          let tempSelected = []
 //          this.model.data.forEach((v1, i) => {

@@ -46,6 +46,11 @@ const options = {
   getToken (data) {
     let loginToken = window.localStorage.getItem('loginToken')
     return JSON.parse(loginToken) || ''
+  },
+  loginOut (id) {
+    axios.post(api.baseURL + 'api/user/logout', {cid: id}).then(d => {
+      console.log('成功')
+    })
   }
 }
 
