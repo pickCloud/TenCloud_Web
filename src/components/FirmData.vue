@@ -45,9 +45,9 @@
               <div class="xs-8 flex-table">
                   <div  class="tr">
                     <div class="text-center" style="padding:0 16px">认证资料</div>
-                    <div style="padding:0  16px "><div class="input_image"> <input type="file" alt="Submit" accept="image/*" /></div> </div>
-                    <div style="padding:0  16px "><div class="input_image"> <input type="file" alt="Submit" accept="image/*" /></div> </div>
-                    <div style="padding:0  16px "><div class="input_image"> <input type="file" alt="Submit" accept="image/*" /></div> </div>
+                    <div style="padding:0  16px "><div class="input_image" :style="{width:inputW+'px',height:inputH+'px'}"> <input type="file" alt="Submit" accept="image/*" /></div> </div>
+                    <div style="padding:0  16px "><div class="input_image" :style="{width:inputW+'px',height:inputH+'px'}"> <input type="file" alt="Submit" accept="image/*" /></div> </div>
+                    <div style="padding:0  16px "><div class="input_image" :style="{width:inputW+'px',height:inputH+'px'}"> <input type="file" alt="Submit" accept="image/*" /></div> </div>
                   </div>
               </div>
               </div>

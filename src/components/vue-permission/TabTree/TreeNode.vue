@@ -17,7 +17,7 @@
           <tree-node :model="item.data" :idx="nodeIndex"></tree-node>
         </li>
       </ul>
-      <tree-check v-if="idx > 1" v-for="(item,key) in model" :model="item" :vallue="child_selected" v-model="child_selected" :idx="0" :key="key"></tree-check>
+      <tree-check v-if="idx > 1" v-for="(item,key) in model" :model="item" v-model="child_selected" :idx="0" :key="key"></tree-check>
     </div>
 </template>
 

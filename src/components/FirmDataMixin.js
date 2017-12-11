@@ -116,7 +116,13 @@ export default {
   },
   computed: {
     ...mapState('pop', ['pop_all']),
-    ...mapState('firmData', ['employees'])
+    ...mapState('firmData', ['employees']),
+    inputW () {
+      return window.innerWidth * 300 / 1920
+    },
+    inputH () {
+      return window.innerWidth * 190 / 1920
+    }
   },
   created () {
     this.getDataApi()
