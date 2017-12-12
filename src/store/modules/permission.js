@@ -3,15 +3,23 @@
 export default {
   namespaced: true,
   state: {
-    btnIndex: 0,
-    btnIndexSec: 0
+    permissions: [],
+    access_servers: [],
+    access_projects: [],
+    access_filehub: []
   },
   mutations: {
-    setBtnIndex (state, index) {
-      state.btnIndex = index
+    setState (state, obj) {
+      let idx = state[obj.name].indexOf(obj.value)
+      if (idx !== -1) return
+      state[obj.name].push(obj.value)
+      console.log(state[obj.name])
     },
-    setBtnIndexSec (state, index) {
-      state.btnIndexSec = index
+    deleteState (state, obj) {
+      let idx = state[obj.name].indexOf(obj.value)
+      if (idx !== -1) {
+        state[obj.name].splice(idx, 1)
+      }
     }
   },
   actions: {}

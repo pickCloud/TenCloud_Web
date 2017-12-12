@@ -24,20 +24,10 @@
 <script>
   import axios from '../../store/request/axios'
   import {mapState, mapMutations} from 'vuex'
-//  import TabSecond from "../vue-permission/TabSecond/Main.vue";
-//  import TabSecond from "../vue-permission/TabSecond/Main.vue";
-//  import TabFirst from "../vue-permission/TabFirst/Main.vue";
   export default {
-//    components: {TabFirst},
-//    components: {TabSecond},
-//    components: {TabSecond},
     data: () => ({
       tempName: '',
       cid: '',
-      permissions: [],
-      access_servers: [],
-      access_projects: [],
-      access_filehub: [],
       selectValue: {
         label: '请选择',
         value: ''
@@ -48,13 +38,11 @@
         {label: '管理员2', value: '3'},
         {label: '管理员3', value: '4'}
       ],
-      btnIndex: 0,
-      btnDoIndex: 0,
-      btnDataIndex: 1,
       dataList: []
     }),
     methods: {
       ...mapMutations('pop', ['setPopState']),
+      ...mapMutations('permission', ['setState']),
       setCondition () {
         this.setPopState({name: 'pop_all', value: 2})
       },
@@ -97,19 +85,6 @@
         }
         return list
       },
-      btnIndexChange (index) {
-        this.btnIndex = index
-      },
-      changeType (data) {
-        data.data.forEach(item => {
-          if (item.name === '功能') {
-            this.setDataType()
-          }
-        })
-        return data
-      },
-      setDataType (data, type) {
-      },
       commit () {
         if (!this.tempName) {
           this.$toast('请输入模板名称', 'cc')
@@ -122,10 +97,10 @@
         let p = {
           name: this.tempName,
           cid: this.pop_params.cid,
-          permissions: this.selectPermissions.join(','),
-          access_servers: this.selectServers.join(','),
-          access_projects: this.selectProjects.join(','),
-          access_filehub: this.selectFilehub.join(',')
+          permissions: this.permissions.join(','),
+          access_servers: this.access_servers.join(','),
+          access_projects: this.access_projects.join(','),
+          access_filehub: this.access_filehub.join(',')
         }
         let method = this.pop_all === 3 ? 'post' : 'put'
         axios.http('template_add', p, method).then(d => {
@@ -139,7 +114,8 @@
       this.getData()
     },
     computed: {
-      ...mapState('pop', ['pop_params', 'pop_all'])
+      ...mapState('pop', ['pop_params', 'pop_all']),
+      ...mapState('permission', ['permissions', 'access_servers', 'access_projects', 'access_filehub'])
     },
     watch: {
     }

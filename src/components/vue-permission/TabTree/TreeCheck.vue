@@ -11,12 +11,14 @@
 </template>
 
 <script>
+  import {mapState, mapMutations} from 'vuex'
   export default {
     name: 'TreeCheck',
     props: ['model', 'idx', 'value'],
     data: () => ({
       selected: false,
       checked: 'checked',
+      checkType: false,
       child_selected: [],
 //      childs_selected: [],
       select_all_temp: null
@@ -29,6 +31,17 @@
             let tempSelected = []
             this.model.data.forEach((v1, i) => {
               tempSelected.push((v1.id || v1.name) + '')
+//              if (v1.id) {
+//                if (v1.type === 'permissions') {
+//                  this.permissions.push(v1.id)
+//                } else if (v1.type === 'access_servers') {
+//                  this.access_servers.push(v1.id)
+//                } else if (v1.type === 'access_projects') {
+//                  this.permissions.push(v1.id)
+//                } else if (v1.type === 'access_filehub') {
+//                  this.access_filehub.push(v1.id)
+//                }
+//              }
             })
             this.child_selected = tempSelected
           } else {
@@ -51,15 +64,26 @@
       '$parent.child_selected' () {
         if (this.$parent.child_selected.indexOf(this.checkValue) === -1) {
           this.selected = false
+          if (this.model.id) this.deleteState({name: this.model.type, value: this.model.id})
         } else {
           this.selected = true
+//          if (this.model.type === 'permissions' && this.model.id) {
+//            this.setState({name: 'permissions', value: this.model.id})
+//          } else if (this.model.type === 'access_servers' && this.model.id) {
+//            this.setState({name: 'access_servers', value: this.model.id})
+//          } else if (this.model.type === 'access_projects' && this.model.id) {
+//            this.setState({name: 'access_projects', value: this.model.id})
+//          } else if (this.model.type === 'access_filehub' && this.model.id) {
+//            this.setState({name: 'access_filehub', value: this.model.id})
+//          }
+          if (this.model.id) this.setState({name: this.model.type, value: this.model.id})
         }
+      },
+      'child_selected' () {
       }
     },
     methods: {
-      updateValue (value) {
-        console.log(value)
-      },
+      ...mapMutations('permission', ['setState', 'deleteState']),
       mousedown (e) {
         window.__vmpuid = this.$parent._uid
         window.__vmuid = this._uid
@@ -67,11 +91,13 @@
       }
     },
     computed: {
+      ...mapState('permission', ['permissions', 'access_servers', 'access_projects', 'access_filehub']),
       checkModel: {
         get () {
           return this.value || this.selected
         },
         set (v) {
+          console.log(v)
           this.$emit('input', v)
         }
       },
@@ -83,16 +109,9 @@
       },
       hasChild () {
         return this.model.data && this.model.data.length > 0
-      },
-      selectAll () {
-        if (this.select_all_temp === null) {
-          this.select_all_temp = []
-          this.model.data.forEach((v, i) => {
-            this.select_all_temp.push((v.id || v.name) + '')
-          })
-        }
-        return this.select_all_temp
       }
+    },
+    created () {
     }
   }
 </script>
