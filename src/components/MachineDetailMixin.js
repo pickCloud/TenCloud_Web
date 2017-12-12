@@ -115,9 +115,9 @@ export default {
           this.popperInfo('请关机后再删除')
           return false
         }
-        this.$Global.async('server_del', true).getData({
+        this.$axios.http('server_del', {
           id: [this.$route.params.id]
-        }).then(d => {
+        }, 'post').then(d => {
           if (d.status === 0) {
             this.$router.push({name: 'Machines'})
           }

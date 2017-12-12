@@ -31,7 +31,7 @@ export default {
 
       if (hasEditor) {
         postdata.id = this.$route.params.id
-        this.$Global.async(this.updateApi, true).getData(postdata).then(d => {
+        this.$axios.http(this.updateApi, postdata, 'post').then(d => {
           this.$toast(d.message, 'cc')
         })
       }

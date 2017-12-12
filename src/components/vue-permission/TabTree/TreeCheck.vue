@@ -22,7 +22,6 @@
     watch: {
       'value' (n, o) {
         // 判断子级
-//        console.log(window.__nodeidx)
         if (this.nodeIndex >= window.__nodeidx) {
           if (n.indexOf(this.checkValue) !== -1 && this.model.data) {
             let tempSelected = []
@@ -31,8 +30,6 @@
             })
             this.child_selected = tempSelected
           } else {
-            console.log(this._uid)
-            console.log(window.__vmuid)
             if (this._uid >= window.__vmuid) {
               this.child_selected = []
             }

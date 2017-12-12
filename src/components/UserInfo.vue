@@ -283,6 +283,9 @@
         if (this.infos.email === '') {
           this.$toast('邮箱地址不能为空', 'cc')
           return false
+        } else if (!/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(this.infos.email)) {
+          this.$toast('邮箱格式不正确', 'cc')
+          return false
         }
         if ((typeof p).toLowerCase() === 'number') p = null
         let cdata = p || this.checkChangeData()
