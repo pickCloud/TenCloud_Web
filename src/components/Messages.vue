@@ -61,7 +61,7 @@
         this.getMessages()
       },
       getMessages () {
-        axios.http('message_get', '', 'get', '?' + this.type + '?page=' + this.page).then(d => {
+        axios.http('message_get', '', 'get', this.type + '?page=' + this.page).then(d => {
           if (d.data.length > 0) {
             d.data.forEach((item) => {
               this.messages.push(item)

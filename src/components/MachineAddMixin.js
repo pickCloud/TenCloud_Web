@@ -1,3 +1,4 @@
+import apis from '../store/request/api'
 export default {
   data: () => ({
     sokect: null,
@@ -51,7 +52,7 @@ export default {
       }
     },
     initSocket (cb = null) {
-      this.socket = new WebSocket(this.$Global.apis.wsURL + this.$Global.apis.server_add.u)
+      this.socket = new WebSocket(apis.wsURL + apis.server_add.u)
       this.socket.onopen = (event) => {
         if (cb) cb()
       }
