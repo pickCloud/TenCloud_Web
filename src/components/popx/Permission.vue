@@ -1,11 +1,11 @@
 <template>
   <div>
   <div class="p-16">
-    <div class="flex-flex add-table p-b16" v-if="pop_all===3 || pop_all===5">
-      <div>新增权限模板名称：</div>
+    <div class="flex-flex add-table p-b16" v-if="pop_all===3">
+      <div v-if="pop_all===3">新增权限模板名称：</div>
       <div style="width: 400px"><input class="input-placehold" placeholder="请输入权限模板的名称" v-model="tempName"/></div>
     </div>
-    <div class="p-b16" v-if="pop_all===6">
+    <div class="p-b16" v-if="pop_all===5">
       <div >
         <m-select :datas="selectData" v-model="selectValue" :sizeh="48" :sizew="300" style="border-radius: 5px;border: 1px solid #b2b2b2;"></m-select>
       </div>
@@ -33,32 +33,52 @@
         value: ''
       },
       selectData: [
-        {label: '管理员', value: '1'},
-        {label: '管理员1', value: '2'},
-        {label: '管理员2', value: '3'},
-        {label: '管理员3', value: '4'}
       ],
       dataList: []
     }),
     methods: {
       ...mapMutations('pop', ['setPopState']),
-      ...mapMutations('permission', ['setState']),
+      ...mapMutations('permission', ['setState', 'changeState']),
       setCondition () {
         this.setPopState({name: 'pop_all', value: 2})
       },
       getData () {
         axios.http('company_getPermission', '', 'get', this.pop_params.cid).then(d => {
           d.data = this.setType(d.data)
-          console.log(d.data)
           d.data.forEach(item => {
             this.dataList.push(item)
           })
+        })
+        if (this.pop_all === 5) {
+          this.getMudule()
+          this.getTempUser()
+        }
+      },
+      getMudule () {
+        this.$axios.http('company_template', '', 'get', this.pop_params.cid).then(d => {
+          d.data.forEach(item => {
+            this.selectData.push({label: item.name, value: item.id})
+          })
+        })
+      },
+      getTemp (id) {
+        this.$axios.http('company_getTemplate', '', 'get', id).then(d => {
+          if (d.data) {
+            this.changeState(d.data)
+          }
+        })
+      },
+      getTempUser (id) {
+        console.log(1)
+        this.$axios.http('company_getUserTemplate', '', 'get', this.pop_params.cid + '/user/' + this.$root.userinfo.id + '/detail').then(d => {
+          if (d.data) {
+            this.changeState(d.data)
+          }
         })
       },
       setType (list, type = null) {
         for (let i = 0; i < list.length; i++) {
           if (!type) {
-            console.log(list[i].name)
             if (list[i].name === '功能' && list[i].data) {
               list[i].type = 'permissions'
               list[i].data = this.setType(list[i].data, 'permissions')
@@ -70,7 +90,7 @@
             } else if (list[i].name === '项目' && list[i].data) {
               list[i].type = 'access_projects'
               list[i].data = this.setType(list[i].data, 'access_projects')
-            } else if (list[i].name === '云服务' && list[i].data) {
+            } else if (list[i].name === '云服务器' && list[i].data) {
               list[i].type = 'access_servers'
               list[i].data = this.setType(list[i].data, 'access_servers')
             }
@@ -90,7 +110,8 @@
           this.$toast('请输入模板名称', 'cc')
           return
         }
-        if (this.is0.length === 0 && this.is1.length === 0 && this.is2.length === 0 && this.is3.length === 0 && this.is4.length === 0 && this.is5.length === 0 && this.is6.length === 0) {
+        console.log(this.permissions)
+        if (this.permissions.length === 0 && this.access_servers.length === 0 && this.access_projects.length === 0 && this.access_filehub.length === 0) {
           this.$toast('请至少选择一个模板', 'cc')
           return
         }
@@ -118,6 +139,9 @@
       ...mapState('permission', ['permissions', 'access_servers', 'access_projects', 'access_filehub'])
     },
     watch: {
+      'selectValue' (n) {
+        this.getTemp(n.value)
+      }
     }
   }
 </script>

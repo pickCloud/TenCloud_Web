@@ -2,9 +2,7 @@
   <div class="node-tree" :class="['node-tree-' + idx, {'panel':idx === 0}]">
     <div class="node-label" style="position: relative">
       <div class="check-box" :class="{checked:selected}"></div>
-      <input style="opacity: 0;position: absolute;left: 0;width: 14px;height: 14px;margin-top: 4px;" type="checkbox" :checkType="model.type" v-model="checkModel" :value="checkValue" @mousedown="mousedown">{{model.name || model.filename}}
-
-      <!--<m-checkbox class="list-check" v-model="checkModel" :data="{label:model.name, value:checkValue}"></m-checkbox>-->
+      <input style="opacity: 0;position: absolute;left: 0;width: 14px;height: 14px;margin-top: 4px;" type="checkbox" :checkType="model.type" v-model="checkModel" :value="checkValue" @change="update($event.target.checked)" @mousedown="mousedown">{{model.name || model.filename}}
     </div>
     <tree-check v-for="(item,key) in model.data" v-model="child_selected" :idx="nodeIndex" :model="item" :key="key"></tree-check>
   </div>
@@ -26,27 +24,23 @@
     watch: {
       'value' (n, o) {
         // 判断子级
+        console.log(n)
         if (this.nodeIndex >= window.__nodeidx) {
           if (n.indexOf(this.checkValue) !== -1 && this.model.data) {
             let tempSelected = []
             this.model.data.forEach((v1, i) => {
               tempSelected.push((v1.id || v1.name) + '')
-//              if (v1.id) {
-//                if (v1.type === 'permissions') {
-//                  this.permissions.push(v1.id)
-//                } else if (v1.type === 'access_servers') {
-//                  this.access_servers.push(v1.id)
-//                } else if (v1.type === 'access_projects') {
-//                  this.permissions.push(v1.id)
-//                } else if (v1.type === 'access_filehub') {
-//                  this.access_filehub.push(v1.id)
-//                }
-//              }
+              if (v1.id) this.setState({name: v1.type, value: v1.id + ''})
             })
             this.child_selected = tempSelected
           } else {
             if (this._uid >= window.__vmuid) {
               this.child_selected = []
+              if (this.model.data) {
+                this.model.data.forEach((v1, i) => {
+                  if (v1.id) this.deleteState({name: v1.type, value: v1.id + ''})
+                })
+              }
             }
           }
         }
@@ -61,25 +55,44 @@
           }
         }
       },
+      'permissions' () {
+        if (this.model.id && this.model.type === 'permissions') {
+          let temp = this.permissions.indexOf(this.checkValue)
+          if (temp !== -1) {
+//            this.$parent.child_selected.push(this.checkValue)
+          }
+        }
+      },
+      'access_servers' () {
+        if (this.model.id && this.model.type === 'access_servers') {
+          let temp = this.access_servers.indexOf(this.checkValue)
+          if (temp !== -1) {
+//            this.$parent.child_selected.push(this.checkValue)
+          }
+        }
+      },
+      'access_projects' () {
+        if (this.model.id && this.model.type === 'access_projects') {
+          let temp = this.access_projects.indexOf(this.model.id)
+          if (temp !== -1) {
+//            this.$parent.child_selected.push(this.checkValue)
+          }
+        }
+      },
+      'access_filehub' () {
+        if (this.model.id && this.model.type === 'access_filehub') {
+          let temp = this.access_filehub.indexOf(this.model.id)
+          if (temp !== -1) {
+//            this.$parent.child_selected.push(this.checkValue)
+          }
+        }
+      },
       '$parent.child_selected' () {
         if (this.$parent.child_selected.indexOf(this.checkValue) === -1) {
           this.selected = false
-          if (this.model.id) this.deleteState({name: this.model.type, value: this.model.id})
         } else {
           this.selected = true
-//          if (this.model.type === 'permissions' && this.model.id) {
-//            this.setState({name: 'permissions', value: this.model.id})
-//          } else if (this.model.type === 'access_servers' && this.model.id) {
-//            this.setState({name: 'access_servers', value: this.model.id})
-//          } else if (this.model.type === 'access_projects' && this.model.id) {
-//            this.setState({name: 'access_projects', value: this.model.id})
-//          } else if (this.model.type === 'access_filehub' && this.model.id) {
-//            this.setState({name: 'access_filehub', value: this.model.id})
-//          }
-          if (this.model.id) this.setState({name: this.model.type, value: this.model.id})
         }
-      },
-      'child_selected' () {
       }
     },
     methods: {
@@ -88,6 +101,24 @@
         window.__vmpuid = this.$parent._uid
         window.__vmuid = this._uid
         window.__nodeidx = this.nodeIndex
+      },
+      reCheck (type) {
+        if (this.model.id && this.model.type === 'permissions') {
+          let temp = this.permissions.indexOf(this.checkValue)
+          if (temp !== -1) {
+            console.log(this.$parent.child_selected)
+            this.$parent.child_selected.push(this.checkValue)
+          }
+        }
+      },
+      update (b) {
+        if (!b) {
+          this.selected = false
+          if (this.model.id) this.deleteState({name: this.model.type, value: this.checkValue})
+        } else {
+          this.selected = true
+          if (this.model.id) this.setState({name: this.model.type, value: this.checkValue})
+        }
       }
     },
     computed: {
@@ -97,7 +128,6 @@
           return this.value || this.selected
         },
         set (v) {
-          console.log(v)
           this.$emit('input', v)
         }
       },
@@ -112,6 +142,8 @@
       }
     },
     created () {
+//      this.reCheck()
+//      console.log(window.__vmpuid, this._uid)
     }
   }
 </script>

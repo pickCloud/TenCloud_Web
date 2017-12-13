@@ -1,7 +1,5 @@
 <template>
     <div class="node" >
-      <!--<div class="node-label"><m-btn class="m-r16" :sizeh="30" :sizew="70" :class="btnIndex==index?'primary_bg grey-dark_txt':'panel-bg_bg'" @click.native="setBtnIndex(index)" v-if="idx=='0'">{{model.name}}</m-btn></div>-->
-      <!--<m-btn  :sizeh="30" :class="btnIndexSec==index?'select-active':''" @click.native="setBtnIndexSec(index)" v-if="idx=='1'">{{model.name}}</m-btn>-->
      <ul class="node-labels p-b16" v-if="idx<2">
        <li v-for="(item,key) in model" :class="idx==2?'dis-block':''">
          <m-btn v-if="idx===0" @click.native="tabidx = key" class="m-r16" :sizeh="30" :sizew="70" :class="tabidx==key?'primary_bg grey-dark_txt':'panel-bg_bg'">{{item.name}}</m-btn>

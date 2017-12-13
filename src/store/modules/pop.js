@@ -12,6 +12,7 @@ export default {
   },
   mutations: {
     setPopState (state, obj) {
+      console.log(obj)
       state[obj.name] = obj.value
     }
   },

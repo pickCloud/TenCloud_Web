@@ -133,7 +133,7 @@
               <tr v-for="item in module">
                 <td>{{item.name}}</td>
                 <td>{{item[0]}}</td>
-                <td><m-btn @click="changeTemp(item.id)">修改</m-btn><m-btn>重命名</m-btn><m-btn @click.native="deleteTemp(item.id)">删除</m-btn></td>
+                <td><m-btn @click.native="changeTemp(item.id)">修改</m-btn><m-btn>重命名</m-btn><m-btn @click.native="deleteTemp(item.id)">删除</m-btn></td>
               </tr>
               </tbody>
             </m-table>
