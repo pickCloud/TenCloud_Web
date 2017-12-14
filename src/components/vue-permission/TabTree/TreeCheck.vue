@@ -57,7 +57,7 @@
       },
       'permissions' () {
         if (this.model.id && this.model.type === 'permissions') {
-          let temp = this.permissions.indexOf(this.checkValue)
+          let temp = this.value.indexOf(this.checkValue)
           if (temp !== -1) {
 //            this.$parent.child_selected.push(this.checkValue)
           }
@@ -102,20 +102,59 @@
         window.__vmuid = this._uid
         window.__nodeidx = this.nodeIndex
       },
-      reCheck (type) {
+      reCheck () {
         if (this.model.id && this.model.type === 'permissions') {
           let temp = this.permissions.indexOf(this.checkValue)
           if (temp !== -1) {
-            console.log(this.$parent.child_selected)
             this.$parent.child_selected.push(this.checkValue)
+          } else {
+            let temp1 = this.$parent.child_selected.indexOf(this.checkValue)
+            if (temp1 !== -1) {
+              this.$parent.child_selected.splice(temp1, 1)
+            }
+          }
+        }
+        if (this.model.id && this.model.type === 'access_servers') {
+          let temp = this.access_servers.indexOf(this.checkValue)
+          if (temp !== -1) {
+            this.$parent.child_selected.push(this.checkValue)
+          } else {
+            let temp1 = this.$parent.child_selected.indexOf(this.checkValue)
+            if (temp1 !== -1) {
+              this.$parent.child_selected.splice(temp1, 1)
+            }
+          }
+        }
+        if (this.model.id && this.model.type === 'access_projects') {
+          let temp = this.access_projects.indexOf(this.checkValue)
+          if (temp !== -1) {
+            this.$parent.child_selected.push(this.checkValue)
+          } else {
+            let temp1 = this.$parent.child_selected.indexOf(this.checkValue)
+            if (temp1 !== -1) {
+              this.$parent.child_selected.splice(temp1, 1)
+            }
+          }
+        }
+        if (this.model.id && this.model.type === 'access_filehub') {
+          let temp = this.access_filehub.indexOf(this.checkValue)
+          if (temp !== -1) {
+            this.$parent.child_selected.push(this.checkValue)
+          } else {
+            let temp1 = this.$parent.child_selected.indexOf(this.checkValue)
+            if (temp1 !== -1) {
+              this.$parent.child_selected.splice(temp1, 1)
+            }
           }
         }
       },
       update (b) {
         if (!b) {
+          console.log('删除')
           this.selected = false
           if (this.model.id) this.deleteState({name: this.model.type, value: this.checkValue})
         } else {
+          console.log('add')
           this.selected = true
           if (this.model.id) this.setState({name: this.model.type, value: this.checkValue})
         }
@@ -142,8 +181,7 @@
       }
     },
     created () {
-//      this.reCheck()
-//      console.log(window.__vmpuid, this._uid)
+      this.reCheck()
     }
   }
 </script>

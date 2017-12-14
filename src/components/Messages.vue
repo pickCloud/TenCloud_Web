@@ -11,7 +11,8 @@
               <!--<m-btn class="btn theme-dft" @click.native="selectType(2)" :class="type==2?'select-active':''">最新通知</m-btn>-->
               </div>
               <div class="login-form_inp flex-space-between" style="height: 30px;line-height: 30px">
-                <input type="text" placeholder="输入关键字" v-model="searchWord" style="height: 30px;line-height: 30px">
+                <m-select :datas="selects" v-model="selectValue" :sizeh="38" :sizew="300" ></m-select>
+                <input type="text" placeholder="输入关键字" v-model="searchWord" style="height: 38px;line-height: 30px">
               <!--<i class="iconfont icon-mima" style="top: 0px;"></i>-->
               </div>
             </div>
@@ -50,7 +51,10 @@
       searchWord: '',
       messages: [],
       page: 1,
-      isStillHave: true
+      isStillHave: true,
+      mode: 1,
+      selects: [{label: '加入企业', value: '1'}, {label: '企业信息改变', value: '2'}],
+      selectValue: {label: '加入企业', value: '1'}
     }),
     methods: {
       selectType (type) {
@@ -60,12 +64,16 @@
         this.isStillHave = true
         this.getMessages()
       },
-      getMessages () {
-        axios.http('message_get', '', 'get', this.type + '?page=' + this.page).then(d => {
+      getMessages (isResetData = false) {
+        axios.http('message_get', '', 'get', this.type + '?page=' + this.page + '&mode=' + this.selectValue.value).then(d => {
           if (d.data.length > 0) {
-            d.data.forEach((item) => {
-              this.messages.push(item)
-            })
+            if (isResetData) {
+              this.messages = d.data
+            } else {
+              d.data.forEach((item) => {
+                this.messages.push(item)
+              })
+            }
           } else {
             this.isStillHave = false
           }
@@ -130,6 +138,12 @@
       this.getMessages()
     },
     beforeDestroy () {
+    },
+    watch: {
+      'selectValue.value' (n) {
+        this.page = 1
+        this.getMessages(true)
+      }
     }
   }
 </script>

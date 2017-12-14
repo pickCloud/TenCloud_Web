@@ -38,10 +38,10 @@
             <div class="flex-space-between">
               <div class="flex-space-between">
              <div class="userInfo-safeLine">
-              <span class="progress-bar progress-bar-high"></span>
+              <span class="progress-bar progress-bar-high" :class="{'progress-bar-high':infos.password_strength===6||infos.password_strength===5,'progress-bar-mid':infos.password_strength===4||infos.password_strength===3||infos.password_strength===2,'progress-bar-low':infos.password_strength===0||infos.password_strength===1}" ></span>
             </div>
             <div class="userInfo-safe-tip">
-              <span>安全级别:</span><span>低</span>
+              <span>安全级别:</span><span>{{word}}</span>
             </div>
               </div>
               <m-btn class="grey-dark_txt primary_bg btn-border-radius" @click.native="changePassword">
@@ -186,7 +186,8 @@
         'email': '',
         'image_url': '',
         'gender': 0,
-        'birthday': 1502952797
+        'birthday': 1502952797,
+        'password_strength': 1
       },
       isEditor: false,
       isEditor2: false,
@@ -341,8 +342,35 @@
       ...mapState('navTop', ['companyAllList']),
       sex () {
         return this.infos.gender === undefined ? '' : parseInt(this.infos.gender) === 1 ? '男' : parseInt(this.infos.gender) === 2 ? '女' : ''
-      }
+      },
+      word () {
+        let str = '低'
+        switch (this.infos.password_strength) {
+          case 0:
+            str = '低'
+            break
+          case 1:
+            str = '低'
+            break
+          case 2:
+            str = '中'
+            break
+          case 3:
+            str = '中'
+            break
+          case 4:
+            str = '中'
+            break
+          case 5:
+            str = '高'
+            break
+          case 6:
+            str = '高'
+            break
+        }
 
+        return str
+      }
     },
     created () {
       this.getApiData()
