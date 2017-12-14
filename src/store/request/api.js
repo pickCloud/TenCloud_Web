@@ -44,7 +44,7 @@ const APIS = {
   user_update: {u: '/api/user/update', m: 'post'},
   user_login: {u: '/api/user/login', m: 'post'},
   user_login_password: {u: '/api/user/login/password', m: 'post'},
-  user_sms_count: {u: '/api/user/login/sms/', m: 'get'},
+  user_sms_count: {u: '/api/user/sms/', m: 'get'},
   user_verify: {u: '/api/user/sms', m: 'post'},
   user_logout: {u: '/api/user/logout', m: 'post'},
   user_info: {u: '/api/user', m: 'get'},

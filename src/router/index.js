@@ -212,7 +212,6 @@ router.beforeEach((to, from, next) => {
   if (to.name === 'CompleteData' && to.query.code) {
     window.nextInviteCode = to.query.code
   }
-  console.log(axios)
   console.log(axios.isLogin)
   if (axios.isLogin === null) {
     axios.http('user_info').then(d => {

@@ -129,7 +129,6 @@
         this.getCompany(1)
         this.messageTime()
         this.getCurrentUser()
-        console.log(1)
       }
     },
     destroyed () {
