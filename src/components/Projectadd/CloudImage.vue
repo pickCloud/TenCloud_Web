@@ -37,9 +37,9 @@
         }
         if (this.isDownload) return
         this.isDownload = true
-        this.$Global.async('project_down_image', true).getData({
+        this.$axios.http('project_down_image', {
           image_url: this.image_url
-        }).then(d => {
+        }, 'post').then(d => {
           console.log(d)
           this.isDownload = false
         })

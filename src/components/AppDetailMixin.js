@@ -65,10 +65,10 @@ export default {
     containerCtr (t) {
       this.isWaiting = true
       this.waitingTip = STATUS_MAP[t][0] + '中, 请稍后'
-      this.$Global.async(t, true).getData({
+      this.$axios.http(t, {
         server_id: this.$route.params.mid,
         container_id: this.$route.params.cid
-      }).then(d => {
+      }, 'post').then(d => {
         if (d.status === 0) {
           this.isWaiting = false
           // this.loopGetStatus(t)
@@ -87,7 +87,7 @@ export default {
         //   deltip.actionPopper()
         //   clearTimeout(ttt)
         // }, 1000)
-        this.$axios('container_del', {
+        this.$axios.http('container_del', {
           server_id: this.$route.params.mid,
           container_id: this.$route.params.cid
         }, 'post').then(d => {

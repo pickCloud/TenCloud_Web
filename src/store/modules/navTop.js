@@ -48,6 +48,7 @@ export default {
       })
     },
     getMessages (ctx, type = 0) {
+      if (type === 'closed') return ctx.commit('clearTimer')
       axios.http('message_get', '', 'get', type).then(d => {
         ctx.commit('setMessages', d.data)
         ctx.commit('setTimer', setTimeout(function () {

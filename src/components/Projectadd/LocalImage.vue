@@ -52,7 +52,7 @@
         upStream({
           file: formata,
           method: this.$Global.apis['project_up_image'].m.toUpperCase(),
-          url: this.$Global.apis.baseURL + this.$Global.apis['project_up_image'].u,
+          url: this.$Global.apis.baseURL + this.$axios.apis['project_up_image'].u,
           ing: (d) => {
             let bfb = parseInt(d.loaded * 100 / d.total)
             this.uping = bfb + '%'

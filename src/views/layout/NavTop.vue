@@ -86,6 +86,7 @@
           {name: 'Main', cn: '主页'},
           {cn: '个人资料'}
         ])
+        this.UPDATE(this.$root.userinfo)
       },
       changeLink (item) {
         this.$store.commit('sitepath/SET_PATH', [
@@ -100,8 +101,14 @@
       goMessages () {
         this.$router.push({name: 'Messages'})
       },
+      getUserInfo () {
+        this.$axios.http('user_info').then(d => {
+          this.$axios.isLogin = true
+          window.ROOT_DATA.userinfo = this.$root.userinfo = d.data
+          this.UPDATE(this.$root.userinfo)
+        })
+      },
       getCurrentUser () {
-        console.log(this.$axios.token.cid)
         if (this.$axios.token.cid) {
           this.$axios.http('company_detail', '', 'get', this.$axios.token.cid).then(d => {
             this.UPDATE(d.data)
@@ -126,6 +133,7 @@
     },
     created () {
       if (!this.$parent.TD) {
+        this.getUserInfo()
         this.getCompany(1)
         this.messageTime()
         this.getCurrentUser()

@@ -25,8 +25,10 @@ export default {
   methods: {
     getCount () {
       axios.http('user_sms_count', '', 'get', this.loginData.mobile + '/count', false).then(d => {
-        this.sms_count = d.sms_count
+        this.sms_count = d.data.sms_count
+        console.log(this.sms_count)
         if (this.sms_count > 2) {
+          this.btndis = true
           this.initGeet()
         }
       }).catch(e => {
@@ -186,7 +188,8 @@ export default {
         this.loginData['geetest_challenge'] = result.geetest_challenge
         this.loginData['geetest_validate'] = result.geetest_validate
         this.loginData['geetest_seccode'] = result.geetest_seccode
-        this.requestCode()
+        // this.requestCode()
+        this.btndis = false
       })
       captchaObj.onReady(function () {
         document.getElementById('wait').style.display = 'none'
