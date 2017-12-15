@@ -205,7 +205,7 @@
       deleteCompany (cid) {
         axios.http('company_dismission', {id: cid}, 'post').then(d => {
           this.$toast('解除成功', 'cc')
-          this.getCompany(0)
+          this.getCompany(4)
         })
       },
       addCompany () {
@@ -223,7 +223,7 @@
         this.$router.push({name: 'CompleteData', params: {id: this.infos.id}})
       },
       getApiData () {
-        this.getCompany(0)
+        this.getCompany(4)
         axios.http('user_info', true).then(d => {
           this.$root.userinfo = this.infos = d.data
           if (this.infos.birthday !== undefined) this.date.time = moment.unix(this.infos.birthday).format('YYYY-MM-DD')

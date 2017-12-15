@@ -37,11 +37,12 @@ export default {
     }
   },
   actions: {
+    /* 3通过4所有 */
     getCompany (ctx, type) {
       axios.http('company_get', '', 'get', type).then(d => {
-        if (type) {
+        if (type === 3) {
           ctx.commit('setCompany', d.data)
-        } else {
+        } else if (type === 4) {
           ctx.commit('setAllCompany', d.data)
         }
       }).catch(e => {
