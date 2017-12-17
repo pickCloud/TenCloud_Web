@@ -134,7 +134,7 @@
     created () {
       if (!this.$parent.TD) {
         this.getUserInfo()
-        this.getCompany(1)
+        this.getCompany(3)
         this.messageTime()
         this.getCurrentUser()
       }

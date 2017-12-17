@@ -29,7 +29,6 @@ export default {
     },
     changeState (state, data) {
       if (data.permissions) {
-        console.log(data.permissions.split(','))
         state.permissions = data.permissions.split(',')
       }
       if (data.access_servers) {

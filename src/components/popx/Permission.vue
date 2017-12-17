@@ -5,9 +5,9 @@
       <div v-if="pop_all===3">新增权限模板名称：</div>
       <div style="width: 400px"><input class="input-placehold" placeholder="请输入权限模板的名称" v-model="tempName"/></div>
     </div>
-    <div class="p-b16" v-if="pop_all===5">
+    <div class="p-b16" v-if="pop_all===6">
       <div >
-        <m-select :datas="selectData" v-model="selectValue" :sizeh="48" :sizew="300" style="border-radius: 5px;border: 1px solid #b2b2b2;"></m-select>
+        <m-select :datas="selectData" v-model="selectValue" @change="moduleChange($event)" :sizeh="48" :sizew="300" style="border-radius: 5px;border: 1px solid #b2b2b2;"></m-select>
       </div>
     </div>
     <div class="flex-flex p-b16" >
@@ -43,18 +43,27 @@
         this.setPopState({name: 'pop_all', value: 2})
       },
       getData () {
+        console.log('获取所有模板')
         axios.http('company_getPermission', '', 'get', this.pop_params.cid).then(d => {
           d.data = this.setType(d.data)
           d.data.forEach(item => {
             this.dataList.push(item)
           })
         })
-        if (this.pop_all === 5) {
+        if (this.pop_all === 3) {
+//          this.getMudule()
+          this.getTempUser()
+        }
+        if (this.pop_all === 6) {
           this.getMudule()
           this.getTempUser()
         }
       },
+      moduleChange (e) {
+//        console.log(e)
+      },
       getMudule () {
+        /* 获取模板list */
         this.$axios.http('company_template', '', 'get', this.pop_params.cid).then(d => {
           d.data.forEach(item => {
             this.selectData.push({label: item.name, value: item.id})
@@ -62,15 +71,15 @@
         })
       },
       getTemp (id) {
-        this.$axios.http('company_getTemplate', '', 'get', id).then(d => {
+        /* get module of temple(not user) */
+        this.$axios.http('company_getTemplate', '', 'get', '/' + id + '/format/' + 1).then(d => {
           if (d.data) {
             this.changeState(d.data)
           }
         })
       },
       getTempUser (id) {
-        console.log(1)
-        this.$axios.http('company_getUserTemplate', '', 'get', this.pop_params.cid + '/user/' + this.$root.userinfo.id + '/detail').then(d => {
+        this.$axios.http('company_getUserTemplate', '', 'get', this.pop_params.cid + '/user/' + this.pop_params.id + '/detail').then(d => {
           if (d.data) {
             this.changeState(d.data)
           }
@@ -106,11 +115,10 @@
         return list
       },
       commit () {
-        if (!this.tempName) {
+        if (!this.tempName && this.pop_all === 3) {
           this.$toast('请输入模板名称', 'cc')
           return
         }
-        console.log(this.permissions)
         if (this.permissions.length === 0 && this.access_servers.length === 0 && this.access_projects.length === 0 && this.access_filehub.length === 0) {
           this.$toast('请至少选择一个模板', 'cc')
           return
@@ -123,7 +131,10 @@
           access_projects: this.access_projects.join(','),
           access_filehub: this.access_filehub.join(',')
         }
-        let method = this.pop_all === 3 ? 'post' : 'put'
+        if (this.pop_params === 6) {
+          p.uid = this.pop_params.id
+        }
+        let method = this.pop_all === 3 || this.pop_all === 6 ? 'post' : 'put'
         axios.http('template_add', p, method).then(d => {
           this.$toast('操作成功', 'cc')
         }).catch(e => {
@@ -135,6 +146,7 @@
       this.getData()
     },
     computed: {
+      /* pop_all 3 是创建模板5是修改模板 6是修改用户模板 */
       ...mapState('pop', ['pop_params', 'pop_all']),
       ...mapState('permission', ['permissions', 'access_servers', 'access_projects', 'access_filehub'])
     },

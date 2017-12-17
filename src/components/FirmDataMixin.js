@@ -67,6 +67,10 @@ export default {
       this.setPopState({name: 'pop_all', value: 3})
       this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id}})
     },
+    changeUserTemp (id) {
+      this.setPopState({name: 'pop_all', value: 6})
+      this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id, id: id}})
+    },
     changeTemp (id) {
       this.setPopState({name: 'pop_all', value: 5})
       this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id}})
@@ -106,10 +110,10 @@ export default {
     },
     deleteTemp (id) {
       let p = {
-        id: id,
+        pt_id: id,
         cid: this.$route.params.id
       }
-      axios.http('company_getTemplate', p, 'post').then(d => {
+      axios.http('company_getTemplate', p, 'post', '/' + id + '/del').then(d => {
         this.$toast('删除成功', 'cc')
         this.getModule()
       })
