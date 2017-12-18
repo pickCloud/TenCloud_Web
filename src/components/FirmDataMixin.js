@@ -73,7 +73,7 @@ export default {
     },
     changeTemp (id) {
       this.setPopState({name: 'pop_all', value: 5})
-      this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id}})
+      this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id, id: id}})
     },
     invite () {
       this.setPopState({name: 'pop_all', value: 1})

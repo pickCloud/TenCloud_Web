@@ -10,6 +10,7 @@
 
 <script>
   import {mapState, mapMutations} from 'vuex'
+  import Event from '../../Events'
   export default {
     name: 'TreeCheck',
     props: ['model', 'idx', 'value'],
@@ -106,7 +107,7 @@
         if (this.model.id && this.model.type === 'permissions') {
           let temp = this.permissions.indexOf(this.checkValue)
           if (temp !== -1) {
-            this.$parent.child_selected.push(this.checkValue)
+            this.$parent.child_selected.indexOf(this.checkValue) === -1 && this.$parent.child_selected.push(this.checkValue)
           } else {
             let temp1 = this.$parent.child_selected.indexOf(this.checkValue)
             if (temp1 !== -1) {
@@ -117,7 +118,7 @@
         if (this.model.id && this.model.type === 'access_servers') {
           let temp = this.access_servers.indexOf(this.checkValue)
           if (temp !== -1) {
-            this.$parent.child_selected.push(this.checkValue)
+            this.$parent.child_selected.indexOf(this.checkValue) === -1 && this.$parent.child_selected.push(this.checkValue)
           } else {
             let temp1 = this.$parent.child_selected.indexOf(this.checkValue)
             if (temp1 !== -1) {
@@ -128,7 +129,7 @@
         if (this.model.id && this.model.type === 'access_projects') {
           let temp = this.access_projects.indexOf(this.checkValue)
           if (temp !== -1) {
-            this.$parent.child_selected.push(this.checkValue)
+            this.$parent.child_selected.indexOf(this.checkValue) === -1 && this.$parent.child_selected.push(this.checkValue)
           } else {
             let temp1 = this.$parent.child_selected.indexOf(this.checkValue)
             if (temp1 !== -1) {
@@ -139,7 +140,7 @@
         if (this.model.id && this.model.type === 'access_filehub') {
           let temp = this.access_filehub.indexOf(this.checkValue)
           if (temp !== -1) {
-            this.$parent.child_selected.push(this.checkValue)
+            this.$parent.child_selected.indexOf(this.checkValue) === -1 && this.$parent.child_selected.push(this.checkValue)
           } else {
             let temp1 = this.$parent.child_selected.indexOf(this.checkValue)
             if (temp1 !== -1) {
@@ -150,11 +151,9 @@
       },
       update (b) {
         if (!b) {
-          console.log('删除')
           this.selected = false
           if (this.model.id) this.deleteState({name: this.model.type, value: this.checkValue})
         } else {
-          console.log('add')
           this.selected = true
           if (this.model.id) this.setState({name: this.model.type, value: this.checkValue})
         }
@@ -182,6 +181,9 @@
     },
     created () {
       this.reCheck()
+      Event.$on('input', () => {
+        this.reCheck()
+      })
     }
   }
 </script>

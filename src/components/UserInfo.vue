@@ -38,7 +38,7 @@
             <div class="flex-space-between">
               <div class="flex-space-between">
              <div class="userInfo-safeLine">
-              <span class="progress-bar progress-bar-high" :class="{'progress-bar-high':infos.password_strength===6||infos.password_strength===5,'progress-bar-mid':infos.password_strength===4||infos.password_strength===3||infos.password_strength===2,'progress-bar-low':infos.password_strength===0||infos.password_strength===1}" ></span>
+              <span class="progress-bar" :class="{'progress-bar-high':infos.password_strength===6||infos.password_strength===5,'progress-bar-mid':infos.password_strength===4||infos.password_strength===3||infos.password_strength===2,'progress-bar-low':infos.password_strength===0||infos.password_strength===1}" ></span>
             </div>
             <div class="userInfo-safe-tip">
               <span>安全级别:</span><span>{{word}}</span>

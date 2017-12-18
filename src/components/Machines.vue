@@ -55,24 +55,24 @@
             <!--额外添加span标签样式整改 2017、9、19-->
             <td><span class="add machine_status" :class="choose(item.machine_status)">{{item.machine_status}}</span></td>
             <td>
-              <div>{{JSON.parse(item.cpu_content).percent}}%</div>
+              <div>{{item.cpu_content.percent}}%</div>
               <div class="percent-box">
-                <div class="percent-box-bar" :class="{warning: JSON.parse(item.cpu_content).percent > 80}" :style="{width: JSON.parse(item.cpu_content).percent + '%'}"></div>
+                <div class="percent-box-bar" :class="{warning: item.cpu_content.percent > 80}" :style="{width: item.cpu_content.percent + '%'}"></div>
               </div>
             </td>
             <td>
-              <div>{{JSON.parse(item.memory_content).percent}}%</div>
+              <div>{{item.memory_content.percent}}%</div>
               <div class="percent-box">
-                <div class="percent-box-bar" :class="{warning: JSON.parse(item.memory_content).percent > 80}" :style="{width: JSON.parse(item.memory_content).percent + '%'}"></div>
+                <div class="percent-box-bar" :class="{warning: item.memory_content.percent > 80}" :style="{width: item.memory_content.percent + '%'}"></div>
               </div>
             </td>
             <td>
-              <div>{{JSON.parse(item.disk_content).percent}}%</div>
+              <div>{{item.disk_content.percent}}%</div>
               <div class="percent-box">
-                <div class="percent-box-bar" :class="{warning: JSON.parse(item.disk_content).percent > 80}" :style="{width: JSON.parse(item.disk_content).percent + '%'}"></div>
+                <div class="percent-box-bar" :class="{warning: item.disk_content.percent > 80}" :style="{width: item.disk_content.percent + '%'}"></div>
               </div>
             </td>
-            <td>{{JSON.parse(item.net_content).input + '／' + JSON.parse(item.net_content).output}}</td>
+            <td>{{item.net_content.input + '／' + item.net_content.output}}</td>
             <td v-if="!isDeploy">
               <m-btn :href="{name:'MachineDetail', params:{id:item.id}}"><img class="vam" src="../assets/info.jpg" alt=""></m-btn>
               <!--<m-btn @click.native="delMachine(item.id)"><img class="vam" src="../assets/delete.jpg" alt=""></m-btn>-->

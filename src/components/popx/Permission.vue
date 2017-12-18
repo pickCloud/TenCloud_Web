@@ -1,8 +1,9 @@
 <template>
   <div>
   <div class="p-16">
-    <div class="flex-flex add-table p-b16" v-if="pop_all===3">
+    <div class="flex-flex add-table p-b16" v-if="pop_all===3 || pop_all===5">
       <div v-if="pop_all===3">新增权限模板名称：</div>
+      <div v-if="pop_all===5">修改权限模板名称：</div>
       <div style="width: 400px"><input class="input-placehold" placeholder="请输入权限模板的名称" v-model="tempName"/></div>
     </div>
     <div class="p-b16" v-if="pop_all===6">
@@ -24,6 +25,7 @@
 <script>
   import axios from '../../store/request/axios'
   import {mapState, mapMutations} from 'vuex'
+  import Event from '../Events'
   export default {
     data: () => ({
       tempName: '',
@@ -43,7 +45,6 @@
         this.setPopState({name: 'pop_all', value: 2})
       },
       getData () {
-        console.log('获取所有模板')
         axios.http('company_getPermission', '', 'get', this.pop_params.cid).then(d => {
           d.data = this.setType(d.data)
           d.data.forEach(item => {
@@ -51,8 +52,11 @@
           })
         })
         if (this.pop_all === 3) {
-//          this.getMudule()
-          this.getTempUser()
+//          this.getTempUser()
+        }
+        if (this.pop_all === 5) {
+          this.getMudule()
+          this.getTemp(this.pop_params.id)
         }
         if (this.pop_all === 6) {
           this.getMudule()
@@ -75,7 +79,9 @@
         this.$axios.http('company_getTemplate', '', 'get', '/' + id + '/format/' + 1).then(d => {
           if (d.data) {
             this.changeState(d.data)
+            this.tempName = d.data.name
           }
+          Event.$emit('input')
         })
       },
       getTempUser (id) {
@@ -134,8 +140,21 @@
         if (this.pop_params === 6) {
           p.uid = this.pop_params.id
         }
-        let method = this.pop_all === 3 || this.pop_all === 6 ? 'post' : 'put'
-        axios.http('template_add', p, method).then(d => {
+        if (this.pop_all === 5) {
+          this.changeTemp(p)
+        } else {
+          this.addTemp(p)
+        }
+      },
+      changeTemp (p) {
+        axios.http('company_getTemplate', p, 'put', '/' + this.pop_params.id + '/update').then(d => {
+          this.$toast('操作成功', 'cc')
+        }).catch(e => {
+          this.$toast(e.message, 'cc')
+        })
+      },
+      addTemp (p) {
+        axios.http('template_add', p, 'post').then(d => {
           this.$toast('操作成功', 'cc')
         }).catch(e => {
           this.$toast(e.message, 'cc')
