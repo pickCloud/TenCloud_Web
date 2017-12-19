@@ -1,6 +1,6 @@
 import Selects from './Selects.js'
 import Poppers from './Poppers.js'
-import {mapGetters, mapMutations, mapActions} from 'vuex'
+import {mapState, mapGetters, mapMutations, mapActions} from 'vuex'
 export default {
   mixins: [Poppers, Selects],
   data: () => ({
@@ -18,6 +18,9 @@ export default {
   computed: {
     ...mapGetters('projects', [
       'listts'
+    ]),
+    ...mapState('user', [
+      'currentUser'
     ])
   },
   methods: {

@@ -24,7 +24,7 @@ const options = {
       axios[method](this.URL, params).then(response => {
         if (response.status === 200) {
           resolve(response.data)
-          if (url === 'user_login_password' || url === 'user_login') {
+          if (url === 'user_login_password' || url === 'user_login' || url === 'user_resign') {
             this.setToken(response.data.data)
           }
         } else {

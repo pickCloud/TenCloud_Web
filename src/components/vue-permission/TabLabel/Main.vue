@@ -1,6 +1,6 @@
 <template>
     <div class="">
-      <m-table class="hover striped machines-table m-t16" v-for="(item,index) in dataList">
+      <m-table class="hover striped machines-table m-t16" v-for="(item,index) in dataList" :key="item.id">
         <col width="55px">
         <thead>
         <tr class="panel">

@@ -1,7 +1,8 @@
 export default {
   namespaced: true,
   state: {
-    currentUser: {}
+    currentUser: {
+    }
   },
   mutations: {
     'UPDATE' (state, data) {

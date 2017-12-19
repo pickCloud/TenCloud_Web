@@ -17,8 +17,8 @@ import Clipboard from './vue-clipboard'
 import Piece from './components/piece'
 import 'jimu/dist/jimu.base.min.css'
 import './scss/app.scss'
-import TabFirst from './components/vue-permission/TabFirst'
-import TabSecond from './components/vue-permission/TabSecond'
+// import TabFirst from './components/vue-permission/TabFirst'
+// import TabSecond from './components/vue-permission/TabSecond'
 import TabLabel from './components/vue-permission/TabLabel'
 
 import Tabs from './components/vue-permission'
@@ -35,8 +35,8 @@ Vue.use(Jimu)
 Vue.use(Piece)
 Vue.use(Vueswiper)
 
-Vue.use(TabFirst)
-Vue.use(TabSecond)
+// Vue.use(TabFirst)
+// Vue.use(TabSecond)
 Vue.use(TabLabel)
 Vue.use(Tabs)
 Vue.use(TabTree)

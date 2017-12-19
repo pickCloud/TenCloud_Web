@@ -1,7 +1,7 @@
 import Poppers from './Poppers.js'
 import Selects from './Selects.js'
 // import StatusCode from './StatusCode.js'
-import {mapGetters, mapMutations, mapActions} from 'vuex'
+import {mapState, mapGetters, mapMutations, mapActions} from 'vuex'
 export default {
   mixins: [Poppers, Selects],
   data: () => ({
@@ -10,7 +10,8 @@ export default {
   computed: {
     ...mapGetters('machines', [
       'listts'
-    ])
+    ]),
+    ...mapState('user', ['currentUser'])
   },
   methods: {
     ...mapMutations('machines', ['setListts']),
@@ -108,5 +109,10 @@ export default {
       {name: 'Main', cn: '主页'},
       {cn: '机器列表'}
     ])
+  },
+  watch: {
+    'currentUser' () {
+      this.getApiData()
+    }
   }
 }

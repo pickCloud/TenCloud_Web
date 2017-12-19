@@ -66,7 +66,7 @@
       },
       getMessages (isResetData = false) {
         axios.http('message_get', '', 'get', this.type + '?page=' + this.page + '&mode=' + this.selectValue.value).then(d => {
-          if (d.data.length > 0) {
+          if (d.data) {
             if (isResetData) {
               this.messages = d.data
             } else {

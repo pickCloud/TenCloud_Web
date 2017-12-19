@@ -18,7 +18,9 @@ export default {
   actions: {
     getApiData (store) {
       // if (store.getters.listts.length > 0) return false
-      let cid = this.clusterid = 1
+      let cid = store.rootState.user.currentUser.cid
+      console.log(store.rootState.user.currentUser)
+      if (!cid) return
       axios.http('cluster_detail', '', 'get', cid).then(d => {
         store.commit('setListts', d.data.server_list)
       })

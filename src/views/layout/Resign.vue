@@ -53,9 +53,6 @@
       TD: true
     }),
     methods: {
-      selectType (value) {
-        this.type = value
-      },
       login () {
         this.$router.push({name: 'Login'})
       },
@@ -101,7 +98,7 @@
     components: {Navtop},
     watch: {
       'loginData.mobile' () {
-        if (this.loginData.mobile.length === 11 && this.type === 1) {
+        if (this.loginData.mobile.length === 11) {
           this.getCount()
         }
       }

@@ -12,7 +12,7 @@
           <div class="head" :style="{backgroundImage:'url('+ userinfo.image_url+')'}" v-else></div>
           <span class="vam userName">{{currentUser.name||currentUser.company_name}}</span></div>
         <ul slot="popper">
-          <li v-for="item in companyList"><router-link :to="{name:'FirmData',params:{id:item.cid}}" @click.native="changeLink(item)"><i class="iconfont icon-qiye vam"></i> <span class="vam">{{item.company_name}}</span></router-link></li>
+          <li v-for="item in companyList" :key="item.id"><router-link :to="{name:'FirmData',params:{id:item.cid}}" @click.native="changeLink(item)"><i class="iconfont icon-qiye vam"></i> <span class="vam">{{item.company_name}}</span></router-link></li>
           <li><router-link :to="{name:'FirmAdd'}" @click.native="addCompany"><i class="iconfont icon-tianjiaqiye vam"></i> <span class="vam">添加企业</span></router-link></li>
           <li><router-link :to="{name:'UserInfo'}"  @click.native="userInfo"><i class="iconfont icon-geren vam"></i> <span class="vam">个人中心</span></router-link></li>
           <li class="text-left"><div class="__btn" @click="logout"><i class="iconfont icon-tuichu vam" style="margin-right: 3px"></i><span class="vam">退出登录</span></div></li>
@@ -28,7 +28,7 @@
               <div class="pad-lr16">消息合</div>
               <m-btn class="pad-lr16 btn">清空</m-btn>
             </div>
-            <li class="flex-space-between line-50 pad-5 over-hidden" v-for="item in messages">
+            <li class="flex-space-between line-50 pad-5 over-hidden" v-for="item in messages" :key="item.id">
               <div class="line-14 text-left"><span>{{item.content}}</span></div>
               <div class="line-0 pad-5">
                 <div class="line-20">{{item.update_time}}</div>
@@ -62,8 +62,10 @@
       },
       logout (id) {
         let paramsId = ''
-        if (this.currentUser.cid) {
-          paramsId = this.currentUser.id
+        if (!this.currentUser.cid) {
+          paramsId = 0
+        } else {
+          paramsId = this.currentUser.cid
         }
         this.$axios.http('user_logout', {cid: paramsId}, 'post').then(d => {
           if (d.status === 0) {
@@ -102,16 +104,21 @@
         this.$router.push({name: 'Messages'})
       },
       getUserInfo () {
-        this.$axios.http('user_info').then(d => {
+//        this.$axios.http('user_info').then(d => {
+//          this.$axios.isLogin = true
+//          window.ROOT_DATA.userinfo = this.$root.userinfo = d.data
+//          this.UPDATE(this.$root.userinfo)
+//        })
+        if (this.$axios.token.user) {
+          console.log(this.$axios.token.user)
           this.$axios.isLogin = true
-          window.ROOT_DATA.userinfo = this.$root.userinfo = d.data
-          this.UPDATE(this.$root.userinfo)
-        })
+          window.ROOT_DATA.userinfo = this.$root.userinfo = this.$axios.token.user
+        }
       },
       getCurrentUser () {
         if (this.$axios.token.cid) {
           this.$axios.http('company_detail', '', 'get', this.$axios.token.cid).then(d => {
-            this.UPDATE(d.data)
+            this.UPDATE(d.data[0])
           })
         } else {
           this.UPDATE(this.$root.userinfo)
