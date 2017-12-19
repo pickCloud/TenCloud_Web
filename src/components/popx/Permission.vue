@@ -31,7 +31,7 @@
       tempName: '',
       cid: '',
       selectValue: {
-        label: '请选择',
+        label: '快速选择模板',
         value: ''
       },
       selectData: [
@@ -52,7 +52,6 @@
           })
         })
         if (this.pop_all === 3) {
-//          this.getTempUser()
         }
         if (this.pop_all === 5) {
           this.getMudule()
@@ -85,10 +84,11 @@
         })
       },
       getTempUser (id) {
-        this.$axios.http('company_getUserTemplate', '', 'get', this.pop_params.cid + '/user/' + this.pop_params.id + '/detail').then(d => {
+        this.$axios.http('company_getUserTemplate', '', 'get', this.pop_params.cid + '/user/' + this.pop_params.id + '/detail/format/1').then(d => {
           if (d.data) {
             this.changeState(d.data)
           }
+          Event.$emit('input')
         })
       },
       setType (list, type = null) {
@@ -137,13 +137,15 @@
           access_projects: this.access_projects.join(','),
           access_filehub: this.access_filehub.join(',')
         }
-        if (this.pop_params === 6) {
+        if (this.pop_all === 6) {
           p.uid = this.pop_params.id
         }
         if (this.pop_all === 5) {
           this.changeTemp(p)
-        } else {
+        } else if (this.pop_all === 3) {
           this.addTemp(p)
+        } else if (this.pop_all === 6) {
+          this.addUserTemp(p)
         }
       },
       changeTemp (p) {
@@ -155,6 +157,13 @@
       },
       addTemp (p) {
         axios.http('template_add', p, 'post').then(d => {
+          this.$toast('操作成功', 'cc')
+        }).catch(e => {
+          this.$toast(e.message, 'cc')
+        })
+      },
+      addUserTemp (p) {
+        axios.http('company_template_user_update', p, 'post').then(d => {
           this.$toast('操作成功', 'cc')
         }).catch(e => {
           this.$toast(e.message, 'cc')

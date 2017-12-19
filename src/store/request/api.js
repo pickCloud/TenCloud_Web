@@ -78,6 +78,7 @@ const APIS = {
   company_getPermission: {u: '/api/permission/resource/', m: 'get'},
   company_getTemplate: {u: '/api/permission/template', m: 'get'},
   company_getUserTemplate: {u: '/api/permission/', m: 'get'},
+  company_template_user_update: {u: '/api/permission/user/update', m: 'get'},
   message_get: {u: '/api/messages/', m: 'get'},
 
   template_add: {u: '/api/permission/template/add', m: 'post'},

@@ -28,6 +28,7 @@ export default {
       data.forEach(function (item) {
         state.companyAllList.push(item)
       })
+      console.log(state.companyAllList)
     },
     setTimer (state, timer) {
       state.timer = timer

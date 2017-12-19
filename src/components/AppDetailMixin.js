@@ -26,13 +26,14 @@ export default {
     getApiData () {
       this.performanceData.server_id = this.$route.params.mid
       this.performanceData.container_name = this.$route.params.name
-      this.$axios('container_detail', '', 'get', this.$route.params.mid + '/container/' + this.$route.params.cid).then(d => {
+      this.$axios.http('container_detail', '', 'get', this.$route.params.mid + '/container/' + this.$route.params.cid).then(d => {
         if (d.status === 0) {
           this.runtime = d.data.runtime
           this.network = d.data.network
           this.container = d.data.container
           this.status = d.data.status
           this.name = d.data.name.substr(1)
+          console.log(d.data)
           this.timedata = (new Date(d.data.created)).Format('yyyy/MM/dd hh:mm:ss')
           this.isOpen = this.status.toLowerCase() === 'running'
 

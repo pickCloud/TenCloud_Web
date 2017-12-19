@@ -22,8 +22,8 @@ export default {
       return [
         p.map((v, i) => {
           return [
-            (new Date(v[0] * 1000)).Format('yyyy/MM/dd hh:mm:ss'),
-            v[1].percent,
+            (new Date(v.created_time * 1000)).Format('yyyy/MM/dd hh:mm:ss'),
+            v.percent,
             this.tipinfo(v)
           ]
         })
@@ -35,29 +35,29 @@ export default {
       return [
         p.map((v, i) => {
           return [
-            (new Date(v[0] * 1000)).Format('yyyy/MM/dd hh:mm:ss'),
-            parseFloat(v[1].input),
+            (new Date((v.created_time + '') * 1000)).Format('yyyy/MM/dd hh:mm:ss'),
+            parseFloat(v.input),
             this.netTip(v)
           ]
         }),
         p.map((v, i) => {
           return [
-            (new Date(v[0] * 1000)).Format('yyyy/MM/dd hh:mm:ss'),
-            parseFloat(v[1].output)
+            (new Date(v.created_time * 1000)).Format('yyyy/MM/dd hh:mm:ss'),
+            parseFloat(v.output)
           ]
         })
       ]
     },
     netTip (p) {
       let temptxt = MAP[this.performance]
-      let temp = '<p class="tooltip-title">' + (new Date(p[0] * 1000)).Format('yyyy/MM/dd hh:mm:ss') + '</p><p class="tooltip-body">'
-      temp += '<i class="tooltip-dian" style="background-color: #95c099;"></i>' + temptxt[0] + '：' + p[1].input + temptxt[2]
-      temp += '<br><i class="tooltip-dian" style="background-color: #eb6565;"></i>' + temptxt[1] + '：' + p[1].output + temptxt[2]
+      let temp = '<p class="tooltip-title">' + (new Date(p.created_time * 1000)).Format('yyyy/MM/dd hh:mm:ss') + '</p><p class="tooltip-body">'
+      temp += '<i class="tooltip-dian" style="background-color: #95c099;"></i>' + temptxt[0] + '：' + p.input + temptxt[2]
+      temp += '<br><i class="tooltip-dian" style="background-color: #eb6565;"></i>' + temptxt[1] + '：' + p.output + temptxt[2]
       return temp + '</p>'
     },
     tipinfo (ppp) {
-      let p = ppp[1]
-      let temp = '<p class="tooltip-title">' + (new Date(ppp[0] * 1000)).Format('yyyy/MM/dd hh:mm:ss') + '</p><p class="tooltip-body"><i class="tooltip-dian"></i>使用率：' + p.percent + '%'
+      let p = ppp
+      let temp = '<p class="tooltip-title">' + (new Date(p.created_time * 1000)).Format('yyyy/MM/dd hh:mm:ss') + '</p><p class="tooltip-body"><i class="tooltip-dian"></i>使用率：' + p.percent + '%'
       if (p.free) temp += '<br><i class="tooltip-dian"></i>空余：' + this.toG(p.free) + 'G'
       if (p.total) temp += '<br><i class="tooltip-dian"></i>总量：' + this.toG(p.total) + 'G'
       return temp + '</p>'
@@ -149,6 +149,7 @@ export default {
       this.getPerformance(timeNum, true)
     },
     chartData (k, d) {
+      console.log(k)
       d.forEach((v, i) => {
         if (!this[k][i]) this.$set(this[k], i, {data: []})
         let temp = this[k][i].data

@@ -97,7 +97,7 @@
                 <td>{{item.update_time}}</td>
                 <td :class="item.status===0?'pass_tip':''">{{item.status===1?'已通过审核':item.status===0?'待审核':'审核不通过'}}</td>
                 <td v-if="item.status===0"><m-btn @click.native="company_reject(item.id)">拒绝</m-btn><m-btn @click.native="company_accept(item.id)">允许</m-btn></td>
-                <td ><div v-if="item.status===1"><m-btn @click.native="changeUserTemp(item.id)">权限</m-btn><m-btn v-if="isAdmin" @click.native="company_dismission(item.id)">解除</m-btn></div></td>
+                <td ><div v-if="item.status===1"><m-btn @click.native="changeUserTemp(item.uid)">权限</m-btn><m-btn v-if="isAdmin" @click.native="company_dismission(item.id)">解除</m-btn></div></td>
               </tr>
               </tbody>
             </table>
