@@ -191,6 +191,7 @@
 <style lang='scss'>
   .node-tree {
     padding-left: 16px;
+    line-height: 20px;
     .check-box{
       width: 14px;
       height: 14px;

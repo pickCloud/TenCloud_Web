@@ -67,9 +67,15 @@ export default {
       this.setPopState({name: 'pop_all', value: 3})
       this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id}})
     },
-    changeUserTemp (id) {
-      this.setPopState({name: 'pop_all', value: 6})
-      this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id, id: id}})
+    changeUserTemp (id, b) {
+      console.log(!b)
+      if (b) {
+        this.setPopState({name: 'pop_all', value: 6})
+        this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id, id: id}})
+      } else {
+        this.setPopState({name: 'pop_all', value: 7})
+        this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id, id: id}})
+      }
     },
     changeTemp (id) {
       this.setPopState({name: 'pop_all', value: 5})
@@ -122,6 +128,7 @@ export default {
   computed: {
     ...mapState('pop', ['pop_all']),
     ...mapState('firmData', ['employees']),
+    ...mapState('user', ['currentUser']),
     inputW () {
       return window.innerWidth * 300 / 1920
     },

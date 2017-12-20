@@ -221,7 +221,12 @@ router.beforeEach((to, from, next) => {
     })
   } else {
     if (axios.isLogin && to.name === 'Login' && from.name === null) router.replace({name: 'Main'})
-    else next()
+    else {
+      console.log(axios.isLogin)
+      if (window.nextInviteCode && to.name === 'Login') {
+        router.replace({name: 'LoginInvite'})
+      } else next()
+    }
   }
 })
 

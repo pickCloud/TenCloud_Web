@@ -13,7 +13,7 @@
             <input type="text" placeholder="请输入手机号码" v-model="loginData.mobile">
             <i class="iconfont icon-shouji"></i>
           </div>
-          <div class="login-form_inp m-b16" v-if="type==0">
+          <div class="login-form_inp m-b16" v-if="false">
             <input type="password" placeholder="请输入密码" v-model="loginData.password" >
             <i class="iconfont icon-mima"></i>
           </div>
@@ -67,6 +67,29 @@
         contact: ''
       }
     }),
+    methods: {
+      login () {
+        let loginData = this.loginData
+        if (this.checkCodeAndMobile()) return false
+        this.$axios.http('user_login', loginData, 'post').then(d => {
+          if (window.nextInviteCode) {
+            let code = window.nextInviteCode
+            delete window.nextInviteCode
+            console.log(window.nextInviteCode)
+            this.$router.push({name: 'CompleteData', query: {'code': code}})
+          } else {
+            this.$router.replace({name: 'Main'})
+          }
+        }).catch(e => {
+          if (e.status === 10404) {
+            this.isRegisn = false
+            return false
+          }
+          this.tip.type = 'error'
+          this.tip.info = e.message
+        })
+      }
+    },
     created () {
       let code = window.nextInviteCode
       this.$axios.http('company_code', '', 'get', '?code=' + code).then(d => {
@@ -77,7 +100,7 @@
     },
     watch: {
       'loginData.mobile' () {
-        if (this.loginData.mobile.length === 11 && this.type === 1) {
+        if (this.loginData.mobile.length === 11) {
           this.getCount()
         }
       }

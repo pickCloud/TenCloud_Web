@@ -12,6 +12,7 @@
        <Invite v-if="pop_all===1"></Invite>
        <InviteCondition v-else-if="pop_all===2"></InviteCondition>
        <Permission v-else-if="pop_all===3 || pop_all===5 || pop_all===6"></Permission>
+        <PermissionLook v-else-if="pop_all===7"></PermissionLook>
        <PermissionChange v-else-if="pop_all===4"></PermissionChange>
       </div>
     </div>
@@ -27,8 +28,9 @@
   import InviteCondition from '../../components/popx/InviteCondition.vue'
   import Permission from '../../components/popx/Permission.vue'
   import PermissionChange from '../../components/popx/PermissionChange.vue'
+  import PermissionLook from '../../components/popx/PermissionLook.vue'
   export default {
-    components: {Invite, Apply, InviteCondition, Permission, PermissionChange},
+    components: {Invite, Apply, InviteCondition, Permission, PermissionChange, PermissionLook},
     mixins: [PopMixin]
   }
 </script>

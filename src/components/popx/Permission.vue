@@ -16,7 +16,7 @@
     <tab-tree :model="dataList"></tab-tree>
     </div>
 
-  <div class="" style="background-color: #1d212a;height: 70px;display: flex;">
+  <div class="" style="background-color: #1d212a;height: 70px;display: flex;" v-if="pop_all!==7">
     <m-btn class="primary_bg grey-dark_txt" :sizeh="48" :sizew="300" style="margin: 11px auto" @click.native="commit">确认提交</m-btn>
   </div>
   </div>
