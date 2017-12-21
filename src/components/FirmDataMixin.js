@@ -123,6 +123,28 @@ export default {
         this.$toast('删除成功', 'cc')
         this.getModule()
       })
+    },
+    changeName () {
+      // this.$Popx({
+      //   popper: CreateNewVue,
+      //   data: {
+      //     title: '修改名字'
+      //   },
+      //   // callback: (type, payload, next)
+      //   callback: ({type, payload, next}) => {
+      //     if (payload.type === 'sure') {
+      //       this.$axios.http('file_create_dir', {
+      //         pid: this.pid,
+      //         dir_name: payload.filename
+      //       }, 'post').then(d => {
+      //         this.listts.push(d.data[0])
+      //         next()
+      //       })
+      //     } else {
+      //       next()
+      //     }
+      //   }
+      // })
     }
   },
   computed: {

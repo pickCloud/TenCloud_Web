@@ -122,7 +122,7 @@
     <div class="col xs-12">
       <div class="lay-left-right userinfo-padding">
         <div style="display: flex;justify-content: flex-end">
-        <m-btn class="btn primary_bg grey-dark_txt" style="margin-right: 10px">申请加入已有企业</m-btn>
+        <m-btn class="btn primary_bg grey-dark_txt" style="margin-right: 10px" @click.native="addCompanyApply">申请加入已有企业</m-btn>
         <m-btn class="btn primary_bg grey-dark_txt" @click.native="addCompany">添加企业</m-btn>
         </div>
       </div>
@@ -207,6 +207,9 @@
           this.$toast('解除成功', 'cc')
           this.getCompany(4)
         })
+      },
+      addCompanyApply () {
+        this.setPopState({name: 'pop_all', value: 8})
       },
       addCompany () {
         this.$store.commit('sitepath/SET_PATH', [
