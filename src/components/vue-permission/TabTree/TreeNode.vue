@@ -12,10 +12,10 @@
      </ul>
       <ul class="node-childs" v-if="idx<2">
         <li v-for="(item,key) in model" :class="{'active':tabidx === key}">
-          <tree-node :model="item.data" :idx="nodeIndex"></tree-node>
+          <tree-node :model="item.data" :idx="nodeIndex" :isLabel="isLabel"></tree-node>
         </li>
       </ul>
-      <tree-check v-if="idx > 1" v-for="(item,key) in model" :model="item" v-model="child_selected" :idx="0" :key="key"></tree-check>
+      <tree-check v-if="idx > 1" v-for="(item,key) in model" :isLabel="isLabel" :model="item" v-model="child_selected" :idx="0" :key="key"></tree-check>
     </div>
 </template>
 
@@ -23,7 +23,7 @@
   import {mapState, mapMutations} from 'vuex'
   export default {
     name: 'TreeNode',
-    props: ['model', 'idx'],
+    props: ['model', 'idx', 'isLabel'],
     data: () => ({
       selects: [],
       isSelectALl: false,
@@ -43,6 +43,7 @@
     },
     created () {
 //      console.log(this.idx)
+      console.log(this.isLabel)
     }
   }
 </script>

@@ -1,10 +1,10 @@
 <template>
   <div class="node-tree" :class="['node-tree-' + idx, {'panel':idx === 0}]">
     <div class="node-label" style="position: relative">
-      <div class="check-box" :class="{checked:selected}"></div>
-      <input style="opacity: 0;position: absolute;left: 0;width: 14px;height: 14px;margin-top: 4px;" type="checkbox" :checkType="model.type" v-model="checkModel" :value="checkValue" @change="update($event.target.checked)" @mousedown="mousedown">{{model.name || model.filename}}
+      <div class="check-box" :class="{checked:selected}" v-if="isLabel"></div>
+      <input v-if="isLabel" style="opacity: 0;position: absolute;left: 0;width: 14px;height: 14px;margin-top: 4px;" type="checkbox" :checkType="model.type" v-model="checkModel" :value="checkValue" @change="update($event.target.checked)" @mousedown="mousedown">{{model.name || model.filename}}
     </div>
-    <tree-check v-for="(item,key) in model.data" v-model="child_selected" :idx="nodeIndex" :model="item" :key="key"></tree-check>
+    <tree-check v-for="(item,key) in model.data" :isLabel="isLabel" v-model="child_selected" :idx="nodeIndex" :model="item" :key="key"></tree-check>
   </div>
 </template>
 
@@ -13,7 +13,7 @@
   import Event from '../../Events'
   export default {
     name: 'TreeCheck',
-    props: ['model', 'idx', 'value'],
+    props: ['model', 'idx', 'value', 'isLabel'],
     data: () => ({
       selected: false,
       checked: 'checked',

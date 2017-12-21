@@ -13,7 +13,7 @@
     </div>
     <div class="flex-flex p-b16" >
     </div>
-    <tab-tree :model="dataList"></tab-tree>
+    <tab-tree :model="dataList" :isLabel="true"></tab-tree>
     </div>
 
   <div class="" style="background-color: #1d212a;height: 70px;display: flex;" v-if="pop_all!==7">
@@ -24,7 +24,7 @@
 
 <script>
   import axios from '../../store/request/axios'
-  import {mapState, mapMutations} from 'vuex'
+  import {mapState, mapMutations, mapActions} from 'vuex'
   import Event from '../Events'
   export default {
     data: () => ({
@@ -41,6 +41,7 @@
     methods: {
       ...mapMutations('pop', ['setPopState']),
       ...mapMutations('permission', ['setState', 'changeState']),
+      ...mapActions('firmData', ['getModule']),
       setCondition () {
         this.setPopState({name: 'pop_all', value: 2})
       },
@@ -147,6 +148,9 @@
         } else if (this.pop_all === 6) {
           this.addUserTemp(p)
         }
+        this.setPopState({name: 'pop_all', value: 0})
+        console.log(this.pop_params.cid)
+        this.getModule(this.pop_params.cid)
       },
       changeTemp (p) {
         axios.http('company_getTemplate', p, 'put', '/' + this.pop_params.id + '/update').then(d => {

@@ -3,6 +3,7 @@
       <tree-node
       :model="model"
       :idx="0"
+      :isLabel="isLabel"
       >
       </tree-node>
     </div>
@@ -11,10 +12,13 @@
 <script>
     export default {
       name: 'TabTree',
-      props: ['model'],
+      props: ['model', 'isLabel'],
       data: () => ({
         selects: []
-      })
+      }),
+      created () {
+        console.log(this.isLabel)
+      }
     }
 </script>
 

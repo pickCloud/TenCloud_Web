@@ -11,8 +11,8 @@
               <!--<m-btn class="btn theme-dft" @click.native="selectType(2)" :class="type==2?'select-active':''">最新通知</m-btn>-->
               </div>
               <div class="login-form_inp flex-space-between" style="height: 30px;line-height: 30px">
-                <m-select :datas="selects" v-model="selectValue" :sizeh="38" :sizew="300" ></m-select>
-                <input type="text" placeholder="输入关键字" v-model="searchWord" style="height: 38px;line-height: 30px">
+                <m-select :datas="selects" v-model="selectValue" :sizeh="36" :sizew="300" style="margin-right: 5px;border: 1px solid #464e5c;"></m-select>
+                <input type="text" placeholder="输入关键字" v-model="searchWord" style="height: 38px;line-height: 38px;">
               <!--<i class="iconfont icon-mima" style="top: 0px;"></i>-->
               </div>
             </div>

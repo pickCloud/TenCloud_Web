@@ -9,13 +9,14 @@ export default {
       update_time: ''
     },
     isEditor: false,
-    module: [],
+    // module: [],
     idType: '',
     isAdmin: false
   }),
   methods: {
     ...mapMutations('pop', ['setPopState']),
-    ...mapActions('firmData', ['getEmployees']),
+    ...mapMutations('permission', ['clearState']),
+    ...mapActions('firmData', ['getEmployees', 'getModule']),
     changeData () {
       this.isEditor = !this.isEditor
     },
@@ -51,24 +52,19 @@ export default {
     getDataApi () {
       this.getBaseData()
       this.getEmployees(this.$route.params.id)
-      this.getModule()
+      this.getModule(this.$route.params.id)
     },
     getBaseData () {
       axios.http('company_detail', '', 'get', this.$route.params.id).then(d => {
         this.form = d.data[0]
       })
     },
-    getModule () {
-      axios.http('company_template', '', 'get', this.$route.params.id).then(d => {
-        this.module = d.data
-      })
-    },
     addTemp () {
+      this.clearState()
       this.setPopState({name: 'pop_all', value: 3})
       this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id}})
     },
     changeUserTemp (id, b) {
-      console.log(!b)
       if (b) {
         this.setPopState({name: 'pop_all', value: 6})
         this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id, id: id}})
@@ -121,7 +117,7 @@ export default {
       }
       axios.http('company_getTemplate', p, 'post', '/' + id + '/del').then(d => {
         this.$toast('删除成功', 'cc')
-        this.getModule()
+        this.getModule(this.$route.params.id)
       })
     },
     changeName () {
@@ -149,7 +145,7 @@ export default {
   },
   computed: {
     ...mapState('pop', ['pop_all']),
-    ...mapState('firmData', ['employees']),
+    ...mapState('firmData', ['employees', 'module']),
     ...mapState('user', ['currentUser']),
     inputW () {
       return window.innerWidth * 300 / 1920

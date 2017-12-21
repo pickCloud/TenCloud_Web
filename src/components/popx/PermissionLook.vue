@@ -3,7 +3,7 @@
   <div class="p-16">
     <div class="flex-flex p-b16" >
     </div>
-    <tab-tree :model="dataList"></tab-tree>
+    <tab-tree :model="dataList" :isLabel="false"></tab-tree>
     </div>
   </div>
 </template>
@@ -48,8 +48,8 @@
           })
         })
       },
-      getTempUser (id) {
-        this.$axios.http('company_getTemplate', '', 'get', '/' + id + '/format/' + 0).then(d => {
+      getTempUser (cid, id) {
+        this.$axios.http('company_getUserTemplate', '', 'get', cid + '/user/' + id + '/detail/format/' + 0).then(d => {
           if (d.data) {
             d.data.forEach(item => {
               this.dataList.push(item)
@@ -60,7 +60,7 @@
     },
     created () {
 //      this.getData()
-      this.getTempUser(this.pop_params.id)
+      this.getTempUser(this.pop_params.cid, this.pop_params.id)
     },
     computed: {
       /* pop_all 3 是创建模板5是修改模板 6是修改用户模板 */
