@@ -75,7 +75,6 @@
           if (window.nextInviteCode) {
             let code = window.nextInviteCode
             delete window.nextInviteCode
-            console.log(window.nextInviteCode)
             this.$router.push({name: 'CompleteData', query: {'code': code}})
           } else {
             this.$router.replace({name: 'Main'})

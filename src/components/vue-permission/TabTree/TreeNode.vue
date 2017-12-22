@@ -15,7 +15,7 @@
           <tree-node :model="item.data" :idx="nodeIndex" :isLabel="isLabel"></tree-node>
         </li>
       </ul>
-      <tree-check v-if="idx > 1" v-for="(item,key) in model" :isLabel="isLabel" :model="item" v-model="child_selected" :idx="0" :key="key"></tree-check>
+      <tree-check v-if="idx > 1" class="node-check" v-for="(item,key) in model" :isLabel="isLabel" :model="item" v-model="child_selected" :idx="0" :key="key"></tree-check>
     </div>
 </template>
 
@@ -52,4 +52,8 @@
 .node-labels .dis-block{
   display: block;
 }
+  .node-check {
+    padding: 10px 0;
+    background-color: #2f3543;
+  }
 </style>

@@ -1,6 +1,10 @@
 import axios from '../store/request/axios'
 import {mapState, mapMutations, mapActions} from 'vuex'
+import ChangeModuleName from './popx/ChangeModuleName.vue'
+import Poppers from './Poppers.js'
+import Selects from './Selects.js'
 export default {
+  mixins: [Poppers, Selects],
   data: () => ({
     form: {
       name: '',
@@ -120,27 +124,27 @@ export default {
         this.getModule(this.$route.params.id)
       })
     },
-    changeName () {
-      // this.$Popx({
-      //   popper: CreateNewVue,
-      //   data: {
-      //     title: '修改名字'
-      //   },
-      //   // callback: (type, payload, next)
-      //   callback: ({type, payload, next}) => {
-      //     if (payload.type === 'sure') {
-      //       this.$axios.http('file_create_dir', {
-      //         pid: this.pid,
-      //         dir_name: payload.filename
-      //       }, 'post').then(d => {
-      //         this.listts.push(d.data[0])
-      //         next()
-      //       })
-      //     } else {
-      //       next()
-      //     }
-      //   }
-      // })
+    moduleMame (item) {
+      this.$Popx({
+        popper: ChangeModuleName,
+        data: {
+          title: '模板重命名'
+        },
+        callback: ({type, payload, next}) => {
+          if (payload.type === 'sure') {
+            this.$axios.http('company_getTemplate', {
+              pt_id: item.id,
+              cid: this.$route.params.id,
+              name: payload.filename
+            }, 'post', '/' + item.id + '/rename').then(d => {
+              this.getModule(this.$route.params.id)
+              next()
+            })
+          } else {
+            next()
+          }
+        }
+      })
     }
   },
   computed: {

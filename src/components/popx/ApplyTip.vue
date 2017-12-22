@@ -5,7 +5,7 @@
       </div>
       <div class="p-b16">邀请流程</div>
       <div class="p-16">
-      <img src="../../../static/img/tip1.png" style="margin: 0 auto;display: block"/>
+      <img src="../../../static/img/tip2.png" style="margin: 0 auto;display: block"/>
       </div>
     </div>
 </template>

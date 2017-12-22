@@ -119,20 +119,20 @@
               <thead>
               <tr>
                 <th>模板名称</th>
-                <th>模板类型</th>
+                <th>备注</th>
                 <th>操作</th>
               </tr>
               </thead>
               <tbody>
               <tr>
                 <td>管理员</td>
-                <td>功能|数据</td>
+                <td>预设</td>
                 <td>查看</td>
               </tr>
               <tr v-for="item in module">
                 <td>{{item.name}}</td>
                 <td>{{item[0]}}</td>
-                <td><m-btn @click.native="changeTemp(item.id)">修改</m-btn><m-btn>重命名</m-btn><m-btn @click.native="deleteTemp(item.id)">删除</m-btn></td>
+                <td><m-btn @click.native="changeTemp(item.id)">修改</m-btn><m-btn @click.native="moduleMame(item)">重命名</m-btn><m-btn @click.native="deleteTemp(item.id)">删除</m-btn></td>
               </tr>
               </tbody>
             </m-table>
