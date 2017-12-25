@@ -8,7 +8,7 @@
           <div class="login-select_content m-b32 p-b16">
             邀请你加入企业
           </div>
-          <div class="p-b16"><span class="primary_txt">{{inviteData.contact}}</span> 邀请你加入 <span  class="primary_txt">{{inviteData.company}}</span></div>
+          <div class="p-b16"><span class="primary_txt">{{inviteData.contact}}</span> 邀请你加入 <span  class="primary_txt">{{inviteData.company_name}}</span></div>
           <div class="login-form_inp m-b16">
             <input type="text" placeholder="请输入手机号码" v-model="loginData.mobile">
             <i class="iconfont icon-shouji"></i>
@@ -27,10 +27,10 @@
           </div>
           </div>
           <m-btn class="login-form_sure m-b16" :sizeh="50" @click.native="login">登录</m-btn>
-          <div class="flex-space-between">
-            <span class="">还没有账号？<m-btn class="primary_txt" @click.native="resign">免费注册</m-btn></span>
-            <span class=""><m-btn class="primary_txt" @click.native="lostPassword">忘记密码</m-btn></span>
-          </div>
+          <!--<div class="flex-space-between">-->
+            <!--<span class="">还没有账号？<m-btn class="primary_txt" @click.native="resign">免费注册</m-btn></span>-->
+            <!--<span class=""><m-btn class="primary_txt" @click.native="lostPassword">忘记密码</m-btn></span>-->
+          <!--</div>-->
 
           <!--<div class="login-form_sure">登录</div>-->
         </div>
@@ -84,6 +84,24 @@
             this.isRegisn = false
             return false
           }
+          this.tip.type = 'error'
+          this.tip.info = e.message
+        })
+      },
+      isOther () {
+        if (window.nextInviteCode) {
+          this.$router.push({name: 'CompleteData', query: {'code': window.nextInviteCode}})
+          delete window.nextInviteCode
+        } else {
+          this.$router.replace({name: 'Main'})
+        }
+      },
+      codeResign () {
+        let loginData = this.loginData
+        if (this.checkPassword()) return false
+        this.$axios.http('user_setPassword', loginData, 'post').then(d => {
+          this.isOther()
+        }).catch(e => {
           this.tip.type = 'error'
           this.tip.info = e.message
         })
