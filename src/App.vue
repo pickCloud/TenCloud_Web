@@ -165,8 +165,10 @@
   .login-tip {
     padding: 0 16px;
     height: 50px;
-    line-height: 50px;
+    /*line-height: 50px;*/
     border: 1px solid transparent;
+    display: flex;
+    align-items: center;
     .iconfont {
       font-size: 1rem;
     }

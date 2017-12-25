@@ -23,6 +23,7 @@
               <!--</div>-->
               <div class="m-l16">
                 <div class="messages-type m-b16">
+                  <i class="iconfont icon-xiaoxi1"></i>
                   <span>{{messagesType(item.mode)}}</span>
                   <span>{{item.update_time}}</span>
                 </div>

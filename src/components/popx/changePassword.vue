@@ -104,12 +104,12 @@
     computed: {
     },
     created () {
-      this.initGeet()
+//      this.initGeet()
     },
     watch: {
-      type: function () {
-        if (this.type !== 1) return
-        this.initGeet()
+      'loginData.mobile': function () {
+        if (this.loginData.mobile.length === 11 && this.type !== 1) return
+        this.getCount()
       }
     }
   }

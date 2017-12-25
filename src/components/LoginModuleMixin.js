@@ -26,7 +26,6 @@ export default {
     getCount () {
       axios.http('user_sms_count', '', 'get', this.loginData.mobile + '/count', false).then(d => {
         this.sms_count = d.data.sms_count
-        console.log(this.sms_count)
         if (this.sms_count > 2) {
           this.btndis = true
           this.initGeet()

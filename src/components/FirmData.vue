@@ -6,7 +6,7 @@
             <panel class="m-b16">
               <div class="panel-title flex-space-between" slot="title" style="padding: 0px 16px">
                 <div class="p-lr-16">
-                  <input type="text" class="inp-editor input-height" style="line-height:30px" :disabled="!isEditor" :class="{'editor':isEditor}" v-model="form.name">
+                  <input type="text" class="inp-editor input-height" style="line-height:30px;text-overflow: ellipsis;" :disabled="!isEditor" :class="{'editor':isEditor}" v-model="form.name">
                 </div>
                   <div >
                   <m-btn  @click.native="changeData" v-if="!isEditor"><i class="iconfont icon-xiugai"></i> 修改</m-btn>
@@ -71,17 +71,17 @@
           <div class="panel-body p-b16">
             <table class="table hover striped theme-dft pad-table ">
               <col width="10%">
+              <col width="10%">
               <col width="15%">
               <col width="15%">
               <col width="15%">
-              <col width="15%">
-              <col width="15%">
+              <col width="10%">
               <col width="15%">
               <thead>
               <tr>
                 <th>姓名</th>
                 <th>手机号码</th>
-                <!--<th>身份证号</th>-->
+                <th>身份证号</th>
                 <th>申请时间</th>
                 <th>加入时间</th>
                 <th>状态</th>
@@ -92,7 +92,7 @@
               <tr v-for="item in employees">
                 <td><i v-if="item.is_admin" class="iconfont icon-guanliyuan yellow_txt" style="padding-right: 5px"></i>{{item.name}}</td>
                 <td>{{item.mobile}}</td>
-                <!--<td>{{item.is_admin}}</td>-->
+                <td>{{item.id_card}}</td>
                 <td>{{item.create_time}}</td>
                 <td>{{item.update_time}}</td>
                 <td :class="item.status===0?'pass_tip':''">{{item.status===1 || item.status===2?'已通过审核':item.status===0?'待审核':'审核不通过'}}</td>
@@ -132,7 +132,7 @@
               <tr v-for="item in module">
                 <td>{{item.name}}</td>
                 <td>{{item[0]}}</td>
-                <td><m-btn @click.native="changeTemp(item.id)">修改</m-btn><m-btn @click.native="moduleMame(item)">重命名</m-btn><m-btn @click.native="deleteTemp(item.id)">删除</m-btn></td>
+                <td><m-btn @click.native="changeTemp(item.id)">修改</m-btn><m-btn @click.native="moduleMame(item)">重命名</m-btn><m-btn @click.native="deleteTemp(item)">删除</m-btn></td>
               </tr>
               </tbody>
             </m-table>

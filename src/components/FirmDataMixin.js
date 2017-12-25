@@ -114,14 +114,16 @@ export default {
         this.getDataApi()
       })
     },
-    deleteTemp (id) {
-      let p = {
-        pt_id: id,
-        cid: this.$route.params.id
-      }
-      axios.http('company_getTemplate', p, 'post', '/' + id + '/del').then(d => {
-        this.$toast('删除成功', 'cc')
-        this.getModule(this.$route.params.id)
+    deleteTemp (item) {
+      this.popperDelete('您确定要删除 ' + item.name + ' 模板吗？', _ => {
+        let p = {
+          pt_id: item.id,
+          cid: this.$route.params.id
+        }
+        this.$axios.http('company_getTemplate', p, 'post', '/' + item.id + '/del').then(d => {
+          this.$toast('删除成功', 'cc')
+          this.getModule(this.$route.params.id)
+        }, e => {})
       })
     },
     moduleMame (item) {
