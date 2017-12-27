@@ -21,6 +21,7 @@ export default {
     ...mapMutations('pop', ['setPopState']),
     ...mapMutations('permission', ['clearState']),
     ...mapActions('firmData', ['getEmployees', 'getModule']),
+    ...mapActions('navTop', ['getCompany']),
     changeData () {
       this.isEditor = !this.isEditor
     },
@@ -85,10 +86,17 @@ export default {
       this.setPopState({name: 'pop_all', value: 1})
       this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id, company_name: this.form.name}})
     },
-    leaveCompany (id) {
-      axios.http('company_accept', {id: id}, 'post').then(d => {
+    leaveCompany () {
+      let id = ''
+      this.employees.forEach(item => {
+        if (item.uid === this.$root.userinfo.id) {
+          id = item.id
+          return false
+        }
+      })
+      axios.http('company_employee_dismission', {id: id}, 'post').then(d => {
         this.$toast('成功', 'cc')
-        this.getDataApi()
+        this.getCompany(3)
       })
       this.$router.push({name: 'UserInfo'})
     },

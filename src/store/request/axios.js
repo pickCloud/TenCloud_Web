@@ -15,10 +15,13 @@ const options = {
       if (this.token === null && this.getToken()) {
         this.token = this.getToken()
         axios.defaults.headers.common['Authorization'] = this.token.token
+        axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
       } else if (this.getToken() && this.token.token !== this.getToken().token) {
         this.token = this.getToken()
         axios.defaults.headers.common['Authorization'] = this.token.token
+        axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
       }
+      axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
       axios[method](this.URL, params).then(response => {
         if (response.status === 200) {
           resolve(response.data)

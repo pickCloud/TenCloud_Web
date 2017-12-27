@@ -110,11 +110,11 @@ export default {
       }, temp[0] * 1000)
     },
     deleteMachine () {
-      this.popperDelete(this.baseInfo.name, _ => {
-        if (this.isOpen) {
-          this.popperInfo('请关机后再删除')
-          return false
-        }
+      this.popperDelete('确定要删除 ' + this.baseInfo.name + ' 吗？', _ => {
+        // if (this.isOpen) {
+        //   this.popperInfo('请关机后再删除')
+        //   return false
+        // }
         this.$axios.http('server_del', {
           id: [this.$route.params.id]
         }, 'post').then(d => {

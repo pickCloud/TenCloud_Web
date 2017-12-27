@@ -81,7 +81,6 @@ const APIS = {
   company_getUserTemplate: {u: '/api/permission/', m: 'get'},
   company_template_user_update: {u: '/api/permission/user/update', m: 'get'},
   message_get: {u: '/api/messages/', m: 'get'},
-
   template_add: {u: '/api/permission/template/add', m: 'post'},
 
   islocal: islocal
