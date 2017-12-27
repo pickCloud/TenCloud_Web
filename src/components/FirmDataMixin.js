@@ -85,7 +85,11 @@ export default {
       this.setPopState({name: 'pop_all', value: 1})
       this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id, company_name: this.form.name}})
     },
-    leaveCompany () {
+    leaveCompany (id) {
+      axios.http('company_accept', {id: id}, 'post').then(d => {
+        this.$toast('成功', 'cc')
+        this.getDataApi()
+      })
       this.$router.push({name: 'UserInfo'})
     },
     inviteCondition () {

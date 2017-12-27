@@ -14,11 +14,9 @@ const options = {
       }
       if (this.token === null && this.getToken()) {
         this.token = this.getToken()
-        axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
         axios.defaults.headers.common['Authorization'] = this.token.token
       } else if (this.getToken() && this.token.token !== this.getToken().token) {
         this.token = this.getToken()
-        axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
         axios.defaults.headers.common['Authorization'] = this.token.token
       }
       axios[method](this.URL, params).then(response => {
@@ -26,6 +24,8 @@ const options = {
           resolve(response.data)
           if (url === 'user_login_password' || url === 'user_login' || url === 'user_resign') {
             this.setToken(response.data.data)
+            this.token = this.getToken()
+            axios.defaults.headers.common['Authorization'] = this.token.token
           }
         } else {
           reject(response.data)
@@ -49,7 +49,6 @@ const options = {
   },
   loginOut (id) {
     axios.post(api.baseURL + 'api/user/logout', {cid: id}).then(d => {
-      console.log('成功')
     })
   }
 }

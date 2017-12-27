@@ -109,10 +109,12 @@
 //          window.ROOT_DATA.userinfo = this.$root.userinfo = d.data
 //          this.UPDATE(this.$root.userinfo)
 //        })
+//        console.log(this.$axios.token)
         if (this.$axios.token.user) {
           console.log(this.$axios.token.user)
           this.$axios.isLogin = true
           window.ROOT_DATA.userinfo = this.$root.userinfo = this.$axios.token.user
+          this.UPDATE(this.$root.userinfo)
         }
       },
       getCurrentUser () {

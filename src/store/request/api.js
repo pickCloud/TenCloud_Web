@@ -74,6 +74,7 @@ const APIS = {
   company_reject: {u: '/api/company/application/reject', m: 'post'},
   company_code: {u: '/api/company/application', m: 'get'},
   company_dismission: {u: '/api/company/application/dismission', m: 'post'},
+  company_employee_dismission: {u: '/api/company/employee/dismission', m: 'post'},
   company_adminTransfer: {u: '/api/company/admin/transfer', m: 'post'},
   company_getPermission: {u: '/api/permission/resource/', m: 'get'},
   company_getTemplate: {u: '/api/permission/template', m: 'get'},

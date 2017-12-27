@@ -108,8 +108,7 @@
     },
     watch: {
       'loginData.mobile': function () {
-        if (this.loginData.mobile.length === 11 && this.type !== 1) return
-        this.getCount()
+        if (this.loginData.mobile.length === 11 && this.type === 0) this.getCount()
       }
     }
   }
