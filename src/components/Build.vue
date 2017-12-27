@@ -80,7 +80,7 @@
   }
 </script>
 
-<style>
+<style lang="scss">
   .build-note p {
     margin-bottom: 8px;
   }

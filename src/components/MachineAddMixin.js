@@ -11,7 +11,8 @@ export default {
       cluster_id: 0
     },
     status: 'save',
-    clusters: []
+    clusters: [],
+    notes: []
   }),
   methods: {
     addHost () {
@@ -42,7 +43,7 @@ export default {
     initClusters () {
       this.rid = this.formdata.cluster_id = this.$route.params.id
       if (parseInt(this.rid) === 0) {
-        this.$Global.async('clusters').getData().then(d => {
+        this.$axios.http('clusters').then(d => {
           this.clusters = d.data
           this.formdata.cluster_id = this.clusters[0].id
           // this.initSocket()
@@ -57,12 +58,13 @@ export default {
         if (cb) cb()
       }
       this.socket.onmessage = (event) => {
+        this.notes.push(event.data)
         if (event.data === 'success') {
           this.$router.push({name: 'Machines'})
         } else {
           if (event.data !== 'open') {
             this.status = 'save'
-            this.$toast(event.data, 'cc')
+            // this.$toast(event.data, 'cc')
           }
         }
       }

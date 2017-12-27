@@ -3,7 +3,7 @@ const APIS = {
   baseURL: islocal ? 'https://c.10.com' : 'https://c.10.com',
   // baseURL: 'https://c.10.com',
   // baseURL: 'http://47.94.18.22:18080',
-  wsURL: islocal ? 'wss://10.0.1.9:8010' : 'wss://c.10.com',
+  wsURL: islocal ? 'wss://c.10.com' : 'wss://c.10.com',
   clusters: {u: '/api/clusters', m: 'get'},
   cluster_add: {u: '/api/cluster/new', m: 'post'},
   cluster_del: {u: '/api/cluster/del', m: 'post'},

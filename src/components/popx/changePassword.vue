@@ -72,6 +72,7 @@
     methods: {
       ...mapMutations('pop', ['setPopState']),
       nextStep () {
+        this.resetInfoTip()
         if (this.type === 0) {
           if (this.checkCodeAndMobile()) return false
           this.type++
@@ -99,12 +100,13 @@
       },
       getBack () {
         this.type--
+        this.resetInfoTip()
       }
     },
     computed: {
     },
     created () {
-//      this.initGeet()
+      if (this.loginData.mobile.length === 11 && this.type === 0) this.getCount()
     },
     watch: {
       'loginData.mobile': function () {
