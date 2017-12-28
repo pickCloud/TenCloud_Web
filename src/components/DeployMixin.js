@@ -60,7 +60,9 @@ export default {
         image_name: this.$route.params.image_name + ':' + this.version.value,
         container_name: this.container_name,
         project_id: this.$route.params.id,
-        ips: this.getMachineIps()
+        ips: this.getMachineIps(),
+        cid: this.$axios.token.cid,
+        Authorization: this.$axios.token.token
       }
       if (pdata.ips.length === 0) {
         this.$toast('请选择机器', 'cc')
@@ -78,7 +80,7 @@ export default {
       this.initSocket('', pdata)
     },
     initSocket (cb = null, pdata) {
-      this.socket = new WebSocket(this.$Global.apis.wsURL + this.$Global.apis.project_deployment.u)
+      this.socket = new WebSocket(this.$axios.apis.wsURL + this.$axios.apis.project_deployment.u)
       let scrolldiv = document.getElementById('scroll')
       this.socket.onopen = (event) => {
         if (cb) cb()

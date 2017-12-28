@@ -53,9 +53,25 @@ export default {
       }
     },
     initSocket (cb = null) {
-      this.socket = new WebSocket(apis.wsURL + apis.server_add.u)
+      // let pdata = {
+      //   cid: this.$axios.token.cid,
+      //   Authorization: this.$axios.token.token
+      // }
+      // this.socket.headers['cid'] = this.$axios.token.cid
+      console.log(apis.wsURL + apis.server_add.u)
+      this.socket = new WebSocket(apis.wsURL + apis.server_add.u,
+        // [],
+        {
+          'headers': {
+            // cid: this.$axios.token.cid,
+            // Authorization: this.$axios.token.token
+            'Cookie': 1
+          }
+        })
       this.socket.onopen = (event) => {
         if (cb) cb()
+        console.log(event)
+        // this.socket.send(JSON.stringify(pdata))
       }
       this.socket.onmessage = (event) => {
         this.notes.push(event.data)

@@ -31,7 +31,7 @@
                   {{item.content}}
                 </div>
                 <!--<div class="m-b16">{{messagesTip(item.sub_mode)}}</div>-->
-                <div class="btn primary_txt" @click="btn(item)">{{messagesBtn(item.sub_mode)+ ' >'}}</div>
+                <div class="btn primary_txt" @click="btn(item)" v-if="selectValue.value !== '3'">{{messagesBtn(item.sub_mode)+ ' >'}}</div>
               </div>
             </li>
             </ul>
@@ -54,8 +54,8 @@
       page: 1,
       isStillHave: true,
       mode: 1,
-      selects: [{label: '加入企业', value: '1'}, {label: '企业信息改变', value: '2'}],
-      selectValue: {label: '加入企业', value: '1'}
+      selects: [{label: '全部', value: '0'}, {label: '加入企业', value: '1'}, {label: '企业变更', value: '2'}, {label: '离开企业', value: '3'}],
+      selectValue: {label: '全部', value: '0'}
     }),
     methods: {
       selectType (type) {
@@ -144,6 +144,19 @@
       'selectValue.value' (n) {
         this.page = 1
         this.getMessages(true)
+      },
+      'searchWord' (n) {
+        if (n) {
+          let str = this.selectValue.value === 0 ? '' : '?status=' + this.selectValue.value
+
+          this.$axios.http('message_search', '', 'get', str).then(d => {
+            if (d.data) {
+              this.messages = d.data
+            }
+          })
+        } else {
+          this.getMessages()
+        }
       }
     }
   }
