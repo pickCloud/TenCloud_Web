@@ -21,22 +21,22 @@
       <div class="user-box btn hover-component animate-fadeIn" style="right: 190px;text-align: right;">
         <div class="user-box_label" @click="goMessages">
           <i class="iconfont icon-xiaoxi vam" style="font-size: 1rem"></i>
-          <span class="vam user-box_msg_translate common-ground_box navtop" v-show="messages.length>0"><div class="num">{{messages.length}}</div></span></div>
+          <span class="vam user-box_msg_translate common-ground_box navtop" v-show="messages"><div class="num">{{messages}}</div></span></div>
         <div style="position: relative;width: 400px;background-color: #2f3543" v-if="false">
           <ul class="child user-message_tietle ">
             <div class="flex-space-between" style="border-bottom: 1px solid rgba(255,255,255,0.2);">
               <div class="pad-lr16">消息合</div>
               <m-btn class="pad-lr16 btn">清空</m-btn>
             </div>
-            <li class="flex-space-between line-50 pad-5 over-hidden" v-for="item in messages" :key="item.id">
-              <div class="line-14 text-left"><span>{{item.content}}</span></div>
-              <div class="line-0 pad-5">
-                <div class="line-20">{{item.update_time}}</div>
+            <!--<li class="flex-space-between line-50 pad-5 over-hidden" v-for="item in messages" :key="item.id">-->
+              <!--<div class="line-14 text-left"><span>{{item.content}}</span></div>-->
+              <!--<div class="line-0 pad-5">-->
+                <!--<div class="line-20">{{item.update_time}}</div>-->
                 <!--<div  class="common-ground_box navtop-msg-content line-20">-->
                   <!--<div class="num line-20">1</div>-->
                 <!--</div>-->
-              </div>
-            </li>
+              <!--</div>-->
+            <!--</li>-->
             <div class="line-50 btn text-center theme-dft" style="display: block;">全部消息</div>
           </ul>
         </div>
@@ -89,6 +89,7 @@
           {cn: '个人资料'}
         ])
         this.UPDATE(this.$root.userinfo)
+        this.$axios.token.cid = 0
       },
       changeLink (item) {
         this.$store.commit('sitepath/SET_PATH', [
@@ -96,6 +97,7 @@
           {cn: '企业资料'}
         ])
         this.UPDATE(item)
+        this.$axios.token.cid = item.cid
       },
       messageTime () {
         this.getMessages(0)

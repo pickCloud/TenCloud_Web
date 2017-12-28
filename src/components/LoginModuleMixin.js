@@ -98,7 +98,7 @@ export default {
       this.requestCode()
     },
     requestCode () {
-      axios.http('user_verify', this.loginData).then(d => {
+      axios.http('user_verify', this.loginData, 'post', '', false).then(d => {
       }, e => {
         this.overwati()
         if (e.status === 10404) {

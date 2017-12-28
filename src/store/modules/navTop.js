@@ -3,7 +3,7 @@ import axios from '../request/axios'
 export default {
   namespaced: true,
   state: {
-    messages: [],
+    messages: '',
     companyList: [],
     companyAllList: [],
     timer: ''
@@ -11,11 +11,12 @@ export default {
   getters: {},
   mutations: {
     setMessages (state, data) {
-      state.messages.splice(0, state.messages.length)
-      if (!Array.isArray(data)) return false
-      data.forEach(function (item) {
-        state.messages.push(item)
-      })
+      // state.messages.splice(0, state.messages.length)
+      // if (!Array.isArray(data)) return false
+      // data.forEach(function (item) {
+      //   state.messages.push(item)
+      // })
+      state.messages = data
     },
     setCompany (state, data) {
       state.companyList.splice(0, state.companyList.length)
@@ -51,7 +52,20 @@ export default {
     },
     getMessages (ctx, type = 0) {
       if (type === 'closed') return ctx.commit('clearTimer')
-      axios.http('message_get', '', 'get', type).then(d => {
+      axios.http('message_count', '', 'get').then(d => {
+        ctx.commit('setMessages', d.data.num)
+        ctx.commit('setTimer', setTimeout(function () {
+          ctx.dispatch('getMessages', type)
+        }, 30000))
+      }).catch(e => {
+        if (e.message === 'timeOut') {
+          ctx.dispatch('getMessages', {type: type})
+        }
+      })
+    },
+    getMessagesCount (ctx, type = 0) {
+      if (type === 'closed') return ctx.commit('clearTimer')
+      axios.http('message_count', '', 'get', type).then(d => {
         ctx.commit('setMessages', d.data)
         ctx.commit('setTimer', setTimeout(function () {
           ctx.dispatch('getMessages', type)
