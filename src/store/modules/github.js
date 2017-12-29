@@ -38,7 +38,7 @@ export default {
     },
     'getLocaltion' (state, data) {
       let dataObj = {}
-      if (typeof data === 'string') {
+      if (typeof data === 'string' && data !== '') {
         dataObj = JSON.parse(data)
       }
       this.commit('projectAdd/setFormdata', {name: false, value: dataObj}, { root: true })

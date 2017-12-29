@@ -67,7 +67,7 @@ export default {
       this.initSocket('', pdata)
     },
     initSocket (cb = null, pdata) {
-      this.socket = new WebSocket(apis.wsURL + apis.project_create.u,
+      this.socket = new WebSocket(apis.wsURL + apis.project_create.u + '?cid:' + this.$axios.token.cid + '&' + 'Authorization:' + this.$axios.token.token,
         [],
         {
           'headers': {
