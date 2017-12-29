@@ -54,11 +54,7 @@
           return false
         }
         if (!this.personData.name) {
-          this.$toast('请填写企业名称', 'cc')
-          return false
-        }
-        if (!this.personData.name) {
-          this.$toast('请填写联系人', 'cc')
+          this.$toast('姓名不能为空', 'cc')
           return false
         }
         if (!this.personData.id_card && this.isId_card()) {
@@ -84,7 +80,6 @@
       axios.http('company_code', '', 'get', '?code=' + this.$route.query.code).then(d => {
         this.inviteData = d.data
       }).catch(e => {
-
       })
     },
     beforeDestroy () {

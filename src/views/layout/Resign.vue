@@ -57,8 +57,8 @@
         this.$router.push({name: 'Login'})
       },
       resign () {
-        if (this.checkPassword()) return false
         if (this.checkCodeAndMobile()) return false
+        if (this.checkPassword()) return false
         let loginData = this.loginData
         axios.http('user_resign', loginData, 'post').then(d => {
           if (window.nextUrl) {

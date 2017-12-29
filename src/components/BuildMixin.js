@@ -1,5 +1,6 @@
 import dlist from './piece/datalist/Main.vue'
 import Poppers from './Poppers.js'
+import apis from '../store/request/api'
 export default {
   mixins: [Poppers],
   data: () => ({
@@ -66,7 +67,7 @@ export default {
       this.initSocket('', pdata)
     },
     initSocket (cb = null, pdata) {
-      this.socket = new WebSocket(this.$axios.apis.wsURL + this.$axios.apis.project_create.u,
+      this.socket = new WebSocket(apis.wsURL + apis.project_create.u,
         [],
         {
           'headers': {

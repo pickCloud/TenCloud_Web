@@ -11,7 +11,7 @@
           <i class="iconfont icon-touxiang1 vam" style="font-size: 1.5rem" v-if="!userinfo.image_url"></i>
           <div class="head" :style="{backgroundImage:'url('+ userinfo.image_url+')'}" v-else></div>
           <span class="vam userName">{{currentUser.name||currentUser.company_name}}</span></div>
-        <ul slot="popper">
+        <ul slot="popper" style="max-height: 700px;overflow: auto">
           <li style="white-space: nowrap;" v-for="item in companyList" :key="item.id"><router-link :to="{name:'FirmData',params:{id:item.cid}}" @click.native="changeLink(item)"><i class="iconfont icon-qiye vam"></i> <span class="vam" style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{item.company_name}}</span></router-link></li>
           <li><router-link :to="{name:'FirmAdd'}" @click.native="addCompany"><i class="iconfont icon-tianjiaqiye vam"></i> <span class="vam">添加企业</span></router-link></li>
           <li><router-link :to="{name:'UserInfo'}"  @click.native="userInfo"><i class="iconfont icon-geren vam"></i> <span class="vam">个人中心</span></router-link></li>
@@ -104,6 +104,10 @@
       },
       goMessages () {
         this.$router.push({name: 'Messages'})
+        this.$store.commit('sitepath/SET_PATH', [
+          {name: 'Main', cn: '主页'},
+          {cn: '消息'}
+        ])
       },
       getUserInfo () {
 //        this.$axios.http('user_info').then(d => {

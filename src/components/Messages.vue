@@ -6,7 +6,7 @@
           <panel class="m-b16">
             <div class="panel-title flex-space-between" slot="title">
               <div class="flex-felx">
-              <m-btn class="btn theme-dft" @click.native="selectType(0)" :class="type==0?'select-active':''">最新通知</m-btn>
+              <m-btn class="btn theme-dft" @click.native="selectType(0)" :class="type==0?'select-active':''">最新消息</m-btn>
               <m-btn class="btn theme-dft" @click.native="selectType(1)" :class="type==1?'select-active':''">历史消息</m-btn>
               <!--<m-btn class="btn theme-dft" @click.native="selectType(2)" :class="type==2?'select-active':''">最新通知</m-btn>-->
               </div>
@@ -31,7 +31,7 @@
                   {{item.content}}
                 </div>
                 <!--<div class="m-b16">{{messagesTip(item.sub_mode)}}</div>-->
-                <div class="btn primary_txt" @click="btn(item)" v-if="selectValue.value !== '3'">{{messagesBtn(item.sub_mode)+ ' >'}}</div>
+                <div class="btn primary_txt" @click="btn(item)" v-if="item.mode !== 3">{{messagesBtn(item.sub_mode)+ ' >'}}</div>
               </div>
             </li>
             </ul>
@@ -66,7 +66,9 @@
         this.getMessages()
       },
       getMessages (isResetData = false) {
-        axios.http('message_get', '', 'get', this.type + '?page=' + this.page + '&mode=' + this.selectValue.value).then(d => {
+        console.log(this.selectValue.value)
+        let modeStr = this.selectValue.value === '0' ? '' : '&mode=' + this.selectValue.value
+        axios.http('message_get', '', 'get', this.type + '?page=' + this.page + modeStr).then(d => {
           if (d.data) {
             if (isResetData) {
               this.messages = d.data
@@ -147,9 +149,10 @@
       },
       'searchWord' (n) {
         if (n) {
-          let str = this.selectValue.value === 0 ? '' : '?status=' + this.selectValue.value
-
-          this.$axios.http('message_search', '', 'get', str).then(d => {
+          let typeStr = this.type === 0 ? '' : 'status=' + this.type
+          let modeStr = this.selectValue.value === '0' ? '' : '&mode=' + this.selectValue.value
+          let keyStr = '&keywords=' + n
+          this.$axios.http('message_search', '', 'get', '?' + typeStr + modeStr + keyStr).then(d => {
             if (d.data) {
               this.messages = d.data
             }
