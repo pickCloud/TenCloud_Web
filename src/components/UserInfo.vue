@@ -38,7 +38,7 @@
             <div class="flex-space-between">
               <div class="flex-space-between">
              <div class="userInfo-safeLine">
-              <span class="progress-bar" :class="{'progress-bar-high':infos.password_strength===6||infos.password_strength===5,'progress-bar-mid':infos.password_strength===4||infos.password_strength===3||infos.password_strength===2,'progress-bar-low':infos.password_strength===0||infos.password_strength===1}" ></span>
+              <span class="progress-bar" :class="{'progress-bar-high':infos.password_strength===4||infos.password_strength===5,'progress-bar-mid':infos.password_strength===3,'progress-bar-low':infos.password_strength===2||infos.password_strength===1}" ></span>
             </div>
             <div class="userInfo-safe-tip">
               <span>安全级别:</span><span>{{word}}</span>
@@ -153,11 +153,11 @@
           </div>
         </div>
           <div class="flex-flex-end" style="width: 200px;padding-right: 10px">
-            <div v-if="item.status === 1">
+            <div v-if="item.status === 1 ||item.status === 2">
             <!--<m-btn class="no-radius btn-github" @click.native="deleteCompany(item.cid)">解除绑定</m-btn>-->
             <m-btn v-if="" class="primary_bg grey-dark_txt" @click.native="enterCompany(item.cid)">进入企业</m-btn>
             </div>
-              <m-btn v-else-if="item.status === -1" class="primary_bg grey-dark_txt" @click.native="applyAdd(item.cid)">重新申请</m-btn>
+            <m-btn v-else-if="item.status === -1" class="primary_bg grey-dark_txt" @click.native="applyAdd(item.cid)">重新申请</m-btn>
           </div>
       </div>
     </div>
@@ -297,7 +297,7 @@
 
         this.updateing = true
         this.$axios.http('user_update', cdata, 'post').then(d => {
-          this.$toast(d.message, 'cc')
+          this.$toast('保存成功', 'cc')
           this.isEditor = false
           this.isEditor2 = false
           this.updateing = false
@@ -349,25 +349,25 @@
       word () {
         let str = '低'
         switch (this.infos.password_strength) {
-          case 0:
+          case '0':
             str = '低'
             break
-          case 1:
-            str = '低'
+          case '1':
+            str = '很弱'
             break
-          case 2:
-            str = '中'
+          case '2':
+            str = '弱'
             break
-          case 3:
-            str = '中'
+          case '3':
+            str = '一般'
             break
-          case 4:
-            str = '中'
+          case '4':
+            str = '强'
             break
-          case 5:
-            str = '高'
+          case '5':
+            str = '很强'
             break
-          case 6:
+          case '6':
             str = '高'
             break
         }

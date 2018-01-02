@@ -79,7 +79,7 @@
         } else if (this.type === 1) {
           this.resetInfoTip()
           if (this.checkNewPassword()) return false
-          axios.http('user_resetPassword', this.loginData).then(d => {
+          axios.http('user_resetPassword', this.loginData, 'post', '', false).then(d => {
             if (d.status === 0) {
               this.type++
               this.$toast('修改密码成功', 'cc')

@@ -103,7 +103,7 @@
       codeResign () {
         let loginData = this.loginData
         if (this.checkPassword()) return false
-        axios.http('user_setPassword', loginData, 'post').then(d => {
+        axios.http('user_setPassword', loginData, 'post', '', false).then(d => {
           this.isOther()
         }).catch(e => {
           this.tip.type = 'error'
@@ -114,7 +114,7 @@
         let loginData = this.loginData
         if (this.type === 1) {
           if (this.checkCodeAndMobile()) return false
-          this.$axios.http('user_login', loginData, 'post').then(d => {
+          this.$axios.http('user_login', loginData, 'post', '', false).then(d => {
             this.isOther()
           }).catch(e => {
             if (e.status === 10404) {
@@ -126,7 +126,7 @@
           })
         } else {
           if (this.checkPasswordAndMobile()) return true
-          axios.http('user_login_password', loginData, 'post').then(d => {
+          axios.http('user_login_password', loginData, 'post', '', false).then(d => {
             this.isOther()
           }).catch(e => {
             this.tip.type = 'error'

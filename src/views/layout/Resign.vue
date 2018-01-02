@@ -60,7 +60,7 @@
         if (this.checkCodeAndMobile()) return false
         if (this.checkPassword()) return false
         let loginData = this.loginData
-        axios.http('user_resign', loginData, 'post').then(d => {
+        axios.http('user_resign', loginData, 'post', '', false).then(d => {
           if (window.nextUrl) {
             this.$router.replace({name: 'Main'})
             window.location.href = window.location.origin + window.nextUrl

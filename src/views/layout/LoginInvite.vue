@@ -71,7 +71,7 @@
       login () {
         let loginData = this.loginData
         if (this.checkCodeAndMobile()) return false
-        this.$axios.http('user_login', loginData, 'post').then(d => {
+        this.$axios.http('user_login', loginData, 'post', '', false).then(d => {
           if (window.nextInviteCode) {
             let code = window.nextInviteCode
             delete window.nextInviteCode
@@ -99,7 +99,7 @@
       codeResign () {
         let loginData = this.loginData
         if (this.checkPassword()) return false
-        this.$axios.http('user_setPassword', loginData, 'post').then(d => {
+        this.$axios.http('user_setPassword', loginData, 'post', '', false).then(d => {
           this.isOther()
         }).catch(e => {
           this.tip.type = 'error'

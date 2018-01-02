@@ -1,10 +1,10 @@
 <template>
     <div class="p-16">
       <div class="p-b16">
-      <span>你好</span><span class="primary_txt">现在不能个人申请加入,需要管理员邀请</span>
+      <span>你好:&nbsp;&nbsp;</span><span class="primary_txt">现在不能个人申请加入,需要管理员邀请</span>
       </div>
       <div class="p-b16">邀请流程</div>
-      <div class="p-16">
+      <div style="padding: 32px">
       <img src="../../../static/img/tip2.png" style="margin: 0 auto;display: block"/>
       </div>
     </div>

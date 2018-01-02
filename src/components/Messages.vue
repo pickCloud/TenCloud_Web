@@ -95,7 +95,7 @@
           case 1:
             return '加入企业'
           case 2:
-            return '改变企业信息'
+            return '企业变更'
         }
       },
       messagesTip (code) {

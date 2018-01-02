@@ -55,7 +55,7 @@
         if (this.pop_all === 3) {
         }
         if (this.pop_all === 5) {
-          this.getMudule()
+//          this.getMudule()
           this.getTemp(this.pop_params.id)
         }
         if (this.pop_all === 6) {
@@ -149,7 +149,6 @@
           this.addUserTemp(p)
         }
         this.setPopState({name: 'pop_all', value: 0})
-        console.log(this.pop_params.cid)
         this.getModule(this.pop_params.cid)
       },
       changeTemp (p) {

@@ -50,7 +50,7 @@
       }
     },
     methods: {
-      ...mapActions('github', ['getGitHub', 'deleteToken']),
+      ...mapActions('github', ['getGitHub']),
       ...mapMutations('github', ['setGittip', 'setLocalStorage']),
       change (p) {
         if (this.value === p) {
@@ -63,6 +63,11 @@
         } else {
           Event.$emit('input', p)
         }
+      },
+      deleteToken () {
+        this.$axios.http('user_thumb_token', '', 'delete').then(d => {
+          this.$toast('解除绑定成功', 'cc')
+        })
       }
     },
     created () {

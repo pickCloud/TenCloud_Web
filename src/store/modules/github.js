@@ -21,7 +21,6 @@ export default {
       state.repos_idx = data
     },
     'setGittip' (state, data) {
-      console.log(data)
       state.gittip = data
     },
     'setHasGit' (state, data) {

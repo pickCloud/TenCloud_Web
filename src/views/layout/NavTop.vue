@@ -10,7 +10,7 @@
         <div slot="label" class="user-box_label">
           <i class="iconfont icon-touxiang1 vam" style="font-size: 1.5rem" v-if="!userinfo.image_url"></i>
           <div class="head" :style="{backgroundImage:'url('+ userinfo.image_url+')'}" v-else></div>
-          <span class="vam userName">{{currentUser.name||currentUser.company_name}}</span></div>
+          <span class="vam userName">{{currentUser.name||currentUser.company_name||currentUser.mobile}}</span></div>
         <ul slot="popper" style="max-height: 700px;overflow: auto">
           <li style="white-space: nowrap;" v-for="item in companyList" :key="item.id"><router-link :to="{name:'FirmData',params:{id:item.cid}}" @click.native="changeLink(item)"><i class="iconfont icon-qiye vam"></i> <span class="vam" style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{item.company_name}}</span></router-link></li>
           <li><router-link :to="{name:'FirmAdd'}" @click.native="addCompany"><i class="iconfont icon-tianjiaqiye vam"></i> <span class="vam">添加企业</span></router-link></li>
@@ -23,7 +23,7 @@
           <i class="iconfont icon-xiaoxi vam" style="font-size: 1rem"></i>
           <span class="vam user-box_msg_translate common-ground_box navtop" v-show="messages"><div class="num">{{messages}}</div></span></div>
         <div style="position: relative;width: 400px;background-color: #2f3543" v-if="false">
-          <ul class="child user-message_tietle ">
+            <ul class="child user-message_tietle ">
             <div class="flex-space-between" style="border-bottom: 1px solid rgba(255,255,255,0.2);">
               <div class="pad-lr16">消息合</div>
               <m-btn class="pad-lr16 btn">清空</m-btn>
@@ -56,7 +56,7 @@
     }),
     methods: {
       ...mapActions('navTop', ['getCompany', 'getMessages']),
-      ...mapMutations('user', ['UPDATE']),
+      ...mapMutations('user', ['UPDATE', 'getPermission']),
       back () {
         this.$router.back()
       },
@@ -73,7 +73,6 @@
             this.getMessages('closed')
             this.$router.replace({name: 'Login'})
           }
-//          this.$toast(d.message, 'cc')
         })
       },
       addCompany () {
@@ -117,20 +116,30 @@
 //        })
 //        console.log(this.$axios.token)
         if (this.$axios.token.user) {
-          console.log(this.$axios.token.user)
           this.$axios.isLogin = true
           window.ROOT_DATA.userinfo = this.$root.userinfo = this.$axios.token.user
-          this.UPDATE(this.$root.userinfo)
+//          this.UPDATE(this.$root.userinfo)
         }
       },
       getCurrentUser () {
         if (this.$axios.token.cid) {
           this.$axios.http('company_detail', '', 'get', this.$axios.token.cid).then(d => {
             this.UPDATE(d.data[0])
+            this.getTempUser()
           })
         } else {
           this.UPDATE(this.$root.userinfo)
+          this.getTempUser()
         }
+      },
+      getTempUser () {
+        console.log(this.currentUser)
+        let replaceId = this.currentUser.cid || this.currentUser.id
+        this.$axios.http('company_getUserTemplate', '', 'get', replaceId + '/user/' + this.$root.userinfo.id + '/detail/format/' + 0).then(d => {
+          if (d.data) {
+            this.getPermission(d.data)
+          }
+        })
       }
     },
     computed: {
@@ -156,6 +165,13 @@
     },
     destroyed () {
 //      clearInterval(this.timer)
+    },
+    watch: {
+      currentUser (n) {
+        if (n.cid) {
+          this.getTempUser()
+        }
+      }
     }
   }
 </script>
