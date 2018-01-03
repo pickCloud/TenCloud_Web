@@ -168,9 +168,9 @@
     },
     watch: {
       currentUser (n) {
-        if (n.cid) {
-          this.getTempUser()
-        }
+//        if (n.cid) {
+        this.getTempUser()
+//        }
       }
     }
   }

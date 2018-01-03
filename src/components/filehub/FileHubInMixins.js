@@ -45,7 +45,7 @@ export default {
       } else {
         this.popperDelete('您确定要删除文件' + this.getAttrById(delids, 'filename').join(',') + '吗？', _ => {
           this.$axios.http('file_del', {
-            file_ids: delids
+            id: delids
           }, 'post').then(d => {
             if (d.status === 0) {
               this.selects = []

@@ -38,10 +38,10 @@
             <div class="flex-space-between">
               <div class="flex-space-between">
              <div class="userInfo-safeLine">
-              <span class="progress-bar" :class="{'progress-bar-high':infos.password_strength===4||infos.password_strength===5,'progress-bar-mid':infos.password_strength===3,'progress-bar-low':infos.password_strength===2||infos.password_strength===1}" ></span>
+              <span class="progress-bar" :class="{'progress-bar-high':infos.password_strength==='很强'||infos.password_strength==='强','progress-bar-mid':infos.password_strength==='一般','progress-bar-low':infos.password_strength==='弱'||infos.password_strength==='很弱'}" ></span>
             </div>
             <div class="userInfo-safe-tip">
-              <span>安全级别:</span><span>{{word}}</span>
+              <span>安全级别:</span><span>{{infos.password_strength || '低'}}</span>
             </div>
               </div>
               <m-btn class="grey-dark_txt primary_bg btn-border-radius" @click.native="changePassword">
@@ -349,9 +349,6 @@
       word () {
         let str = '低'
         switch (this.infos.password_strength) {
-          case '0':
-            str = '低'
-            break
           case '1':
             str = '很弱'
             break

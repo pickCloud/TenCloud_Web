@@ -24,7 +24,8 @@ export default {
   methods: {
     ...mapActions('mechineDetail', ['getServerOperation']),
     getApiData () {
-      this.performanceData.server_id = this.$route.params.mid
+      // this.performanceData.server_id = this.$route.params.mid
+      this.performanceData.id = this.$route.params.mid
       this.performanceData.container_name = this.$route.params.name
       this.$axios.http('container_detail', '', 'get', this.$route.params.mid + '/container/' + this.$route.params.cid).then(d => {
         if (d.status === 0) {
@@ -67,7 +68,8 @@ export default {
       this.isWaiting = true
       this.waitingTip = STATUS_MAP[t][0] + '中, 请稍后'
       this.$axios.http(t, {
-        server_id: this.$route.params.mid,
+        // server_id: this.$route.params.mid,
+        id: this.$route.params.mid,
         container_id: this.$route.params.cid
       }, 'post').then(d => {
         if (d.status === 0) {
@@ -89,7 +91,8 @@ export default {
         //   clearTimeout(ttt)
         // }, 1000)
         this.$axios.http('container_del', {
-          server_id: this.$route.params.mid,
+          // server_id: this.$route.params.mid,
+          id: this.$route.params.mid,
           container_id: this.$route.params.cid
         }, 'post').then(d => {
           if (d.status === 0) {

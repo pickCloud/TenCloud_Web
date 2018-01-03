@@ -68,6 +68,7 @@ const APIS = {
   company_detail: {u: '/api/company/', m: 'get'},
   company_updata: {u: '/api/company/update', m: 'get'},
   company_invite: {u: '/api/company/', m: 'get'},
+  company_invite_waiting: {u: '/api/company/application/waiting', m: 'post'},
   company_setCondition: {u: '/api/company/', m: 'get'},
   company_apply: {u: '/api/company/application', m: 'post'},
   company_accept: {u: '/api/company/application/accept', m: 'post'},

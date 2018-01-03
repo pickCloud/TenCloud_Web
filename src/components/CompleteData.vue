@@ -81,6 +81,7 @@
         this.inviteData = d.data
       }).catch(e => {
       })
+      this.$axios.http('company_invite_waiting', {code: this.$route.query.code}, 'post').then(d => {})
     },
     beforeDestroy () {
     }

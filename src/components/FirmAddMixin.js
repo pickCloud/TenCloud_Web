@@ -40,6 +40,7 @@ export default {
     }
   },
   created () {
+    this.data.mobile = this.$root.userinfo.mobile
   },
   beforeDestroy () {
   }

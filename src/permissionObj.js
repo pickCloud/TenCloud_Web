@@ -36,6 +36,7 @@ let permission = {
 
   'audit_user_id': 6,  // 个人实名制审核
   'company_issue': 7,  // 用户提起企业异议处理
-  'audit_company_id': 35  // 企业认证审核
+  'audit_company_id': 35,  // 企业认证审核
+  'invite_new_employee': 36  // 邀请员工
 }
 export default permission
