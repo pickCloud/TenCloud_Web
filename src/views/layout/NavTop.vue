@@ -133,9 +133,8 @@
         }
       },
       getTempUser () {
-        console.log(this.currentUser)
         let replaceId = this.currentUser.cid || this.currentUser.id
-        this.$axios.http('company_getUserTemplate', '', 'get', replaceId + '/user/' + this.$root.userinfo.id + '/detail/format/' + 0).then(d => {
+        this.$axios.http('company_getUserTemplate', '', 'get', replaceId + '/user/' + this.$root.userinfo.id + '/detail/format/' + 1).then(d => {
           if (d.data) {
             this.getPermission(d.data)
           }
@@ -160,7 +159,7 @@
         this.getUserInfo()
         this.getCompany(3)
         this.messageTime()
-        this.getCurrentUser()
+        this.getTempUser()
       }
     },
     destroyed () {

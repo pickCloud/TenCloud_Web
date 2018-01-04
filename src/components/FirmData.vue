@@ -8,8 +8,8 @@
                 <div class="p-lr-16">
                   <input type="text" class="inp-editor input-height" style="line-height:30px;text-overflow: ellipsis;" :disabled="!isEditor" :class="{'editor':isEditor}" v-model="form.name">
                 </div>
-                  <div >
-                  <m-btn  @click.native="changeData" v-if="!isEditor"><i class="iconfont icon-xiugai"></i> 修改</m-btn>
+                  <div v-if="isPermission('modify_company_info')">
+                  <m-btn  @click.native="changeData" v-if="!isEditor"><i class="iconfont icon-xiugai"></i>修改</m-btn>
                   <div v-else>
                   <m-btn  @click.native="saveData">保存</m-btn>
                   <m-btn  @click.native="cancel">取消</m-btn>
@@ -62,11 +62,9 @@
           <div class="panel-title flex-space-between btn-group" slot="title">
             <div>员工列表</div>
             <m-btn v-if="!isAdmin" class="btn primary_txt" @click.native="leaveCompany">离开企业</m-btn>
-            <div v-else>
-            <m-btn class="primary_txt"   @click.native="invite">邀请员工</m-btn>
+            <m-btn class="primary_txt" v-if="isPermission('invite_new_employee')"  @click.native="invite">邀请员工</m-btn>
             <m-btn class="primary_txt" v-if="isPermission('set_join_conditions')" @click.native="inviteCondition"  >设置</m-btn>
             <m-btn class="primary_txt" v-if="isPermission('set_admin')" @click.native="permissionChange">更换管理员</m-btn>
-            </div>
           </div>
           <div class="panel-body p-b16">
             <table class="table hover striped theme-dft pad-table ">
@@ -124,11 +122,6 @@
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>管理员</td>
-                <td>预设</td>
-                <td>查看</td>
-              </tr>
               <tr v-for="item in module">
                 <td>{{item.name}}</td>
                 <td>{{item[0]}}</td>
