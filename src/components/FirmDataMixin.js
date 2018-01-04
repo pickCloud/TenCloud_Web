@@ -20,7 +20,7 @@ export default {
   methods: {
     ...mapMutations('pop', ['setPopState']),
     ...mapMutations('permission', ['clearState']),
-    ...mapMutations('user', ['isPermission']),
+    ...mapActions('user', ['isPermission']),
     ...mapActions('firmData', ['getEmployees', 'getModule']),
     ...mapActions('navTop', ['getCompany']),
     changeData () {
@@ -160,6 +160,9 @@ export default {
           }
         }
       })
+    },
+    isShow (name) {
+      return this.isPermission(name)
     }
   },
   computed: {

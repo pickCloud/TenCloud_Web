@@ -8,7 +8,7 @@
                 <div class="p-lr-16">
                   <input type="text" class="inp-editor input-height" style="line-height:30px;text-overflow: ellipsis;" :disabled="!isEditor" :class="{'editor':isEditor}" v-model="form.name">
                 </div>
-                  <div v-if="isPermission('modify_company_info')">
+                  <div v-if="isShow('modify_company_info')">
                   <m-btn  @click.native="changeData" v-if="!isEditor"><i class="iconfont icon-xiugai"></i>修改</m-btn>
                   <div v-else>
                   <m-btn  @click.native="saveData">保存</m-btn>
@@ -61,10 +61,12 @@
         <panel class="m-b16">
           <div class="panel-title flex-space-between btn-group" slot="title">
             <div>员工列表</div>
+            <div>
             <m-btn v-if="!isAdmin" class="btn primary_txt" @click.native="leaveCompany">离开企业</m-btn>
-            <m-btn class="primary_txt" v-if="isPermission('invite_new_employee')"  @click.native="invite">邀请员工</m-btn>
-            <m-btn class="primary_txt" v-if="isPermission('set_join_conditions')" @click.native="inviteCondition"  >设置</m-btn>
-            <m-btn class="primary_txt" v-if="isPermission('set_admin')" @click.native="permissionChange">更换管理员</m-btn>
+            <m-btn class="primary_txt" v-if="isShow('invite_new_employee')"  @click.native="invite">邀请员工</m-btn>
+            <m-btn class="primary_txt" v-if="isShow('set_join_conditions')" @click.native="inviteCondition"  >设置</m-btn>
+            <m-btn class="primary_txt" v-if="isShow('set_admin')" @click.native="permissionChange">更换管理员</m-btn>
+            </div>
           </div>
           <div class="panel-body p-b16">
             <table class="table hover striped theme-dft pad-table ">
@@ -94,7 +96,7 @@
                 <td>{{item.create_time}}</td>
                 <td>{{item.update_time}}</td>
                 <td :class="item.status===0?'pass_tip':''">{{item.status===1 || item.status===2?'已通过审核':item.status===0?'待审核':'审核不通过'}}</td>
-                <td ><div ><m-btn v-if="isPermission('audit_employee')" @click.native="company_reject(item.id)">拒绝</m-btn><m-btn v-if="isPermission('audit_employee')" @click.native="company_accept(item.id)">允许</m-btn><m-btn v-if="isPermission('set_employee_permission')" @click.native="changeUserTemp(item.uid,isAdmin)">权限</m-btn><m-btn v-if="isPermission('dismiss_employee')"  @click.native="company_dismission(item.id)">解除</m-btn></div></td>
+                <td ><div ><m-btn v-if="isShow('audit_employee')" @click.native="company_reject(item.id)">拒绝</m-btn><m-btn v-if="isShow('audit_employee')" @click.native="company_accept(item.id)">允许</m-btn><m-btn v-if="isShow('set_employee_permission')" @click.native="changeUserTemp(item.uid,isAdmin)">权限</m-btn><m-btn v-if="isShow('dismiss_employee')"  @click.native="company_dismission(item.id)">解除</m-btn></div></td>
               </tr>
               </tbody>
             </table>
@@ -106,7 +108,7 @@
           <div class="panel-title flex-space-between" slot="title">
               <div>权限模板</div>
               <div>
-                <m-btn v-if="isPermission('add_permission_template')" @click.native="addTemp">新增权限模板</m-btn>
+                <m-btn v-if="isShow('add_permission_template')" @click.native="addTemp">新增权限模板</m-btn>
               </div>
           </div>
           <div class="panel-body">
@@ -126,9 +128,9 @@
                 <td>{{item.name}}</td>
                 <td>{{item[0]}}</td>
                 <td>
-                  <m-btn v-if="isPermission('modify_permission_template')" @click.native="changeTemp(item.id)">修改</m-btn>
+                  <m-btn v-if="isShow('modify_permission_template')" @click.native="changeTemp(item.id)">修改</m-btn>
                   <!--<m-btn @click.native="moduleMame(item)">重命名</m-btn>-->
-                  <m-btn v-if="isPermission('delete_permission_template')" @click.native="deleteTemp(item)">删除</m-btn></td>
+                  <m-btn v-if="isShow('delete_permission_template')" @click.native="deleteTemp(item)">删除</m-btn></td>
               </tr>
               </tbody>
             </m-table>

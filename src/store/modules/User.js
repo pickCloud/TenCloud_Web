@@ -101,11 +101,11 @@ export default {
       }
       arry = arry.concat(data.permissions, data.access_servers, data.access_projects, data.access_filehub)
       state.currentPermission = arry
-      console.log(data)
-      console.log(arry)
-    },
-    isPermission (state, permissionName) {
-      return state.currentPermission.indexOf(state.permissions[permissionName]) !== -1
+    }
+  },
+  actions: {
+    isPermission (store, permissionName) {
+      return store.rootState.user.currentPermission.indexOf(store.rootState.user.permissions[permissionName]) !== -1
     }
   }
 }
