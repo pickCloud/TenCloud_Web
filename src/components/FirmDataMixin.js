@@ -20,6 +20,7 @@ export default {
   methods: {
     ...mapMutations('pop', ['setPopState']),
     ...mapMutations('permission', ['clearState']),
+    ...mapMutations('user', ['isPermission']),
     ...mapActions('firmData', ['getEmployees', 'getModule']),
     ...mapActions('navTop', ['getCompany']),
     changeData () {
@@ -173,8 +174,6 @@ export default {
     }
   },
   created () {
-    console.log(this.$route.params.id)
-
     this.getDataApi()
   },
   beforeDestroy () {

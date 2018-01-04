@@ -66,7 +66,6 @@
           <div class="info-head m-b16" :style="{backgroundImage:'url('+ infos.image_url+')'}">
             <i v-if="!infos.image_url" class="iconfont icon-touxiang1 iconHead" style="font-size: 139px;"></i>
           </div>
-
           <div class="text-center m-b16">
             <div class="formbylabel file theme-dft" style="height: 32px; line-height: 32px;">
               <input type="file" id="a5wpj6gl9z" name="file" @change="fileChange">
