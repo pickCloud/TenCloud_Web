@@ -102,7 +102,8 @@ export default {
   },
   actions: {
     isPermission (store, permissionName) {
-      return store.rootState.user.currentPermission.indexOf(store.rootState.user.permissions[permissionName]) !== -1
+      return 2
+      // return store.rootState.user.currentUser.is_admin || store.rootState.user.currentPermission.indexOf(store.rootState.user.permissions[permissionName]) !== -1
     }
   }
 }

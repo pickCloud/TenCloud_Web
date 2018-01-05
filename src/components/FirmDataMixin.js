@@ -162,6 +162,7 @@ export default {
     },
     isShow (name) {
       this.isPermission(name).then(d => {
+        console.log(d)
         return d
       })
     }
