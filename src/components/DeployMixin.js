@@ -79,7 +79,7 @@ export default {
       this.initSocket('', pdata)
     },
     initSocket (cb = null, pdata) {
-      this.socket = new WebSocket(apis.wsURL + apis.project_deployment.u + '?cid=' + this.$axios.token.cid + '&Authorization=' + this.$axios.token.token)
+      this.socket = new WebSocket(apis.wsURL + apis.project_deployment.u + '?Cid=' + this.$axios.token.cid + '&Authorization=' + this.$axios.token.token)
       let scrolldiv = document.getElementById('scroll')
       this.socket.onopen = (event) => {
         if (cb) cb()

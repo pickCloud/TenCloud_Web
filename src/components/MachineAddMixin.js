@@ -58,7 +58,7 @@ export default {
       //   Authorization: this.$axios.token.token
       // }
       // this.socket.headers['cid'] = this.$axios.token.cid
-      this.socket = new WebSocket(apis.wsURL + apis.server_add.u + '?cid=' + this.$axios.token.cid + '&Authorization=' + this.$axios.token.token)
+      this.socket = new WebSocket(apis.wsURL + apis.server_add.u + '?Cid=' + this.$axios.token.cid + '&Authorization=' + this.$axios.token.token)
       this.socket.onopen = (event) => {
         if (cb) cb()
         console.log(event)

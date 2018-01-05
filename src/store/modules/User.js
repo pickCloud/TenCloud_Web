@@ -26,7 +26,6 @@ export default {
       'view_company_identify_info': 34,  // 查看企业认证信息
       'company_identify': 21,  // 认证企业
       'modify_company_info': 3,  // 修改企业信息
-
       'dismiss_employee': 26,  // 解除和员工关系
       'view_employee_info': 4,  // 查看员工信息
       'set_join_conditions': 27,  // 设置员工加入条件
@@ -34,11 +33,9 @@ export default {
       'set_admin': 24,  // 更换员工管理员
       'audit_employee': 23,  // 审核员工
       'view_employee_id_info': 22,  // 查看员工身份证信息
-
       'modify_permission_template': 28,  // 修改权限模版
       'delete_permission_template': 29,  // 删除权限模版
       'add_permission_template': 5,  // 新增权限模版
-
       'audit_user_id': 6,  // 个人实名制审核
       'company_issue': 7,  // 用户提起企业异议处理
       'audit_company_id': 35,  // 企业认证审核
