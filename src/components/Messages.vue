@@ -46,6 +46,7 @@
 
 <script>
   import axios from '../store/request/axios'
+  import {mapState, mapMutations} from 'vuex'
   export default {
     data: () => ({
       type: 0,
@@ -58,6 +59,7 @@
       selectValue: {label: '全部', value: '0'}
     }),
     methods: {
+      ...mapMutations('user', ['UPDATE']),
       selectType (type) {
         this.type = type
         this.page = 1
@@ -66,7 +68,6 @@
         this.getMessages()
       },
       getMessages (isResetData = false) {
-        console.log(this.selectValue.value)
         let modeStr = this.selectValue.value === '0' ? '' : '&mode=' + this.selectValue.value
         axios.http('message_get', '', 'get', this.type + '?page=' + this.page + modeStr).then(d => {
           if (d.data) {
@@ -125,20 +126,29 @@
       btn (item) {
         let list = []
         if (item.tip) list = item.tip.split(':')
+        // list[0] company id : list[1] code
+        let currentUser = {}
+        if (this.companyList.length > 0) {
+          currentUser = this.companyList.forEach(item => {
+            if (item.cid === list[0]) {
+              return item
+            }
+          })
+        }
         switch (item.sub_mode) {
           case 1:
             return this.$router.push({name: 'CompleteData', query: {code: list[1]}})
-          case 2:
-            return this.$router.push({name: 'FirmData', params: {id: list[0]}})
-          case 3:
-            return this.$router.push({name: 'FirmData', params: {id: list[0]}})
-          case 0:
+          case 2 || 3 || 0:
+            this.UPDATE(currentUser)
             return this.$router.push({name: 'FirmData', params: {id: list[0]}})
         }
       }
     },
     created () {
       this.getMessages()
+    },
+    computed: {
+      ...mapState('navTop', ['companyList'])
     },
     beforeDestroy () {
     },

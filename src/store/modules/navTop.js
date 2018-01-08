@@ -11,11 +11,6 @@ export default {
   getters: {},
   mutations: {
     setMessages (state, data) {
-      // state.messages.splice(0, state.messages.length)
-      // if (!Array.isArray(data)) return false
-      // data.forEach(function (item) {
-      //   state.messages.push(item)
-      // })
       state.messages = data
     },
     setCompany (state, data) {
@@ -29,7 +24,6 @@ export default {
       data.forEach(function (item) {
         state.companyAllList.push(item)
       })
-      console.log(state.companyAllList)
     },
     setTimer (state, timer) {
       state.timer = timer

@@ -20,7 +20,7 @@ export default {
   methods: {
     ...mapMutations('pop', ['setPopState']),
     ...mapMutations('permission', ['clearState']),
-    ...mapActions('user', ['isPermission']),
+    ...mapMutations('user', ['UPDATE']),
     ...mapActions('firmData', ['getEmployees', 'getModule']),
     ...mapActions('navTop', ['getCompany']),
     changeData () {
@@ -56,13 +56,20 @@ export default {
       this.isEditor = false
     },
     getDataApi () {
-      this.getBaseData()
       this.getEmployees(this.$route.params.id)
-      this.getModule(this.$route.params.id)
+      this.getModule(this.$route.params.id).then(d => {
+        this.getBaseData()
+      })
     },
     getBaseData () {
       axios.http('company_detail', '', 'get', this.$route.params.id).then(d => {
-        this.form = d.data[0]
+        let companyInfo = d.data[0]
+        companyInfo.cid = companyInfo.id
+        delete companyInfo.id
+        this.form = companyInfo
+        this.form.is_admin = this.isAdmin
+        this.UPDATE(this.form)
+        console.log(this.form)
       })
     },
     addTemp () {
@@ -70,9 +77,11 @@ export default {
       this.setPopState({name: 'pop_all', value: 3})
       this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id}})
     },
-    changeUserTemp (id) {
-      this.setPopState({name: 'pop_all', value: 6})
-      this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id, id: id}})
+    changeUserTemp (id, b) {
+      if (b) {
+        this.setPopState({name: 'pop_all', value: 6})
+        this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id, id: id}})
+      }
     },
     lookUserTemp (id) {
       this.setPopState({name: 'pop_all', value: 7})
@@ -161,9 +170,7 @@ export default {
       })
     },
     isShow (name) {
-      return this.isPermission(name).then(d => {
-        return d
-      })
+      return this.$store.state.user.currentUser.is_admin || this.$store.state.user.currentPermission.indexOf(this.$store.state.user.permissions[name]) !== -1
     }
   },
   computed: {

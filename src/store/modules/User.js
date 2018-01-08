@@ -98,12 +98,14 @@ export default {
       }
       arry = arry.concat(data.permissions, data.access_servers, data.access_projects, data.access_filehub)
       state.currentPermission = arry
+    },
+    isPermission (state, permissionName) {
+      return state.currentUser.is_admin || state.user.currentPermission.indexOf(state.permissions[permissionName]) !== -1
     }
   },
   actions: {
-    isPermission (store, permissionName) {
-      // return true
-      return store.rootState.user.currentUser.is_admin || store.rootState.user.currentPermission.indexOf(store.rootState.user.permissions[permissionName]) !== -1
-    }
+    // isPermission (store, permissionName) {
+    //   return store.rootState.user.currentUser.is_admin || store.rootState.user.currentPermission.indexOf(store.rootState.user.permissions[permissionName]) !== -1
+    // }
   }
 }

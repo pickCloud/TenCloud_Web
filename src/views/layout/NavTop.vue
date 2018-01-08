@@ -23,7 +23,7 @@
           <i class="iconfont icon-xiaoxi vam" style="font-size: 1rem"></i>
           <span class="vam user-box_msg_translate common-ground_box navtop" v-show="messages"><div class="num">{{messages}}</div></span></div>
         <div style="position: relative;width: 400px;background-color: #2f3543" v-if="false">
-            <ul class="child user-message_tietle ">
+            <ul class="child user-message_tietle">
             <div class="flex-space-between" style="border-bottom: 1px solid rgba(255,255,255,0.2);">
               <div class="pad-lr16">消息合</div>
               <m-btn class="pad-lr16 btn">清空</m-btn>
@@ -56,6 +56,7 @@
     }),
     methods: {
       ...mapActions('navTop', ['getCompany', 'getMessages']),
+      ...mapMutations('navTop', ['setMessages']),
       ...mapMutations('user', ['UPDATE', 'getPermission']),
       back () {
         this.$router.back()
@@ -89,6 +90,7 @@
         ])
         this.UPDATE(this.$root.userinfo)
         this.$axios.token.cid = 0
+        this.setLocal(this.$root.userinfo)
       },
       changeLink (item) {
         this.$store.commit('sitepath/SET_PATH', [
@@ -96,6 +98,7 @@
           {cn: '企业资料'}
         ])
         this.UPDATE(item)
+        this.setLocal(item)
         this.$axios.token.cid = item.cid
       },
       messageTime () {
@@ -107,38 +110,52 @@
           {name: 'Main', cn: '主页'},
           {cn: '消息'}
         ])
+        this.setMessages(0)
       },
       getUserInfo () {
-//        this.$axios.http('user_info').then(d => {
-//          this.$axios.isLogin = true
-//          window.ROOT_DATA.userinfo = this.$root.userinfo = d.data
-//          this.UPDATE(this.$root.userinfo)
-//        })
-//        console.log(this.$axios.token)
         if (this.$axios.token.user) {
           this.$axios.isLogin = true
           window.ROOT_DATA.userinfo = this.$root.userinfo = this.$axios.token.user
-//          this.UPDATE(this.$root.userinfo)
         }
       },
       getCurrentUser () {
-        if (this.$axios.token.cid) {
-          this.$axios.http('company_detail', '', 'get', this.$axios.token.cid).then(d => {
-            this.UPDATE(d.data[0])
-            this.getTempUser()
-          })
-        } else {
-          this.UPDATE(this.$root.userinfo)
+        let currentUserLocal = window.localStorage.getItem('currentUserLocal')
+        currentUserLocal = JSON.parse(currentUserLocal)
+        if (currentUserLocal && currentUserLocal.uid === this.$root.userinfo.id) {
+          this.UPDATE(currentUserLocal.currentUser)
+          if (currentUserLocal.currentUser.cid) {
+            this.$axios.token.cid = currentUserLocal.currentUser.cid
+          }
           this.getTempUser()
+        } else {
+          if (this.$axios.token.cid) {
+            this.$axios.http('company_detail', '', 'get', this.$axios.token.cid).then(d => {
+              this.UPDATE(d.data[0])
+              this.getTempUser()
+            })
+          } else {
+            this.UPDATE(this.$root.userinfo)
+            this.getTempUser()
+          }
         }
       },
       getTempUser () {
+        // get permission temp
+        console.log(this.currentUser.cid)
         let replaceId = this.currentUser.cid || this.currentUser.id
         this.$axios.http('company_getUserTemplate', '', 'get', replaceId + '/user/' + this.$root.userinfo.id + '/detail/format/' + 1).then(d => {
           if (d.data) {
             this.getPermission(d.data)
           }
         })
+      },
+      setLocal (item) {
+        let currentUserLocal = {
+          currentUser: item,
+          uid: this.$root.userinfo.id
+        }
+        currentUserLocal = JSON.stringify(currentUserLocal)
+        window.localStorage.setItem('currentUserLocal', currentUserLocal)
       }
     },
     computed: {
@@ -147,9 +164,6 @@
       miniClass () {
         return this.$parent.isMini ? 'lay-mini' : ''
       },
-//      hasBack () {
-//        return true
-//      },
       userinfo () {
         return this.$root.userinfo
       }
@@ -157,6 +171,7 @@
     created () {
       if (!this.$parent.TD) {
         this.getUserInfo()
+        this.getCurrentUser()
         this.getCompany(3)
         this.messageTime()
         this.getTempUser()
