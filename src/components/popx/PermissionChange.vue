@@ -68,7 +68,7 @@
         })
       },
       changeAdmin () {
-        axios.http('company_adminTransfer', {uids: [this.userId], cid: this.pop_params.cid}, 'post').then(d => {
+        axios.http('company_adminTransfer', {uid: this.userId, cid: this.pop_params.cid}, 'post').then(d => {
           this.setPopState({name: 'pop_all', value: 0})
           this.$toast('更换成功', 'cc')
           this.getEmployees(this.pop_params.cid)
