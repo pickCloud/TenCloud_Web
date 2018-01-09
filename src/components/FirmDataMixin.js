@@ -77,11 +77,9 @@ export default {
       this.setPopState({name: 'pop_all', value: 3})
       this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id}})
     },
-    changeUserTemp (id, b) {
-      if (b) {
-        this.setPopState({name: 'pop_all', value: 6})
-        this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id, id: id}})
-      }
+    changeUserTemp (id) {
+      this.setPopState({name: 'pop_all', value: 6})
+      this.setPopState({name: 'pop_params', value: {cid: this.$route.params.id, id: id}})
     },
     lookUserTemp (id) {
       this.setPopState({name: 'pop_all', value: 7})
