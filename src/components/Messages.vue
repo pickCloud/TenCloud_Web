@@ -129,16 +129,23 @@
         // list[0] company id : list[1] code
         let currentUser = {}
         if (this.companyList.length > 0) {
-          currentUser = this.companyList.forEach(item => {
-            if (item.cid === list[0]) {
-              return item
+          this.companyList.forEach(item => {
+            if (item.cid + '' === list[0] + '') {
+              currentUser = item
+              return false
             }
           })
         }
         switch (item.sub_mode) {
           case 1:
             return this.$router.push({name: 'CompleteData', query: {code: list[1]}})
-          case 2 || 3 || 0:
+          case 2:
+            this.UPDATE(currentUser)
+            return this.$router.push({name: 'FirmData', params: {id: list[0]}})
+          case 3:
+            this.UPDATE(currentUser)
+            return this.$router.push({name: 'FirmData', params: {id: list[0]}})
+          case 0:
             this.UPDATE(currentUser)
             return this.$router.push({name: 'FirmData', params: {id: list[0]}})
         }
