@@ -4,8 +4,6 @@
 from fabric.api import local, cd, run, env
 from fabric.colors import *
 
-env.hosts = ['root@47.94.18.22', ]
-env.password = 'Sqsm1234'
 
 
 def push(info="fabric auto"):
@@ -24,8 +22,8 @@ def server_update():
 def up(info="fabric add"):
     """
     提交代码并在服务器拉取
-    :param info: 
-    :return: 
+    :param info:
+    :return:
     """
     show(3)
     push(info)

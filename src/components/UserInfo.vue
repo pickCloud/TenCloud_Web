@@ -211,11 +211,6 @@
         this.setPopState({name: 'pop_all', value: 8})
       },
       addCompany () {
-        this.$store.commit('sitepath/SET_PATH', [
-          {name: 'Main', cn: '主页'},
-          {name: 'UserInfo', cn: '个人资料'},
-          {cn: '添加企业'}
-        ])
         this.$router.push({name: 'FirmAdd'})
       },
       changePassword () {

@@ -29,7 +29,7 @@
     methods: {
       upload () {
         let temppost = {}
-        this.$Global.async('file_upload', true).getData({
+        this.$axios.http('file_upload', {
           file_infos: [
             {
               filename: this.data.file.name,
@@ -37,7 +37,7 @@
               pid: this.data.pid
             }
           ]
-        }).then(d => {
+        }, 'post').then(d => {
           if (d.data[0].file_status === 1) {
 //            this.removeTask()
             this.upok = true
@@ -69,7 +69,7 @@
         })
       },
       update (p) {
-        this.$Global.async('file_update', true).getData(p).then(d => {
+        this.$axios.http('file_update', p, 'post').then(d => {
           if (this.data.cb) this.data.cb(d)
         })
       },

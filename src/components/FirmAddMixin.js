@@ -27,10 +27,6 @@ export default {
       }
       axios.http('company_create', this.data, 'post').then(d => {
         this.$toast('添加成功', 'cc')
-        this.$store.commit('sitepath/SET_PATH', [
-          {name: 'Main', cn: '主页'},
-          {cn: '企业资料'}
-        ])
         this.UPDATE({cid: d.data.cid,
           company_name: this.data.name})
         this.$axios.token.cid = d.data.cid
@@ -41,6 +37,11 @@ export default {
   },
   created () {
     this.data.mobile = this.$root.userinfo.mobile
+    this.$store.commit('sitepath/SET_PATH', [
+      {name: 'Main', cn: '主页'},
+      {name: 'UserInfo', cn: '个人资料'},
+      {cn: '添加企业'}
+    ])
   },
   beforeDestroy () {
   }

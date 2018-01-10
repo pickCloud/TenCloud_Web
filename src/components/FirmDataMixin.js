@@ -184,6 +184,10 @@ export default {
   },
   created () {
     this.getDataApi()
+    this.$store.commit('sitepath/SET_PATH', [
+      {name: 'Main', cn: '主页'},
+      {cn: '企业资料'}
+    ])
   },
   beforeDestroy () {
   },

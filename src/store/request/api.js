@@ -1,9 +1,11 @@
 const islocal = window.isLoacal = /.+localhost.+/.test(window.location.href)
+const bUrl = window.location.origin
+const hostName = window.location.hostname
 const APIS = {
-  baseURL: islocal ? 'https://c.10.com' : 'https://c.10.com',
+  baseURL: islocal ? 'https://c.10.com' : bUrl,
   // baseURL: 'https://c.10.com',
   // baseURL: 'http://47.94.18.22:18080',
-  wsURL: islocal ? 'wss://c.10.com' : 'wss://c.10.com',
+  wsURL: islocal ? 'wss://c.10.com' : 'wss://' + hostName,
   clusters: {u: '/api/clusters', m: 'get'},
   cluster_add: {u: '/api/cluster/new', m: 'post'},
   cluster_del: {u: '/api/cluster/del', m: 'post'},

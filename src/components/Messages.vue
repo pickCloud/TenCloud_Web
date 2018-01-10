@@ -153,6 +153,10 @@
     },
     created () {
       this.getMessages()
+      this.$store.commit('sitepath/SET_PATH', [
+        {name: 'Main', cn: '主页'},
+        {cn: '消息'}
+      ])
     },
     computed: {
       ...mapState('navTop', ['companyList'])

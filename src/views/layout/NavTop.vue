@@ -77,26 +77,13 @@
         })
       },
       addCompany () {
-        this.$store.commit('sitepath/SET_PATH', [
-          {name: 'Main', cn: '主页'},
-          {name: 'UserInfo', cn: '个人资料'},
-          {cn: '添加企业'}
-        ])
       },
       userInfo () {
-        this.$store.commit('sitepath/SET_PATH', [
-          {name: 'Main', cn: '主页'},
-          {cn: '个人资料'}
-        ])
         this.UPDATE(this.$root.userinfo)
         this.$axios.token.cid = 0
         this.setLocal(this.$root.userinfo)
       },
       changeLink (item) {
-        this.$store.commit('sitepath/SET_PATH', [
-          {name: 'Main', cn: '主页'},
-          {cn: '企业资料'}
-        ])
         this.UPDATE(item)
         this.setLocal(item)
         this.$axios.token.cid = item.cid
@@ -106,10 +93,6 @@
       },
       goMessages () {
         this.$router.push({name: 'Messages'})
-        this.$store.commit('sitepath/SET_PATH', [
-          {name: 'Main', cn: '主页'},
-          {cn: '消息'}
-        ])
         this.setMessages(0)
       },
       getUserInfo () {
