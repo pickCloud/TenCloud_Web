@@ -13,7 +13,7 @@
           <span class="vam userName">{{currentUser.name||currentUser.company_name||currentUser.mobile}}</span></div>
         <ul slot="popper" style="max-height: 700px;overflow: auto">
           <li style="white-space: nowrap;" v-for="item in companyList" :key="item.id"><router-link :to="{name:'FirmData',params:{id:item.cid}}" @click.native="changeLink(item)"><i class="iconfont icon-qiye vam"></i> <span class="vam" style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{item.company_name}}</span></router-link></li>
-          <li><router-link :to="{name:'FirmAdd'}" @click.native="addCompany"><i class="iconfont icon-tianjiaqiye vam"></i> <span class="vam">添加企业</span></router-link></li>
+          <!--<li><router-link :to="{name:'FirmAdd'}" @click.native="addCompany"><i class="iconfont icon-tianjiaqiye vam"></i> <span class="vam">添加企业</span></router-link></li>-->
           <li><router-link :to="{name:'UserInfo'}"  @click.native="userInfo"><i class="iconfont icon-geren vam"></i> <span class="vam">个人中心</span></router-link></li>
           <li class="text-left"><div class="__btn" @click="logout"><i class="iconfont icon-tuichu vam" style="margin-right: 3px"></i><span class="vam">退出登录</span></div></li>
         </ul>
@@ -76,8 +76,6 @@
           }
         })
       },
-      addCompany () {
-      },
       userInfo () {
         this.UPDATE(this.$root.userinfo)
         this.$axios.token.cid = 0
@@ -87,6 +85,7 @@
         this.UPDATE(item)
         this.setLocal(item)
         this.$axios.token.cid = item.cid
+        this.$router.push({name: 'Machines'})
       },
       messageTime () {
         this.getMessages(0)
@@ -109,16 +108,16 @@
           if (currentUserLocal.currentUser.cid) {
             this.$axios.token.cid = currentUserLocal.currentUser.cid
           }
-          this.getTempUser()
+//          this.getTempUser()
         } else {
           if (this.$axios.token.cid) {
             this.$axios.http('company_detail', '', 'get', this.$axios.token.cid).then(d => {
               this.UPDATE(d.data[0])
-              this.getTempUser()
+//              this.getTempUser()
             })
           } else {
             this.UPDATE(this.$root.userinfo)
-            this.getTempUser()
+//            this.getTempUser()
           }
         }
       },
@@ -153,11 +152,12 @@
     },
     created () {
       if (!this.$parent.TD) {
+        console.log(1)
         this.getUserInfo()
         this.getCurrentUser()
         this.getCompany(3)
         this.messageTime()
-        this.getTempUser()
+//        this.getTempUser()
       }
     },
     destroyed () {
