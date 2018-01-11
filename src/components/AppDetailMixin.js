@@ -34,7 +34,6 @@ export default {
           this.container = d.data.container
           this.status = d.data.status
           this.name = d.data.name.substr(1)
-          console.log(d.data)
           this.timedata = (new Date(d.data.created)).Format('yyyy/MM/dd hh:mm:ss')
           this.isOpen = this.status.toLowerCase() === 'running'
 

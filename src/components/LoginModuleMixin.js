@@ -133,7 +133,7 @@ export default {
         this.tip.type = 'error'
         this.tip.info = '请输入密码'
         temp = true
-      } else if (this.loginData.sure_password.length === '') {
+      } else if (this.loginData.sure_password === '') {
         this.tip.type = 'error'
         this.tip.info = '确认密码不能为空'
         temp = true
@@ -154,7 +154,7 @@ export default {
         this.tip.type = 'error'
         this.tip.info = '请输入新密码'
         temp = true
-      } else if (this.loginData.sure_password.length === '') {
+      } else if (this.loginData.sure_password === '') {
         this.tip.type = 'error'
         this.tip.info = '确认密码不能为空'
         temp = true
@@ -175,7 +175,7 @@ export default {
         this.tip.type = 'error'
         this.tip.info = '请输入原始密码'
         temp = true
-      } else if (this.loginData.sure_password.length === '') {
+      } else if (this.loginData.new_password === '') {
         this.tip.type = 'error'
         this.tip.info = '确认密码不能为空'
         temp = true
@@ -183,9 +183,9 @@ export default {
         this.tip.type = 'error'
         this.tip.info = '密码最小长度为6位'
         temp = true
-      } else if (this.loginData.sure_password.length < 6) {
+      } else if (this.loginData.new_password.length < 6) {
         this.tip.type = 'error'
-        this.tip.info = '确认密码最小长度为6位'
+        this.tip.info = '新密码最小长度为6位'
         temp = true
       } else if (this.loginData.new_password !== this.sure_password) {
         this.tip.type = 'error'

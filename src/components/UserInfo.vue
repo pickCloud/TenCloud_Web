@@ -154,9 +154,9 @@
           <div class="flex-flex-end" style="width: 200px;padding-right: 10px">
             <div v-if="item.status === 1 ||item.status === 2">
             <!--<m-btn class="no-radius btn-github" @click.native="deleteCompany(item.cid)">解除绑定</m-btn>-->
-            <m-btn v-if="" class="primary_bg grey-dark_txt" @click.native="enterCompany(item.cid)">进入企业</m-btn>
+            <m-btn v-if="" class="primary_bg grey-dark_txt" @click.native="enterCompany(item)">进入企业</m-btn>
             </div>
-            <m-btn v-else-if="item.status === -1" class="primary_bg grey-dark_txt" @click.native="applyAdd(item.cid)">重新申请</m-btn>
+            <m-btn v-else-if="item.status === -1" class="primary_bg grey-dark_txt" @click.native="applyAdd(item)">重新申请</m-btn>
           </div>
       </div>
     </div>
@@ -197,9 +197,11 @@
     mixins: [DatePickerMixin],
     methods: {
       ...mapMutations('pop', ['setPopState']),
+      ...mapMutations('user', ['UPDATE']),
       ...mapActions('navTop', ['getCompany']),
-      enterCompany (cid) {
-        this.$router.push({name: 'FirmData', params: {id: cid}})
+      enterCompany (item) {
+        this.UPDATE(item)
+        this.$router.push({name: 'FirmData', params: {id: item.cid}})
       },
       deleteCompany (cid) {
         axios.http('company_dismission', {id: cid}, 'post').then(d => {
@@ -216,8 +218,8 @@
       changePassword () {
         this.setPopState({name: 'pop_changePassword', value: true})
       },
-      applyAdd () {
-        this.$router.push({name: 'CompleteData', params: {id: this.infos.id}})
+      applyAdd (item) {
+        this.$router.push({name: 'CompleteData', params: {id: this.infos.id}, query: {code: item.code}})
       },
       getApiData () {
         this.getCompany(4)

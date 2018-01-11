@@ -44,7 +44,7 @@
             this.uping = 100
             if (this.data.cb) this.data.cb(d)
           } else {
-            temppost.file_id = d.data[0].file_id
+            temppost.id = d.data[0].file_id
             let formata = new FormData()
             formata.append('file', this.data.file)
             formata.append('token', d.data[0].token)
