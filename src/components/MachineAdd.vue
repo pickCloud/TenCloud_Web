@@ -27,11 +27,11 @@
       <div class="p-16" v-if="status === 'error'"><div class="hongse-text">异常，请联系客服</div></div>
       <div class="p-16 text-center" v-if="status === 'save'"><m-btn class="primary_bg no-radius grey-dark_txt" @click.native="addHost">确定添加</m-btn></div>
     </panel>
-    <panel title="构建过程" class="machineAdd-note m-t16">
-      <div class="p-16" style="overflow-y: auto;max-height: 300px;" id="scroll">
-        <p v-for="item in notes">{{item}}</p>
-      </div>
-    </panel>
+    <!--<panel title="构建过程" class="machineAdd-note m-t16">-->
+      <!--<div class="p-16" style="overflow-y: auto;max-height: 300px;" id="scroll">-->
+        <!--<p v-for="item in notes">{{item}}</p>-->
+      <!--</div>-->
+    <!--</panel>-->
   </div>
 </template>
 

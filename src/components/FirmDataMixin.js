@@ -168,6 +168,9 @@ export default {
       })
     },
     isShow (name) {
+      if (name === 'invite_new_employee') {
+        console.log(this.$store.state.user.currentUser.is_admin || this.$store.state.user.currentPermission.indexOf(this.$store.state.user.permissions[name]) !== -1)
+      }
       return this.$store.state.user.currentUser.is_admin || this.$store.state.user.currentPermission.indexOf(this.$store.state.user.permissions[name]) !== -1
     }
   },

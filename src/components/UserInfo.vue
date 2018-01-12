@@ -147,17 +147,17 @@
              </div>
              <div class="flex-flex-grow-1">
                <div class="userinfo-item-up">状态</div>
-               <span class="userinfo-item-down">{{item.status === 0?"待审核":item.status === 1?"审核通过":item.status === 2?"初创建":item.status === 3?"待加入":"审核不通过"}}</span>
+               <span class="userinfo-item-down">{{item.status === 2?"待审核":item.status === 3?"审核通过":item.status === 4?"初创建":item.status === 5?"待加入":"审核不通过"}}</span>
              </div>
           </div>
         </div>
           <div class="flex-flex-end" style="width: 200px;padding-right: 10px">
-            <div v-if="item.status === 1 ||item.status === 2">
+            <div v-if="item.status === 3 ||item.status === 4">
             <!--<m-btn class="no-radius btn-github" @click.native="deleteCompany(item.cid)">解除绑定</m-btn>-->
             <m-btn v-if="" class="primary_bg grey-dark_txt" @click.native="enterCompany(item)">进入企业</m-btn>
             </div>
-            <m-btn v-else-if="item.status === 3" class="primary_bg grey-dark_txt" @click.native="applyAdd(item)">加入申请</m-btn>
-            <m-btn v-else-if="item.status === -1" class="primary_bg grey-dark_txt" @click.native="applyAdd(item)">重新申请</m-btn>
+            <m-btn v-else-if="item.status === 5" class="primary_bg grey-dark_txt" @click.native="applyAdd(item)">加入申请</m-btn>
+            <m-btn v-else-if="item.status === 1" class="primary_bg grey-dark_txt" @click.native="applyAdd(item)">重新申请</m-btn>
           </div>
       </div>
     </div>
