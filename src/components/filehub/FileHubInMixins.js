@@ -68,17 +68,20 @@ export default {
         this.$toast('请选择要下载的文件', 'cc')
       } else {
         let downlist = this.getAttrById(delids, 'url')
-        let namelist = this.getAttrById(delids, 'filename')
+        // let namelist = this.getAttrById(delids, 'filename')
         downlist.forEach((v, i) => {
-          let alink = document.createElement('a')
-          alink.href = v
-          alink.download = namelist[i]
-          document.body.appendChild(alink)
-          alink.click()
-          let tempto = setTimeout(_ => {
-            clearTimeout(tempto)
-            document.body.removeChild(alink)
-          }, 10)
+          // let alink = document.createElement('a')
+          // alink.href = v
+          // alink.download = namelist[i]
+          // document.body.appendChild(alink)
+          // alink.click()
+          // let tempto = setTimeout(_ => {
+          //   clearTimeout(tempto)
+          //   document.body.removeChild(alink)
+          // }, 10)
+          this.$axios.http('file_download', '', 'get', '1').then(d => {
+            console.log(d)
+          })
           // let ajax = new XMLHttpRequest()
           // ajax.open('GET', v, true)
           // ajax.responseType = 'blob'
@@ -98,7 +101,6 @@ export default {
         page_number: this.page_number
       }, 'post').then(d => {
         this.listts = d.data
-        // console.log(d.data.files)
       })
     },
     getPagesNumber () {

@@ -51,6 +51,9 @@ export default {
     getApiData () {
       // const cid = this.clusterid = 1
       this.getProjects()
+    },
+    isShow (name) {
+      return this.$store.state.user.currentUser.is_admin || this.$store.state.user.currentPermission.indexOf(this.$store.state.user.permissions[name]) !== -1
     }
   },
   created () {

@@ -25,7 +25,7 @@
     watch: {
       'value' (n, o) {
         // 判断子级
-        console.log(n)
+//        console.log(n)
         if (this.nodeIndex >= window.__nodeidx) {
           if (n.indexOf(this.checkValue) !== -1 && this.model.data) {
             let tempSelected = []

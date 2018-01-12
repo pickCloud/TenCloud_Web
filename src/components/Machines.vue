@@ -7,7 +7,7 @@
       <!--</div>-->
       <div class="panel-body p-b16">
         <div class="btn-group text-right m-t16 m-b16" v-if="!isDeploy">
-          <m-btn :href="{name:'MachineAdd', params:{id:1}}" class="primary_bg no-radius grey-dark_txt">添加已有主机</m-btn>
+          <m-btn v-if="isShow('add_server')" :href="{name:'MachineAdd', params:{id:1}}" class="primary_bg no-radius grey-dark_txt">添加已有主机</m-btn>
           <m-btn class="primary_bg no-radius grey-dark_txt" @click.native="refresh">刷新</m-btn>
           <!--<m-btn class="pink_bg no-radius grey-dark_txt" @click.native="delMachine(-1)">删除</m-btn>-->
         </div>

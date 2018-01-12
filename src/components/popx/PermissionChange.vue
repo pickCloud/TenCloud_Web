@@ -49,7 +49,8 @@
   export default {
     data: () => ({
       employees: [],
-      userId: 0
+      userId: 0,
+      firstId: ''
     }),
     methods: {
       ...mapMutations('pop', ['setPopState']),
@@ -62,12 +63,15 @@
           this.employees = d.data
           this.employees.forEach((item) => {
             if (item.is_admin) {
-              this.userId = item.uid
+              this.firstId = this.userId = item.uid
             }
           })
         })
       },
       changeAdmin () {
+        if (this.watchId === this.firstId + '') {
+          return this.$toast('你没有选择新的管理员，不需要提交处理；无需更换可以直接关闭', 'cc')
+        }
         axios.http('company_adminTransfer', {uid: this.userId, cid: this.pop_params.cid}, 'post').then(d => {
           this.setPopState({name: 'pop_all', value: 0})
           this.$toast('更换成功', 'cc')

@@ -156,6 +156,7 @@
             <!--<m-btn class="no-radius btn-github" @click.native="deleteCompany(item.cid)">解除绑定</m-btn>-->
             <m-btn v-if="" class="primary_bg grey-dark_txt" @click.native="enterCompany(item)">进入企业</m-btn>
             </div>
+            <m-btn v-else-if="item.status === 3" class="primary_bg grey-dark_txt" @click.native="applyAdd(item)">加入申请</m-btn>
             <m-btn v-else-if="item.status === -1" class="primary_bg grey-dark_txt" @click.native="applyAdd(item)">重新申请</m-btn>
           </div>
       </div>

@@ -136,6 +136,10 @@
             }
           })
         }
+        if (!currentUser.cid) {
+          this.$toast('已不存在此公司', 'cc')
+          return false
+        }
         switch (item.sub_mode) {
           case 1:
             return this.$router.push({name: 'CompleteData', query: {code: list[1]}})

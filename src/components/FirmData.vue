@@ -95,8 +95,8 @@
                 <td>{{item.id_card}}</td>
                 <td>{{item.create_time}}</td>
                 <td>{{item.update_time}}</td>
-                <td :class="item.status===0?'pass_tip':''">{{item.status===1 || item.status===2?'已通过审核':item.status===3?'待审核':'审核不通过'}}</td>
-                <td ><div ><span v-if="item.status===3"><m-btn v-if="isShow('audit_employee')" @click.native="company_reject(item.id)">拒绝</m-btn><m-btn v-if="isShow('audit_employee')" @click.native="company_accept(item.id)">允许</m-btn></span><span v-if="item.status===2"><m-btn v-if="isShow('set_employee_permission')" @click.native="changeUserTemp(item.uid)">权限</m-btn><m-btn v-else  @click.native="lookUserTemp(item.uid)">查看</m-btn><m-btn v-if="isShow('dismiss_employee')"  @click.native="company_dismission(item.id)">解除</m-btn></span></div></td>
+                <td :class="item.status===2?'pass_tip':''">{{item.status===3 || item.status===4?'已通过审核':item.status===5?'待审核':'审核不通过'}}</td>
+                <td ><div ><span v-if="item.status===5"><m-btn v-if="isShow('audit_employee')" @click.native="company_reject(item.id)">拒绝</m-btn><m-btn v-if="isShow('audit_employee')" @click.native="company_accept(item.id)">允许</m-btn></span><span v-if="item.status===4 || item.status===3"><m-btn v-if="isShow('set_employee_permission')" @click.native="changeUserTemp(item.uid)">权限</m-btn><m-btn v-else  @click.native="lookUserTemp(item.uid)">查看</m-btn><m-btn v-if="isShow('dismiss_employee')"  @click.native="company_dismission(item.id)">解除</m-btn></span></div></td>
               </tr>
               </tbody>
             </table>
