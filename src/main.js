@@ -25,6 +25,18 @@ import Tabs from './components/vue-permission'
 import TabTree from './components/vue-permission/TabTree'
 import TabTr from './components/vue-permission/TabTr'
 
+// 增加通用链接的生成,
+//   let baseScheme = "myApp://",
+//    baseLink = "http://m.xxxx.com?"
+// let createScheme = function (options, isLink) {
+//   var urlScheme = isLink ? baseLink : baseScheme
+//   for (var item in options) {
+//     urlScheme = urlScheme + item + '=' + encodeURIComponent(options[item]) + '&'
+//   }
+//   urlScheme = urlScheme.substring(0, urlScheme.length - 1)
+//   return isLink ? urlScheme : encodeURIComponent(urlScheme)
+// }
+
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 Vue.use(Vuepopx)

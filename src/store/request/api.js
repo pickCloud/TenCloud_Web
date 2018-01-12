@@ -3,7 +3,7 @@ const bUrl = window.location.origin
 const hostName = window.location.hostname
 const protocol = /https/.test(window.location.protocol)
 const APIS = {
-  baseURL: islocal ? 'https://c.10.com' : bUrl,
+  baseURL: islocal ? 'http://47.94.18.22' : bUrl,
   // baseURL: 'https://c.10.com',
   // baseURL: 'http://47.94.18.22:18080',
   wsURL: islocal ? 'wss://c.10.com' : protocol ? 'wss://' + hostName : 'ws://' + hostName,
