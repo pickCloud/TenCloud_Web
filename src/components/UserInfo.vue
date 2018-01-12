@@ -202,7 +202,7 @@
       ...mapActions('navTop', ['getCompany']),
       enterCompany (item) {
         this.UPDATE(item)
-        this.$axios.cid = item.cid
+        this.$axios.token.cid = item.cid
         this.$router.push({name: 'FirmData', params: {id: item.cid}})
       },
       deleteCompany (cid) {
