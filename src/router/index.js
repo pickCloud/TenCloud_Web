@@ -226,8 +226,8 @@ var browser = {
   }()),
   language: (navigator.browserLanguage || navigator.language).toLowerCase()
 }
-let isInvite = /invite?code/.test(window.location)
-let appurl = 'tencloud://invite?code=b73d340'
+let isInvite = /invite\?code/.test(window.location)
+let appurl = 'tencloud://' + window.location.hash.split('/')[1]
 router.beforeEach((to, from, next) => {
   if (browser.versions.ios && isInvite) {
     window.location.href = appurl
