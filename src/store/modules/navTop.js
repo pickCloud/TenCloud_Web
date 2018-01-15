@@ -33,12 +33,12 @@ export default {
     }
   },
   actions: {
-    /* 3通过4所有 */
+    /* 1拒绝, 2审核中, 3通过, 4创始人, 5待加入，6获取通过的，以及作为创始人的公司列表, 7获取所有和该用户相关的公司列表 */
     getCompany (ctx, type) {
       axios.http('company_get', '', 'get', type).then(d => {
-        if (type === 3) {
+        if (type === 6) {
           ctx.commit('setCompany', d.data)
-        } else if (type === 4) {
+        } else if (type === 7) {
           ctx.commit('setAllCompany', d.data)
         }
       }).catch(e => {

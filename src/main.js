@@ -24,34 +24,7 @@ import TabLabel from './components/vue-permission/TabLabel'
 import Tabs from './components/vue-permission'
 import TabTree from './components/vue-permission/TabTree'
 import TabTr from './components/vue-permission/TabTr'
-var browser = {
-  versions: (function () {
-    let u = navigator.userAgent
-    return {
-      trident: u.indexOf('Trident') > -1,
-      presto: u.indexOf('Presto') > -1,
-      webKit: u.indexOf('AppleWebKit') > -1,
-      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') === -1,
-      mobile: !!u.match(/AppleWebKit.*Mobile.*/),
-      ios: !!u.match(/\(i[^]+( U)? CPU.+Mac OS X/),
-      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1,
-      iPhone: u.indexOf('iPhone') > -1,
-      iPad: u.indexOf('iPad') > -1,
-      webApp: u.indexOf('Safari') === -1,
-      souyue: u.indexOf('souyue') > -1,
-      superapp: u.indexOf('superapp') > -1,
-      weixin: u.toLowerCase().indexOf('micromessenger') > -1,
-      Safari: u.indexOf('Safari') > -1
-    }
-  }()),
-  language: (navigator.browserLanguage || navigator.language).toLowerCase()
-}
-let appurl = 'tencloud://invite?code=b73d340'
-if (browser.versions.ios) {
-  window.location.href = appurl
-} else if (browser.versions.android) {
-  window.location.href = appurl
-}
+
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 Vue.use(Vuepopx)

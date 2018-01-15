@@ -149,7 +149,7 @@
       if (!this.$parent.TD) {
         this.getUserInfo()
         this.getCurrentUser()
-        this.getCompany(3)
+        this.getCompany(6)
         this.messageTime()
 //        this.getTempUser()
       }

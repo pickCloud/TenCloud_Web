@@ -224,7 +224,7 @@
         this.$router.push({name: 'CompleteData', params: {id: this.infos.id}, query: {code: item.code}})
       },
       getApiData () {
-        this.getCompany(4)
+        this.getCompany(7)
         axios.http('user_info', true).then(d => {
           this.$root.userinfo = this.infos = d.data
           if (this.infos.birthday !== undefined) this.date.time = moment.unix(this.infos.birthday).format('YYYY-MM-DD')
