@@ -35,6 +35,11 @@ const options = {
           reject(response.data)
         }
       }).catch(error => {
+        if (error.response.status === 10404) {
+          this.setToken(error.response.data)
+          this.token = this.getToken()
+          axios.defaults.headers.common['Authorization'] = this.token.token
+        }
         if (canTip && error.response && error.response.status !== 403) Vue.prototype.$toast(error.response.data.message, 'cc')
         if (error.response && error.response.status === 403) {
           options.isLogin = false
