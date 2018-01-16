@@ -2,8 +2,9 @@ import Poppers from './Poppers.js'
 import Selects from './Selects.js'
 // import StatusCode from './StatusCode.js'
 import {mapState, mapGetters, mapMutations, mapActions} from 'vuex'
+import PermisionCommonModule from './PermisionCommonModule.js'
 export default {
-  mixins: [Poppers, Selects],
+  mixins: [Poppers, Selects, PermisionCommonModule],
   data: () => ({
     isDeploy: false
   }),
@@ -95,9 +96,6 @@ export default {
       } else if (str === '微软云') {
         return 'icon-azure'
       }
-    },
-    isShow (name) {
-      return this.$store.state.user.currentUser.is_admin || this.$store.state.user.currentPermission.indexOf(this.$store.state.user.permissions[name]) !== -1
     }
   },
   beforeDestroy () {

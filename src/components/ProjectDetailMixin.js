@@ -9,7 +9,9 @@ const STATUS = {
 }
 const MODE_CN = ['普通项目', '基础服务', '应用组件']
 import {mapState, mapActions} from 'vuex'
+import PermisionCommonModule from './PermisionCommonModule.js'
 export default {
+  mixins: [PermisionCommonModule],
   data: () => ({
     base: {},
     vers: [],
@@ -67,9 +69,6 @@ export default {
           this.containers = d.data
         }
       })
-    },
-    isShow (name) {
-      return this.$store.state.user.currentUser.is_admin || this.$store.state.user.currentPermission.indexOf(this.$store.state.user.permissions[name]) !== -1
     }
   },
   computed: {

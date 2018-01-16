@@ -3,8 +3,9 @@ import {mapState, mapMutations, mapActions} from 'vuex'
 import ChangeModuleName from './popx/ChangeModuleName.vue'
 import Poppers from './Poppers.js'
 import Selects from './Selects.js'
+import PermisionCommonModule from './PermisionCommonModule.js'
 export default {
-  mixins: [Poppers, Selects],
+  mixins: [Poppers, Selects, PermisionCommonModule],
   data: () => ({
     form: {
       name: '',
@@ -166,12 +167,6 @@ export default {
           }
         }
       })
-    },
-    isShow (name) {
-      if (name === 'invite_new_employee') {
-        console.log(this.$store.state.user.currentUser.is_admin || this.$store.state.user.currentPermission.indexOf(this.$store.state.user.permissions[name]) !== -1)
-      }
-      return this.$store.state.user.currentUser.is_admin || this.$store.state.user.currentPermission.indexOf(this.$store.state.user.permissions[name]) !== -1
     }
   },
   computed: {

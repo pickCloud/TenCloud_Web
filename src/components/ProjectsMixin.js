@@ -1,8 +1,9 @@
 import Selects from './Selects.js'
 import Poppers from './Poppers.js'
 import {mapState, mapGetters, mapMutations, mapActions} from 'vuex'
+import PermisionCommonModule from './PermisionCommonModule.js'
 export default {
-  mixins: [Poppers, Selects],
+  mixins: [Poppers, Selects, PermisionCommonModule],
   data: () => ({
     modelCn: ['普通项目', '基础服务', '应用组件'],
     STATUS: {
@@ -51,9 +52,6 @@ export default {
     getApiData () {
       // const cid = this.clusterid = 1
       this.getProjects()
-    },
-    isShow (name) {
-      return this.$store.state.user.currentUser.is_admin || this.$store.state.user.currentPermission.indexOf(this.$store.state.user.permissions[name]) !== -1
     }
   },
   created () {
