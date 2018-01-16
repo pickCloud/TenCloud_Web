@@ -17,11 +17,11 @@
         <div class="btn-group right">
           <div class="formbylabel file theme-dft">
             <input type="file" id="a5wpj6gl9zab" name="file" multiple accept="*/*" @change="fileChange">
-            <label for="a5wpj6gl9zab" class="file-label browser_button">上传文件</label>
+            <label v-if="isShow('upload_file')" for="a5wpj6gl9zab" class="file-label browser_button">上传文件</label>
           </div>
-          <m-btn class="primary_bg no-radius grey-dark_txt m-r8" @click.native="createNew">新建文件夹</m-btn>
+          <m-btn v-if="isShow('add_directory')" class="primary_bg no-radius grey-dark_txt m-r8" @click.native="createNew">新建文件夹</m-btn>
           <!--<m-btn class="primary_bg no-radius grey-dark_txt" @click.native="downFile(-1)">下载</m-btn>-->
-          <m-btn class="pink_bg no-radius grey-dark_txt" @click.native="delFile(-1)">删除</m-btn>
+          <m-btn v-if="isShow('delete_file')" class="pink_bg no-radius grey-dark_txt" @click.native="delFile(-1)">删除</m-btn>
         </div>
       </div>
       <div class="p-lr-16 file-list-body">
@@ -60,7 +60,7 @@
               <m-btn class="primary_txt" v-if="item.type === 0 && item.mime.indexOf('image') !== -1" @click.native="preview(item)">预览</m-btn>
               <m-btn class="primary_txt" :data-text="item.url" :data-params="item.id" v-clipboard="clipboard" v-if="item.type === 0">复制URL</m-btn>
               <m-btn class="primary_txt" @click.native="downFile(item.id)" v-if="item.type === 0">下载</m-btn>
-              <m-btn class="pink_txt" @click.native="delFile(item.id)">删除</m-btn>
+              <m-btn v-if="isShow('delete_file')" class="pink_txt" @click.native="delFile(item.id)">删除</m-btn>
             </td>
           </tr>
           </tbody>
@@ -73,8 +73,9 @@
 
 <script>
   import HubInMixin from './FileHubInMixins'
+  import PermisionCommonModule from '../PermisionCommonModule'
   export default {
-    mixins: [HubInMixin]
+    mixins: [HubInMixin, PermisionCommonModule]
   }
 </script>
 

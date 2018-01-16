@@ -21,7 +21,7 @@ const options = {
       }
       axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
       if (this.token) {
-        axios.defaults.headers.common['Cid'] = this.token.cid || '0'
+        axios.defaults.headers.common['Cid'] = Number(this.token.cid) || 0
       }
       axios[method](this.URL, params).then(response => {
         if (response.status === 200) {
