@@ -10,6 +10,11 @@ if (flag) {
 } else {
   $('.btn1').hide()
 }
+let isCode = /code/.test(window.location.search)
+if (isCode) {
+  window.location.href = 'tencloud://invite' + window.location.search
+  return false
+}
 $('.btn.btn1').click(function (e) {
   if (isWeixin()) {
 		return $('.tip-wx').show()
