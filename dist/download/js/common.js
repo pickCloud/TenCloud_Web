@@ -3,6 +3,13 @@ var isWeixin = function () {
   var ua = navigator.userAgent.toLowerCase()
   return ua.match(/MicroMessenger/i) == "micromessenger"
 }
+
+let flag = navigator.userAgent.match(/\(i[^]+( U)? CPU.+Mac OS X/)
+if (flag) {
+  $('.btn2').hide()
+} else {
+  $('.btn1').hide()
+}
 $('.btn.btn1').click(function (e) {
   if (isWeixin()) {
 		return $('.tip-wx').show()
