@@ -231,7 +231,7 @@ let appurl = 'tencloud://' + window.location.hash.split('/')[1]
 router.beforeEach((to, from, next) => {
   if (browser.versions.ios || browser.versions.android && isInvite) {
     setTimeout(function () {
-      window.location.href = window.location.origin
+      window.location.href = window.location.origin + '/download'
     }, 500)
     return (window.location.href = appurl)
   }
