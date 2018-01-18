@@ -230,9 +230,9 @@ let isInvite = /invite\?code/.test(window.location)
 let appurl = 'tencloud://' + window.location.hash.split('/')[1]
 router.beforeEach((to, from, next) => {
   if (browser.versions.ios && isInvite) {
-    window.location.href = appurl
+    return (window.location.href = appurl)
   } else if (browser.versions.android && isInvite) {
-    window.location.href = appurl
+    return (window.location.href = appurl)
   }
   if (to.name === 'Login' && to.query.next) {
     window.nextUrl = to.query.next

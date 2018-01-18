@@ -53,16 +53,10 @@ export default {
       }
     },
     initSocket (cb = null) {
-      // let pdata = {
-      //   cid: this.$axios.token.cid,
-      //   Authorization: this.$axios.token.token
-      // }
-      // this.socket.headers['cid'] = this.$axios.token.cid
       this.socket = new WebSocket(apis.wsURL + apis.server_add.u + '?Cid=' + this.$axios.token.cid + '&Authorization=' + this.$axios.token.token)
       this.socket.onopen = (event) => {
         if (cb) cb()
         console.log(event)
-        // this.socket.send(JSON.stringify(pdata))
       }
       this.socket.onmessage = (event) => {
         this.notes.push(event.data)

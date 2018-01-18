@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+		<meta name="format-detection" content="telphone=no, email=no"/>
+		<meta name="screen-orientation" content="portrait">
+		<meta name="full-screen" content="yes">
+		<meta name="x5-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximu-scale=1.0,minimum-scale=1.0,user-scalable=no">
+		<!-- 下面三个是清除缓存  微信浏览器缓存严重又无刷新；这个方法调试的时候很方便 -->
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Cache-Control" content="no-cache">
+        <meta http-equiv="Expires" content="0">
+        <link rel="stylesheet" type="text/css" href="css/normal.css"/>
+		<title></title>
+	</head>
+	<script>
+		(function (doc, win) {
+            var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+              var clientWidth = docEl.clientWidth;
+              if (!clientWidth) return;
+              docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+            };
+
+            if (!doc.addEventListener) return;
+               win.addEventListener(resizeEvt, recalc, false);
+               doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+	</script>
+	<body>
+		<div class="bg-img">
+			<div class="phone">
+				<img src="img/phone.png" />
+			</div>
+			<div class="word-div">
+			<div class="tipword">一个覆盖了产品从开发到发布、运行维护、变更升级及云服务平台</div>
+			<div class="tipword">及至下线的全生命周期的、场景化的</div>
+			<div class="tipword">容器云服务平台</div>
+			</div>
+			<a class="btn btn1">
+					<img src="img/btn-andord.png"/>
+			</a>
+			<a class="btn btn2">
+					<img src="img/btn-apple.png"/>
+			</a>
+		</div>
+		<div class="tip-wx" >
+			<div class="shadow"></div>
+			<div class="tipimg">
+				<img src="img/tip.png"/>
+			</div>
+		</div>
+	</body>
+	<script src="js/zepto_1.1.3.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+</html>
