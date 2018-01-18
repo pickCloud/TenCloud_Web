@@ -61,9 +61,8 @@
       var ua = navigator.userAgent.toLowerCase()
       return ua.toLowerCase().indexOf('micromessenger') > -1
     }
-    alert(navigator.userAgent)
-    var flag = navigator.userAgent.indexOf('Android') > -1
-    if (!flag) {
+    var flag = navigator.userAgent.indexOf('iPhone') > -1
+    if (flag) {
       $('.btn2').hide()
     } else {
       $('.btn1').hide()
