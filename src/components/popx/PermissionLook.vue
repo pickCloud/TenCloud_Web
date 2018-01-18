@@ -60,7 +60,15 @@
     },
     created () {
 //      this.getData()
-      this.getTempUser(this.pop_params.cid, this.pop_params.id)
+      if (this.pop_params.id) {
+        this.getTempUser(this.pop_params.cid, this.pop_params.id)
+      } else {
+        axios.http('company_getPermission', '', 'get', this.pop_params.cid).then(d => {
+          d.data.forEach(item => {
+            this.dataList.push(item)
+          })
+        })
+      }
     },
     computed: {
       /* pop_all 3 是创建模板5是修改模板 6是修改用户模板 */
