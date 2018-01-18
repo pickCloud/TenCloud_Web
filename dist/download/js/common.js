@@ -1,4 +1,3 @@
-alert(1)
 var isWeixin = function () {
   // 判断是否是微信
   var ua = navigator.userAgent.toLowerCase()
