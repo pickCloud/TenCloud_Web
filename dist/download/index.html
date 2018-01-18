@@ -68,13 +68,13 @@
       $('.btn1').hide()
     }
     $('.btn.btn1').click(function (e) {
-      if (1) {
+      if (isWeixin()) {
         return $('.tip-wx').show()
       }
       window.location.href='https://itunes.apple.com/cn/app/id336141475'
     })
     $('.btn.btn2').click(function (e) {
-      if (0) {
+      if (isWeixin()) {
         return $('.tip-wx').show()
       }
       window.location.href = 'http://3g.163.com/links/4636'
