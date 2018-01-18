@@ -61,7 +61,7 @@
 //      var ua = navigator.userAgent.toLowerCase()
 //      return ua.toLowerCase().indexOf('micromessenger') > -1
 //    }
-    alert(JSON.stringify(navigator.userAgent))
+    alert(JSON.stringify(navigator))
 //    let flag = navigator.userAgent.indexOf('Android')
 //    if (!flag) {
 //      $('.btn2').hide()
@@ -80,7 +80,7 @@
       }
       window.location.href = 'http://3g.163.com/links/4636'
     })
-    let isCode = /code/.test(window.location.search)
+    var isCode = /code/.test(window.location.search)
     if (isCode) {
       window.location.href = 'tencloud://invite' + window.location.search
     }
