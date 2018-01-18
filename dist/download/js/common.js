@@ -7,7 +7,7 @@ $('.btn.btn1').click(function (e) {
   if (isWeixin()) {
 		return $('.tip-wx').show()
 	}
-	window.location.href='https://itunes.apple.com/cn/app/id892359007'
+	window.location.href='https://itunes.apple.com/cn/app/id336141475'
 })
 $('.btn.btn2').click(function (e) {
 	if (isWeixin()) {
