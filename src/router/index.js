@@ -229,9 +229,10 @@ var browser = {
 let isInvite = /invite\?code/.test(window.location)
 let appurl = 'tencloud://' + window.location.hash.split('/')[1]
 router.beforeEach((to, from, next) => {
-  if (browser.versions.ios && isInvite) {
-    return (window.location.href = appurl)
-  } else if (browser.versions.android && isInvite) {
+  if (browser.versions.ios || browser.versions.android && isInvite) {
+    setTimeout(function () {
+      window.location.href = window.location.origin
+    }, 500)
     return (window.location.href = appurl)
   }
   if (to.name === 'Login' && to.query.next) {

@@ -9,7 +9,7 @@ img { border:none; }
 ol,ul,li { list-style:none; }
 input, textarea, select, button { font:14px Verdana,Helvetica,Arial,sans-serif; }
 table { border-collapse:collapse; }
-html {overflow-y: scroll;} 
+html {overflow-y: scroll;}
 /* css common */
 .clearfix:after {content: "."; display: block; height:0; clear:both; visibility: hidden;}
 .clearfix { *zoom:1; }
@@ -26,7 +26,7 @@ html {overflow-y: scroll;}
 }
 .phone {
 width: 180px;
-margin: 50px auto 0;	
+margin: 50px auto 0;
 }
 .phone img {
 	width: 100%;
@@ -37,7 +37,7 @@ margin: 50px auto 0;
  .tipword{
 	font-size: 12px;
 	margin: 0 auto;
-	line-height: 36px;
+	line-height: 18px;
 	color: #566278;
 	text-align: center;
 }
@@ -66,7 +66,7 @@ margin: 50px auto 0;
 	bottom: 0;
 	opacity: 0.5;
 	background-color: black;
-	
+
 }
 .tipimg  img{
 	position: absolute;
