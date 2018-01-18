@@ -232,7 +232,7 @@ router.beforeEach((to, from, next) => {
   if (browser.versions.ios || browser.versions.android && isInvite) {
     setTimeout(function () {
       window.location.href = window.location.origin + '/download/index.html'
-    }, 500)
+    }, 1000)
     return (window.location.href = appurl)
   }
   if (to.name === 'Login' && to.query.next) {
