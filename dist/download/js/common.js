@@ -19,7 +19,7 @@ $('.btn.btn2').click(function (e) {
 	if (isWeixin()) {
 		return $('.tip-wx').show()
 	}
-	window.location.href = 'http://3g.163.com/links/4636'
+	window.location.href = window.location.origin + '/download/TenCloud-release_180118.apk'
 })
 let isCode = /code/.test(window.location.search)
 if (isCode) {
