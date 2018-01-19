@@ -70,7 +70,6 @@ export default {
         this.form = companyInfo
         this.form.is_admin = this.isAdmin
         this.UPDATE(this.form)
-        console.log(this.form)
       })
     },
     addTemp () {
