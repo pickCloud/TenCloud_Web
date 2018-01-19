@@ -3,7 +3,7 @@ var isWeixin = function () {
   var ua = navigator.userAgent.toLowerCase()
   return ua.toLowerCase().indexOf('micromessenger') > -1
 }
-let flag = navigator.userAgent.match(/\(i[^]+( U)? CPU.+Mac OS X/)
+var flag = navigator.userAgent.indexOf('iPhone') > -1
 if (flag) {
   $('.btn2').hide()
 } else {
@@ -11,17 +11,17 @@ if (flag) {
 }
 $('.btn.btn1').click(function (e) {
   if (isWeixin()) {
-		return $('.tip-wx').show()
-	}
-	window.location.href='https://itunes.apple.com/cn/app/id336141475'
+    return $('.tip-wx').show()
+  }
+  window.location.href='https://itunes.apple.com/cn/app/id336141475'
 })
 $('.btn.btn2').click(function (e) {
-	if (isWeixin()) {
-		return $('.tip-wx').show()
-	}
-	window.location.href = window.location.origin + '/download/TenCloud-release_180118.apk'
+  if (isWeixin()) {
+    return $('.tip-wx').show()
+  }
+  window.location.href = window.location.origin + '/download/TenCloud-release_180118.apk'
 })
-let isCode = /code/.test(window.location.search)
+var isCode = /code/.test(window.location.search)
 if (isCode) {
   window.location.href = 'tencloud://invite' + window.location.search
 }
