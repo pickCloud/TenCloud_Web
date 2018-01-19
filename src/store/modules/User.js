@@ -98,6 +98,7 @@ export default {
         data.access_filehub = arryData
       }
       arry = arry.concat(data.permissions, data.access_servers, data.access_projects, data.access_filehub)
+      console.log('改变权限')
       state.currentPermission = arry
     },
     isPermission (state, permissionName) {

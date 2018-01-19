@@ -119,6 +119,7 @@
       },
       getTempUser () {
         // get permission temp
+        console.log('一次')
         let replaceId = this.currentUser.cid || this.currentUser.id
         this.$axios.http('company_getUserTemplate', '', 'get', replaceId + '/user/' + this.$root.userinfo.id + '/detail/format/' + 1).then(d => {
           if (d.data) {
