@@ -201,7 +201,7 @@
       ...mapMutations('user', ['UPDATE']),
       ...mapActions('navTop', ['getCompany']),
       enterCompany (item) {
-        this.UPDATE(item)
+        this.UPDATE({item: item, id: this.$root.userinfo.id})
         this.$axios.token.cid = item.cid
         this.$router.push({name: 'FirmData', params: {id: item.cid}})
       },

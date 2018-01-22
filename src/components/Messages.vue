@@ -144,13 +144,13 @@
           case 1:
             return this.$router.push({name: 'CompleteData', query: {code: list[1]}})
           case 2:
-            this.UPDATE(currentUser)
+            this.UPDATE({item: currentUser, id: this.$root.userinfo.id})
             return this.$router.push({name: 'FirmData', params: {id: list[0]}})
           case 3:
-            this.UPDATE(currentUser)
+            this.UPDATE({item: currentUser, id: this.$root.userinfo.id})
             return this.$router.push({name: 'FirmData', params: {id: list[0]}})
           case 0:
-            this.UPDATE(currentUser)
+            this.UPDATE({item: currentUser, id: this.$root.userinfo.id})
             return this.$router.push({name: 'FirmData', params: {id: list[0]}})
         }
       }

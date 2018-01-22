@@ -3,7 +3,7 @@
       <div class="p-b16">
       <span>你将邀请同事加入</span><span class="primary_txt">{{this.company_name}}</span>
       </div>
-      <div class="p-b16">加入企业需要个人提供<span class="primary_txt">手机、姓名、身份证号，</span>如需要改,请
+      <div class="p-b16">加入企业需要个人提供<span class="primary_txt">手机、姓名{{identify?'、身份证':''}}，</span>如需要改,请
       <m-btn class="btn green-l_txt" @click.native="setCondition">设置</m-btn>
       </div>
       <div class="p-b16">邀请流程</div>
@@ -34,7 +34,8 @@
         url: '',
         isCopy: false
       },
-      company_name: ''
+      company_name: '',
+      identify: false
     }),
     methods: {
       ...mapMutations('pop', ['setPopState']),
@@ -55,8 +56,10 @@
     },
     created () {
       this.getShare()
-      console.log(this.pop_params.company_name)
       this.company_name = this.pop_params.company_name
+      this.$axios.http('company_setCondition', '', 'get', this.pop_params.cid + '/entry/setting').then(d => {
+        if (d.data && d.data.setting) this.identify = d.data.setting.split(',').length > 2
+      })
     },
     computed: {
       ...mapState('pop', ['pop_params'])

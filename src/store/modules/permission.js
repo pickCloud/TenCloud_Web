@@ -13,7 +13,6 @@ export default {
       let idx = state[obj.name].indexOf(obj.value + '')
       if (idx !== -1) return
       state[obj.name].push(obj.value)
-      console.log(state[obj.name])
     },
     deleteState (state, obj) {
       let idx = state[obj.name].indexOf(obj.value)

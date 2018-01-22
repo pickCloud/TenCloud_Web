@@ -44,9 +44,15 @@ export default {
     }
   },
   mutations: {
-    'UPDATE' (state, data) {
+    'UPDATE' (state, {item, id}) {
       // 用户数据更新
-      state.currentUser = data
+      state.currentUser = item
+      let currentUserLocal = {
+        currentUser: item,
+        uid: id
+      }
+      currentUserLocal = JSON.stringify(currentUserLocal)
+      window.localStorage.setItem('currentUserLocal', currentUserLocal)
     },
     'GET_USER' () {
       // 获取用户数据
@@ -98,7 +104,6 @@ export default {
         data.access_filehub = arryData
       }
       arry = arry.concat(data.permissions, data.access_servers, data.access_projects, data.access_filehub)
-      console.log('改变权限')
       state.currentPermission = arry
     },
     isPermission (state, permissionName) {

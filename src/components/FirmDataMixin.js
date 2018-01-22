@@ -68,8 +68,8 @@ export default {
         companyInfo.cid = companyInfo.id
         delete companyInfo.id
         this.form = companyInfo
-        this.form.is_admin = this.isAdmin
-        this.UPDATE(this.form)
+        // this.form.is_admin = this.isAdmin
+        // this.UPDATE(this.form)
       })
     },
     addTemp () {

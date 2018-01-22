@@ -77,13 +77,12 @@
         })
       },
       userInfo () {
-        this.UPDATE(this.$root.userinfo)
+        this.UPDATE({item: this.$root.userinfo, id: this.$root.userinfo.id})
         this.$axios.token.cid = 0
-        this.setLocal(this.$root.userinfo)
+//        this.setLocal(this.$root.userinfo)
       },
       changeLink (item) {
-        this.UPDATE(item)
-        this.setLocal(item)
+        this.UPDATE({item: item, id: this.$root.userinfo.id})
         this.$axios.token.cid = item.cid
       },
       messageTime () {
@@ -103,23 +102,22 @@
         let currentUserLocal = window.localStorage.getItem('currentUserLocal')
         currentUserLocal = JSON.parse(currentUserLocal)
         if (currentUserLocal && currentUserLocal.uid === this.$root.userinfo.id) {
-          this.UPDATE(currentUserLocal.currentUser)
+          this.UPDATE({item: currentUserLocal.currentUser, id: this.$root.userinfo.id})
           if (currentUserLocal.currentUser.cid) {
             this.$axios.token.cid = currentUserLocal.currentUser.cid
           }
         } else {
           if (this.$axios.token.cid) {
             this.$axios.http('company_detail', '', 'get', this.$axios.token.cid).then(d => {
-              this.UPDATE(d.data[0])
+              this.UPDATE({item: d.data[0], id: this.$root.userinfo.id})
             })
           } else {
-            this.UPDATE(this.$root.userinfo)
+            this.UPDATE({item: this.$root.userinfo, id: this.$root.userinfo.id})
           }
         }
       },
       getTempUser () {
         // get permission temp
-        console.log('一次')
         let replaceId = this.currentUser.cid || this.currentUser.id
         this.$axios.http('company_getUserTemplate', '', 'get', replaceId + '/user/' + this.$root.userinfo.id + '/detail/format/' + 1).then(d => {
           if (d.data) {
