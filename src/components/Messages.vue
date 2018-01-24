@@ -121,6 +121,8 @@
             return '进入企业'
           case 3:
             return '马上查看'
+          case 4:
+            return '马上查看'
           case 0:
             return '马上审核'
         }
