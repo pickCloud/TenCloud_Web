@@ -228,10 +228,14 @@ var browser = {
 }
 let isInvite = /invite\?code/.test(window.location)
 let appurl = 'tencloud://' + window.location.hash.split('/')[1]
+let isRelocation = false
 router.beforeEach((to, from, next) => {
   if (browser.versions.ios || browser.versions.android && isInvite) {
     setTimeout(function () {
-      window.location.href = window.location.origin + '/download/index.html?' + window.location.href.split('?')[1]
+      if (!isRelocation) {
+        isRelocation = true
+        window.location.href = window.location.origin + '/download/index.html?' + window.location.href.split('?')[1]
+      }
     }, 1000)
     return (window.location.href = appurl)
   }

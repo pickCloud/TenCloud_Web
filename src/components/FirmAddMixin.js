@@ -27,11 +27,11 @@ export default {
       }
       axios.http('company_create', this.data, 'post').then(d => {
         this.$toast('添加成功', 'cc')
-        this.UPDATE({cid: d.data.cid,
-          company_name: this.data.name})
+        this.UPDATE({item: {cid: d.data.cid, company_name: this.data.name}, id: this.$root.userinfo.id})
         this.$axios.token.cid = d.data.cid
-        this.getCompany(3)
-        this.$router.push({name: 'FirmData', params: {id: d.data.cid}})
+        this.getCompany(6).then(data => {
+          this.$router.push({name: 'FirmData', params: {id: d.data.cid}})
+        })
       })
     }
   },

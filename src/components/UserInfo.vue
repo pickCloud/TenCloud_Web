@@ -376,6 +376,10 @@
 //        this.headHeigth()
 //        console.log(22)
       }
+      this.$store.commit('sitepath/SET_PATH', [
+        {name: 'Main', cn: '主页'},
+        {cn: '个人中心'}
+      ])
 //      window.addEventListener('resize', this.resizeFunc)
     },
     destroyed () {

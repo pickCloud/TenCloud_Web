@@ -1,7 +1,10 @@
+var ua = navigator.userAgent.toLowerCase()
 var isWeixin = function () {
   // 判断是否是微信
-  var ua = navigator.userAgent.toLowerCase()
   return ua.toLowerCase().indexOf('micromessenger') > -1
+}
+var isQQ = function () {
+  return ua.toLowerCase().indexOf('qq') > -1
 }
 var flag = navigator.userAgent.indexOf('iPhone') > -1
 if (flag) {
@@ -10,13 +13,13 @@ if (flag) {
   $('.btn1').hide()
 }
 $('.btn.btn1').click(function (e) {
-  if (isWeixin()) {
+  if (isWeixin()||isQQ()) {
     return $('.tip-wx').show()
   }
   window.location.href='https://itunes.apple.com/cn/app/id336141475'
 })
 $('.btn.btn2').click(function (e) {
-  if (isWeixin()) {
+  if (isWeixin()||isQQ()) {
     return $('.tip-wx').show()
   }
   window.location.href = window.location.origin + '/download/TenCloud-release_180118.apk'

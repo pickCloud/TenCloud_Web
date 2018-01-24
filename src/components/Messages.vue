@@ -6,8 +6,9 @@
           <panel class="m-b16">
             <div class="panel-title flex-space-between" slot="title">
               <div class="flex-felx">
-              <m-btn class="btn theme-dft" @click.native="selectType(0)" :class="type==0?'select-active':''">最新消息</m-btn>
-              <m-btn class="btn theme-dft" @click.native="selectType(1)" :class="type==1?'select-active':''">历史消息</m-btn>
+              <!--<m-btn class="btn theme-dft" @click.native="selectType(0)" :class="type==0?'select-active':''">最新消息</m-btn>-->
+              <!--<m-btn class="btn theme-dft" @click.native="selectType(1)" :class="type==1?'select-active':''">历史消息</m-btn>-->
+              <div class="theme-dft">消息列表</div>
               <!--<m-btn class="btn theme-dft" @click.native="selectType(2)" :class="type==2?'select-active':''">最新通知</m-btn>-->
               </div>
               <div class="login-form_inp flex-space-between" style="height: 30px;line-height: 30px">
@@ -21,6 +22,7 @@
               <!--<div>-->
                 <!--<img src="/static/img/spin.gif" class="head"/>-->
               <!--</div>-->
+              <div class="readpoint" v-if="item.status === 0"></div>
               <div class="m-l16">
                 <div class="messages-type m-b16">
                   <i class="iconfont icon-xiaoxi1"></i>
@@ -55,7 +57,7 @@
       page: 1,
       isStillHave: true,
       mode: 1,
-      selects: [{label: '全部', value: '0'}, {label: '加入企业', value: '1'}, {label: '企业变更', value: '2'}, {label: '离开企业', value: '3'}],
+      selects: [{label: '全部', value: '0'}, {label: '加入企业', value: '1'}, {label: '企业变更', value: '2'}, {label: '离开企业', value: '3'}, {label: '添加主机', value: '4'}],
       selectValue: {label: '全部', value: '0'}
     }),
     methods: {
@@ -69,7 +71,7 @@
       },
       getMessages (isResetData = false) {
         let modeStr = this.selectValue.value === '0' ? '' : '&mode=' + this.selectValue.value
-        axios.http('message_get', '', 'get', this.type + '?page=' + this.page + modeStr).then(d => {
+        axios.http('message_get', '', 'get', '?page=' + this.page + modeStr).then(d => {
           if (d.data) {
             if (isResetData) {
               this.messages = d.data
@@ -149,6 +151,8 @@
           case 3:
             this.UPDATE({item: currentUser, id: this.$root.userinfo.id})
             return this.$router.push({name: 'FirmData', params: {id: list[0]}})
+          case 4:
+            return this.$router.push({name: 'MachineDetail', params: {id: list[0]}})
           case 0:
             this.UPDATE({item: currentUser, id: this.$root.userinfo.id})
             return this.$router.push({name: 'FirmData', params: {id: list[0]}})

@@ -8,7 +8,9 @@
           <div class="login-select_content m-b32 p-b16">
             邀请你加入企业
           </div>
-          <div class="p-b16"><span class="primary_txt">{{inviteData.contact}}</span> 邀请你加入 <span  class="primary_txt">{{inviteData.company_name}}</span></div>
+          <div class="p-b16">
+            <!--<span class="primary_txt">{{inviteData.contact}}</span> -->
+             <span  class="primary_txt">{{inviteData.company_name}}</span>邀请你加入企业</div>
           <div class="login-form_inp m-b16">
             <input type="text" placeholder="请输入手机号码" v-model="loginData.mobile">
             <i class="iconfont icon-shouji"></i>
