@@ -4,8 +4,6 @@ var isWeixin = function () {
   return ua.toLowerCase().indexOf('micromessenger') > -1
 }
 var isQQ = function () {
-  alert(ua.toLowerCase())
-  alert(ua.toLowerCase().indexOf('mobile mqqbrowser'))
   return ua.toLowerCase().indexOf('mobile mqqbrowser') > -1
 }
 var flag = navigator.userAgent.indexOf('iPhone') > -1
