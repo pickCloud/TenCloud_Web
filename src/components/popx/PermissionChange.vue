@@ -22,7 +22,7 @@
             </tr>
             </thead>
             <tbody style="height: 700px;overflow: auto">
-            <tr v-for="item in employees" v-if="item.status===1">
+            <tr v-for="item in employees" v-if="item.status===3 || item.status===4">
               <td >
                 <m-radio v-model="watchId" :data="{label: '', value: item.uid}" ></m-radio>
               </td>
@@ -31,7 +31,7 @@
               <!--<td>{{item.is_admin}}</td>-->
               <td>{{item.create_time}}</td>
               <td>{{item.update_time}}</td>
-              <td :class="item.status===0?'pass_tip':''">{{item.status===1?'已通过审核':item.status===0?'待审核':'审核不通过'}}</td>
+              <td :class="item.status===2?'pass_tip':''">{{item.status===4?'创始人':item.status===3?'已通过审核':''}}</td>
             </tr>
             </tbody>
           </table>
