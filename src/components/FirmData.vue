@@ -96,7 +96,7 @@
                 <td>{{item.create_time}}</td>
                 <td>{{item.update_time}}</td>
                 <td :class="item.status===1?'pass_tip':''">{{item.status===4?'创建人':item.status===3?'已通过审核':item.status===2?'待审核':'审核不通过'}}</td>
-                <td ><div ><span v-if="item.status===2"><m-btn v-if="isShow('audit_employee')" @click.native="company_reject(item.id)">拒绝</m-btn><m-btn v-if="isShow('audit_employee')" @click.native="company_accept(item.id)">允许</m-btn></span><span v-if="!item.is_admin"><m-btn v-if="currentUser.is_admin" @click.native="changeUserTemp(item.uid)">权限</m-btn><m-btn  @click.native="lookUserTemp(item.uid)">查看</m-btn><m-btn v-if="currentUser.is_admin"  @click.native="company_dismission(item.id)">解除</m-btn></span></div></td>
+                <td ><div ><span v-if="item.status===2"><m-btn v-if="isShow('audit_employee')" @click.native="company_reject(item.id)">拒绝</m-btn><m-btn v-if="isShow('audit_employee')" @click.native="company_accept(item.id)">允许</m-btn></span><span v-if="!item.is_admin && currentUser.is_admin"><m-btn v-if="currentUser.is_admin" @click.native="changeUserTemp(item.uid)">权限</m-btn><m-btn  @click.native="lookUserTemp(item.uid)">查看</m-btn><m-btn v-if="currentUser.is_admin"  @click.native="company_dismission(item.id)">解除</m-btn></span></div></td>
               </tr>
               </tbody>
             </table>
