@@ -11,7 +11,8 @@ export default {
       name: '',
       mobile: '',
       create_time: '',
-      update_time: ''
+      update_time: '',
+      image_url: ''
     },
     isEditor: false,
     // module: [],
@@ -32,7 +33,8 @@ export default {
         cid: this.$route.params.id,
         mobile: this.form.mobile,
         contact: this.form.contact,
-        name: this.form.name
+        name: this.form.name,
+        image_url: this.form.image_url
       }
       if (this.form.name === '') {
         this.$toast('企业名称不能为空', 'cc')

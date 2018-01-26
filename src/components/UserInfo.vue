@@ -147,7 +147,7 @@
              </div>
              <div class="flex-flex-grow-1">
                <div class="userinfo-item-up">状态</div>
-               <span class="userinfo-item-down">{{item.status === 2?"待审核":item.status === 3?"审核通过":item.status === 4?"初创建":item.status === 5?"待加入":"审核不通过"}}</span>
+               <span class="userinfo-item-down">{{item.status === 2?"待审核":item.status === 3?"审核通过":item.status === 4?"创建人":item.status === 5?"待加入":"审核不通过"}}</span>
              </div>
           </div>
         </div>

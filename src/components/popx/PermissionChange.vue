@@ -38,7 +38,7 @@
         </div>
       </panel>
       <div class="" style="background-color: #1d212a;height: 70px;display: flex;">
-        <m-btn class="primary_bg grey-dark_txt" :sizeh="48" :sizew="300" style="margin: 11px auto" @click.native="changeAdmin">确认提交</m-btn>
+        <m-btn class="primary_bg grey-dark_txt" :sizeh="48" :sizew="300" style="margin: 11px auto" @click.native="changeAdmin">确认更换</m-btn>
       </div>
     </div>
 </template>

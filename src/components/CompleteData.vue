@@ -9,9 +9,9 @@
             </div>
             <div class="p-16">
               <div class="flex-flex">
-                <span class="primary_txt">{{inviteData.contact }} </span>
-                <span>邀请你加入</span>
-                <span class="primary_txt"> {{ inviteData.company_name}}</span>
+                <!--<span class="primary_txt">{{inviteData.contact }} </span>-->
+                <!--<span>邀请你加入</span>-->
+                <span class="primary_txt"> {{ inviteData.company_name}} 邀请你加入企业</span>
               </div>
               <div>请先完善你的资料</div>
             <div class="personContent">

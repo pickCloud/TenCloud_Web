@@ -29,11 +29,10 @@
                   <span>{{messagesType(item.mode)}}</span>
                   <span>{{item.update_time}}</span>
                 </div>
-                <div class="messages-content line-25">
-                  {{item.content}}
+                <div class="messages-content line-25" v-html="messageChange(item.content)">
                 </div>
                 <!--<div class="m-b16">{{messagesTip(item.sub_mode)}}</div>-->
-                <div class="btn primary_txt" @click="btn(item)" v-if="item.mode !== 3">{{messagesBtn(item.sub_mode)+ ' >'}}</div>
+                <div class="btn" style="color: deepskyblue;" @click="btn(item)" v-if="item.mode !== 3">{{messagesBtn(item.sub_mode)+ ' >'}}</div>
               </div>
             </li>
             </ul>
@@ -99,6 +98,10 @@
             return '加入企业'
           case 2:
             return '企业变更'
+          case 3:
+            return '离开企业'
+          case 4:
+            return '添加主机'
         }
       },
       messagesTip (code) {
@@ -126,6 +129,11 @@
           case 0:
             return '马上审核'
         }
+      },
+      messageChange (str) {
+        str = str.replace(/【/g, '<span class="primary_txt"> ')
+        str = str.replace(/】/g, '</span >')
+        return str
       },
       btn (item) {
         let list = []
